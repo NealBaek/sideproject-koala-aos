@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
         DayView dayView = new DayView(this);
 
-        ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(120, 240);
+        ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(240, 480);
 
         ConstraintLayout bodyLayout = (ConstraintLayout)findViewById(R.id.bodyLayout);
 
