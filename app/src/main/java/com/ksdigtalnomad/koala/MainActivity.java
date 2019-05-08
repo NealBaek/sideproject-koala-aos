@@ -18,12 +18,12 @@ public class MainActivity extends AppCompatActivity {
 
         ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(240, 480);
 
-        ConstraintLayout bodyLayout = (ConstraintLayout)findViewById(R.id.bodyLayout);
+        ConstraintLayout bodyLayout = findViewById(R.id.bodyLayout);
 
         dayView.setBackgroundColor(Color.BLACK);
 
         bodyLayout.addView(dayView, 0, params);
 
-
     }
+
 }

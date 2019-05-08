@@ -15,13 +15,14 @@ import android.widget.TextView;
 
 public class DayView extends RelativeLayout {
 
-    private LinearLayout dayHeaderView;
-    private Context context;
+    private static int HEIIGHT_HEADER = 100;
+    private static int HEIIGHT_BODY = 200;
+    private LinearLayout dayHeaderLayout;
+    private LinearLayout dayBodyLayout;
+
 
     public DayView(Context context) {
         super(context);
-
-        this.context = context;
 
         Log.d("ABC", "DayView w/ childCnt: " + getChildCount());
 
@@ -34,14 +35,28 @@ public class DayView extends RelativeLayout {
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         Log.d("ABC", "onLayout w/ childCnt: " + getChildCount());
 
-        dayHeaderView.layout(0, 0, getMeasuredWidth(), 100);
+        int parentWidth  = getMeasuredWidth();
+        int parentHeight = getMeasuredHeight();
+
+        // 1. Layout DayHeaderLayout
+        dayHeaderLayout.layout(0, 0, parentWidth, HEIIGHT_HEADER);
+        setChildrenLp(dayHeaderLayout);
 
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(getMeasuredWidth(), 50, 1);
+        // 2. Layout DayBodyLayout
+        dayBodyLayout.layout(0, parentHeight - HEIIGHT_HEADER, parentWidth, HEIIGHT_BODY);
+        setChildrenLp(dayHeaderLayout);
 
-        dayHeaderView.getChildAt(0).setLayoutParams(params);
-        dayHeaderView.getChildAt(1).setLayoutParams(params);
+    }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        // @TODO: 몇번 호출되는지 확인
+        // @TODO: onLayout 에서 부르는 함수를 여기서 호출해보자
+            // @TODO: 한번만 호출 되면 여기서 init
+            // @TODO: 아니면
     }
 
     @Override
@@ -53,42 +68,93 @@ public class DayView extends RelativeLayout {
     }
 
     private void initView(){
-        dayHeaderView = createDayHeaderLayout();
+        dayHeaderLayout = createDayHeaderLayout();
+        dayBodyLayout = createDayBodyLayout();
 
 
-        TextView dayTv = new TextView(context);
-        dayTv.setText("11");
-        dayTv.setGravity(Gravity.LEFT | Gravity.CENTER);
-        dayTv.setBackgroundColor(Color.CYAN);
-        dayTv.setTextColor(Color.WHITE);
-        dayTv.setTextSize(8);
-        dayTv.setPadding(10,0,0,0);
-
-
-        TextView levelTv = new TextView(context);
-        levelTv.setText("Max");
-        levelTv.setGravity(Gravity.RIGHT | Gravity.CENTER);
-        levelTv.setBackgroundColor(Color.LTGRAY);
-        levelTv.setTextColor(Color.WHITE);
-        levelTv.setTextSize(8);
-        levelTv.setPadding(0,0,10,0);
-
-
-        dayHeaderView.addView(dayTv);
-        dayHeaderView.addView(levelTv);
-
-
+        addView(dayHeaderLayout);
+        addView(dayBodyLayout);
     }
 
 
-    private LinearLayout createDayHeaderLayout(){
+    private LinearLayout createDayHeaderLayout(){ // dayNum, drunkLevel
 
-        LinearLayout layout = new LinearLayout(context);
-        layout.setBackgroundColor(Color.BLUE);
+        LinearLayout layout = new LinearLayout(getContext());
+        layout.setBackgroundColor(Color.WHITE);
         layout.setOrientation(LinearLayout.VERTICAL);
-        this.addView(layout);
+
+        TextView dayTv        = createLeftSideTv("11", Color.RED);
+        TextView drunkLevelTv = createRightSideTv("Max", Color.WHITE, Color.RED);
+
+        layout.addView(dayTv);
+        layout.addView(drunkLevelTv);
 
         return layout;
     }
 
+    private LinearLayout createDayBodyLayout(){ // dayNum, drunkLevel
+
+        LinearLayout layout = new LinearLayout(getContext());
+        layout.setBackgroundColor(Color.WHITE);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        TextView friendListTv = createLeftSideTv("아이유 외 1", Color.BLACK);
+        TextView foodListTv   = createLeftSideTv("곱창 외 1", Color.BLACK);
+        TextView liquorListTv = createLeftSideTv("소주 외 1", Color.BLACK);
+        TextView memoTv       = createLeftSideTv("행사 뒷풀이", Color.BLACK);
+
+        layout.addView(friendListTv);
+        layout.addView(foodListTv);
+        layout.addView(liquorListTv);
+        layout.addView(memoTv);
+
+
+        return layout;
+    }
+
+    private TextView createLeftSideTv(String contents, int textColor){
+
+        TextView textView = new TextView(getContext());
+        textView.setText(contents);
+        textView.setTextColor(textColor);
+        textView.setTextSize(8);
+
+        textView.setGravity(Gravity.LEFT | Gravity.CENTER);
+
+        textView.setBackgroundColor(Color.WHITE);
+
+        textView.setPadding(10,0,0,0);
+
+        return textView;
+    }
+    private TextView createRightSideTv(String contents, int txtColor, int bgColor){
+
+        TextView textView = new TextView(getContext());
+
+        textView.setText(contents);
+        textView.setTextColor(txtColor);
+        textView.setTextSize(8);
+
+        textView.setGravity(Gravity.RIGHT | Gravity.CENTER);
+        textView.setBackgroundColor(bgColor);
+
+        textView.setPadding(0,0,10,0);
+
+        return textView;
+    }
+
+
+    private void setChildrenLp(LinearLayout parent){
+
+        int parentWidth  = parent.getMeasuredWidth();
+        int parentHeight = parent.getMeasuredHeight();
+        int childCnt     = parent.getChildCount();
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(parentWidth, parentHeight/childCnt, 1);
+
+        for(int i = 0; i < childCnt; ++ i){
+            parent.getChildAt(i).setLayoutParams(params);
+        }
+
+    }
 }
