@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.ksdigtalnomad.koala.customView.calendar.DayView;
+import com.ksdigtalnomad.koala.customView.calendar.MonthModel;
 
 public class MainActivity extends AppCompatActivity {
 
