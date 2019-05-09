@@ -1,15 +1,13 @@
 package com.ksdigtalnomad.koala.customView.calendar;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 /**
  * Created by ooddy on 08/05/2019.
@@ -28,19 +26,28 @@ public class CalendarRvAdapter extends RecyclerView.Adapter{
     @NonNull @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
+        int targetWidth = viewGroup.getMeasuredWidth()/7;
+        int targetHeight = viewGroup.getMeasuredHeight()/6;
+
         DayView dayView = new DayView(context);
-        dayView.setMinimumHeight(viewGroup.getMeasuredHeight()/6);
-        dayView.setMinimumWidth(viewGroup.getMeasuredWidth()/7);
+        dayView.setMinimumWidth(targetWidth);
+        dayView.setMinimumHeight(targetHeight);
+
+        dayView.setBackgroundColor(Color.LTGRAY);
+
+//        viewGroup.addView(dayView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
 
-//        dayView.setLayoutParams(new ViewGroup.LayoutParams(viewGroup.getMeasuredHeight()/6, viewGroup.getMeasuredWidth()/7));
+//        dayView.setLayoutParams(viewGroup.getLayoutParams());
+
+//        Log.d("ABC", "viewGroup: " + (viewGroup == null));
 //
-        Log.d("ABC", "onCreateViewHolder, w: " + viewGroup.getMeasuredWidth()/6 + ", h: " + viewGroup.getMeasuredHeight()/7);
- //
-//        int widthSpec = View.MeasureSpec.makeMeasureSpec(viewGroup.getMeasuredWidth(), View.MeasureSpec.EXACTLY);
-//        int heightSpec = View.MeasureSpec.makeMeasureSpec(viewGroup.getMeasuredHeight(), View.MeasureSpec.EXACTLY);
-//
-//        dayView.measure(heightSpec, widthSpec);
+//        dayView.measure( View.MeasureSpec.makeMeasureSpec(targetWidth, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(targetHeight, View.MeasureSpec.UNSPECIFIED));
+
+//        dayView.measure(View.MeasureSpec.makeMeasureSpec());
+
+//        RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(viewGroup.getMeasuredWidth()/7, viewGroup.getMeasuredHeight()/6);
+//        dayView.setLayoutParams(lp);
 
         return new ViewHolder(dayView);
     }
@@ -48,9 +55,8 @@ public class CalendarRvAdapter extends RecyclerView.Adapter{
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         DayView dayView = ((ViewHolder) viewHolder).dayView;
-//        dayView.setChildrenLp(dayView.dayHeaderLayout);
 
-//        dayView.requestLayout();
+        dayView.requestLayout();
     }
 
     @Override

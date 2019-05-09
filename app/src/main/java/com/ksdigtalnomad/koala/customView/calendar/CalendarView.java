@@ -11,6 +11,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -66,9 +67,9 @@ public class CalendarView extends LinearLayout{
         dayHeaderLayout.measure(widthMeasureSpec, dHeaderHeightSpec);
         calendarRcView.measure(widthMeasureSpec, rvHeightSpec);
 
-        setChildrenLp(dayHeaderLayout);
+        Log.d("ABC", "dayHeaderLayout: " + dayHeaderLayout.getWidth());
 
-        calendarRcView.setAdapter(new CalendarRvAdapter(getContext()));
+        setChildrenLp(dayHeaderLayout);
     }
 
     private void initViews(){
@@ -95,14 +96,18 @@ public class CalendarView extends LinearLayout{
     private LinearLayout createDayHeaderLayout(){
 
         LinearLayout layout = new LinearLayout(getContext());
-        layout.setBackgroundColor(Color.BLACK);
+//        layout.setBackgroundColor(Color.BLACK);
         layout.setOrientation(LinearLayout.HORIZONTAL);
 
 
         String[] dayList = {"일", "월", "화", "수", "목", "금", "토"};
         int[] colorList = {Color.RED, Color.DKGRAY, Color.DKGRAY, Color.DKGRAY, Color.DKGRAY, Color.DKGRAY, Color.BLUE};
 
-        for(int i = 0; i < 7; ++ i){ layout.addView(createCenterSideTextView(dayList[i], colorList[i]));}
+        for(int i = 0; i < 7; ++ i){
+            TextView textView = createCenterSideTextView(dayList[i], colorList[i]);
+            textView.setBackgroundColor(Color.BLACK);
+            layout.addView(textView);
+        }
 
         return layout;
     }
@@ -121,9 +126,9 @@ public class CalendarView extends LinearLayout{
 
         RectShape rectShape = new RectShape();
         ShapeDrawable shapeDrawable = new ShapeDrawable(rectShape);
-        shapeDrawable.getPaint().setColor(Color.LTGRAY);
-        shapeDrawable.setAlpha(1);
-        shapeDrawable.getPaint().setStrokeWidth(0.5f);
+        shapeDrawable.getPaint().setColor(Color.DKGRAY);
+//        shapeDrawable.setAlpha(1);
+        shapeDrawable.getPaint().setStrokeWidth(1.0f);
 
 
         DividerItemDecoration horiDivider = new DividerItemDecoration(recyclerView.getContext(), GridLayoutManager.HORIZONTAL);
@@ -136,8 +141,7 @@ public class CalendarView extends LinearLayout{
 
         recyclerView.setLayoutManager(layoutManager);
 
-
-
+        recyclerView.setAdapter(new CalendarRvAdapter(getContext()));
 
         return recyclerView;
     }
@@ -161,8 +165,8 @@ public class CalendarView extends LinearLayout{
 
     private void setChildrenLp(LinearLayout parent){
 
-        int parentWidth  = parent.getWidth();
-        int parentHeight = parent.getHeight();
+        int parentWidth  = parent.getMeasuredWidth();
+        int parentHeight = parent.getMeasuredHeight();
         int childCnt     = parent.getChildCount();
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(parentWidth/childCnt, parentHeight, 1);

@@ -3,6 +3,7 @@ package com.ksdigtalnomad.koala.customView.calendar;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
@@ -48,72 +49,107 @@ public class DayView extends RelativeLayout {
 //        parentWidth = width;
 //        parentHeight = height;
 
-        initView();
-
+//        initView();
     }
 
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-
-        int parentWidth  = getMeasuredWidth();
-        int parentHeight = getMeasuredHeight();
-
-        // 1. Layout DayHeaderLayout
-
-        headerLeft   = 0;
-        headerTop    = 0;
-        headerRight  = parentWidth;
-        headerBottom = parentHeight/3;
-
-        dayHeaderLayout.layout(headerLeft, headerTop, headerRight, headerBottom);
-        setChildrenLp(dayHeaderLayout);
-
-
-
-        // 2. Layout DayBodyLayout
-
-        bodyLeft   = 0;
-        bodyTop    = parentHeight/2 - BODY_MARGIN;
-        bodyRight  = parentWidth;
-        bodyBottom = parentHeight - BODY_MARGIN;
-
-        dayBodyLayout.layout(bodyLeft, bodyTop, bodyRight, bodyBottom);
-        setChildrenLp(dayBodyLayout);
-
-
-        Log.d("ABC", "onMeasure, w: " + parentWidth + ", h: " + parentHeight);
-        Log.d("ABC", "onMeasure, ㅇ: " + dayHeaderLayout.getWidth());
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-        // @TODO: 몇번 호출되는지 확인
-        // @TODO: onLayout 에서 부르는 함수를 여기서 호출해보자
-            // @TODO: 한번만 호출 되면 여기서 init
-            // @TODO: 아니면
-
-//        Log.d("ABC", "onMeasure, w: " + getMinimumWidth() + ", h: " + getMinimumHeight()/3);
-
-//        final int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-
-
-//        int headerWidthSpec = MeasureSpec.makeMeasureSpec(getMinimumWidth(), MeasureSpec.AT_MOST);
-//        int headerHeightSpec = MeasureSpec.makeMeasureSpec(getMinimumHeight()/3, MeasureSpec.AT_MOST);
-//        int bodyHeightSpec = MeasureSpec.makeMeasureSpec(heightSize/2, MeasureSpec.EXACTLY);
+//    @Override
+//    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+//
+//        Log.d("ABC", "onLayout");
+//
+//        sup
+//
+//        if (!changed){ return; }
+//
+////        Log.d("ABC", "changed: " + changed);
+//
+//        int parentWidth  = getMeasuredWidth();
+//        int parentHeight = getMeasuredHeight();
+//
+//        // 1. Layout DayHeaderLayout
+//
+//        headerLeft   = 0;
+//        headerTop    = 0;
+//        headerRight  = parentWidth;
+//        headerBottom = parentHeight/3;
+//
+//        dayHeaderLayout.layout(headerLeft, headerTop, headerRight, headerBottom);
+//        setChildrenLp(dayHeaderLayout);
 //
 //
-//        dayHeaderLayout.measure(headerWidthSpec, headerHeightSpec);
-//        dayBodyLayout.measure(widthMeasureSpec, bodyHeightSpec);
-    }
+//
+//        // 2. Layout DayBodyLayout
+//
+//        bodyLeft   = 0;
+//        bodyTop    = parentHeight/2 - BODY_MARGIN;
+//        bodyRight  = parentWidth;
+//        bodyBottom = parentHeight - BODY_MARGIN;
+//
+//        dayBodyLayout.layout(bodyLeft, bodyTop, bodyRight, bodyBottom);
+//        setChildrenLp(dayBodyLayout);
+////
+////
+////        Log.d("ABC", "onMeasure, w: " + parentWidth + ", h: " + parentHeight);
+////        Log.d("ABC", "onMeasure, ㅇ: " + dayHeaderLayout.getWidth());
+//    }
+
+
+
+//    @Override
+//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+//
+//        Log.d("ABC", "onMeasure");
+//
+//        // @TODO: 몇번 호출되는지 확인
+//        // @TODO: onLayout 에서 부르는 함수를 여기서 호출해보자
+//            // @TODO: 한번만 호출 되면 여기서 init
+//            // @TODO: 아니면
+//
+//
+//
+//    }
+
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
+        Log.d("ABC", "onDraw");
+
+        int parentWidth  = getMeasuredWidth();
+        int parentHeight = getMeasuredHeight();
+
+
+        // 1. day text 그리기
+
+        // 2. drunkLevel
+        //  2-1. Rect 그리기
+        //  2-2. MAX 그리기
+
+        // 3. 리스트 텍스트 (역순으로 리스트 형식은 어떨까?)
+        //  3-1. friendList text 그리기
+        //  3-2. friendList text 그리기
+        //  3-3. friendList text 그리기
+        //  3-4. friendList text 그리기
+
+
+        // 텍스트 그리기 속성
+        Paint textp = new Paint();
+
+        textp.setColor(Color.BLACK);
+        textp.setTextSize(10);
+        textp.setTextAlign(Paint.Align.CENTER);
+
+
+        // 텍스트 그리기
+        canvas.drawText("테스트", parentWidth / 2, parentHeight / 2, textp);
+
+
+//        canvas.draw
     }
 
-    private void initView(){
+    public void initView(){
         dayHeaderLayout = createDayHeaderLayout();
         dayBodyLayout = createDayBodyLayout();
 
@@ -195,17 +231,16 @@ public class DayView extends RelativeLayout {
 
     public void setChildrenLp(LinearLayout parent){
 
-        int parentWidth  = parent.getWidth();
-        int parentHeight = parent.getHeight();
+        int parentWidth  = parent.getMeasuredWidth();
+        int parentHeight = parent.getMeasuredHeight();
         int childCnt     = parent.getChildCount();
 
-        Log.d("ABC", "setChildrenLp, p_w: " + parentWidth);
+        Log.d("ABC", "setChildrenLp, w: " + parentWidth + ", h: " + parentHeight);
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, parentHeight/childCnt, 1);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(parentWidth, parentHeight/childCnt, 1);
 
         for(int i = 0; i < childCnt; ++ i){
             parent.getChildAt(i).setLayoutParams(params);
-            parent.getChildAt(i).requestLayout();
         }
 
     }
