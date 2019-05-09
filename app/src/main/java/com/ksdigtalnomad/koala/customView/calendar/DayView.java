@@ -3,6 +3,7 @@ package com.ksdigtalnomad.koala.customView.calendar;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -15,38 +16,73 @@ import android.widget.TextView;
 
 public class DayView extends RelativeLayout {
 
-    private static int HEIIGHT_HEADER = 100;
-    private static int HEIIGHT_BODY = 200;
-    private LinearLayout dayHeaderLayout;
+//    private int parentWidth;
+//    private int parentHeight;
+
+    // header l t r b
+    private int headerLeft;
+    private int headerTop;
+    private int headerRight;
+    private int headerBottom;
+
+    // body l t r b
+    private int bodyLeft;
+    private int bodyTop;
+    private int bodyRight;
+    private int bodyBottom;
+    private static final int BODY_MARGIN = 20;
+
+    public LinearLayout dayHeaderLayout;
     private LinearLayout dayBodyLayout;
 
 
-    public DayView(Context context) {
+    // Text attributes
+    private final float TEXT_SIZE = 8;
+    private final int TEXT_PADDING_LEFT  = 15;
+    private final int TEXT_PADDING_RIGHT = 10;
+
+
+    public DayView(Context context){ //, int width, int height) {
         super(context);
 
-        Log.d("ABC", "DayView w/ childCnt: " + getChildCount());
+//        parentWidth = width;
+//        parentHeight = height;
 
         initView();
 
-        Log.d("ABC", "DayView w/ childCnt: " + getChildCount());
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        Log.d("ABC", "onLayout w/ childCnt: " + getChildCount());
 
         int parentWidth  = getMeasuredWidth();
         int parentHeight = getMeasuredHeight();
 
         // 1. Layout DayHeaderLayout
-        dayHeaderLayout.layout(0, 0, parentWidth, HEIIGHT_HEADER);
+
+        headerLeft   = 0;
+        headerTop    = 0;
+        headerRight  = parentWidth;
+        headerBottom = parentHeight/3;
+
+        dayHeaderLayout.layout(headerLeft, headerTop, headerRight, headerBottom);
         setChildrenLp(dayHeaderLayout);
+
 
 
         // 2. Layout DayBodyLayout
-        dayBodyLayout.layout(0, parentHeight - HEIIGHT_HEADER, parentWidth, HEIIGHT_BODY);
-        setChildrenLp(dayHeaderLayout);
 
+        bodyLeft   = 0;
+        bodyTop    = parentHeight/2 - BODY_MARGIN;
+        bodyRight  = parentWidth;
+        bodyBottom = parentHeight - BODY_MARGIN;
+
+        dayBodyLayout.layout(bodyLeft, bodyTop, bodyRight, bodyBottom);
+        setChildrenLp(dayBodyLayout);
+
+
+        Log.d("ABC", "onMeasure, w: " + parentWidth + ", h: " + parentHeight);
+        Log.d("ABC", "onMeasure, ㅇ: " + dayHeaderLayout.getWidth());
     }
 
     @Override
@@ -57,14 +93,24 @@ public class DayView extends RelativeLayout {
         // @TODO: onLayout 에서 부르는 함수를 여기서 호출해보자
             // @TODO: 한번만 호출 되면 여기서 init
             // @TODO: 아니면
+
+//        Log.d("ABC", "onMeasure, w: " + getMinimumWidth() + ", h: " + getMinimumHeight()/3);
+
+//        final int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+
+
+//        int headerWidthSpec = MeasureSpec.makeMeasureSpec(getMinimumWidth(), MeasureSpec.AT_MOST);
+//        int headerHeightSpec = MeasureSpec.makeMeasureSpec(getMinimumHeight()/3, MeasureSpec.AT_MOST);
+//        int bodyHeightSpec = MeasureSpec.makeMeasureSpec(heightSize/2, MeasureSpec.EXACTLY);
+//
+//
+//        dayHeaderLayout.measure(headerWidthSpec, headerHeightSpec);
+//        dayBodyLayout.measure(widthMeasureSpec, bodyHeightSpec);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-        Log.d("ABC", "onDraw w/ childCnt: " + getChildCount());
-
     }
 
     private void initView(){
@@ -83,8 +129,10 @@ public class DayView extends RelativeLayout {
         layout.setBackgroundColor(Color.WHITE);
         layout.setOrientation(LinearLayout.VERTICAL);
 
-        TextView dayTv        = createLeftSideTv("11", Color.RED);
-        TextView drunkLevelTv = createRightSideTv("Max", Color.WHITE, Color.RED);
+        TextView dayTv        = createLeftSideTv("11", Color.DKGRAY);
+        TextView drunkLevelTv = createRightSideTv("MAX", Color.WHITE, Color.RED);
+
+        drunkLevelTv.setTypeface(null, Typeface.BOLD);
 
         layout.addView(dayTv);
         layout.addView(drunkLevelTv);
@@ -98,10 +146,10 @@ public class DayView extends RelativeLayout {
         layout.setBackgroundColor(Color.WHITE);
         layout.setOrientation(LinearLayout.VERTICAL);
 
-        TextView friendListTv = createLeftSideTv("아이유 외 1", Color.BLACK);
-        TextView foodListTv   = createLeftSideTv("곱창 외 1", Color.BLACK);
-        TextView liquorListTv = createLeftSideTv("소주 외 1", Color.BLACK);
-        TextView memoTv       = createLeftSideTv("행사 뒷풀이", Color.BLACK);
+        TextView friendListTv = createLeftSideTv("아이유 외 1", Color.DKGRAY);
+        TextView foodListTv   = createLeftSideTv("곱창 외 1", Color.DKGRAY);
+        TextView liquorListTv = createLeftSideTv("소주 외 1", Color.DKGRAY);
+        TextView memoTv       = createLeftSideTv("행사 뒷풀이", Color.DKGRAY);
 
         layout.addView(friendListTv);
         layout.addView(foodListTv);
@@ -117,13 +165,13 @@ public class DayView extends RelativeLayout {
         TextView textView = new TextView(getContext());
         textView.setText(contents);
         textView.setTextColor(textColor);
-        textView.setTextSize(8);
+        textView.setTextSize(TEXT_SIZE);
 
         textView.setGravity(Gravity.LEFT | Gravity.CENTER);
 
         textView.setBackgroundColor(Color.WHITE);
 
-        textView.setPadding(10,0,0,0);
+        textView.setPadding(TEXT_PADDING_LEFT,0,0,0);
 
         return textView;
     }
@@ -133,27 +181,31 @@ public class DayView extends RelativeLayout {
 
         textView.setText(contents);
         textView.setTextColor(txtColor);
-        textView.setTextSize(8);
+        textView.setTextSize(TEXT_SIZE);
 
         textView.setGravity(Gravity.RIGHT | Gravity.CENTER);
+
         textView.setBackgroundColor(bgColor);
 
-        textView.setPadding(0,0,10,0);
+        textView.setPadding(0,0,TEXT_PADDING_RIGHT,0);
 
         return textView;
     }
 
 
-    private void setChildrenLp(LinearLayout parent){
+    public void setChildrenLp(LinearLayout parent){
 
-        int parentWidth  = parent.getMeasuredWidth();
-        int parentHeight = parent.getMeasuredHeight();
+        int parentWidth  = parent.getWidth();
+        int parentHeight = parent.getHeight();
         int childCnt     = parent.getChildCount();
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(parentWidth, parentHeight/childCnt, 1);
+        Log.d("ABC", "setChildrenLp, p_w: " + parentWidth);
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, parentHeight/childCnt, 1);
 
         for(int i = 0; i < childCnt; ++ i){
             parent.getChildAt(i).setLayoutParams(params);
+            parent.getChildAt(i).requestLayout();
         }
 
     }
