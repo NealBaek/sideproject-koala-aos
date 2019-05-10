@@ -4,10 +4,13 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
+import android.support.v4.graphics.ColorUtils;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,243 +18,210 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class DayView extends RelativeLayout {
 
-    private static final int BODY_MARGIN = 20;
-
-    public LinearLayout dayHeaderLayout;
-    private LinearLayout dayBodyLayout;
-
-
+    private DayModel dayModel = null;
 
     // Paints
-    private Paint dayTxPt = null;
-    private Paint drunkLevelTxPt = null;
-    private Paint listTxPt = null;
+    private Paint dayTvPt = null;
+    private Paint drunkLvRectPt = null;
+    private Paint drunkLvTvPt = null;
+    private Paint listTvPt = null;
+
+
+    private final String DRUNK_LV_STR = "MAX";
+
 
     // Text attributes
-    private final float TEXT_SIZE = 8;
+    private final float TEXT_SIZE = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics());
     private final int TEXT_PADDING_LEFT  = 15;
-    private final int TEXT_PADDING_RIGHT = 10;
+    private final int TEXT_PADDING_RIGHT = 15;
+
+    private int txHeightForHeader = 0;
+    private int txHeightForBody = 0;
+
+
 
     public DayView(Context context){ //, int width, int height) {
         super(context);
 
-//        parentWidth = width;
-//        parentHeight = height;
+        // DayView 설정
+        setBackgroundColor(Color.WHITE);
+    }
+
+
+    /** set Data*/
+    public void setDayModel(DayModel dayModel){
+        this.dayModel = dayModel;
+
+        // 1. 페인트 준비
+        initPaints(dayModel);
+    }
+
+    /** Paints */
+    private void initPaints(DayModel dayModel){
 
         // 1. day text Pain 만들기
-        dayTxPt = createTxPaint(Color.RED, Paint.Align.LEFT);
+        int DAY_COLOR = CalendarConstUtils.getDayColor(dayModel.daySeq);
+        dayTvPt = createTxPaint(DAY_COLOR, Paint.Align.LEFT, null);
 
         // 2. drunkLevel Paint 만들기
         //  2-1. Rect
+        drunkLvRectPt = createRectPaint(CalendarConstUtils.getDrunkLvColor(dayModel.drunkLevel));
         //  2-2. MAX
-        drunkLevelTxPt = createTxPaint(Color.RED, Paint.Align.RIGHT);
+        drunkLvTvPt = createTxPaint(Color.WHITE, Paint.Align.RIGHT, Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 
         // 3. 리스트 텍스트 Pain 만들기 (역순으로 리스트 형식은 어떨까?)
-        listTxPt = createTxPaint(Color.DKGRAY, Paint.Align.LEFT);
+        listTvPt = createTxPaint(Color.BLACK, Paint.Align.LEFT, null);
+
+
+        // 4. 텍스트 기준 높이 계산
+
+        Rect headerTvBound = new Rect();
+        dayTvPt.getTextBounds(DRUNK_LV_STR, 0, DRUNK_LV_STR.length(), headerTvBound);
+
+        Rect bodyTvBound = new Rect();
+        listTvPt.getTextBounds(DRUNK_LV_STR, 0, DRUNK_LV_STR.length(), bodyTvBound);
+
+
+        txHeightForHeader = headerTvBound.height();
+        txHeightForBody = bodyTvBound.height();
     }
 
-    private Paint createTxPaint(int textColor, Paint.Align align){
+    // Create Paints
+    private Paint createTxPaint(int textColor, Paint.Align align, Typeface typeface){
         Paint textp = new Paint();
 
         textp.setColor(textColor);
         textp.setTextSize(TEXT_SIZE);
         textp.setTextAlign(align);
+        textp.setAntiAlias(true);
+
+        if(typeface != null){ textp.setTypeface(typeface); }
 
         return textp;
     }
+    private Paint createRectPaint(int bgColor){
+        Paint rectP = new Paint();
 
-//    @Override
-//    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-//
-//        Log.d("ABC", "onLayout");
-//
-//        sup
-//
-//        if (!changed){ return; }
-//
-////        Log.d("ABC", "changed: " + changed);
-//
-//        int parentWidth  = getMeasuredWidth();
-//        int parentHeight = getMeasuredHeight();
-//
-//        // 1. Layout DayHeaderLayout
-//
-//        headerLeft   = 0;
-//        headerTop    = 0;
-//        headerRight  = parentWidth;
-//        headerBottom = parentHeight/3;
-//
-//        dayHeaderLayout.layout(headerLeft, headerTop, headerRight, headerBottom);
-//        setChildrenLp(dayHeaderLayout);
-//
-//
-//
-//        // 2. Layout DayBodyLayout
-//
-//        bodyLeft   = 0;
-//        bodyTop    = parentHeight/2 - BODY_MARGIN;
-//        bodyRight  = parentWidth;
-//        bodyBottom = parentHeight - BODY_MARGIN;
-//
-//        dayBodyLayout.layout(bodyLeft, bodyTop, bodyRight, bodyBottom);
-//        setChildrenLp(dayBodyLayout);
-////
-////
-////        Log.d("ABC", "onMeasure, w: " + parentWidth + ", h: " + parentHeight);
-////        Log.d("ABC", "onMeasure, ㅇ: " + dayHeaderLayout.getWidth());
-//    }
+        rectP.setColor(bgColor);
+        rectP.setStrokeWidth(0);
+
+        return rectP;
+    }
 
 
 
-//    @Override
-//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-//
-//        Log.d("ABC", "onMeasure");
-//
-//        // @TODO: 몇번 호출되는지 확인
-//        // @TODO: onLayout 에서 부르는 함수를 여기서 호출해보자
-//            // @TODO: 한번만 호출 되면 여기서 init
-//            // @TODO: 아니면
-//
-//
-//
-//    }
 
 
+    /** Draw */
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        Log.d("ABC", "onDraw");
+        if(dayModel == null) return;
+
+        // 1. Header 그리기
+        drawHeader(canvas, dayModel);
+
+        // 2. Body 그리기
+        drawBody(canvas);
+
+
+    }
+
+    // Draw Layouts
+    private void drawHeader(Canvas canvas, DayModel model){
 
         int parentWidth  = getMeasuredWidth();
-        int parentHeight = getMeasuredHeight();
-
-        int dayTxY = parentHeight/20;
 
         // 1. day text 그리기
-        canvas.drawText("11", TEXT_PADDING_LEFT, dayTxY, dayTxPt);
 
-        // 2. drunkLevel
-        //  2-1. Rect 그리기
-        //  2-2. MAX 그리기
-        canvas.drawText("MAX", parentWidth - TEXT_PADDING_RIGHT - 20, dayTxY * 3, drunkLevelTxPt);
-
-        int listTtTopMargin = parentHeight/8;
-
-        // 3. 리스트 텍스트 (역순으로 리스트 형식은 어떨까?)
-        //  3-1. friendList text 그리기
-        canvas.drawText("아이유 외 1", TEXT_PADDING_LEFT, parentHeight/2, listTxPt);
-        //  3-2. foodList text 그리기
-        canvas.drawText("곱창 외 1", TEXT_PADDING_LEFT, parentHeight/2 + listTtTopMargin, listTxPt);
-        //  3-3. liquorList text 그리기
-        canvas.drawText("소주 외 1", TEXT_PADDING_LEFT, parentHeight/2 + listTtTopMargin * 2, listTxPt);
-        //  3-4. memo text 그리기
-        canvas.drawText("송별회", TEXT_PADDING_LEFT, parentHeight/2 + listTtTopMargin * 3, listTxPt);
-
-        // 텍스트 그리기
-//        canvas.drawText("테스트", parentWidth / 2, parentHeight / 2, textp);
+        // 1-1. 레이아웃 HEIGHT & MARGIN
+        int dayTvHeight = txHeightForHeader * 2;
+        int dayTvTopMargin = txHeightForHeader/2;
 
 
-//        canvas.draw
+        // 1-2. 텍스트 그리기
+        drawDayTv(canvas, txHeightForHeader, TEXT_PADDING_LEFT, dayTvTopMargin, dayTvHeight, dayTvPt, model);
+
+
+
+        // 2. drunkLv 그리기
+        drawDrunkLv(canvas, txHeightForHeader, dayTvTopMargin, dayTvHeight, parentWidth, drunkLvRectPt, drunkLvTvPt, DRUNK_LV_STR);
     }
+    private void drawBody(Canvas canvas){
 
-    public void initView(){
-        dayHeaderLayout = createDayHeaderLayout();
-        dayBodyLayout = createDayBodyLayout();
+        int parentHeight = getMeasuredHeight();
 
+        // 리스트 텍스트 그리기
+        drawListTvs(canvas, txHeightForBody ,parentHeight, listTvPt, dayModel);
 
-        addView(dayHeaderLayout);
-        addView(dayBodyLayout);
     }
 
 
-    private LinearLayout createDayHeaderLayout(){ // dayNum, drunkLevel
+    // Draw Details
+    private void drawDayTv(Canvas canvas, int TEXT_HEIGHT, int PADDING_R, int MARGIN_T, int HEIGHT, Paint paint, DayModel dayModel){
 
-        LinearLayout layout = new LinearLayout(getContext());
-        layout.setBackgroundColor(Color.WHITE);
-        layout.setOrientation(LinearLayout.VERTICAL);
+        String text = String.valueOf(dayModel.day);
 
-        TextView dayTv        = createLeftSideTv("11", Color.DKGRAY);
-        TextView drunkLevelTv = createRightSideTv("MAX", Color.WHITE, Color.RED);
+        int PADDING_TOP = (HEIGHT - TEXT_HEIGHT)/2;
 
-        drunkLevelTv.setTypeface(null, Typeface.BOLD);
 
-        layout.addView(dayTv);
-        layout.addView(drunkLevelTv);
+        int x = PADDING_R;
+        int y = MARGIN_T + HEIGHT - PADDING_TOP;
 
-        return layout;
+        canvas.drawText(text, x, y, paint);
     }
+    private void drawDrunkLv(Canvas canvas, int TEXT_HEIGHT, int DAY_TV_MARGIN_TOP, int DAY_TV_HEIGHT, int PARENT_WIDTH, Paint rPaint, Paint txPaint, String text){
 
-    private LinearLayout createDayBodyLayout(){ // dayNum, drunkLevel
+        //  1. Rect 그리기
 
-        LinearLayout layout = new LinearLayout(getContext());
-        layout.setBackgroundColor(Color.WHITE);
-        layout.setOrientation(LinearLayout.VERTICAL);
+        int RECT_L = 0;
+        int RECT_T = DAY_TV_MARGIN_TOP + (DAY_TV_HEIGHT * 1);
+        int RECT_R = PARENT_WIDTH;
+        int RECT_B = DAY_TV_MARGIN_TOP + (DAY_TV_HEIGHT * 2);
 
-        TextView friendListTv = createLeftSideTv("아이유 외 1", Color.DKGRAY);
-        TextView foodListTv   = createLeftSideTv("곱창 외 1", Color.DKGRAY);
-        TextView liquorListTv = createLeftSideTv("소주 외 1", Color.DKGRAY);
-        TextView memoTv       = createLeftSideTv("행사 뒷풀이", Color.DKGRAY);
-
-        layout.addView(friendListTv);
-        layout.addView(foodListTv);
-        layout.addView(liquorListTv);
-        layout.addView(memoTv);
+        canvas.drawRect(RECT_L, RECT_T, RECT_R, RECT_B, rPaint);
 
 
-        return layout;
+        //  2. MAX Text 그리기
+        int PADDING_TOP = (RECT_B - RECT_T - TEXT_HEIGHT)/2;
+
+        canvas.drawText(text, PARENT_WIDTH - TEXT_PADDING_RIGHT, RECT_B - PADDING_TOP, txPaint);
     }
+    private void drawListTvs(Canvas canvas, int TEXT_HEIGHT, int PARENT_HEIGHT, Paint txPaint, DayModel dayModel){
 
-    private TextView createLeftSideTv(String contents, int textColor){
+        //  1. list text 검증
 
-        TextView textView = new TextView(getContext());
-        textView.setText(contents);
-        textView.setTextColor(textColor);
-        textView.setTextSize(TEXT_SIZE);
+        String friendStr = CalendarConstUtils.getShortStr(dayModel.friendList);
+        String foodStr = CalendarConstUtils.getShortStr(dayModel.foodList);
+        String liquorStr = CalendarConstUtils.getShortStr(dayModel.liquorList);
+        String memoStr = CalendarConstUtils.getShortStr(dayModel.memo);
 
-        textView.setGravity(Gravity.LEFT | Gravity.CENTER);
+        ArrayList<String> toDrawList = new ArrayList<>();
 
-        textView.setBackgroundColor(Color.WHITE);
-
-        textView.setPadding(TEXT_PADDING_LEFT,0,0,0);
-
-        return textView;
-    }
-    private TextView createRightSideTv(String contents, int txtColor, int bgColor){
-
-        TextView textView = new TextView(getContext());
-
-        textView.setText(contents);
-        textView.setTextColor(txtColor);
-        textView.setTextSize(TEXT_SIZE);
-
-        textView.setGravity(Gravity.RIGHT | Gravity.CENTER);
-
-        textView.setBackgroundColor(bgColor);
-
-        textView.setPadding(0,0,TEXT_PADDING_RIGHT,0);
-
-        return textView;
-    }
+        if(memoStr != "")   { toDrawList.add(memoStr); }
+        if(liquorStr != "") { toDrawList.add(liquorStr); }
+        if(foodStr != "")   { toDrawList.add(foodStr); }
+        if(friendStr != "") { toDrawList.add(friendStr); }
 
 
-    public void setChildrenLp(LinearLayout parent){
+        final int toDrawCnt = toDrawList.size();
 
-        int parentWidth  = parent.getMeasuredWidth();
-        int parentHeight = parent.getMeasuredHeight();
-        int childCnt     = parent.getChildCount();
+        if(toDrawCnt == 0){ return; }
 
-        Log.d("ABC", "setChildrenLp, w: " + parentWidth + ", h: " + parentHeight);
+        //  2. list text 그리기 (vertical, from bottom)
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(parentWidth, parentHeight/childCnt, 1);
+        final int VIEW_HEIGHT = (int)(TEXT_HEIGHT * 1.5);
+        final int LIST_TV_Y = PARENT_HEIGHT - TEXT_HEIGHT * 4;
 
-        for(int i = 0; i < childCnt; ++ i){
-            parent.getChildAt(i).setLayoutParams(params);
+        for(int i = 0; i < toDrawCnt; ++i){
+            canvas.drawText(toDrawList.get(i), TEXT_PADDING_LEFT, LIST_TV_Y + (VIEW_HEIGHT * (2 - i)), txPaint);
         }
+
 
     }
 }

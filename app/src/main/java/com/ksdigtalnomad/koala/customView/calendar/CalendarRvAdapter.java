@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 /**
  * Created by ooddy on 08/05/2019.
  */
@@ -33,30 +35,35 @@ public class CalendarRvAdapter extends RecyclerView.Adapter{
         dayView.setMinimumWidth(targetWidth);
         dayView.setMinimumHeight(targetHeight);
 
-        dayView.setBackgroundColor(Color.LTGRAY);
-
-//        viewGroup.addView(dayView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-
-
-//        dayView.setLayoutParams(viewGroup.getLayoutParams());
-
-//        Log.d("ABC", "viewGroup: " + (viewGroup == null));
-//
-//        dayView.measure( View.MeasureSpec.makeMeasureSpec(targetWidth, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(targetHeight, View.MeasureSpec.UNSPECIFIED));
-
-//        dayView.measure(View.MeasureSpec.makeMeasureSpec());
-
-//        RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(viewGroup.getMeasuredWidth()/7, viewGroup.getMeasuredHeight()/6);
-//        dayView.setLayoutParams(lp);
-
         return new ViewHolder(dayView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+
+        Log.d("ABC", "?? : " + ((int) (Math.random() * 10) %5));
+
+        DayModel dayModel = new DayModel();
+        dayModel.day = i;
+        dayModel.daySeq = i;
+        dayModel.drunkLevel = ((int)( Math.random() * 10)) % 5;
+        dayModel.friendList = new ArrayList<String>();
+        dayModel.foodList = new ArrayList<String>();
+        dayModel.liquorList = new ArrayList<String>();
+
+
+        if(i%2 == 0) dayModel.friendList.add("아이유 외 1");
+
+        if(i%3 == 0) dayModel.foodList.add("곱창 외 1");
+
+        dayModel.liquorList.add("소주 외 1");
+
+        if(i%4 == 0) dayModel.memo = "송별회";
+
+
         DayView dayView = ((ViewHolder) viewHolder).dayView;
 
-        dayView.requestLayout();
+        dayView.setDayModel(dayModel);
     }
 
     @Override

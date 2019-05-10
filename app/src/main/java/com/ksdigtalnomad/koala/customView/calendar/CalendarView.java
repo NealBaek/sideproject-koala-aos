@@ -96,7 +96,7 @@ public class CalendarView extends LinearLayout{
     private LinearLayout createDayHeaderLayout(){
 
         LinearLayout layout = new LinearLayout(getContext());
-//        layout.setBackgroundColor(Color.BLACK);
+        layout.setBackgroundColor(Color.LTGRAY);
         layout.setOrientation(LinearLayout.HORIZONTAL);
 
 
@@ -105,7 +105,7 @@ public class CalendarView extends LinearLayout{
 
         for(int i = 0; i < 7; ++ i){
             TextView textView = createCenterSideTextView(dayList[i], colorList[i]);
-            textView.setBackgroundColor(Color.BLACK);
+            textView.setBackgroundColor(Color.LTGRAY);
             layout.addView(textView);
         }
 
@@ -117,30 +117,17 @@ public class CalendarView extends LinearLayout{
         RecyclerView recyclerView = new RecyclerView(getContext());
 
         // Bg Color
-        recyclerView.setBackgroundColor(Color.WHITE);
+        recyclerView.setBackgroundColor(Color.LTGRAY);
 
 
         // Layout Manager & dividers
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
-
-
-        RectShape rectShape = new RectShape();
-        ShapeDrawable shapeDrawable = new ShapeDrawable(rectShape);
-        shapeDrawable.getPaint().setColor(Color.DKGRAY);
-//        shapeDrawable.setAlpha(1);
-        shapeDrawable.getPaint().setStrokeWidth(1.0f);
-
-
-        DividerItemDecoration horiDivider = new DividerItemDecoration(recyclerView.getContext(), GridLayoutManager.HORIZONTAL);
-        DividerItemDecoration vertDivider = new DividerItemDecoration(recyclerView.getContext(), GridLayoutManager.VERTICAL);
-        horiDivider.setDrawable(shapeDrawable);
-        vertDivider.setDrawable(shapeDrawable);
-
-        recyclerView.addItemDecoration(horiDivider);
-        recyclerView.addItemDecoration(vertDivider);
+        GridLayoutManager layoutManager         = new GridLayoutManager(getContext(), 7);
+        CalendarItemDecoration itemDecoration   = new CalendarItemDecoration(1);
 
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(itemDecoration);
 
+        // Adapter
         recyclerView.setAdapter(new CalendarRvAdapter(getContext()));
 
         return recyclerView;
