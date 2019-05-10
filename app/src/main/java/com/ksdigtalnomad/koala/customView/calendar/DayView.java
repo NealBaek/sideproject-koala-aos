@@ -17,31 +17,22 @@ import android.widget.TextView;
 
 public class DayView extends RelativeLayout {
 
-//    private int parentWidth;
-//    private int parentHeight;
-
-    // header l t r b
-    private int headerLeft;
-    private int headerTop;
-    private int headerRight;
-    private int headerBottom;
-
-    // body l t r b
-    private int bodyLeft;
-    private int bodyTop;
-    private int bodyRight;
-    private int bodyBottom;
     private static final int BODY_MARGIN = 20;
 
     public LinearLayout dayHeaderLayout;
     private LinearLayout dayBodyLayout;
 
 
+
+    // Paints
+    private Paint dayTxPt = null;
+    private Paint drunkLevelTxPt = null;
+    private Paint listTxPt = null;
+
     // Text attributes
     private final float TEXT_SIZE = 8;
     private final int TEXT_PADDING_LEFT  = 15;
     private final int TEXT_PADDING_RIGHT = 10;
-
 
     public DayView(Context context){ //, int width, int height) {
         super(context);
@@ -49,7 +40,26 @@ public class DayView extends RelativeLayout {
 //        parentWidth = width;
 //        parentHeight = height;
 
-//        initView();
+        // 1. day text Pain 만들기
+        dayTxPt = createTxPaint(Color.RED, Paint.Align.LEFT);
+
+        // 2. drunkLevel Paint 만들기
+        //  2-1. Rect
+        //  2-2. MAX
+        drunkLevelTxPt = createTxPaint(Color.RED, Paint.Align.RIGHT);
+
+        // 3. 리스트 텍스트 Pain 만들기 (역순으로 리스트 형식은 어떨까?)
+        listTxPt = createTxPaint(Color.DKGRAY, Paint.Align.LEFT);
+    }
+
+    private Paint createTxPaint(int textColor, Paint.Align align){
+        Paint textp = new Paint();
+
+        textp.setColor(textColor);
+        textp.setTextSize(TEXT_SIZE);
+        textp.setTextAlign(align);
+
+        return textp;
     }
 
 //    @Override
@@ -120,30 +130,30 @@ public class DayView extends RelativeLayout {
         int parentWidth  = getMeasuredWidth();
         int parentHeight = getMeasuredHeight();
 
+        int dayTxY = parentHeight/20;
 
         // 1. day text 그리기
+        canvas.drawText("11", TEXT_PADDING_LEFT, dayTxY, dayTxPt);
 
         // 2. drunkLevel
         //  2-1. Rect 그리기
         //  2-2. MAX 그리기
+        canvas.drawText("MAX", parentWidth - TEXT_PADDING_RIGHT - 20, dayTxY * 3, drunkLevelTxPt);
+
+        int listTtTopMargin = parentHeight/8;
 
         // 3. 리스트 텍스트 (역순으로 리스트 형식은 어떨까?)
         //  3-1. friendList text 그리기
-        //  3-2. friendList text 그리기
-        //  3-3. friendList text 그리기
-        //  3-4. friendList text 그리기
-
-
-        // 텍스트 그리기 속성
-        Paint textp = new Paint();
-
-        textp.setColor(Color.BLACK);
-        textp.setTextSize(10);
-        textp.setTextAlign(Paint.Align.CENTER);
-
+        canvas.drawText("아이유 외 1", TEXT_PADDING_LEFT, parentHeight/2, listTxPt);
+        //  3-2. foodList text 그리기
+        canvas.drawText("곱창 외 1", TEXT_PADDING_LEFT, parentHeight/2 + listTtTopMargin, listTxPt);
+        //  3-3. liquorList text 그리기
+        canvas.drawText("소주 외 1", TEXT_PADDING_LEFT, parentHeight/2 + listTtTopMargin * 2, listTxPt);
+        //  3-4. memo text 그리기
+        canvas.drawText("송별회", TEXT_PADDING_LEFT, parentHeight/2 + listTtTopMargin * 3, listTxPt);
 
         // 텍스트 그리기
-        canvas.drawText("테스트", parentWidth / 2, parentHeight / 2, textp);
+//        canvas.drawText("테스트", parentWidth / 2, parentHeight / 2, textp);
 
 
 //        canvas.draw
