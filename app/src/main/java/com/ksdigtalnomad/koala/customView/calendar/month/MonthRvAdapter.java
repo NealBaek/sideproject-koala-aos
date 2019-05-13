@@ -52,13 +52,16 @@ public class MonthRvAdapter extends RecyclerView.Adapter{
         dayModel.liquorList = new ArrayList<String>();
 
 
-        if(i%2 == 0) dayModel.friendList.add("아이유 외 1");
 
-        if(i%3 == 0) dayModel.foodList.add("곱창 외 1");
+        if(dayModel.drunkLevel != CalendarConstUtils.DRUNK_LV_0){
+            if(i%2 == 0) dayModel.friendList.add("아이유 외 1");
 
-        dayModel.liquorList.add("소주 외 1");
+            if(i%3 == 0) dayModel.foodList.add("곱창 외 1");
 
-        if(i%4 == 0) dayModel.memo = "송별회";
+            dayModel.liquorList.add("소주 외 1");
+
+            if(i%4 == 0) dayModel.memo = "송별회";
+        }
 
 
         DayView dayView = ((ViewHolder) viewHolder).dayView;

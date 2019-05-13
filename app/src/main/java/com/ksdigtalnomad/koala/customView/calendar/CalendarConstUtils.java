@@ -42,15 +42,15 @@ public class CalendarConstUtils {
 
         switch (drunkLv){
             case DRUNK_LV_1:
-                return ColorUtils.setAlphaComponent(Color.RED, /** 0~ 255 */ 255 * 1/4);
+                return ColorUtils.setAlphaComponent(Color.RED, /** 0~ 255 */ 255 * 1/5);
             case DRUNK_LV_2:
-                return ColorUtils.setAlphaComponent(Color.RED, /** 0~ 255 */ 255 * 2/4);
+                return ColorUtils.setAlphaComponent(Color.RED, /** 0~ 255 */ 255 * 2/5);
             case DRUNK_LV_3:
-                return ColorUtils.setAlphaComponent(Color.RED, /** 0~ 255 */ 255 * 3/4);
+                return ColorUtils.setAlphaComponent(Color.RED, /** 0~ 255 */ 255 * 3/5);
             case DRUNK_LV_MAX:
                 return ColorUtils.setAlphaComponent(Color.RED, /** 0~ 255 */ 255 * 4/4);
             default:
-                return ColorUtils.setAlphaComponent(Color.LTGRAY, 200);
+                return ColorUtils.setAlphaComponent(Color.LTGRAY, 100);
         }
 
     }

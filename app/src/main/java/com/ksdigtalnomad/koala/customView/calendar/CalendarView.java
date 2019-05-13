@@ -111,7 +111,6 @@ public class CalendarView extends LinearLayout{
 
         viewPager.setBackgroundColor(Color.RED);
 
-
         CalendarBodyPagerAdapter adapter = new CalendarBodyPagerAdapter(calendarModel);
 
         viewPager.setAdapter(adapter);
@@ -126,10 +125,9 @@ public class CalendarView extends LinearLayout{
 //        // Bg Color
 //        recyclerView.setBackgroundColor(Color.LTGRAY);
 //
-//
 //        // Layout Manager & dividers
-//        GridLayoutManager layoutManager      = new GridLayoutManager(getContext(), 7);
-//        MonthItemDecoration itemDecoration   = new MonthItemDecoration(1);
+//        NonScrollGridLayoutManager layoutManager = new NonScrollGridLayoutManager(getContext(), 7);
+//        CalendarItemDecoration itemDecoration    = new CalendarItemDecoration(1);
 //
 //        recyclerView.setLayoutManager(layoutManager);
 //        recyclerView.addItemDecoration(itemDecoration);

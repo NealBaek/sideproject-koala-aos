@@ -116,42 +116,31 @@ public class DayView extends RelativeLayout {
 
         if(dayModel == null) return;
 
-        // 1. Header 그리기
-        drawHeader(canvas, dayModel);
-
-        // 2. Body 그리기
-        drawBody(canvas);
-
-
-    }
-
-    // Draw Layouts
-    private void drawHeader(Canvas canvas, DayModel model){
 
         int parentWidth  = getMeasuredWidth();
 
         // 1. day text 그리기
 
-        // 1-1. 레이아웃 HEIGHT & MARGIN
+        //  1-1. 레이아웃 HEIGHT & MARGIN
         int dayTvHeight = txHeightForHeader * 2;
         int dayTvTopMargin = txHeightForHeader/2;
 
 
-        // 1-2. 텍스트 그리기
-        drawDayTv(canvas, txHeightForHeader, TEXT_PADDING_LEFT, dayTvTopMargin, dayTvHeight, dayTvPt, model);
-
+        //  1-2. 텍스트 그리기
+        drawDayTv(canvas, txHeightForHeader, TEXT_PADDING_LEFT, dayTvTopMargin, dayTvHeight, dayTvPt, dayModel);
 
 
         // 2. drunkLv 그리기
-        drawDrunkLv(canvas, txHeightForHeader, dayTvTopMargin, dayTvHeight, parentWidth, drunkLvRectPt, drunkLvTvPt, DRUNK_LV_STR);
-    }
-    private void drawBody(Canvas canvas){
 
-        int parentHeight = getMeasuredHeight();
+        //  2-1. DrinkLv Rect Bottom 계산
+        int drunkLvRectBottom = dayTvTopMargin + (dayTvHeight * 2);
 
-        // 리스트 텍스트 그리기
-        drawListTvs(canvas, txHeightForBody ,parentHeight, listTvPt, dayModel);
+        //  2-2. DrinkLv Rect & Text 그리기
+        drawDrunkLv(canvas, txHeightForHeader, dayTvTopMargin, dayTvHeight, drunkLvRectBottom, parentWidth, drunkLvRectPt, drunkLvTvPt, DRUNK_LV_STR, dayModel.drunkLevel);
 
+
+        // 3. 리스트 텍스트 그리기
+        drawListTvs(canvas, txHeightForBody ,drunkLvRectBottom, listTvPt, dayModel);
     }
 
 
@@ -168,24 +157,25 @@ public class DayView extends RelativeLayout {
 
         canvas.drawText(text, x, y, paint);
     }
-    private void drawDrunkLv(Canvas canvas, int TEXT_HEIGHT, int DAY_TV_MARGIN_TOP, int DAY_TV_HEIGHT, int PARENT_WIDTH, Paint rPaint, Paint txPaint, String text){
+    private void drawDrunkLv(Canvas canvas, int TEXT_HEIGHT, int DAY_TV_MARGIN_TOP, int DAY_TV_HEIGHT, int TARGET_BOTTOM,int PARENT_WIDTH, Paint rPaint, Paint txPaint, String text, int drunkLv){
 
         //  1. Rect 그리기
-
         int RECT_L = 0;
         int RECT_T = DAY_TV_MARGIN_TOP + (DAY_TV_HEIGHT * 1);
         int RECT_R = PARENT_WIDTH;
-        int RECT_B = DAY_TV_MARGIN_TOP + (DAY_TV_HEIGHT * 2);
+        int RECT_B = TARGET_BOTTOM;
 
         canvas.drawRect(RECT_L, RECT_T, RECT_R, RECT_B, rPaint);
 
+
+        if(drunkLv != CalendarConstUtils.DRUNK_LV_MAX){ return; }
 
         //  2. MAX Text 그리기
         int PADDING_TOP = (RECT_B - RECT_T - TEXT_HEIGHT)/2;
 
         canvas.drawText(text, PARENT_WIDTH - TEXT_PADDING_RIGHT, RECT_B - PADDING_TOP, txPaint);
     }
-    private void drawListTvs(Canvas canvas, int TEXT_HEIGHT, int PARENT_HEIGHT, Paint txPaint, DayModel dayModel){
+    private void drawListTvs(Canvas canvas, int TEXT_HEIGHT, int TARGET_Y, Paint txPaint, DayModel dayModel){
 
         //  1. list text 검증
 
@@ -196,10 +186,10 @@ public class DayView extends RelativeLayout {
 
         ArrayList<String> toDrawList = new ArrayList<>();
 
-        if(memoStr != "")   { toDrawList.add(memoStr); }
-        if(liquorStr != "") { toDrawList.add(liquorStr); }
-        if(foodStr != "")   { toDrawList.add(foodStr); }
         if(friendStr != "") { toDrawList.add(friendStr); }
+        if(foodStr != "")   { toDrawList.add(foodStr); }
+        if(liquorStr != "") { toDrawList.add(liquorStr); }
+        if(memoStr != "")   { toDrawList.add(memoStr); }
 
 
         final int toDrawCnt = toDrawList.size();
@@ -209,10 +199,10 @@ public class DayView extends RelativeLayout {
         //  2. list text 그리기 (vertical, from bottom)
 
         final int VIEW_HEIGHT = (int)(TEXT_HEIGHT * 1.5);
-        final int LIST_TV_Y = PARENT_HEIGHT - TEXT_HEIGHT * 4;
+        final int LIST_TV_Y = TARGET_Y + TEXT_HEIGHT * 3;
 
         for(int i = 0; i < toDrawCnt; ++i){
-            canvas.drawText(toDrawList.get(i), TEXT_PADDING_LEFT, LIST_TV_Y + (VIEW_HEIGHT * (2 - i)), txPaint);
+            canvas.drawText(toDrawList.get(i), TEXT_PADDING_LEFT, LIST_TV_Y + (VIEW_HEIGHT * (i - 1)), txPaint);
         }
 
 
