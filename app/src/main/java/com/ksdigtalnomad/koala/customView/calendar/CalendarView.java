@@ -126,7 +126,7 @@ public class CalendarView extends LinearLayout{
 //        recyclerView.setBackgroundColor(Color.LTGRAY);
 //
 //        // Layout Manager & dividers
-//        NonScrollGridLayoutManager layoutManager = new NonScrollGridLayoutManager(getContext(), 7);
+//        MonthRvLayoutManager layoutManager = new MonthRvLayoutManager(getContext(), 7);
 //        CalendarItemDecoration itemDecoration    = new CalendarItemDecoration(1);
 //
 //        recyclerView.setLayoutManager(layoutManager);

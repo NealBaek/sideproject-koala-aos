@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.customView.calendar;
+package com.ksdigtalnomad.koala.customView.calendar.month;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
@@ -8,11 +8,11 @@ import android.util.AttributeSet;
  * Created by ooddy on 10/05/2019.
  */
 
-public class NonScrollGridLayoutManager extends GridLayoutManager {
+public class MonthRvLayoutManager extends GridLayoutManager {
 
     private boolean isScrollEnabled = true;
 
-    public NonScrollGridLayoutManager(Context context, int spanCount) {
+    public MonthRvLayoutManager(Context context, int spanCount) {
         super(context, spanCount);
     }
 
