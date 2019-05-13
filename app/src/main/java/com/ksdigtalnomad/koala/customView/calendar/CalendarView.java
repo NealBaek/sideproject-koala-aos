@@ -2,22 +2,14 @@ package com.ksdigtalnomad.koala.customView.calendar;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RectShape;
 import android.support.constraint.ConstraintLayout;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.ksdigtalnomad.koala.customView.calendar.calendarBody.CalendarBodyViewPager;
+import com.ksdigtalnomad.koala.customView.calendar.calendarBody.CalendarBodyPagerAdapter;
+import com.ksdigtalnomad.koala.customView.calendar.calendarBody.CalendarModel;
 
 public class CalendarView extends LinearLayout{
 
@@ -26,8 +18,11 @@ public class CalendarView extends LinearLayout{
     private ConstraintLayout calendarHeaderLayout;
     // 2. dayHeaderLayout
     private LinearLayout dayHeaderLayout;
-    // 3. calendarRcView
-    private RecyclerView calendarRcView;
+//    // 3. calendarRcView
+//    private RecyclerView calendarRcView;
+
+    // 3. YearViewPager
+    private CalendarBodyViewPager calendarBodyViewPager;
 
 
     // View Ratios
@@ -45,9 +40,9 @@ public class CalendarView extends LinearLayout{
 
     private final float TEXT_SIZE = 8;
 
-    public CalendarView(Context context){
+    public CalendarView(Context context, CalendarModel calendarModel){
         super(context);
-        initViews();
+        initViews(calendarModel);
     }
 
     @Override
@@ -65,24 +60,23 @@ public class CalendarView extends LinearLayout{
 
         calendarHeaderLayout.measure(widthMeasureSpec, cHeaderHeightSpec);
         dayHeaderLayout.measure(widthMeasureSpec, dHeaderHeightSpec);
-        calendarRcView.measure(widthMeasureSpec, rvHeightSpec);
+        calendarBodyViewPager.measure(widthMeasureSpec, rvHeightSpec);
 
-        Log.d("ABC", "dayHeaderLayout: " + dayHeaderLayout.getWidth());
 
         setChildrenLp(dayHeaderLayout);
     }
 
-    private void initViews(){
+    private void initViews(CalendarModel calendarModel){
 
         this.setOrientation(LinearLayout.VERTICAL);
 
         calendarHeaderLayout = createCalendarHeaderLayout();
         dayHeaderLayout      = createDayHeaderLayout();
-        calendarRcView       = createCalendarRcView();
+        calendarBodyViewPager = createYearViewPager(calendarModel);
 
         this.addView(calendarHeaderLayout);
         this.addView(dayHeaderLayout);
-        this.addView(calendarRcView);
+        this.addView(calendarBodyViewPager);
     }
 
     private ConstraintLayout createCalendarHeaderLayout(){
@@ -112,26 +106,39 @@ public class CalendarView extends LinearLayout{
         return layout;
     }
 
-    private RecyclerView createCalendarRcView(){
+    private CalendarBodyViewPager createYearViewPager(CalendarModel calendarModel){
+        CalendarBodyViewPager viewPager = new CalendarBodyViewPager(getContext());
 
-        RecyclerView recyclerView = new RecyclerView(getContext());
-
-        // Bg Color
-        recyclerView.setBackgroundColor(Color.LTGRAY);
+        viewPager.setBackgroundColor(Color.RED);
 
 
-        // Layout Manager & dividers
-        GridLayoutManager layoutManager         = new GridLayoutManager(getContext(), 7);
-        CalendarItemDecoration itemDecoration   = new CalendarItemDecoration(1);
+        CalendarBodyPagerAdapter adapter = new CalendarBodyPagerAdapter(calendarModel);
 
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(itemDecoration);
+        viewPager.setAdapter(adapter);
 
-        // Adapter
-        recyclerView.setAdapter(new CalendarRvAdapter(getContext()));
-
-        return recyclerView;
+        return viewPager;
     }
+
+//    private RecyclerView createCalendarRcView(){
+//
+//        RecyclerView recyclerView = new RecyclerView(getContext());
+//
+//        // Bg Color
+//        recyclerView.setBackgroundColor(Color.LTGRAY);
+//
+//
+//        // Layout Manager & dividers
+//        GridLayoutManager layoutManager      = new GridLayoutManager(getContext(), 7);
+//        MonthItemDecoration itemDecoration   = new MonthItemDecoration(1);
+//
+//        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.addItemDecoration(itemDecoration);
+//
+//        // Adapter
+//        recyclerView.setAdapter(new MonthRvAdapter(getContext()));
+//
+//        return recyclerView;
+//    }
 
 
 

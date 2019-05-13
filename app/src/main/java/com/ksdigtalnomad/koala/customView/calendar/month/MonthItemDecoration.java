@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.customView.calendar;
+package com.ksdigtalnomad.koala.customView.calendar.month;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
@@ -8,10 +8,10 @@ import android.view.View;
  * Created by ooddy on 10/05/2019.
  */
 
-public class CalendarItemDecoration extends RecyclerView.ItemDecoration {
+public class MonthItemDecoration extends RecyclerView.ItemDecoration {
     private int space;
 
-    public CalendarItemDecoration(int space) {
+    public MonthItemDecoration(int space) {
         this.space = space;
     }
 

@@ -1,13 +1,13 @@
-package com.ksdigtalnomad.koala.customView.calendar;
+package com.ksdigtalnomad.koala.customView.calendar.month;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
+
+import com.ksdigtalnomad.koala.customView.calendar.day.DayModel;
+import com.ksdigtalnomad.koala.customView.calendar.day.DayView;
 
 import java.util.ArrayList;
 
@@ -15,12 +15,12 @@ import java.util.ArrayList;
  * Created by ooddy on 08/05/2019.
  */
 
-public class CalendarRvAdapter extends RecyclerView.Adapter{
+public class MonthRvAdapter extends RecyclerView.Adapter{
 
     private Context context;
 
 
-    public CalendarRvAdapter(Context context){
+    public MonthRvAdapter(Context context){
         this.context = context;
     }
 
