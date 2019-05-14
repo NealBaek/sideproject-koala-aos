@@ -4,7 +4,7 @@ import com.ksdigtalnomad.koala.customView.calendar.day.DayModel;
 
 import java.util.ArrayList;
 
-public class MonthModel {
+public class MonthModel{
 
     public ArrayList<DayModel> dayList;
     public int month;

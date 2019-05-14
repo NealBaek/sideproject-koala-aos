@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.ViewGroup;
 
+import com.ksdigtalnomad.koala.customView.calendar.CalendarConstUtils;
 import com.ksdigtalnomad.koala.customView.calendar.day.DayModel;
 import com.ksdigtalnomad.koala.customView.calendar.day.DayView;
 
@@ -18,10 +19,12 @@ import java.util.ArrayList;
 public class MonthRvAdapter extends RecyclerView.Adapter{
 
     private Context context;
+    private MonthModel monthModel;
 
 
-    public MonthRvAdapter(Context context){
+    public MonthRvAdapter(Context context, MonthModel monthModel){
         this.context = context;
+        this.monthModel = monthModel;
     }
 
 

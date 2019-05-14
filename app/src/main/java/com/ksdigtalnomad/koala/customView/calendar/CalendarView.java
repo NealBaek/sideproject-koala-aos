@@ -115,30 +115,10 @@ public class CalendarView extends LinearLayout{
 
         viewPager.setAdapter(adapter);
 
+        viewPager.setBackgroundColor(Color.GREEN);
+
         return viewPager;
     }
-
-//    private RecyclerView createCalendarRcView(){
-//
-//        RecyclerView recyclerView = new RecyclerView(getContext());
-//
-//        // Bg Color
-//        recyclerView.setBackgroundColor(Color.LTGRAY);
-//
-//        // Layout Manager & dividers
-//        MonthRvLayoutManager layoutManager = new MonthRvLayoutManager(getContext(), 7);
-//        CalendarItemDecoration itemDecoration    = new CalendarItemDecoration(1);
-//
-//        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.addItemDecoration(itemDecoration);
-//
-//        // Adapter
-//        recyclerView.setAdapter(new MonthRvAdapter(getContext()));
-//
-//        return recyclerView;
-//    }
-
-
 
     private TextView createCenterSideTextView(String contents, int textColor){
 
