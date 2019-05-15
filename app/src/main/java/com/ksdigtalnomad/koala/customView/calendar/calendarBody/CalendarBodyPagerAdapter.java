@@ -42,10 +42,7 @@ public class CalendarBodyPagerAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
         if(parentList.size() <=  position){
-            RecyclerView calendarRv = createCalendarRv(container.getContext(), calendarModel.monthList.get(position));
-            calendarRv.setBackgroundColor(Color.LTGRAY);
-            calendarRv.setAdapter(new MonthRvAdapter(container.getContext(), calendarModel.monthList.get(position)));
-
+            RecyclerView calendarRv = createCalendarRv(container.getContext(), calendarModel.monthList.get(position), eventInterface);
             parentList.add(calendarRv);
         }
 
@@ -63,7 +60,7 @@ public class CalendarBodyPagerAdapter extends PagerAdapter {
         container.removeView(((View) object));
     }
 
-    private RecyclerView createCalendarRv(Context context, MonthModel monthModel){
+    private RecyclerView createCalendarRv(Context context, MonthModel monthModel, CalendarView.EventInterface eventInterface){
 
         RecyclerView recyclerView = new RecyclerView(context);
 
@@ -78,7 +75,7 @@ public class CalendarBodyPagerAdapter extends PagerAdapter {
         recyclerView.addItemDecoration(itemDecoration);
 
         // Adapter
-        recyclerView.setAdapter(new MonthRvAdapter(context, monthModel));
+        recyclerView.setAdapter(new MonthRvAdapter(context, monthModel, eventInterface));
 
         return recyclerView;
     }

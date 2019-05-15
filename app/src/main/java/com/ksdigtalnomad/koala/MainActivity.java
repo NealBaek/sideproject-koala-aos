@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.ksdigtalnomad.koala.customView.calendar.CalendarView;
 import com.ksdigtalnomad.koala.customView.calendar.calendarBody.CalendarModel;
@@ -29,13 +30,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void showCalendar(){
 
-        CalendarView calendarView = new CalendarView(this, createCalendarModel());
-        calendarView.setOnTouchEventInterface(new CalendarView.EventInterface() {
+        CalendarView calendarView = new CalendarView(this, createCalendarModel(), new CalendarView.EventInterface() {
             @Override
             public void onDayViewTouch(DayModel dayModel) {
-                startActivity(new Intent(MainActivity.this.getBaseContext(), CalendarDayDetailActivity.class));
+//                startActivity(new Intent(MainActivity.this.getBaseContext(), CalendarDayDetailActivity.class));
+
+                Toast.makeText(MainActivity.this, dayModel.year + "." + dayModel.month + "." + dayModel.day, Toast.LENGTH_SHORT).show();
             }
         });
+
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
 
@@ -58,14 +61,15 @@ public class MainActivity extends AppCompatActivity {
             monthModel.year = 2019;
             monthModel.month = i + 1;
             monthModel.numberOfDaysInTheMonth = 30;
-            monthModel.dayList = null;
+            monthModel.dayList = new ArrayList<>();
 
-            ArrayList<DayModel> dayList = new ArrayList<>();
 
             for(int j = 0; j < 42; ++j){
 
                 DayModel dayModel = new DayModel();
 
+                dayModel.year = monthModel.year;
+                dayModel.month = monthModel.month;
                 dayModel.day = j;
                 dayModel.daySeq = j;
                 dayModel.drunkLevel = ((int)( Math.random() * 10)) % 5;
@@ -82,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(j%4 == 0) dayModel.memo = "송별회";
 
-                dayList.add(dayModel);
+                monthModel.dayList.add(dayModel);
             }
 
 

@@ -49,10 +49,11 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
 
 
 
-    public CalendarView(Context context, CalendarModel calendarModel){
+    public CalendarView(Context context, CalendarModel calendarModel, EventInterface eventInterface){
         super(context);
 
         this.calendarModel = calendarModel;
+        this.eventInterface = eventInterface;
 
         // 1. CalendarView 설정
         final int BG_COLOR = Color.parseColor("#eaeaea");
@@ -62,7 +63,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
 
 
         // 2. 자식 Layout 생성
-        initViews(calendarModel);
+        initViews(calendarModel, eventInterface);
 
 
         // 3. Presenter 생성
@@ -71,17 +72,16 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         //  3-1. 이번 달로 설정
         presenter.setUpThisMonth();
     }
-    public void setOnTouchEventInterface(EventInterface eventInterface){ this.eventInterface = eventInterface;}
 
 
 
 
     /** Create Layouts */
-    private void initViews(CalendarModel calendarModel){
+    private void initViews(CalendarModel calendarModel, EventInterface eventInterface){
 
         calendarHeaderLayout  = createCalendarHeaderLayout();
         dayLayout             = createDayHeaderLayout();
-        calendarBodyViewPager = createYearViewPager(calendarModel);
+        calendarBodyViewPager = createYearViewPager(calendarModel, eventInterface);
 
         this.addView(calendarHeaderLayout);
         this.addView(dayLayout);
@@ -186,12 +186,12 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
 
         return layout;
     }
-    private CalendarBodyViewPager createYearViewPager(CalendarModel calendarModel){
+    private CalendarBodyViewPager createYearViewPager(CalendarModel calendarModel, EventInterface eventInterface){
         CalendarBodyViewPager viewPager = new CalendarBodyViewPager(getContext());
 
         viewPager.setBackgroundColor(Color.LTGRAY);
 
-        CalendarBodyPagerAdapter adapter = new CalendarBodyPagerAdapter(getContext(), calendarModel, eventInterface);
+        CalendarBodyPagerAdapter adapter = new CalendarBodyPagerAdapter(calendarModel, eventInterface);
 
         viewPager.setAdapter(adapter);
 
@@ -264,7 +264,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
 
         if(cIdx == 0){ return; }
 
-        final int targetIdx = cIdx + 1;
+        final int targetIdx = cIdx - 1;
 
         calendarBodyViewPager.setCurrentItem(targetIdx, true);
 
@@ -273,9 +273,9 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
     public void onMoveToNextMonth(){
         int cIdx = calendarBodyViewPager.getCurrentItem();
 
-        if(cIdx == calendarModel.monthList.size()){ return; }
+        if(cIdx == calendarModel.monthList.size() - 1){ return; }
 
-        final int targetIdx = cIdx - 1;
+        final int targetIdx = cIdx + 1;
 
         calendarBodyViewPager.setCurrentItem(targetIdx, true);
 

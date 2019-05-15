@@ -47,30 +47,30 @@ public class MonthRvAdapter extends RecyclerView.Adapter{
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 
-        DayModel dayModel = new DayModel();
-        dayModel.day = i;
-        dayModel.daySeq = i;
-        dayModel.drunkLevel = ((int)( Math.random() * 10)) % 5;
-        dayModel.friendList = new ArrayList<String>();
-        dayModel.foodList = new ArrayList<String>();
-        dayModel.liquorList = new ArrayList<String>();
 
-
-
-        if(dayModel.drunkLevel != CalendarConstUtils.DRUNK_LV_0){
-            if(i%2 == 0) dayModel.friendList.add("아이유 외 1");
-
-            if(i%3 == 0) dayModel.foodList.add("곱창 외 1");
-
-            dayModel.liquorList.add("소주 외 1");
-
-            if(i%4 == 0) dayModel.memo = "송별회";
-        }
-
+//        DayModel dayModel = new DayModel();
+//        dayModel.day = i;
+//        dayModel.daySeq = i;
+//        dayModel.drunkLevel = ((int)( Math.random() * 10)) % 5;
+//        dayModel.friendList = new ArrayList<String>();
+//        dayModel.foodList = new ArrayList<String>();
+//        dayModel.liquorList = new ArrayList<String>();
+//
+//
+//
+//        if(dayModel.drunkLevel != CalendarConstUtils.DRUNK_LV_0){
+//            if(i%2 == 0) dayModel.friendList.add("아이유 외 1");
+//
+//            if(i%3 == 0) dayModel.foodList.add("곱창 외 1");
+//
+//            dayModel.liquorList.add("소주 외 1");
+//
+//            if(i%4 == 0) dayModel.memo = "송별회";
+//        }
 
         DayView dayView = ((ViewHolder) viewHolder).dayView;
 
-        dayView.setDayModel(dayModel);
+        dayView.setDayModel(monthModel.dayList.get(i));
 
 
     }
