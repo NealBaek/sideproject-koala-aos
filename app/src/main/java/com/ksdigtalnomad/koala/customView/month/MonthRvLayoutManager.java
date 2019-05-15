@@ -1,8 +1,7 @@
-package com.ksdigtalnomad.koala.customView.calendar.month;
+package com.ksdigtalnomad.koala.customView.month;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
-import android.util.AttributeSet;
 
 /**
  * Created by ooddy on 10/05/2019.

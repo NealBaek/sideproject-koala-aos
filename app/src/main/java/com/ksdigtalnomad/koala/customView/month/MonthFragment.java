@@ -1,6 +1,5 @@
-package com.ksdigtalnomad.koala.customView.calendar.month;
+package com.ksdigtalnomad.koala.customView.month;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 public class MonthFragment extends Fragment {

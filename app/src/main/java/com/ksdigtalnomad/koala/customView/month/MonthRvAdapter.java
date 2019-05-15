@@ -1,17 +1,12 @@
-package com.ksdigtalnomad.koala.customView.calendar.month;
+package com.ksdigtalnomad.koala.customView.month;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.ViewGroup;
 
-import com.ksdigtalnomad.koala.customView.calendar.CalendarConstUtils;
 import com.ksdigtalnomad.koala.customView.calendar.CalendarView;
-import com.ksdigtalnomad.koala.customView.calendar.day.DayModel;
-import com.ksdigtalnomad.koala.customView.calendar.day.DayView;
-
-import java.util.ArrayList;
+import com.ksdigtalnomad.koala.customView.day.DayView;
 
 /**
  * Created by ooddy on 08/05/2019.
@@ -47,31 +42,9 @@ public class MonthRvAdapter extends RecyclerView.Adapter{
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 
-
-//        DayModel dayModel = new DayModel();
-//        dayModel.day = i;
-//        dayModel.daySeq = i;
-//        dayModel.drunkLevel = ((int)( Math.random() * 10)) % 5;
-//        dayModel.friendList = new ArrayList<String>();
-//        dayModel.foodList = new ArrayList<String>();
-//        dayModel.liquorList = new ArrayList<String>();
-//
-//
-//
-//        if(dayModel.drunkLevel != CalendarConstUtils.DRUNK_LV_0){
-//            if(i%2 == 0) dayModel.friendList.add("아이유 외 1");
-//
-//            if(i%3 == 0) dayModel.foodList.add("곱창 외 1");
-//
-//            dayModel.liquorList.add("소주 외 1");
-//
-//            if(i%4 == 0) dayModel.memo = "송별회";
-//        }
-
         DayView dayView = ((ViewHolder) viewHolder).dayView;
 
         dayView.setDayModel(monthModel.dayList.get(i));
-
 
     }
 

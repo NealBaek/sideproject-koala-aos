@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.customView.calendar.calendarBody;
+package com.ksdigtalnomad.koala.customView.calendarBody;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -9,10 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ksdigtalnomad.koala.customView.calendar.CalendarView;
-import com.ksdigtalnomad.koala.customView.calendar.month.MonthItemDecoration;
-import com.ksdigtalnomad.koala.customView.calendar.month.MonthModel;
-import com.ksdigtalnomad.koala.customView.calendar.month.MonthRvAdapter;
-import com.ksdigtalnomad.koala.customView.calendar.month.MonthRvLayoutManager;
+import com.ksdigtalnomad.koala.customView.month.MonthItemDecoration;
+import com.ksdigtalnomad.koala.customView.month.MonthModel;
+import com.ksdigtalnomad.koala.customView.month.MonthRvAdapter;
+import com.ksdigtalnomad.koala.customView.month.MonthRvLayoutManager;
 
 import java.util.ArrayList;
 
@@ -22,9 +22,15 @@ public class CalendarBodyPagerAdapter extends PagerAdapter {
     private CalendarView.EventInterface eventInterface;
     ArrayList<View> parentList = new ArrayList<>();
 
-    public CalendarBodyPagerAdapter(CalendarModel calendarModel, CalendarView.EventInterface eventInterface){
+    public CalendarBodyPagerAdapter(Context context, CalendarModel calendarModel, CalendarView.EventInterface eventInterface){
         this.calendarModel = calendarModel;
         this.eventInterface = eventInterface;
+
+        int parentCnt = calendarModel.monthList.size();
+        for(int i = 0; i < parentCnt; ++i){
+            RecyclerView calendarRv = createCalendarRv(context, calendarModel.monthList.get(i), eventInterface);
+            parentList.add(calendarRv);
+        }
     }
 
     @Override
@@ -40,11 +46,6 @@ public class CalendarBodyPagerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-
-        if(parentList.size() <=  position){
-            RecyclerView calendarRv = createCalendarRv(container.getContext(), calendarModel.monthList.get(position), eventInterface);
-            parentList.add(calendarRv);
-        }
 
 
         View child = parentList.get(position);

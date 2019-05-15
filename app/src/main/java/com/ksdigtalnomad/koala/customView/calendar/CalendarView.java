@@ -3,7 +3,7 @@ package com.ksdigtalnomad.koala.customView.calendar;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.util.Log;
+import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.ksdigtalnomad.koala.customView.calendar.calendarBody.CalendarBodyViewPager;
-import com.ksdigtalnomad.koala.customView.calendar.calendarBody.CalendarBodyPagerAdapter;
-import com.ksdigtalnomad.koala.customView.calendar.calendarBody.CalendarModel;
-import com.ksdigtalnomad.koala.customView.calendar.day.DayModel;
-import com.ksdigtalnomad.koala.customView.calendar.month.MonthModel;
+import com.ksdigtalnomad.koala.customView.calendarBody.CalendarBodyViewPager;
+import com.ksdigtalnomad.koala.customView.calendarBody.CalendarBodyPagerAdapter;
+import com.ksdigtalnomad.koala.customView.calendarBody.CalendarModel;
+import com.ksdigtalnomad.koala.customView.day.DayModel;
+import com.ksdigtalnomad.koala.customView.month.MonthModel;
 
 public class CalendarView extends LinearLayout implements CalendarContract.CalendarView{
 
@@ -35,20 +35,6 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
     private CalendarBodyViewPager calendarBodyViewPager;
 
 
-    // View Ratios
-    private int PARENT_H_RATIO = 7;
-    // 1. Calendar RecyclerView Height
-    private int C_RV_H_RATIO = 6;
-    // 2. Total Header Height
-    private int TOTAL_HEADER_H_RATION = 4;
-    // 2-1. Calendar Header Height
-    private int C_HEADER_H_RATION = 3;
-    // 2-2. Day Header Height
-    private int D_HEADER_H_RATION = 1;
-
-
-
-
     public CalendarView(Context context, CalendarModel calendarModel, EventInterface eventInterface){
         super(context);
 
@@ -63,11 +49,11 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
 
 
         // 2. 자식 Layout 생성
-        initViews(calendarModel, eventInterface);
+        initViews(BG_COLOR, calendarModel, eventInterface);
 
 
         // 3. Presenter 생성
-        presenter = new CalendarPresenter(this);
+        presenter = new CalendarPresenter(this, calendarModel);
 
         //  3-1. 이번 달로 설정
         presenter.setUpThisMonth();
@@ -77,17 +63,29 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
 
 
     /** Create Layouts */
-    private void initViews(CalendarModel calendarModel, EventInterface eventInterface){
+    private void initViews(int bgColor, final CalendarModel calendarModel, EventInterface eventInterface){
 
-        calendarHeaderLayout  = createCalendarHeaderLayout();
-        dayLayout             = createDayHeaderLayout();
+        // 1. Create Views
+        calendarHeaderLayout  = createCalendarHeaderLayout(bgColor);
+        dayLayout             = createDayHeaderLayout(bgColor);
         calendarBodyViewPager = createYearViewPager(calendarModel, eventInterface);
 
+        // 2. Add Views
         this.addView(calendarHeaderLayout);
         this.addView(dayLayout);
         this.addView(calendarBodyViewPager);
+
+        // 3. SetUp Listeners
+        calendarBodyViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {}
+            @Override
+            public void onPageSelected(int i) { setMonthTitle(i, monthTitleTv); }
+            @Override
+            public void onPageScrollStateChanged(int i) {}
+        });
     }
-    private RelativeLayout createCalendarHeaderLayout(){
+    private RelativeLayout createCalendarHeaderLayout(int bgColor){
 
 
         final float MONTH_TITLE_TEXT_SIZE = 20;
@@ -101,6 +99,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
 
         // 1. Calendar Header Layout
         RelativeLayout layout = new RelativeLayout(getContext());
+        layout.setBackgroundColor(bgColor);
 
         RelativeLayout.LayoutParams relativeLp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
@@ -160,9 +159,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
 
         moveToTodayTv.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View view) {
-                onMoveToToday();
-            }
+            public void onClick(View view) { onMoveToToday(presenter.getThisMonthIdx()); }
         });
 
         layout.addView(moveToTodayTv);
@@ -170,7 +167,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
 
         return layout;
     }
-    private LinearLayout createDayHeaderLayout(){
+    private LinearLayout createDayHeaderLayout(int bgColor){
 
         LinearLayout layout = new LinearLayout(getContext());
         layout.setOrientation(LinearLayout.HORIZONTAL);
@@ -181,6 +178,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
 
         for(int i = 0; i < 7; ++ i){
             TextView textView = createCenterSideTextView(dayList[i], colorList[i]);
+            textView.setBackgroundColor(bgColor);
             layout.addView(textView);
         }
 
@@ -189,9 +187,9 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
     private CalendarBodyViewPager createYearViewPager(CalendarModel calendarModel, EventInterface eventInterface){
         CalendarBodyViewPager viewPager = new CalendarBodyViewPager(getContext());
 
-        viewPager.setBackgroundColor(Color.LTGRAY);
+//        viewPager.setBackgroundColor(Color.LTGRAY);
 
-        CalendarBodyPagerAdapter adapter = new CalendarBodyPagerAdapter(calendarModel, eventInterface);
+        CalendarBodyPagerAdapter adapter = new CalendarBodyPagerAdapter(getContext(), calendarModel, eventInterface);
 
         viewPager.setAdapter(adapter);
 
@@ -233,57 +231,52 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        final int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        // 1. Measure 자식 Layouts
+        final int parentHeightSize = MeasureSpec.getSize(heightMeasureSpec);
 
-        int cHeaderHeightSpec = MeasureSpec.makeMeasureSpec(heightSize/PARENT_H_RATIO * C_HEADER_H_RATION/TOTAL_HEADER_H_RATION, MeasureSpec.EXACTLY);
-        int dHeaderHeightSpec = MeasureSpec.makeMeasureSpec(heightSize/PARENT_H_RATIO * D_HEADER_H_RATION/TOTAL_HEADER_H_RATION, MeasureSpec.EXACTLY);
-        int rvHeightSpec = MeasureSpec.makeMeasureSpec(heightSize * C_RV_H_RATIO/PARENT_H_RATIO, MeasureSpec.EXACTLY);
+        final int PARENT_H_RATIO = 7;
+        final int C_RV_H_RATIO = 6;
+        final int D_HEADER_H_SIZE = 50;
+
+        int rvHeightSize = (parentHeightSize * C_RV_H_RATIO/PARENT_H_RATIO);
+        int cHeaderHeightSize = parentHeightSize - rvHeightSize - D_HEADER_H_SIZE;
+
+        int cHeaderHeightSpec = MeasureSpec.makeMeasureSpec(cHeaderHeightSize, MeasureSpec.AT_MOST);
+        int dHeaderHeightSpec = MeasureSpec.makeMeasureSpec(D_HEADER_H_SIZE, MeasureSpec.EXACTLY);
+        int rvHeightSpec = MeasureSpec.makeMeasureSpec(rvHeightSize, MeasureSpec.EXACTLY);
 
         calendarHeaderLayout.measure(widthMeasureSpec, cHeaderHeightSpec);
         dayLayout.measure(widthMeasureSpec, dHeaderHeightSpec);
         calendarBodyViewPager.measure(widthMeasureSpec, rvHeightSpec);
 
 
-        setDayLayoutChildrenLp(dayLayout);
 
-    }
-    private void setDayLayoutChildrenLp(LinearLayout parent){
-
-        int parentWidth  = parent.getMeasuredWidth();
-        int parentHeight = parent.getMeasuredHeight();
-        int childCnt     = parent.getChildCount();
+        // 2. Day Layout 의 자식 텍스트 뷰 LayoutParam
+        int parentWidth  = dayLayout.getMeasuredWidth();
+        int parentHeight = dayLayout.getMeasuredHeight();
+        int childCnt     = dayLayout.getChildCount();
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(parentWidth/childCnt, parentHeight, 1);
 
-        for(int i = 0; i < childCnt; ++ i){ parent.getChildAt(i).setLayoutParams(params); }
+        for(int i = 0; i < childCnt; ++ i){ dayLayout.getChildAt(i).setLayoutParams(params); }
     }
+
+
+
 
     /** Events */
-    public void onMoveToPreviousMonth(){
-        int cIdx = calendarBodyViewPager.getCurrentItem();
+    public void onMoveToPreviousMonth(){ smoothScrollMonthPage(calendarBodyViewPager.getCurrentItem() - 1, true); }
+    public void onMoveToNextMonth(){ smoothScrollMonthPage(calendarBodyViewPager.getCurrentItem() + 1, true); }
+    public void onMoveToToday(int toIdx){ smoothScrollMonthPage(toIdx, true); }
+    private void smoothScrollMonthPage(int toIdx, boolean isSmooth){
+        if(toIdx < 0 || toIdx > calendarModel.monthList.size() - 1){ return; }
 
-        if(cIdx == 0){ return; }
-
-        final int targetIdx = cIdx - 1;
-
-        calendarBodyViewPager.setCurrentItem(targetIdx, true);
-
-        setMonthTitle(targetIdx, monthTitleTv);
+        calendarBodyViewPager.setCurrentItem(toIdx, isSmooth);
+        setMonthTitle(toIdx, monthTitleTv);
     }
-    public void onMoveToNextMonth(){
-        int cIdx = calendarBodyViewPager.getCurrentItem();
 
-        if(cIdx == calendarModel.monthList.size() - 1){ return; }
 
-        final int targetIdx = cIdx + 1;
 
-        calendarBodyViewPager.setCurrentItem(targetIdx, true);
-
-        setMonthTitle(targetIdx, monthTitleTv);
-    }
-    public void onMoveToToday(){
-
-    }
 
     public interface EventInterface{ void onDayViewTouch(DayModel dayModel); }
 
@@ -292,5 +285,5 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
 
 
     /** CalendarContract.CalendarView Overrides */
-    @Override  public void setUpThisMonth(int monthIdx) { setMonthTitle(monthIdx, monthTitleTv); }
+    @Override  public void setUpThisMonth(int monthIdx) { smoothScrollMonthPage(monthIdx, false); }
 }

@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.customView.calendar.calendarBody;
+package com.ksdigtalnomad.koala.customView.calendarBody;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

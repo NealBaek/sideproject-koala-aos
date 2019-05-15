@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.customView.calendar;
+package com.ksdigtalnomad.koala.customView;
 
 import android.graphics.Color;
 import android.support.v4.graphics.ColorUtils;
