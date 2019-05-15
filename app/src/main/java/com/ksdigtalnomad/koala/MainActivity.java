@@ -1,5 +1,6 @@
 package com.ksdigtalnomad.koala;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +30,12 @@ public class MainActivity extends AppCompatActivity {
     private void showCalendar(){
 
         CalendarView calendarView = new CalendarView(this, createCalendarModel());
+        calendarView.setOnTouchEventInterface(new CalendarView.EventInterface() {
+            @Override
+            public void onDayViewTouch(DayModel dayModel) {
+                startActivity(new Intent(MainActivity.this.getBaseContext(), CalendarDayDetailActivity.class));
+            }
+        });
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
 
@@ -49,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < 20; ++i){
             MonthModel monthModel = new MonthModel();
             monthModel.year = 2019;
-            monthModel.month = i;
+            monthModel.month = i + 1;
             monthModel.numberOfDaysInTheMonth = 30;
             monthModel.dayList = null;
 

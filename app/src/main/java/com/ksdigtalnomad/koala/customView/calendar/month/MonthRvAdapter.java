@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.ViewGroup;
 
 import com.ksdigtalnomad.koala.customView.calendar.CalendarConstUtils;
+import com.ksdigtalnomad.koala.customView.calendar.CalendarView;
 import com.ksdigtalnomad.koala.customView.calendar.day.DayModel;
 import com.ksdigtalnomad.koala.customView.calendar.day.DayView;
 
@@ -20,11 +21,13 @@ public class MonthRvAdapter extends RecyclerView.Adapter{
 
     private Context context;
     private MonthModel monthModel;
+    private CalendarView.EventInterface eventInterface;
 
 
-    public MonthRvAdapter(Context context, MonthModel monthModel){
+    public MonthRvAdapter(Context context, MonthModel monthModel, CalendarView.EventInterface eventInterface){
         this.context = context;
         this.monthModel = monthModel;
+        this.eventInterface = eventInterface;
     }
 
 
@@ -34,7 +37,7 @@ public class MonthRvAdapter extends RecyclerView.Adapter{
         int targetWidth = viewGroup.getMeasuredWidth()/7;
         int targetHeight = viewGroup.getMeasuredHeight()/6;
 
-        DayView dayView = new DayView(context);
+        DayView dayView = new DayView(context, eventInterface);
         dayView.setMinimumWidth(targetWidth);
         dayView.setMinimumHeight(targetHeight);
 
@@ -43,8 +46,6 @@ public class MonthRvAdapter extends RecyclerView.Adapter{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-
-        Log.d("ABC", "?? : " + ((int) (Math.random() * 10) %5));
 
         DayModel dayModel = new DayModel();
         dayModel.day = i;
@@ -70,12 +71,12 @@ public class MonthRvAdapter extends RecyclerView.Adapter{
         DayView dayView = ((ViewHolder) viewHolder).dayView;
 
         dayView.setDayModel(dayModel);
+
+
     }
 
     @Override
-    public int getItemCount() {
-        return 42;
-    }
+    public int getItemCount() { return monthModel.dayList.size(); }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 

@@ -6,16 +6,25 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.util.TypedValue;
+import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.ksdigtalnomad.koala.customView.calendar.CalendarConstUtils;
+import com.ksdigtalnomad.koala.customView.calendar.CalendarView;
 
 import java.util.ArrayList;
 
 public class DayView extends RelativeLayout {
 
+    // Event Listener
+    private CalendarView.EventInterface eventInterface =null;
+
+    // Data
     private DayModel dayModel = null;
+
 
     // Paints
     private Paint dayTvPt = null;
@@ -24,11 +33,12 @@ public class DayView extends RelativeLayout {
     private Paint listTvPt = null;
 
 
-    private final String DRUNK_LV_STR = "MAX";
-
 
     // Text attributes
+    private final String DRUNK_LV_STR = "MAX";
+
     private final float TEXT_SIZE = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics());
+
     private final int TEXT_PADDING_LEFT  = 15;
     private final int TEXT_PADDING_RIGHT = 15;
 
@@ -37,11 +47,23 @@ public class DayView extends RelativeLayout {
 
 
 
-    public DayView(Context context){ //, int width, int height) {
+    public DayView(Context context, final CalendarView.EventInterface eventInterface){
         super(context);
 
-        // DayView 설정
+        this.eventInterface = eventInterface;
+
+
+        // 1. DayView 설정
         setBackgroundColor(Color.WHITE);
+
+
+        // 2. 클릭 이벤트 설정
+        setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                eventInterface.onDayViewTouch(dayModel);
+            }
+        });
     }
 
 
