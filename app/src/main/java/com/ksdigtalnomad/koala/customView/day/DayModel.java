@@ -5,9 +5,11 @@ import java.util.ArrayList;
 public class DayModel {
     public int daySeq;
 
-    public int day;
-    public int month;
     public int year;
+    public int month;
+    public int day;
+
+    public String dayOfTheWeek;
 
     public int index;
 

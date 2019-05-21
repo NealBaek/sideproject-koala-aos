@@ -27,9 +27,6 @@ class CalendarPresenter implements CalendarContract.CalendarPresenter{
     @Override
     public void setUpThisMonth() {
 
-
-
-
         // 1. 오늘 날짜 계산
         SimpleDateFormat dfYear = new SimpleDateFormat("yyyy");
         SimpleDateFormat dfMonth = new SimpleDateFormat("MM");

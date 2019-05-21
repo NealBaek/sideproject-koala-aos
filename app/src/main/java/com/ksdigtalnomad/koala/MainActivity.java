@@ -3,15 +3,21 @@ package com.ksdigtalnomad.koala;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.ksdigtalnomad.koala.customView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.customView.calendar.CalendarView;
 import com.ksdigtalnomad.koala.customView.calendarBody.CalendarModel;
 import com.ksdigtalnomad.koala.customView.day.DayModel;
 import com.ksdigtalnomad.koala.customView.month.MonthModel;
 
+import java.text.SimpleDateFormat;
+import java.time.Month;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
@@ -25,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         showCalendar();
+
+
     }
 
     private void showCalendar(){
@@ -47,55 +55,202 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+//    private CalendarModel createCalendarModel(){
+//
+//        CalendarModel calendarModel = new CalendarModel();
+//
+//        ArrayList<MonthModel> monthList = new ArrayList<>();
+//
+//        for(int i = 0; i < 20; ++i){
+//
+//            // @TODO: 임시데이터 업데이트
+//
+//            MonthModel monthModel = new MonthModel();
+//            monthModel.year = 2019;
+//            monthModel.month = i + 1;
+//            monthModel.numberOfDaysInTheMonth = 30;
+//            monthModel.dayList = new ArrayList<>();
+//
+//
+//            for(int j = 0; j < 42; ++j){
+//
+//                DayModel dayModel = new DayModel();
+//
+//                dayModel.year = monthModel.year;
+//                dayModel.month = monthModel.month;
+//                dayModel.day = j;
+//                dayModel.daySeq = j;
+//                dayModel.drunkLevel = ((int)( Math.random() * 10)) % 5;
+//                dayModel.friendList = new ArrayList<String>();
+//                dayModel.foodList = new ArrayList<String>();
+//                dayModel.liquorList = new ArrayList<String>();
+//
+//
+//                int randomIdx = j * ((int)(Math.random() * 10));
+//
+//                if(randomIdx%2 == 0) dayModel.friendList.add("아이유 외 1");
+//
+//                if(randomIdx%3 == 0) dayModel.foodList.add("곱창 외 1");
+//
+//                dayModel.liquorList.add("소주 외 1");
+//
+//                if(randomIdx%4 == 0) dayModel.memo = "송별회";
+//
+//                monthModel.dayList.add(dayModel);
+//            }
+//
+//
+//            monthList.add(monthModel);
+//        }
+//
+//        calendarModel.monthList = monthList;
+//
+//        return calendarModel;
+//    }
+
     private CalendarModel createCalendarModel(){
 
+        // 시작 날짜 정하기 (2019.01.01 부터 시작)
+        int startYear = 2017;
+        int startMonth = 1;
+        int startDay = 1;
+        int dayIdx = 0;
+        int monthIdx = 0;
+        boolean isLeapYear = false;
+
+
+        // 오늘 날짜 구하기
+        SimpleDateFormat dfYear = new SimpleDateFormat("yyyy");
+        SimpleDateFormat dfMonth = new SimpleDateFormat("MM");
+        int thisYear = Integer.parseInt(dfYear.format(new Date()));
+        int thisMonth = Integer.parseInt(dfMonth.format(new Date()));
+
+
+        // 끝나는 날짜 구하기
+        int endYear = thisYear + 1;
+        int endMonth = thisMonth;
+
+        ArrayList<DayModel> dayModelList = new ArrayList<>();
+
         CalendarModel calendarModel = new CalendarModel();
+        calendarModel.monthList = new ArrayList<>();
 
-        ArrayList<MonthModel> monthList = new ArrayList<>();
+        // 계산할 연 갯구 카운트
+        int toCalYearCnt = 1 + endYear - startYear;
 
-        for(int i = 0; i < 20; ++i){
+        // 연 계산
+        for(int i=0; i < toCalYearCnt; ++i){
 
-            // @TODO: 임시데이터 업데이트
+            // 만약 마지막 계산 연이면 종료 달까지/ 아니면 12개월
+            int toCalMonthCnt = ((i == toCalYearCnt) ? endMonth : 12);
 
-            MonthModel monthModel = new MonthModel();
-            monthModel.year = 2019;
-            monthModel.month = i + 1;
-            monthModel.numberOfDaysInTheMonth = 30;
-            monthModel.dayList = new ArrayList<>();
+            // 윤년 계산
+            if(startYear % 400 == 0){ isLeapYear = true; }       // 1. 연도가 400의 배수이면 윤년
+            else if(startYear % 100 == 0){ isLeapYear = false; } // 2. 연도가 100의 배수이면 윤년이 아님.
+            else if(startYear % 4 == 0){ isLeapYear = true; }    // 3. 연도가 4의 배수이면 윤년.
+
+            // 월 계산
+            for(int j=0; j < toCalMonthCnt; ++j){
+
+                // 일 계산
+                int daysCnt = CalendarConstUtils.NUM_DAYS_IN_MONTH[j%12];
+
+                // 윤월에 1일 추가
+                if(j==1) daysCnt += isLeapYear ? 1 : 0;
+
+                MonthModel monthModel = new MonthModel();
+                monthModel.year = startYear;
+                monthModel.month = startMonth;
+                monthModel.numberOfDaysInTheMonth = daysCnt;
+                monthModel.dayList = new ArrayList<>();
+                monthModel.index = monthIdx;
+
+                Log.d("ABc", "size: " + calendarModel.monthList.size() + ", monthIdx: " + monthIdx);
+
+                boolean hasPMonth = (monthIdx == 0) ? false : calendarModel.monthList.size() > monthIdx - 1;
+                MonthModel pMonthModel = hasPMonth ? calendarModel.monthList.get(monthIdx - 1) : null;
 
 
-            for(int j = 0; j < 42; ++j){
 
-                DayModel dayModel = new DayModel();
+                // 전월 일 추가
+                int pDayCnt = dayIdx % CalendarView.DAY_COUNT;
+                if(pDayCnt > 0){
+                    boolean isNextYear = (pMonthModel.month == 12);
 
-                dayModel.year = monthModel.year;
-                dayModel.month = monthModel.month;
-                dayModel.day = j;
-                dayModel.daySeq = j;
-                dayModel.drunkLevel = ((int)( Math.random() * 10)) % 5;
-                dayModel.friendList = new ArrayList<String>();
-                dayModel.foodList = new ArrayList<String>();
-                dayModel.liquorList = new ArrayList<String>();
+                    for(int k=0; k < pDayCnt; ++k){
+                        DayModel pDayModel = new DayModel();
+                        pDayModel.year = isNextYear ? startYear - 1 : startYear;
+                        pDayModel.month = isNextYear ? 1 : startMonth - 1;
+                        pDayModel.day = pMonthModel.numberOfDaysInTheMonth - pDayCnt + k;
+                        int pDayIdx = dayIdx - pDayCnt + k;
+                        pDayModel.daySeq = ((pDayIdx + 2)%7);
+                        pDayModel.dayOfTheWeek = CalendarConstUtils.DAYS_OF_THE_WEEK[pDayModel.daySeq];
+                        pDayModel.index = pDayIdx;
+                        monthModel.dayList.add(pDayModel);
+                    }
+                }
+
+                // 해당 일 추가
+                for(int k=0; k < daysCnt; ++k ){
+
+                    // 데이 값 입력
+                    DayModel dayModel = new DayModel();
+                    dayModel.year = startYear;
+                    dayModel.month = startMonth;
+                    dayModel.day = startDay;
+                    dayModel.daySeq = ((dayIdx + 2)%7);
+                    dayModel.dayOfTheWeek = CalendarConstUtils.DAYS_OF_THE_WEEK[dayModel.daySeq];
+                    dayModel.index = dayIdx;
+
+                    dayModelList.add(dayModel);
+                    monthModel.dayList.add(dayModel);
+
+                    Log.d("ABC", "y: " + startYear + ", m: " + startMonth + ", d: " + startDay + ", = " + dayModel.dayOfTheWeek);
+
+                    startDay += 1;
+                    dayIdx += 1;
+                }
+
+                // 익월 일 추가
+                int nDayCnt = CalendarView.DAY_COUNT - daysCnt - pDayCnt;
+                if(nDayCnt > 0){
+                    boolean isNextYear = (((pMonthModel == null) ? startMonth : pMonthModel.month) == 12);
+                    int nDayIdx = dayIdx + 1;
+
+                    for(int k=0; k < nDayCnt; ++k){
+                        DayModel nDayModel = new DayModel();
+                        nDayModel.year = isNextYear ? startYear - 1 : startYear;
+                        nDayModel.month = isNextYear ? 1 : startMonth - 1;
+                        nDayModel.day = ((pMonthModel == null) ? 31 : pMonthModel.numberOfDaysInTheMonth) - nDayIdx + k;
+                        nDayModel.daySeq = ((nDayIdx + 2)%7);
+                        nDayModel.dayOfTheWeek = CalendarConstUtils.DAYS_OF_THE_WEEK[nDayModel.daySeq];
+                        nDayModel.index = nDayIdx;
+                        monthModel.dayList.add(nDayModel);
+
+                        nDayIdx += 1;
+
+                        Log.d("ABC", "nDayModel.day: " + ((pMonthModel == null) ? 31 : pMonthModel.numberOfDaysInTheMonth));
+                    }
+                }
+
+//                Log.d("ABC", "idx: " + dayIdx + ", nDayCnt: " + nDayCnt);
 
 
-                int randomIdx = j * ((int)(Math.random() * 10));
+                calendarModel.monthList.add(monthModel);
 
-                if(randomIdx%2 == 0) dayModel.friendList.add("아이유 외 1");
-
-                if(randomIdx%3 == 0) dayModel.foodList.add("곱창 외 1");
-
-                dayModel.liquorList.add("소주 외 1");
-
-                if(randomIdx%4 == 0) dayModel.memo = "송별회";
-
-                monthModel.dayList.add(dayModel);
+                startDay = 1;
+                startMonth += 1;
+                monthIdx += 1;
             }
 
-
-            monthList.add(monthModel);
+            // 연 증가
+            startDay = 1;
+            startMonth = 1;
+            startYear += 1;
         }
 
-        calendarModel.monthList = monthList;
+
+        Log.d("ABC", "dayCnt: " + dayModelList.size());
 
         return calendarModel;
     }

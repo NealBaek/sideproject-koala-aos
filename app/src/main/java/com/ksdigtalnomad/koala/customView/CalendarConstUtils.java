@@ -11,6 +11,10 @@ import java.util.ArrayList;
 
 public class CalendarConstUtils {
 
+    public static final String[] DAYS_OF_THE_WEEK = {"일", "월", "화", "수", "목", "금", "토"};
+
+    public static final int[] NUM_DAYS_IN_MONTH = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
     public static final int DAY_SEQ_SUNDAY = 0;
     public static final int DAY_SEQ_SATURDAY = 6;
 

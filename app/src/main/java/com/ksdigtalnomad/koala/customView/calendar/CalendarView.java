@@ -19,6 +19,8 @@ import com.ksdigtalnomad.koala.customView.month.MonthModel;
 
 public class CalendarView extends LinearLayout implements CalendarContract.CalendarView{
 
+    public static final int DAY_COUNT = 42;
+
     // TouchInterface
     private EventInterface eventInterface;
     private CalendarModel calendarModel;
@@ -56,7 +58,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         presenter = new CalendarPresenter(this, calendarModel);
 
         //  3-1. 이번 달로 설정
-        presenter.setUpThisMonth();
+//        presenter.setUpThisMonth();
     }
 
 
