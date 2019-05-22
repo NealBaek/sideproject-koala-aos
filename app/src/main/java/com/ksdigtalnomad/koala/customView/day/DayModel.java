@@ -2,8 +2,9 @@ package com.ksdigtalnomad.koala.customView.day;
 
 import java.util.ArrayList;
 
-public class DayModel {
+public class DayModel implements Cloneable{
     public int daySeq;
+    public boolean isOutMonth;
 
     public int year;
     public int month;
@@ -19,4 +20,19 @@ public class DayModel {
     public ArrayList<String> liquorList;
     public String memo;
 
+
+    public DayModel clone(){
+        //내 객체 생성
+        Object toReturn;
+
+        try
+        {
+            toReturn = super.clone();
+            return ((DayModel)toReturn);
+        }
+        catch (CloneNotSupportedException e)
+        {
+            return this;
+        }
+    }
 }

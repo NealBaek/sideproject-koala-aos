@@ -58,7 +58,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         presenter = new CalendarPresenter(this, calendarModel);
 
         //  3-1. 이번 달로 설정
-//        presenter.setUpThisMonth();
+        presenter.setUpThisMonth();
     }
 
 

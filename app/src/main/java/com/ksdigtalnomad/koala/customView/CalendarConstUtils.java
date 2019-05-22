@@ -27,7 +27,7 @@ public class CalendarConstUtils {
 
         final int NUM_DAYS_IN_WEEK = 7;
 
-        switch (daySeq % NUM_DAYS_IN_WEEK) {
+        switch (daySeq) {
             case DAY_SEQ_SUNDAY:
                 return COLOR_SUNDAY;
             case DAY_SEQ_SATURDAY:

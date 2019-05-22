@@ -55,59 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//    private CalendarModel createCalendarModel(){
-//
-//        CalendarModel calendarModel = new CalendarModel();
-//
-//        ArrayList<MonthModel> monthList = new ArrayList<>();
-//
-//        for(int i = 0; i < 20; ++i){
-//
-//            // @TODO: 임시데이터 업데이트
-//
-//            MonthModel monthModel = new MonthModel();
-//            monthModel.year = 2019;
-//            monthModel.month = i + 1;
-//            monthModel.numberOfDaysInTheMonth = 30;
-//            monthModel.dayList = new ArrayList<>();
-//
-//
-//            for(int j = 0; j < 42; ++j){
-//
-//                DayModel dayModel = new DayModel();
-//
-//                dayModel.year = monthModel.year;
-//                dayModel.month = monthModel.month;
-//                dayModel.day = j;
-//                dayModel.daySeq = j;
-//                dayModel.drunkLevel = ((int)( Math.random() * 10)) % 5;
-//                dayModel.friendList = new ArrayList<String>();
-//                dayModel.foodList = new ArrayList<String>();
-//                dayModel.liquorList = new ArrayList<String>();
-//
-//
-//                int randomIdx = j * ((int)(Math.random() * 10));
-//
-//                if(randomIdx%2 == 0) dayModel.friendList.add("아이유 외 1");
-//
-//                if(randomIdx%3 == 0) dayModel.foodList.add("곱창 외 1");
-//
-//                dayModel.liquorList.add("소주 외 1");
-//
-//                if(randomIdx%4 == 0) dayModel.memo = "송별회";
-//
-//                monthModel.dayList.add(dayModel);
-//            }
-//
-//
-//            monthList.add(monthModel);
-//        }
-//
-//        calendarModel.monthList = monthList;
-//
-//        return calendarModel;
-//    }
-
     private CalendarModel createCalendarModel(){
 
         // 시작 날짜 정하기 (2019.01.01 부터 시작)
@@ -165,27 +112,26 @@ public class MainActivity extends AppCompatActivity {
                 monthModel.dayList = new ArrayList<>();
                 monthModel.index = monthIdx;
 
-                Log.d("ABc", "size: " + calendarModel.monthList.size() + ", monthIdx: " + monthIdx);
-
                 boolean hasPMonth = (monthIdx == 0) ? false : calendarModel.monthList.size() > monthIdx - 1;
                 MonthModel pMonthModel = hasPMonth ? calendarModel.monthList.get(monthIdx - 1) : null;
 
 
 
                 // 전월 일 추가
-                int pDayCnt = dayIdx % CalendarView.DAY_COUNT;
-                if(pDayCnt > 0){
-                    boolean isNextYear = (pMonthModel.month == 12);
+
+                // 전월의 마지막날의 요일 + 1일한 요일
+                //  1. 만약 일요일이면 pDayCnt == 0
+                //  2. 아니면 전월 마지막 요일 에서 역순으로 일요일까지 데이터 세팅
+                int pDayCnt = 0;
+                int lastDaySeq = (pMonthModel == null) ? CalendarConstUtils.DAY_SEQ_SATURDAY : dayModelList.get(dayModelList.size()-1).daySeq;
+
+                if(lastDaySeq != CalendarConstUtils.DAY_SEQ_SATURDAY){
+                    pDayCnt = lastDaySeq + 1;
+                    int lastMonthCnt = dayModelList.size() - 1;
 
                     for(int k=0; k < pDayCnt; ++k){
-                        DayModel pDayModel = new DayModel();
-                        pDayModel.year = isNextYear ? startYear - 1 : startYear;
-                        pDayModel.month = isNextYear ? 1 : startMonth - 1;
-                        pDayModel.day = pMonthModel.numberOfDaysInTheMonth - pDayCnt + k;
-                        int pDayIdx = dayIdx - pDayCnt + k;
-                        pDayModel.daySeq = ((pDayIdx + 2)%7);
-                        pDayModel.dayOfTheWeek = CalendarConstUtils.DAYS_OF_THE_WEEK[pDayModel.daySeq];
-                        pDayModel.index = pDayIdx;
+                        DayModel pDayModel = dayModelList.get(lastMonthCnt - ((pDayCnt-1) - k)).clone();
+                        pDayModel.isOutMonth = true;
                         monthModel.dayList.add(pDayModel);
                     }
                 }
@@ -198,17 +144,20 @@ public class MainActivity extends AppCompatActivity {
                     dayModel.year = startYear;
                     dayModel.month = startMonth;
                     dayModel.day = startDay;
-                    dayModel.daySeq = ((dayIdx + 2)%7);
+                    dayModel.daySeq = ((dayIdx)%7);
                     dayModel.dayOfTheWeek = CalendarConstUtils.DAYS_OF_THE_WEEK[dayModel.daySeq];
                     dayModel.index = dayIdx;
+
+                    // TODO: Only For Test.
+                    insertTestData(dayModel, dayIdx);
 
                     dayModelList.add(dayModel);
                     monthModel.dayList.add(dayModel);
 
-                    Log.d("ABC", "y: " + startYear + ", m: " + startMonth + ", d: " + startDay + ", = " + dayModel.dayOfTheWeek);
-
                     startDay += 1;
                     dayIdx += 1;
+
+                    Log.d("ABC", "dayIdx: " + dayIdx);
                 }
 
                 // 익월 일 추가
@@ -221,20 +170,20 @@ public class MainActivity extends AppCompatActivity {
                         DayModel nDayModel = new DayModel();
                         nDayModel.year = isNextYear ? startYear - 1 : startYear;
                         nDayModel.month = isNextYear ? 1 : startMonth - 1;
-                        nDayModel.day = ((pMonthModel == null) ? 31 : pMonthModel.numberOfDaysInTheMonth) - nDayIdx + k;
-                        nDayModel.daySeq = ((nDayIdx + 2)%7);
+                        nDayModel.day = k + 1;
+                        nDayModel.daySeq = ((nDayIdx - 1)%7);
                         nDayModel.dayOfTheWeek = CalendarConstUtils.DAYS_OF_THE_WEEK[nDayModel.daySeq];
                         nDayModel.index = nDayIdx;
+                        nDayModel.isOutMonth = true;
+
+                        // TODO: Only For Test.
+                        insertTestData(nDayModel, nDayIdx);
+
                         monthModel.dayList.add(nDayModel);
 
                         nDayIdx += 1;
-
-                        Log.d("ABC", "nDayModel.day: " + ((pMonthModel == null) ? 31 : pMonthModel.numberOfDaysInTheMonth));
                     }
                 }
-
-//                Log.d("ABC", "idx: " + dayIdx + ", nDayCnt: " + nDayCnt);
-
 
                 calendarModel.monthList.add(monthModel);
 
@@ -249,9 +198,27 @@ public class MainActivity extends AppCompatActivity {
             startYear += 1;
         }
 
-
-        Log.d("ABC", "dayCnt: " + dayModelList.size());
-
         return calendarModel;
+    }
+
+
+    private DayModel insertTestData(DayModel dayModel, int idx){
+            dayModel.drunkLevel = ((int)( Math.random() * 10)) % 5;
+            dayModel.friendList = new ArrayList<String>();
+            dayModel.foodList = new ArrayList<String>();
+            dayModel.liquorList = new ArrayList<String>();
+
+
+            int randomIdx = idx * ((int)(Math.random() * 10));
+
+            if(randomIdx%2 == 0) dayModel.friendList.add("아이유 외 1");
+
+            if(randomIdx%3 == 0) dayModel.foodList.add("곱창 외 1");
+
+            dayModel.liquorList.add("소주 외 1");
+
+            if(randomIdx%4 == 0) dayModel.memo = "송별회";
+
+            return dayModel;
     }
 }

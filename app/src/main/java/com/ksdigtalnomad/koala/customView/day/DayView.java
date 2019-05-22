@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.support.v4.graphics.ColorUtils;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -29,6 +30,7 @@ public class DayView extends RelativeLayout {
     private Paint drunkLvRectPt = null;
     private Paint drunkLvTvPt = null;
     private Paint listTvPt = null;
+    private Paint blinderRectPt = null;
 
 
 
@@ -58,9 +60,7 @@ public class DayView extends RelativeLayout {
         // 2. 클릭 이벤트 설정
         setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View view) {
-                eventInterface.onDayViewTouch(dayModel);
-            }
+            public void onClick(View view) { if(!dayModel.isOutMonth){eventInterface.onDayViewTouch(dayModel);}}
         });
     }
 
@@ -101,6 +101,9 @@ public class DayView extends RelativeLayout {
 
         txHeightForHeader = headerTvBound.height();
         txHeightForBody = bodyTvBound.height();
+
+        // 5. Blinder Rect Paint 만들기
+        blinderRectPt = createRectPaint(ColorUtils.setAlphaComponent(Color.WHITE, 200));
     }
 
     // Create Paints
@@ -138,6 +141,7 @@ public class DayView extends RelativeLayout {
 
 
         int parentWidth  = getMeasuredWidth();
+        int parentHeight = getMeasuredHeight();
 
         // 1. day text 그리기
 
@@ -161,6 +165,10 @@ public class DayView extends RelativeLayout {
 
         // 3. 리스트 텍스트 그리기
         drawListTvs(canvas, txHeightForBody ,drunkLvRectBottom, listTvPt, dayModel);
+
+
+        // 4. OutMonth 블라인더 그리기
+        if(dayModel.isOutMonth) drawBlinderRect(canvas, parentWidth, parentHeight, blinderRectPt);
     }
 
 
@@ -226,5 +234,8 @@ public class DayView extends RelativeLayout {
         }
 
 
+    }
+    private void drawBlinderRect(Canvas canvas, int parentWidth, int parentHeight, Paint rPaint){
+        canvas.drawRect(0, 0, parentWidth, parentHeight, rPaint);
     }
 }
