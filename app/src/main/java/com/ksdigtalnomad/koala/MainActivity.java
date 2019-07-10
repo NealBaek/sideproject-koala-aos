@@ -1,5 +1,6 @@
 package com.ksdigtalnomad.koala;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDayViewTouch(DayModel dayModel) {
                 Toast.makeText(MainActivity.this, dayModel.year + "." + dayModel.month + "." + dayModel.day, Toast.LENGTH_SHORT).show();
+
+                MainActivity.this.startActivity(CalendarDayDetailActivity.intent(MainActivity.this, dayModel));
             }
         });
 

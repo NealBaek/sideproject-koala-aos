@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.customView.calendarBody.CalendarBodyViewPager;
 import com.ksdigtalnomad.koala.customView.calendarBody.CalendarBodyPagerAdapter;
 import com.ksdigtalnomad.koala.customView.calendarBody.CalendarModel;
@@ -103,15 +104,12 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         RelativeLayout layout = new RelativeLayout(getContext());
         layout.setBackgroundColor(bgColor);
 
-        RelativeLayout.LayoutParams relativeLp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-
-
 
         // 2. Month Title TextView
         monthTitleTv = new TextView(getContext());
         monthTitleTv.setTextSize(MONTH_TITLE_TEXT_SIZE);
         monthTitleTv.setGravity(Gravity.CENTER);
-        monthTitleTv.setLayoutParams(relativeLp);
+        monthTitleTv.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
         layout.addView(monthTitleTv);
 
@@ -143,8 +141,12 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         });
         touchLinearLayout.addView(rightTouchLayout, lp);
 
+        RelativeLayout.LayoutParams touchLp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
-        layout.addView(touchLinearLayout, relativeLp);
+        touchLp.height = 200;
+        touchLp.width = 500;
+        touchLp.addRule(RelativeLayout.CENTER_IN_PARENT);
+        layout.addView(touchLinearLayout, touchLp);
 
 
         // 4. MoveToToday TextView
