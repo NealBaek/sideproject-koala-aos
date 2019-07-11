@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.customView.day;
+package com.ksdigtalnomad.koala.ui.customView.day;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -11,8 +11,8 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.ksdigtalnomad.koala.customView.CalendarConstUtils;
-import com.ksdigtalnomad.koala.customView.calendar.CalendarView;
+import com.ksdigtalnomad.koala.ui.customView.CalendarConstUtils;
+import com.ksdigtalnomad.koala.ui.customView.calendar.CalendarView;
 
 import java.util.ArrayList;
 

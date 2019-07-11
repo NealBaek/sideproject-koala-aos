@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.customView;
+package com.ksdigtalnomad.koala.ui.customView;
 
 import android.graphics.Color;
 import android.support.v4.graphics.ColorUtils;
@@ -61,7 +61,7 @@ public class CalendarConstUtils {
 
 
 
-    //
+    // DayView Texts
     public static String getShortStr(ArrayList<String> strList){
 
         if(strList == null || strList.isEmpty()) return "";

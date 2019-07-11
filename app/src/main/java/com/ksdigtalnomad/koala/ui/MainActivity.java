@@ -1,6 +1,5 @@
-package com.ksdigtalnomad.koala;
+package com.ksdigtalnomad.koala.ui;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,28 +7,26 @@ import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.ksdigtalnomad.koala.customView.CalendarConstUtils;
-import com.ksdigtalnomad.koala.customView.calendar.CalendarView;
-import com.ksdigtalnomad.koala.customView.calendarBody.CalendarModel;
-import com.ksdigtalnomad.koala.customView.day.DayModel;
-import com.ksdigtalnomad.koala.customView.month.MonthModel;
+import com.ksdigtalnomad.koala.R;
+import com.ksdigtalnomad.koala.ui.base.BaseActivity;
+import com.ksdigtalnomad.koala.ui.customView.CalendarConstUtils;
+import com.ksdigtalnomad.koala.ui.customView.calendar.CalendarView;
+import com.ksdigtalnomad.koala.ui.customView.calendarBody.CalendarModel;
+import com.ksdigtalnomad.koala.ui.customView.day.DayModel;
+import com.ksdigtalnomad.koala.ui.customView.month.MonthModel;
 
 import java.text.SimpleDateFormat;
-import java.time.Month;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        getSupportActionBar().hide();
 
         showCalendar();
 
@@ -214,11 +211,11 @@ public class MainActivity extends AppCompatActivity {
 
             int randomIdx = idx * ((int)(Math.random() * 10));
 
-            if(randomIdx%2 == 0) dayModel.friendList.add("아이유 외 1");
+            if(randomIdx%2 == 0){ dayModel.friendList.add("아이유"); dayModel.friendList.add("설민석"); }
 
-            if(randomIdx%3 == 0) dayModel.foodList.add("곱창 외 1");
+            if(randomIdx%3 == 0){ dayModel.foodList.add("곱창"); dayModel.foodList.add("삼겹살"); }
 
-            dayModel.liquorList.add("소주 외 1");
+            dayModel.liquorList.add("소주"); dayModel.liquorList.add("맥주");
 
             if(randomIdx%4 == 0) dayModel.memo = "송별회";
 

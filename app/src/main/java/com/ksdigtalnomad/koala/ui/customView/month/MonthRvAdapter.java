@@ -1,12 +1,12 @@
-package com.ksdigtalnomad.koala.customView.month;
+package com.ksdigtalnomad.koala.ui.customView.month;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.ksdigtalnomad.koala.customView.calendar.CalendarView;
-import com.ksdigtalnomad.koala.customView.day.DayView;
+import com.ksdigtalnomad.koala.ui.customView.calendar.CalendarView;
+import com.ksdigtalnomad.koala.ui.customView.day.DayView;
 
 /**
  * Created by ooddy on 08/05/2019.

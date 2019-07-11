@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.customView.calendar;
+package com.ksdigtalnomad.koala.ui.customView.calendar;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -11,12 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.ksdigtalnomad.koala.R;
-import com.ksdigtalnomad.koala.customView.calendarBody.CalendarBodyViewPager;
-import com.ksdigtalnomad.koala.customView.calendarBody.CalendarBodyPagerAdapter;
-import com.ksdigtalnomad.koala.customView.calendarBody.CalendarModel;
-import com.ksdigtalnomad.koala.customView.day.DayModel;
-import com.ksdigtalnomad.koala.customView.month.MonthModel;
+import com.ksdigtalnomad.koala.ui.customView.calendarBody.CalendarBodyViewPager;
+import com.ksdigtalnomad.koala.ui.customView.calendarBody.CalendarBodyPagerAdapter;
+import com.ksdigtalnomad.koala.ui.customView.calendarBody.CalendarModel;
+import com.ksdigtalnomad.koala.ui.customView.day.DayModel;
+import com.ksdigtalnomad.koala.ui.customView.month.MonthModel;
 
 public class CalendarView extends LinearLayout implements CalendarContract.CalendarView{
 

@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.customView.day;
+package com.ksdigtalnomad.koala.ui.customView.day;
 
 import java.util.ArrayList;
 

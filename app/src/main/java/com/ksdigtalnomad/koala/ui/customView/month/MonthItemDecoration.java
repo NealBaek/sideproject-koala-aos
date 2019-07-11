@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.customView.month;
+package com.ksdigtalnomad.koala.ui.customView.month;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

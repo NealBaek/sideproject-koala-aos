@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.customView.calendarBody;
+package com.ksdigtalnomad.koala.ui.customView.calendarBody;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -8,11 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ksdigtalnomad.koala.customView.calendar.CalendarView;
-import com.ksdigtalnomad.koala.customView.month.MonthItemDecoration;
-import com.ksdigtalnomad.koala.customView.month.MonthModel;
-import com.ksdigtalnomad.koala.customView.month.MonthRvAdapter;
-import com.ksdigtalnomad.koala.customView.month.MonthRvLayoutManager;
+import com.ksdigtalnomad.koala.ui.customView.calendar.CalendarView;
+import com.ksdigtalnomad.koala.ui.customView.month.MonthItemDecoration;
+import com.ksdigtalnomad.koala.ui.customView.month.MonthModel;
+import com.ksdigtalnomad.koala.ui.customView.month.MonthRvAdapter;
+import com.ksdigtalnomad.koala.ui.customView.month.MonthRvLayoutManager;
 
 import java.util.ArrayList;
 
