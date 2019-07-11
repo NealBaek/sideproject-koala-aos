@@ -3,7 +3,7 @@ package com.ksdigtalnomad.koala.ui.customView.day;
 import java.util.ArrayList;
 
 public class DayModel implements Cloneable{
-    public int daySeq;
+    public int daySeq; // 일주일 중 몇 번째 요일 인지
     public boolean isOutMonth;
 
     public int year;
@@ -12,7 +12,9 @@ public class DayModel implements Cloneable{
 
     public String dayOfTheWeek;
 
-    public int index;
+    public int dayIdx; //
+    public int monthIdx; //
+    public int yearIdx; //
 
     public int drunkLevel;
     public ArrayList<String> friendList;

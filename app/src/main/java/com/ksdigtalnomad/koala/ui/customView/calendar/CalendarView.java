@@ -61,6 +61,12 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         presenter.setUpThisMonth();
     }
 
+    public void notifyDataChanged(CalendarModel calendarModel){
+        this.calendarModel = calendarModel;
+        ((CalendarBodyPagerAdapter)calendarBodyViewPager.getAdapter()).setCalendarModel(calendarModel);
+        calendarBodyViewPager.getAdapter().notifyDataSetChanged();
+    }
+
 
 
 
@@ -189,8 +195,6 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
     }
     private CalendarBodyViewPager createYearViewPager(CalendarModel calendarModel, EventInterface eventInterface){
         CalendarBodyViewPager viewPager = new CalendarBodyViewPager(getContext());
-
-//        viewPager.setBackgroundColor(Color.LTGRAY);
 
         CalendarBodyPagerAdapter adapter = new CalendarBodyPagerAdapter(getContext(), calendarModel, eventInterface);
 

@@ -5,15 +5,20 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
 import com.ksdigtalnomad.koala.ui.customView.CalendarConstUtils;
+import com.ksdigtalnomad.koala.ui.customView.CalendarDataController;
 import com.ksdigtalnomad.koala.ui.customView.day.DayModel;
+import com.ksdigtalnomad.koala.ui.customView.month.MonthModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CalendarDayDetailActivity extends BaseActivity {
 
@@ -35,15 +40,16 @@ public class CalendarDayDetailActivity extends BaseActivity {
 
         this.dayModel = new Gson().fromJson(getIntent().getStringExtra(KEY_DAY_MODEL), DayModel.class);
 
-        Log.d("ABC", dayModel.toString());
 
         ((TextView)findViewById(R.id.date)).setText(dayModel.year + "." + dayModel.month + "." + dayModel.day);
-
 
         ((TextView)findViewById(R.id.friendList)).setText(getFullStr(dayModel.friendList));
         ((TextView)findViewById(R.id.foodList)).setText(getFullStr(dayModel.foodList));
         ((TextView)findViewById(R.id.liquarList)).setText(getFullStr(dayModel.liquorList));
-        ((TextView)findViewById(R.id.memo)).setText(dayModel.memo);
+        ((EditText)findViewById(R.id.memo)).setText(dayModel.memo);
+
+
+
     }
 
     private String getFullStr(ArrayList<String> strList){
@@ -53,5 +59,12 @@ public class CalendarDayDetailActivity extends BaseActivity {
         for(int i = 0; i < cnt; ++ i){  toReturn += (i == 0 ? "" : ", ") + strList.get(i);  }
 
         return toReturn;
+    }
+
+    public void onSaveClick(View v){
+        dayModel.memo = ((EditText)findViewById(R.id.memo)).getText().toString();
+        CalendarDataController.updateCalendarModel(dayModel);
+
+        finish();
     }
 }

@@ -33,6 +33,8 @@ public class CalendarBodyPagerAdapter extends PagerAdapter {
         }
     }
 
+    public void setCalendarModel(CalendarModel calendarModel){ this.calendarModel = calendarModel; }
+
     @Override
     public int getCount() {
         return calendarModel.monthList.size();
