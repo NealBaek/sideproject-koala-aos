@@ -44,8 +44,11 @@ public class CalendarDataController {
                     DayModel dModel = dModelList.get(j);
                     if(dModel.dayIdx == dayModel.dayIdx){
                         dModelList.set(j, dayModel);
+                        Log.d("ABC", "memo2: " + dModelList.get(j).memo);
+                        break;
                     }
                 }
+                break;
             }
         }
     }
@@ -209,15 +212,15 @@ public class CalendarDataController {
         dayModel.liquorList = new ArrayList<String>();
 
 
-        int randomIdx = idx * ((int)(Math.random() * 10));
-
-        if(randomIdx%2 == 0){ dayModel.friendList.add("아이유"); dayModel.friendList.add("설민석"); }
-
-        if(randomIdx%3 == 0){ dayModel.foodList.add("곱창"); dayModel.foodList.add("삼겹살"); }
-
-        dayModel.liquorList.add("소주"); dayModel.liquorList.add("맥주");
-
-        if(randomIdx%4 == 0) dayModel.memo = "송별회";
+//        int randomIdx = idx * ((int)(Math.random() * 10));
+//
+//        if(randomIdx%2 == 0){ dayModel.friendList.add("아이유"); dayModel.friendList.add("설민석"); }
+//
+//        if(randomIdx%3 == 0){ dayModel.foodList.add("곱창"); dayModel.foodList.add("삼겹살"); }
+//
+//        dayModel.liquorList.add("소주"); dayModel.liquorList.add("맥주");
+//
+//        if(randomIdx%4 == 0) dayModel.memo = "송별회";
 
         return dayModel;
     }

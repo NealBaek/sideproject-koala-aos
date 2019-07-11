@@ -40,6 +40,7 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
+        Log.d("ABC", "onResume");
         calendarView.notifyDataChanged(CalendarDataController.getInstance().getCalendarModel());
     }
 
