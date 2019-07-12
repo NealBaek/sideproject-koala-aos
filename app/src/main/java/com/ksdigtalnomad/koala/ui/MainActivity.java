@@ -40,13 +40,12 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-        Log.d("ABC", "onResume");
-        calendarView.notifyDataChanged(CalendarDataController.getInstance().getCalendarModel());
+        calendarView.notifyDataChanged(CalendarDataController.getCalendarModel());
     }
 
     private void showCalendar(){
 
-        calendarView = new CalendarView(this, CalendarDataController.getInstance().getCalendarModel(), new CalendarView.EventInterface() {
+        calendarView = new CalendarView(this, CalendarDataController.getCalendarModel(), new CalendarView.EventInterface() {
             @Override
             public void onDayViewTouch(DayModel dayModel) {
                 Toast.makeText(MainActivity.this, dayModel.year + "." + dayModel.month + "." + dayModel.day, Toast.LENGTH_SHORT).show();

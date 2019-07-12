@@ -17,10 +17,10 @@ public class DayModel implements Cloneable{
     public int yearIdx; //
 
     public int drunkLevel;
-    public ArrayList<String> friendList;
-    public ArrayList<String> foodList;
-    public ArrayList<String> liquorList;
-    public String memo;
+    public ArrayList<String> friendList = new ArrayList<String>();
+    public ArrayList<String> foodList = new ArrayList<String>();
+    public ArrayList<String> liquorList = new ArrayList<String>();
+    public String memo = "";
 
 
     public DayModel clone(){

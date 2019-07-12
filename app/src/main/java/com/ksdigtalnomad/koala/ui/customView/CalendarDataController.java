@@ -1,7 +1,12 @@
 package com.ksdigtalnomad.koala.ui.customView;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.customView.calendar.CalendarView;
 import com.ksdigtalnomad.koala.ui.customView.calendarBody.CalendarModel;
 import com.ksdigtalnomad.koala.ui.customView.day.DayModel;
@@ -17,44 +22,14 @@ import java.util.Date;
 
 public class CalendarDataController {
 
-    private static CalendarDataController instance = null;
+    private static final String PREF_FILE_NAME = "BUDDY_COIN";
+    private static final String KEY_CALENDAR_MODEL = "CALENDAR_MODEL";
+
+
     private CalendarDataController(){}
-    public static CalendarDataController getInstance(){
-        if(instance == null) { instance = new CalendarDataController(); }
-        return instance;
-    }
 
 
-    private CalendarModel model = null;
-    public CalendarModel getCalendarModel(){
-        if(model == null) { model = createCalendarModel(); }
-        return model;
-    }
-
-
-
-    public static void updateCalendarModel(DayModel dayModel){
-
-        ArrayList<MonthModel> mModelList = CalendarDataController.getInstance().getCalendarModel().monthList;
-        for(int i = 0; i < mModelList.size(); ++ i){
-            MonthModel mModel = mModelList.get(i);
-            if(mModel.index == dayModel.monthIdx){
-                ArrayList<DayModel> dModelList = mModel.dayList;
-                for(int j = 0; j < dModelList.size(); ++ j){
-                    DayModel dModel = dModelList.get(j);
-                    if(dModel.dayIdx == dayModel.dayIdx){
-                        dModelList.set(j, dayModel);
-                        Log.d("ABC", "memo2: " + dModelList.get(j).memo);
-                        break;
-                    }
-                }
-                break;
-            }
-        }
-    }
-
-
-    private CalendarModel createCalendarModel(){
+    private static CalendarModel createCalendarModel(){
 
         // 시작 날짜 정하기 (2019.01.01 부터 시작)
         int startYear = 2017;
@@ -150,9 +125,6 @@ public class CalendarDataController {
                     dayModel.monthIdx = monthIdx;
                     dayModel.yearIdx = yearIdx;
 
-                    // TODO: Only For Test.
-                    insertTestData(dayModel, dayIdx);
-
                     dayModelList.add(dayModel);
                     monthModel.dayList.add(dayModel);
 
@@ -180,9 +152,6 @@ public class CalendarDataController {
                         nDayModel.yearIdx = yearIdx;
                         nDayModel.isOutMonth = true;
 
-                        // TODO: Only For Test.
-                        insertTestData(nDayModel, nDayIdx);
-
                         monthModel.dayList.add(nDayModel);
 
                         nDayIdx += 1;
@@ -203,25 +172,51 @@ public class CalendarDataController {
             yearIdx += 1;
         }
 
+        storeCalendarModel(calendarModel);
+
         return calendarModel;
     }
-    private DayModel insertTestData(DayModel dayModel, int idx){
-        dayModel.drunkLevel = ((int)( Math.random() * 10)) % 5;
-        dayModel.friendList = new ArrayList<String>();
-        dayModel.foodList = new ArrayList<String>();
-        dayModel.liquorList = new ArrayList<String>();
+    public static CalendarModel getCalendarModel(){ return dumpCalendarModel(); }
+    public static void updateDayModel(DayModel dayModel){
+        CalendarModel calendarModel = CalendarDataController.dumpCalendarModel();
+        ArrayList<MonthModel> mModelList = calendarModel.monthList;
+
+        for(int i = 0; i < mModelList.size(); ++ i){
+            MonthModel mModel = mModelList.get(i);
+            if(mModel.index == dayModel.monthIdx){
+                ArrayList<DayModel> dModelList = mModel.dayList;
+                for(int j = 0; j < dModelList.size(); ++ j){
+                    DayModel dModel = dModelList.get(j);
+                    if(dModel.dayIdx == dayModel.dayIdx){
+                        dModelList.set(j, dayModel);
+                        Log.d("ABC", "memo2: " + dModelList.get(j).memo);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+
+        // preference 에 저장
+        storeCalendarModel(calendarModel);
+    }
 
 
-//        int randomIdx = idx * ((int)(Math.random() * 10));
-//
-//        if(randomIdx%2 == 0){ dayModel.friendList.add("아이유"); dayModel.friendList.add("설민석"); }
-//
-//        if(randomIdx%3 == 0){ dayModel.foodList.add("곱창"); dayModel.foodList.add("삼겹살"); }
-//
-//        dayModel.liquorList.add("소주"); dayModel.liquorList.add("맥주");
-//
-//        if(randomIdx%4 == 0) dayModel.memo = "송별회";
+    private static void storeCalendarModel(CalendarModel model){ getEditPreference().putString(KEY_CALENDAR_MODEL, new Gson().toJson(model)).apply(); }
+    private static CalendarModel dumpCalendarModel(){
+        CalendarModel dumpModel = new Gson().fromJson(getReadPreference().getString(KEY_CALENDAR_MODEL, null), CalendarModel.class);
+        if(dumpModel == null) dumpModel = createCalendarModel();
+        return dumpModel;
+    }
 
-        return dayModel;
+
+    private static SharedPreferences.Editor getEditPreference() {
+        Context context = BaseApplication.getInstance().getApplicationContext();
+        SharedPreferences pref = context.getSharedPreferences(PREF_FILE_NAME, Activity.MODE_PRIVATE);
+        return pref.edit();
+    }
+    private static SharedPreferences getReadPreference() {
+        Context context = BaseApplication.getInstance().getApplicationContext();
+        return context.getSharedPreferences(PREF_FILE_NAME, Activity.MODE_PRIVATE);
     }
 }

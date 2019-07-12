@@ -64,7 +64,7 @@ public class CalendarDayDetailActivity extends BaseActivity {
     public void onSaveClick(View v){
         dayModel.memo = ((EditText)findViewById(R.id.memo)).getText().toString();
         Log.d("ABC", "memo: " + dayModel.memo);
-        CalendarDataController.updateCalendarModel(dayModel);
+        CalendarDataController.updateDayModel(dayModel);
 
         finish();
     }
