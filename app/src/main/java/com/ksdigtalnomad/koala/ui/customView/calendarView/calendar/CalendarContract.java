@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.ui.customView.calendar;
+package com.ksdigtalnomad.koala.ui.customView.calendarView.calendar;
 
 /**
  * Created by ooddy on 14/05/2019.

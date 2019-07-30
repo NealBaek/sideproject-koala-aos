@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.ui.customView;
+package com.ksdigtalnomad.koala.ui.customView.calendarView;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,10 +7,10 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
-import com.ksdigtalnomad.koala.ui.customView.calendar.CalendarView;
-import com.ksdigtalnomad.koala.ui.customView.calendarBody.CalendarModel;
-import com.ksdigtalnomad.koala.ui.customView.day.DayModel;
-import com.ksdigtalnomad.koala.ui.customView.month.MonthModel;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.calendar.CalendarView;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.calendarBody.CalendarModel;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.month.MonthModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

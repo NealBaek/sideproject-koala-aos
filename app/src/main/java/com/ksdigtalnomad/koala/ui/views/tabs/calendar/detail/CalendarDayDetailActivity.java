@@ -1,26 +1,26 @@
-package com.ksdigtalnomad.koala.ui;
+package com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.SeekBar;
 
 import com.google.gson.Gson;
 import com.ksdigtalnomad.koala.R;
+import com.ksdigtalnomad.koala.databinding.ActivityCalendarDayDetailBinding;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
-import com.ksdigtalnomad.koala.ui.customView.CalendarConstUtils;
-import com.ksdigtalnomad.koala.ui.customView.CalendarDataController;
-import com.ksdigtalnomad.koala.ui.customView.day.DayModel;
-import com.ksdigtalnomad.koala.ui.customView.month.MonthModel;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
+import com.ksdigtalnomad.koala.util.KeyboardUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class CalendarDayDetailActivity extends BaseActivity {
+
+    ActivityCalendarDayDetailBinding binding;
 
     DayModel dayModel;
     private static final String KEY_DAY_MODEL = "KEY_DAY_MODEL";
@@ -36,23 +36,27 @@ public class CalendarDayDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar_day_detail);
 
         this.dayModel = new Gson().fromJson(getIntent().getStringExtra(KEY_DAY_MODEL), DayModel.class);
 
-
-        ((TextView)findViewById(R.id.date)).setText(dayModel.year + "." + dayModel.month + "." + dayModel.day);
-
-        ((TextView)findViewById(R.id.friendList)).setText(getFullStr(dayModel.friendList));
-        ((TextView)findViewById(R.id.foodList)).setText(getFullStr(dayModel.foodList));
-        ((TextView)findViewById(R.id.liquarList)).setText(getFullStr(dayModel.liquorList));
-        ((EditText)findViewById(R.id.memo)).setText(dayModel.memo);
-
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_calendar_day_detail);
+        binding.setActivity(this);
+        binding.setDayModel(dayModel);
 
 
     }
 
-    private String getFullStr(ArrayList<String> strList){
+
+    public void onDrunkLevelChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
+        dayModel.drunkLevel = progresValue;
+        binding.drunkLevelComment.setText(CalendarConstUtils.getDrunkLvComment(dayModel.drunkLevel));
+    }
+
+    public void moveToDetailListEditActivity(){
+//        CalendarDetailListEditActivity
+    }
+
+    public String getFullStr(ArrayList<String> strList){
         String toReturn = "";
         int cnt = strList.size();
 
@@ -62,8 +66,10 @@ public class CalendarDayDetailActivity extends BaseActivity {
     }
 
     public void onSaveClick(View v){
-        dayModel.memo = ((EditText)findViewById(R.id.memo)).getText().toString();
-        Log.d("ABC", "memo: " + dayModel.memo);
+        KeyboardUtil.hide(this);
+
+        dayModel.memo = binding.memo.getText().toString();
+
         CalendarDataController.updateDayModel(dayModel);
 
         finish();

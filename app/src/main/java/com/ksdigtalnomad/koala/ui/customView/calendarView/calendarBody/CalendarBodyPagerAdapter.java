@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.ui.customView.calendarBody;
+package com.ksdigtalnomad.koala.ui.customView.calendarView.calendarBody;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -8,11 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ksdigtalnomad.koala.ui.customView.calendar.CalendarView;
-import com.ksdigtalnomad.koala.ui.customView.month.MonthItemDecoration;
-import com.ksdigtalnomad.koala.ui.customView.month.MonthModel;
-import com.ksdigtalnomad.koala.ui.customView.month.MonthRvAdapter;
-import com.ksdigtalnomad.koala.ui.customView.month.MonthRvLayoutManager;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.calendar.CalendarView;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.month.MonthItemDecoration;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.month.MonthModel;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.month.MonthRvAdapter;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.month.MonthRvLayoutManager;
 
 import java.util.ArrayList;
 
@@ -33,7 +33,14 @@ public class CalendarBodyPagerAdapter extends PagerAdapter {
         }
     }
 
-    public void setCalendarModel(CalendarModel calendarModel){ this.calendarModel = calendarModel; }
+    public void notifyDataChange(CalendarModel calendarModel){
+        this.calendarModel = calendarModel;
+        int parentCnt = parentList.size();
+        for (int i = 0; i < parentCnt; ++i){
+            ((MonthRvAdapter)((RecyclerView)parentList.get(i)).getAdapter()).notifyDataChange(calendarModel.monthList.get(i));
+        }
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getCount() {

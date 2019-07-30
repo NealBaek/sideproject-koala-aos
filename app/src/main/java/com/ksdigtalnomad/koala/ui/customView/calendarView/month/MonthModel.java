@@ -1,6 +1,6 @@
-package com.ksdigtalnomad.koala.ui.customView.month;
+package com.ksdigtalnomad.koala.ui.customView.calendarView.month;
 
-import com.ksdigtalnomad.koala.ui.customView.day.DayModel;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 
 import java.util.ArrayList;
 

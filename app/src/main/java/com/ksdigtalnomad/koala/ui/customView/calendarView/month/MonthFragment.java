@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.ui.customView.month;
+package com.ksdigtalnomad.koala.ui.customView.calendarView.month;
 
 import android.support.v4.app.Fragment;
 

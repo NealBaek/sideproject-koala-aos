@@ -1,12 +1,12 @@
-package com.ksdigtalnomad.koala.ui.customView.month;
+package com.ksdigtalnomad.koala.ui.customView.calendarView.month;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.ksdigtalnomad.koala.ui.customView.calendar.CalendarView;
-import com.ksdigtalnomad.koala.ui.customView.day.DayView;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.calendar.CalendarView;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayView;
 
 /**
  * Created by ooddy on 08/05/2019.
@@ -23,6 +23,11 @@ public class MonthRvAdapter extends RecyclerView.Adapter{
         this.context = context;
         this.monthModel = monthModel;
         this.eventInterface = eventInterface;
+    }
+
+    public void notifyDataChange(MonthModel monthModel){
+        this.monthModel = monthModel;
+        notifyDataSetChanged();
     }
 
 

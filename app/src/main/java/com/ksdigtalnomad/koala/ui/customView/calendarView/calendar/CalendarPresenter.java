@@ -1,7 +1,7 @@
-package com.ksdigtalnomad.koala.ui.customView.calendar;
+package com.ksdigtalnomad.koala.ui.customView.calendarView.calendar;
 
-import com.ksdigtalnomad.koala.ui.customView.calendarBody.CalendarModel;
-import com.ksdigtalnomad.koala.ui.customView.month.MonthModel;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.calendarBody.CalendarModel;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.month.MonthModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

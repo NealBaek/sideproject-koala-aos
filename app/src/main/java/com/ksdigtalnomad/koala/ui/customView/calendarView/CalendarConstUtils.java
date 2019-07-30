@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.ui.customView;
+package com.ksdigtalnomad.koala.ui.customView.calendarView;
 
 import android.graphics.Color;
 import android.support.v4.graphics.ColorUtils;
@@ -58,7 +58,24 @@ public class CalendarConstUtils {
         }
 
     }
+    public static String getDrunkLvComment(int drunkLv){
 
+        switch (drunkLv){
+            case DRUNK_LV_0:
+                return "'오늘은 간이 푹 쉬는 날'";
+            case DRUNK_LV_1:
+                return "'맥주 한 두잔?'";
+            case DRUNK_LV_2:
+                return "'칵테일 한 두잔..?'";
+            case DRUNK_LV_3:
+                return "'소주 한 두병..?'";
+            case DRUNK_LV_MAX:
+                return "'만취'";
+            default:
+                return "";
+        }
+
+    }
 
 
     // DayView Texts

@@ -1,228 +1,252 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.ksdigtalnomad.koala.ui.CalendarDayDetailActivity">
-
-    <RelativeLayout
+<layout>
+    <data>
+        <variable
+            name="activity"
+            type="com.ksdigtalnomad.koala.ui.views.home.calendar.detail.CalendarDayDetailActivity"/>
+        <variable
+            name="dayModel"
+            type="com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel"/>
+        <import type="com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils"/>
+        <!--<import type=""/>-->
+    </data>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorMain">
-        <ImageView
-            android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.views.tabs.calendar.detail.CalendarDayDetailActivity">
+
+        <!--Header -->
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="#30000000"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"
-            android:layout_centerVertical="true"/>
+            android:background="@color/colorMain">
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="#30000000"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@{String.valueOf(dayModel.year) + '.' + String.valueOf(dayModel.month) + '.' + String.valueOf(dayModel.day)}"
+                android:textSize="20dp"
+                android:textColor="#30000000"/>
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="#30000000"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
+                android:onClick="onSaveClick"/>
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- 음주량 -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="20dp"
+                            android:text="음주량"
+                            android:textSize="20dp"/>
+                        <android.support.v7.widget.AppCompatSeekBar
+                            android:id="@+id/drunkLevel"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginTop="15dp"
+                            android:max="@{CalendarConstUtils.DRUNK_LV_MAX}"
+                            android:progress="@{dayModel.drunkLevel}"
+                            android:onProgressChanged="@{activity.onDrunkLevelChanged}"/>
+                        <TextView
+                            android:id="@+id/drunkLevelComment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:gravity="center"
+                            android:text="@{CalendarConstUtils.getDrunkLvComment(dayModel.drunkLevel)}"
+                            android:textSize="15dp"
+                            android:textColor="#30000000"/>
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="#300000"/>
+                </RelativeLayout>
+
+                <!-- 음주 파트너 -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="20dp"
+                            android:text="음주 파트너"
+                            android:textSize="20dp"/>
+                        <TextView
+                            android:id="@+id/friendList"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginRight="20dp"
+                            android:focusable="false"
+                            android:text="@{activity.getFullStr(dayModel.friendList)}"
+                            android:hint="여기를 눌러 입력"
+                            android:textSize="15dp"
+                            android:textColor="#30000000"
+                            android:gravity="right"/>
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="#300000"/>
+                </RelativeLayout>
+                <!-- 안주 -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="20dp"
+                            android:text="안주"
+                            android:textSize="20dp"/>
+                        <EditText
+                            android:id="@+id/foodList"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginRight="20dp"
+                            android:focusable="false"
+                            android:text="@{activity.getFullStr(dayModel.foodList)}"
+                            android:hint="여기를 눌러 입력"
+                            android:textSize="15dp"
+                            android:textColor="#30000000"
+                            android:gravity="right"/>
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="#300000"/>
+                </RelativeLayout>
+                <!-- 주류 -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="20dp"
+                            android:text="주류"
+                            android:textSize="20dp"/>
+                        <EditText
+                            android:id="@+id/liquarList"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginRight="20dp"
+                            android:focusable="false"
+                            android:text="@{activity.getFullStr(dayModel.liquorList)}"
+                            android:hint="여기를 눌러 입력"
+                            android:textSize="15dp"
+                            android:textColor="#30000000"
+                            android:gravity="right"/>
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="#300000"/>
+                </RelativeLayout>
+                <!-- 메모 -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="20dp"
+                            android:text="메모"
+                            android:textSize="20dp"/>
+                        <EditText
+                            android:id="@+id/memo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginRight="20dp"
+                            android:hint="여기를 눌러 입력"
+                            android:text="@{dayModel.memo}"
+                            android:textSize="15dp"
+                            android:textColor="#30000000"
+                            android:gravity="right"/>
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="#300000"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+        </ScrollView>
 
         <TextView
-            android:id="@+id/date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:textColor="#30000000"/>
-
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="#30000000"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:layout_centerVertical="true"
-            android:onClick="onSaveClick"/>
-    </RelativeLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="60dp"
+            android:background="#000000"
+            android:gravity="center"
+            android:text="AD"
+            android:textColor="#fff"></TextView>
 
-
-            <!-- 음주량 -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="150dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginLeft="20dp"
-                        android:text="음주량"
-                        android:textSize="20dp"/>
-                    <android.support.v7.widget.AppCompatSeekBar
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="15dp"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:gravity="center"
-                        android:text="'오늘은 간이 푹 쉬는 날'"
-                        android:textSize="15dp"
-                        android:textColor="#30000000"/>
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="#300000"/>
-            </RelativeLayout>
-
-            <!-- 음주 파트너 -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginLeft="20dp"
-                        android:text="음주 파트너"
-                        android:textSize="20dp"/>
-                    <TextView
-                        android:id="@+id/friendList"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="20dp"
-                        android:text="여기를 눌러 입력"
-                        android:textSize="15dp"
-                        android:textColor="#30000000"
-                        android:gravity="right"/>
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="#300000"/>
-            </RelativeLayout>
-            <!-- 안주 -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginLeft="20dp"
-                        android:text="안주"
-                        android:textSize="20dp"/>
-                    <TextView
-                        android:id="@+id/foodList"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="20dp"
-                        android:text="여기를 눌러 입력"
-                        android:textSize="15dp"
-                        android:textColor="#30000000"
-                        android:gravity="right"/>
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="#300000"/>
-            </RelativeLayout>
-            <!-- 주류 -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginLeft="20dp"
-                        android:text="주류"
-                        android:textSize="20dp"/>
-                    <TextView
-                        android:id="@+id/liquarList"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="20dp"
-                        android:text="여기를 눌러 입력"
-                        android:textSize="15dp"
-                        android:textColor="#30000000"
-                        android:gravity="right"/>
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="#300000"/>
-            </RelativeLayout>
-            <!-- 메모 -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginLeft="20dp"
-                        android:text="메모"
-                        android:textSize="20dp"/>
-                    <EditText
-                        android:id="@+id/memo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="20dp"
-                        android:hint="여기를 눌러 입력"
-                        android:textSize="15dp"
-                        android:textColor="#30000000"
-                        android:gravity="right"/>
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="#300000"/>
-            </RelativeLayout>
-
-        </LinearLayout>
-    </ScrollView>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#000000"
-        android:gravity="center"
-        android:text="AD"
-        android:textColor="#fff"></TextView>
-
-</LinearLayout>
+    </LinearLayout>
+</layout>
