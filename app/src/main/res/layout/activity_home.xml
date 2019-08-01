@@ -1,36 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.views.home.HomeActivity"
-    android:orientation="vertical">
-
+    tools:context=".ui.views.home.HomeActivity">
+    <data>
+        <variable
+            name="activity"
+            type="com.ksdigtalnomad.koala.ui.views.home.HomeActivity"/>
+    </data>
     <LinearLayout
-        android:id="@+id/bodyLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_weight="0"
-        android:text="탭바"
-        android:gravity="center"
-        android:background="#50000000"/>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/homeTabViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_weight="0"
-        android:background="#000000"
-        android:textColor="#ffffff"
-        android:text="Ads"
-        android:gravity="center"
-        android:textStyle="bold"/>
+        <!-- Tap Layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <!-- 버튼 1 -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="@{() -> activity.onTapClick(0)}">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerInParent="true">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="#300"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="btn_1"
+                        android:gravity="center"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- 버튼 2 -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="@() -> {activity.onTapClick(1)}">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerInParent="true">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="#300"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="btn_1"
+                        android:gravity="center"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- 버튼 3 -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="@{() -> activity.onTapClick(2)}">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerInParent="true">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="#300"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="btn_1"
+                        android:gravity="center"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- 버튼 4 -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="@{() -> activity.onTapClick(3)}">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerInParent="true">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="#300"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="btn_1"
+                        android:gravity="center"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
 
 
-</LinearLayout>
+        <!-- Banner Ads -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="0"
+            android:background="#000000"
+            android:textColor="#ffffff"
+            android:text="Ads"
+            android:gravity="center"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+</layout>

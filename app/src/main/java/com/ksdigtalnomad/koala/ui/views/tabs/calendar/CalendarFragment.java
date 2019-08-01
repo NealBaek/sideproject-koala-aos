@@ -1,6 +1,7 @@
 package com.ksdigtalnomad.koala.ui.views.tabs.calendar;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -58,17 +59,7 @@ public class CalendarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_calendar, container, false);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        calendarView.notifyDataChanged(CalendarDataController.getCalendarModel());
-    }
-
-    private void showCalendar(){
+        View view = inflater.inflate(R.layout.fragment_calendar, container, false);
 
         calendarView = new CalendarView(mContext, CalendarDataController.getCalendarModel(), new CalendarView.EventInterface() {
             @Override
@@ -83,9 +74,22 @@ public class CalendarFragment extends Fragment {
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
 
-//        LinearLayout bodyLayout = mContext.findViewById(R.id.bodyLayout);
+        LinearLayout bodyLayout = view.findViewById(R.id.bodyLayout);
 
-//        bodyLayout.addView(calendarView, 0, params);
-//        bodyLayout.setBackgroundColor(Color.LTGRAY);
+        bodyLayout.addView(calendarView, 0, params);
+        bodyLayout.setBackgroundColor(Color.LTGRAY);
+
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        calendarView.notifyDataChanged(CalendarDataController.getCalendarModel());
+    }
+
+    private void showCalendar(){
+
+
     }
 }
