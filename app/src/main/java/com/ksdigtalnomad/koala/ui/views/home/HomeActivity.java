@@ -2,6 +2,7 @@ package com.ksdigtalnomad.koala.ui.views.home;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.view.View;
 
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.databinding.ActivityHomeBinding;
@@ -30,5 +31,5 @@ public class HomeActivity extends BaseActivity {
     }
 
 
-    public void onTapClick(int tapNum){ mBinding.homeTabViewPager.setCurrentItem(tapNum, true);  }
+    public void onTapClick(View v, int tapNum){ mBinding.homeTabViewPager.setCurrentItem(tapNum, true);  }
 }

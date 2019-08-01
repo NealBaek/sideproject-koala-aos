@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Koala</string>
     <string name="tap1_title">오늘</string>
     <string name="tap2_title">달력</string>
     <string name="tap3_title">통계</string>

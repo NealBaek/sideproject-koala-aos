@@ -1,6 +1,6 @@
 package com.ksdigtalnomad.koala.net;
 
-import net.ooddy.buddycoin.BuildConfig;
+import com.ksdigtalnomad.koala.BuildConfig;
 
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;

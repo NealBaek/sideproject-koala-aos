@@ -44,18 +44,18 @@ public class AddTokenInterceptor implements Interceptor {
         User user = null;
 
         User loginUser = PreferenceManager.getUser();
-        if (loginUser.getSocialId() != null) {
-            user = ServiceManager.getInstance().getUserService()
-                    .socialLogin(loginUser)
-                    .blockingSingle();
-            user.setSocialType(loginUser.getSocialType());
-            user.setSocialId(loginUser.getSocialId());
-        } else {
-            user = ServiceManager.getInstance().getUserService()
-                    .emailLogin(loginUser)
-                    .blockingSingle();
-            user.setPassword(loginUser.getPassword());
-        }
+//        if (loginUser.getSocialId() != null) {
+//            user = ServiceManager.getInstance().getUserService()
+//                    .socialLogin(loginUser)
+//                    .blockingSingle();
+//            user.setSocialType(loginUser.getSocialType());
+//            user.setSocialId(loginUser.getSocialId());
+//        } else {
+//            user = ServiceManager.getInstance().getUserService()
+//                    .emailLogin(loginUser)
+//                    .blockingSingle();
+//            user.setPassword(loginUser.getPassword());
+//        }
 
         PreferenceManager.setLoginInfo(user);
         return user.getAccessToken();

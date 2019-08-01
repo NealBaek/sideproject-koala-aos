@@ -23,16 +23,16 @@ public class HomeTapAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch(position){
             case 0:
-                if(fragment1 == null){  fragment1 = CalendarFragment.newInstance("1","2"); }
+                if(fragment1 == null){  fragment1 = CalendarFragment.newInstance(); }
                 return fragment1;
             case 1:
-                if(fragment2 == null){  fragment2 = CalendarFragment.newInstance("1","2"); }
+                if(fragment2 == null){  fragment2 = CalendarFragment.newInstance(); }
                 return fragment2;
             case 2:
-                if(fragment3 == null){  fragment3 = CalendarFragment.newInstance("1","2"); }
+                if(fragment3 == null){  fragment3 = CalendarFragment.newInstance(); }
                 return fragment3;
             case 3:
-                if(fragment4 == null){  fragment4 = CalendarFragment.newInstance("1","2"); }
+                if(fragment4 == null){  fragment4 = CalendarFragment.newInstance(); }
                 return fragment4;
             default:
                 return null;
