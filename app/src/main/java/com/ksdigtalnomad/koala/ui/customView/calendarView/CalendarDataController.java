@@ -22,7 +22,7 @@ import java.util.Date;
 
 public class CalendarDataController {
 
-    private static final String PREF_FILE_NAME = "BUDDY_COIN";
+    private static final String PREF_FILE_NAME = "CALENDAR_DATA";
     private static final String KEY_CALENDAR_MODEL = "CALENDAR_MODEL";
 
 
@@ -177,9 +177,14 @@ public class CalendarDataController {
         return calendarModel;
     }
     public static CalendarModel getCalendarModel(){ return dumpCalendarModel(); }
-    public static void updateDayModel(DayModel dayModel){
+    public static CalendarModel updateDayModel(DayModel dayModel){
+
+        Log.d("ABC", "updateDayModel");
+        Log.d("ABC", "1");
         CalendarModel calendarModel = CalendarDataController.dumpCalendarModel();
         ArrayList<MonthModel> mModelList = calendarModel.monthList;
+
+        Log.d("ABC", "2");
 
         for(int i = 0; i < mModelList.size(); ++ i){
             MonthModel mModel = mModelList.get(i);
@@ -197,8 +202,14 @@ public class CalendarDataController {
             }
         }
 
+        Log.d("ABC", "3");
+
         // preference 에 저장
         storeCalendarModel(calendarModel);
+
+        Log.d("ABC", "4");
+
+        return calendarModel;
     }
 
 

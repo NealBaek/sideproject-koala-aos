@@ -25,11 +25,5 @@ public class HomeActivity extends BaseActivity {
         mBinding.homeTabViewPager.setOffscreenPageLimit(4);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-
     public void onTapClick(View v, int tapNum){ mBinding.homeTabViewPager.setCurrentItem(tapNum, true);  }
 }

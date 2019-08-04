@@ -1,13 +1,6 @@
 package com.ksdigtalnomad.koala.fcm;
 
-import com.ksdigtalnomad.koala.net.ServiceManager;
-import com.ksdigtalnomad.koala.util.Constants;
 import com.ksdigtalnomad.koala.util.PreferenceManager;
-
-import lombok.NonNull;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
     @Override public void onNewToken(String pushToken) {

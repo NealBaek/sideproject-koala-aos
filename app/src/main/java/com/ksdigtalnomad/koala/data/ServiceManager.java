@@ -1,6 +1,6 @@
-package com.ksdigtalnomad.koala.net;
+package com.ksdigtalnomad.koala.data;
 
-import com.ksdigtalnomad.koala.net.services.UserService;
+import com.ksdigtalnomad.koala.data.services.UserService;
 
 public enum  ServiceManager {
     INSTANCE;

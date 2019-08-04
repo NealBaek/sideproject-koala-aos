@@ -1,17 +1,19 @@
 package com.ksdigtalnomad.koala.ui.base;
 
-import android.app.Application;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.support.multidex.MultiDexApplication;
 import android.util.Base64;
 import android.util.Log;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class BaseApplication extends Application {
-    private static Application instance;
+public class BaseApplication extends MultiDexApplication {
+    private static BaseApplication instance;
+
+    public static BaseApplication getInstance() { return instance; }
 
     @Override
     public void onCreate() {
@@ -26,10 +28,6 @@ public class BaseApplication extends Application {
 //        KakaoSDK.init(new KAKAOSDKAdapter());
 
         printKeyHash();
-    }
-
-    public static Application getInstance() {
-        return instance;
     }
 
     public static void printKeyHash() {

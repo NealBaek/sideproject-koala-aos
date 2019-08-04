@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.net.services;
+package com.ksdigtalnomad.koala.data.services;
 
 public interface UserService {
 //    @POST("auth/register/email")

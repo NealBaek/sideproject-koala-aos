@@ -1,8 +1,8 @@
-package com.ksdigtalnomad.koala.net;
+package com.ksdigtalnomad.koala.data;
 
 import android.support.annotation.NonNull;
 
-import com.ksdigtalnomad.koala.net.models.User;
+import com.ksdigtalnomad.koala.data.models.User;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.util.PreferenceManager;
 

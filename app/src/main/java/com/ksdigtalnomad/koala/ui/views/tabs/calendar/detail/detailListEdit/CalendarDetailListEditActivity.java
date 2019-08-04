@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail;
+package com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.detailListEdit;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

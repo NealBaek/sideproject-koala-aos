@@ -17,8 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.views.tabs.calendar.detail.CalendarDayDetailActivity" />
-        <activity android:name=".ui.views.tabs.calendar.detail.CalendarDetailListEditActivity"></activity>
+        <activity android:name=".ui.views.tabs.calendar.detail.dayDetail.CalendarDayDetailActivity" />
+        <activity android:name=".ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity"></activity>
     </application>
 
 </manifest>

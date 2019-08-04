@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.net.models;
+package com.ksdigtalnomad.koala.data.models;
 
 import lombok.Builder;
 import lombok.Getter;
