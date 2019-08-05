@@ -42,7 +42,7 @@
                     android:gravity="center"
                     android:text="@{String.valueOf(dayModel.year) + '.' + String.valueOf(dayModel.month) + '.' + String.valueOf(dayModel.day)}"
                     android:textSize="20dp"
-                    android:textColor="#30000000"/>
+                    android:textColor="#fff"/>
 
                 <ImageView
                     android:layout_width="60dp"
@@ -76,8 +76,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="15dp"
                                 android:layout_marginLeft="20dp"
-                                android:text="음주량"
-                                android:textSize="20dp"/>
+                                android:text="@string/calendar_detail_drunk_level_title"
+                                android:textSize="20dp"
+                                android:textColor="@color/colorMain"/>
                             <android.support.v7.widget.AppCompatSeekBar
                                 android:id="@+id/drunkLevel"
                                 android:layout_width="match_parent"
@@ -118,8 +119,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="15dp"
                                 android:layout_marginLeft="20dp"
-                                android:text="음주 파트너"
-                                android:textSize="20dp"/>
+                                android:text="@string/calendar_detail_friends_title"
+                                android:textSize="20dp"
+                                android:textColor="@color/colorMain"/>
                             <TextView
                                 android:id="@+id/friendList"
                                 android:layout_width="match_parent"
@@ -152,8 +154,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="15dp"
                                 android:layout_marginLeft="20dp"
-                                android:text="안주"
-                                android:textSize="20dp"/>
+                                android:text="@string/calendar_detail_foods_title"
+                                android:textSize="20dp"
+                                android:textColor="@color/colorMain"/>
                             <EditText
                                 android:id="@+id/foodList"
                                 android:layout_width="match_parent"
@@ -186,8 +189,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="15dp"
                                 android:layout_marginLeft="20dp"
-                                android:text="주류"
-                                android:textSize="20dp"/>
+                                android:text="@string/calendar_detail_liquor_title"
+                                android:textSize="20dp"
+                                android:textColor="@color/colorMain"/>
                             <EditText
                                 android:id="@+id/liquarList"
                                 android:layout_width="match_parent"
@@ -220,8 +224,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="15dp"
                                 android:layout_marginLeft="20dp"
-                                android:text="메모"
-                                android:textSize="20dp"/>
+                                android:text="@string/calendar_detail_memo_title"
+                                android:textSize="20dp"
+                                android:textColor="@color/colorMain"/>
                             <EditText
                                 android:id="@+id/memo"
                                 android:layout_width="match_parent"
@@ -232,7 +237,8 @@
                                 android:text="@{dayModel.memo}"
                                 android:textSize="15dp"
                                 android:textColor="#30000000"
-                                android:gravity="right"/>
+                                android:gravity="right"
+                                android:textColorLink="@color/colorMain"/>
                         </LinearLayout>
                         <View
                             android:layout_width="match_parent"

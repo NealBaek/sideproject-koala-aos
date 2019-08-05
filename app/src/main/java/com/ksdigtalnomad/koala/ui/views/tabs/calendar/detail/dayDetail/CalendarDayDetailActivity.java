@@ -47,13 +47,10 @@ public class CalendarDayDetailActivity extends BaseActivity {
 
         this.dayModel = new Gson().fromJson(getIntent().getStringExtra(KEY_DAY_MODEL), DayModel.class);
 
-
-
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_calendar_day_detail);
         mBinding.setLifecycleOwner(this);
         mBinding.setActivity(this);
         mBinding.setDayModel(dayModel);
-
 
     }
 
@@ -71,32 +68,26 @@ public class CalendarDayDetailActivity extends BaseActivity {
         String toReturn = "";
         int cnt = strList.size();
 
-        for(int i = 0; i < cnt; ++ i){  toReturn += (i == 0 ? "" : ", ") + strList.get(i);  }
+        for(int i = 0; i < cnt; ++ i){  toReturn += (i == 0 ? ""
+                : ", ") + strList.get(i);  }
 
         return toReturn;
     }
 
     public void onSaveClick(View v){
 
-        Log.d("ABC", "onSaveClick");
         dayModel.memo = mBinding.memo.getText().toString();
 
-        Log.d("ABC", "1");
-
         KeyboardUtil.hide(CalendarDayDetailActivity.this);
-//        ProgressHelper.showProgress(mBinding.bodyLayout);
 
-        Log.d("ABC", "2");
+//        mBinding.bodyLayout.post(()-> ProgressHelper.showProgress(mBinding.bodyLayout) );
 
         CalendarDataController.updateDayModel(dayModel);
 
-        Log.d("ABC", "3");
+//        mBinding.bodyLayout.post(()-> ProgressHelper.dismissProgress(mBinding.bodyLayout) );
 
-//        ProgressHelper.dismissProgress(mBinding.bodyLayout);
-//        finish();
-//        if(updateAsyncTask == null) updateAsyncTask = new UpdateAsyncTask();
-////        updateAsyncTask.cancel(true);
-//        updateAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        finish();
+
     }
 
 }
