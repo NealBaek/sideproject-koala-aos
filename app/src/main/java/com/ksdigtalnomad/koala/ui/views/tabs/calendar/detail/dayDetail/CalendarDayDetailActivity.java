@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class CalendarDayDetailActivity extends BaseActivity {
 
     private ActivityCalendarDayDetailBinding mBinding;
-    private static final String KEY_DAY_MODEL = "KEY_DAY_MODEL";
+    public static final String KEY_DAY_MODEL = "KEY_DAY_MODEL";
 
     private DayModel dayModel;
 
@@ -55,6 +55,7 @@ public class CalendarDayDetailActivity extends BaseActivity {
     }
 
 
+
     public void onDrunkLevelChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
         dayModel.drunkLevel = progresValue;
         mBinding.drunkLevelComment.setText(CalendarConstUtils.getDrunkLvComment(dayModel.drunkLevel));
@@ -78,16 +79,16 @@ public class CalendarDayDetailActivity extends BaseActivity {
 
         dayModel.memo = mBinding.memo.getText().toString();
 
-        KeyboardUtil.hide(CalendarDayDetailActivity.this);
+//        runOnUiThread(()->KeyboardUtil.hide(CalendarDayDetailActivity.this));
 
-//        mBinding.bodyLayout.post(()-> ProgressHelper.showProgress(mBinding.bodyLayout) );
+        Runnable task = () -> CalendarDataController.updateDayModel(dayModel);
+        task.run();
 
-        CalendarDataController.updateDayModel(dayModel);
-
-//        mBinding.bodyLayout.post(()-> ProgressHelper.dismissProgress(mBinding.bodyLayout) );
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(KEY_DAY_MODEL, new Gson().toJson(dayModel));
+        setResult(RESULT_OK, resultIntent);
 
         finish();
 
     }
-
 }

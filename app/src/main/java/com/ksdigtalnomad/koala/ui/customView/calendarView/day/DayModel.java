@@ -3,6 +3,8 @@ package com.ksdigtalnomad.koala.ui.customView.calendarView.day;
 import java.util.ArrayList;
 
 public class DayModel implements Cloneable{
+    public int dayViewId; // Day View 에 접근하기 위한 아이디
+
     public int daySeq; // 일주일 중 몇 번째 요일 인지
     public boolean isOutMonth;
 
@@ -37,4 +39,5 @@ public class DayModel implements Cloneable{
             return this;
         }
     }
+
 }

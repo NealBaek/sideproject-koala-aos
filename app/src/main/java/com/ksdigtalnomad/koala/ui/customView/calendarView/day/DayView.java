@@ -58,9 +58,13 @@ public class DayView extends RelativeLayout {
 
 
         // 2. 클릭 이벤트 설정
-        setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) { if(!dayModel.isOutMonth){eventInterface.onDayViewTouch(dayModel);}}
+        setOnClickListener(view -> {
+            if(!dayModel.isOutMonth){
+                int id = (int) (Math.random() * 10000000);
+                dayModel.dayViewId =  id;
+                setId(id);
+                eventInterface.onDayViewTouch(dayModel);
+            }
         });
     }
 

@@ -179,12 +179,9 @@ public class CalendarDataController {
     public static CalendarModel getCalendarModel(){ return dumpCalendarModel(); }
     public static CalendarModel updateDayModel(DayModel dayModel){
 
-        Log.d("ABC", "updateDayModel");
-        Log.d("ABC", "1");
+        // @TODO: 느려짐 포인트 1-1
         CalendarModel calendarModel = CalendarDataController.dumpCalendarModel();
         ArrayList<MonthModel> mModelList = calendarModel.monthList;
-
-        Log.d("ABC", "2");
 
         for(int i = 0; i < mModelList.size(); ++ i){
             MonthModel mModel = mModelList.get(i);
@@ -202,12 +199,9 @@ public class CalendarDataController {
             }
         }
 
-        Log.d("ABC", "3");
-
         // preference 에 저장
+        // @TODO: 느려짐 포인트 1-2
         storeCalendarModel(calendarModel);
-
-        Log.d("ABC", "4");
 
         return calendarModel;
     }

@@ -1,8 +1,10 @@
 package com.ksdigtalnomad.koala.ui.base;
 
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.util.Base64;
 import android.util.Log;
@@ -51,4 +53,9 @@ public class BaseApplication extends MultiDexApplication {
         }
     }
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 }
