@@ -89,6 +89,10 @@ public class CalendarDayDetailActivity extends BaseActivity {
         setResult(RESULT_OK, resultIntent);
 
         finish();
-
     }
+
+    public void onBackClick(View v){
+        finish();
+    }
+
 }

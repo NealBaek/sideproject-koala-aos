@@ -242,7 +242,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
 
         final int PARENT_H_RATIO = 7;
         final int C_RV_H_RATIO = 6;
-        final int D_HEADER_H_SIZE = 50;
+        final int D_HEADER_H_SIZE = 45;
 
         int rvHeightSize = (parentHeightSize * C_RV_H_RATIO/PARENT_H_RATIO);
         int cHeaderHeightSize = parentHeightSize - rvHeightSize - D_HEADER_H_SIZE;

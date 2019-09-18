@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.google.firebase.iid.FirebaseInstanceId;
+//import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.ksdigtalnomad.koala.data.models.User;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
@@ -66,7 +66,7 @@ public class PreferenceManager {
         String pushToken = getReadPreference().getString(KEY_PUSH_TOKEN, null);
         if (pushToken == null) {
             // todo: getToken() is deprecated
-            pushToken = FirebaseInstanceId.getInstance().getToken();
+//            pushToken = FirebaseInstanceId.getInstance().getToken();
             setPushToken(pushToken);
         }
         return pushToken;

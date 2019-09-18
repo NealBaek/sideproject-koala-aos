@@ -20,20 +20,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:focusableInTouchMode="true">
 
             <!--Header -->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="45dp"
                 android:background="@color/colorMain">
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="#30000000"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_arrow_left"
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="10dp"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:onClick="onBackClick"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -41,19 +43,21 @@
                     android:layout_centerInParent="true"
                     android:gravity="center"
                     android:text="@{String.valueOf(dayModel.year) + '.' + String.valueOf(dayModel.month) + '.' + String.valueOf(dayModel.day)}"
-                    android:textSize="20dp"
-                    android:textColor="#fff"/>
+                    android:textSize="18dp"
+                    android:textColor="#fff"
+                    android:textStyle="bold"/>
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="#30000000"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_done"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="15dp"
                     android:layout_centerVertical="true"
                     android:onClick="onSaveClick"/>
             </RelativeLayout>
 
+            <!-- Body -->
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -61,12 +65,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:background="@color/colorLightGray">
 
                     <!-- 음주량 -->
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="150dp">
+                        android:layout_height="150dp"
+                        android:background="@color/colorPureWhite">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -74,10 +80,11 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
+                                android:layout_marginTop="25dp"
                                 android:layout_marginLeft="20dp"
                                 android:text="@string/calendar_detail_drunk_level_title"
-                                android:textSize="20dp"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
                                 android:textColor="@color/colorMain"/>
                             <android.support.v7.widget.AppCompatSeekBar
                                 android:id="@+id/drunkLevel"
@@ -96,20 +103,21 @@
                                 android:layout_marginTop="15dp"
                                 android:gravity="center"
                                 android:text="@{CalendarConstUtils.getDrunkLvComment(dayModel.drunkLevel)}"
-                                android:textSize="15dp"
-                                android:textColor="#30000000"/>
+                                android:textSize="16dp"
+                                android:textColor="@color/colorDarkGray"/>
                         </LinearLayout>
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="3dp"
                             android:layout_alignParentBottom="true"
-                            android:background="#300000"/>
+                            android:background="@color/colorLightGray"/>
                     </RelativeLayout>
 
                     <!-- 음주 파트너 -->
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="100dp">
+                        android:layout_height="100dp"
+                        android:background="@color/colorPureWhite">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -120,7 +128,8 @@
                                 android:layout_marginTop="15dp"
                                 android:layout_marginLeft="20dp"
                                 android:text="@string/calendar_detail_friends_title"
-                                android:textSize="20dp"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
                                 android:textColor="@color/colorMain"/>
                             <TextView
                                 android:id="@+id/friendList"
@@ -131,20 +140,21 @@
                                 android:focusable="false"
                                 android:text="@{activity.getFullStr(dayModel.friendList)}"
                                 android:hint="여기를 눌러 입력"
-                                android:textSize="15dp"
-                                android:textColor="#30000000"
+                                android:textSize="16dp"
+                                android:textColor="@color/colorDarkGray"
                                 android:gravity="right"/>
                         </LinearLayout>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_alignParentBottom="true"
-                            android:background="#300000"/>
+                            android:background="@color/colorLightGray"/>
                     </RelativeLayout>
                     <!-- 안주 -->
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="100dp">
+                        android:layout_height="100dp"
+                        android:background="@color/colorPureWhite">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -155,31 +165,33 @@
                                 android:layout_marginTop="15dp"
                                 android:layout_marginLeft="20dp"
                                 android:text="@string/calendar_detail_foods_title"
-                                android:textSize="20dp"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
                                 android:textColor="@color/colorMain"/>
-                            <EditText
+                            <TextView
                                 android:id="@+id/foodList"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="15dp"
                                 android:layout_marginRight="20dp"
                                 android:focusable="false"
-                                android:text="@{activity.getFullStr(dayModel.foodList)}"
+                                android:text="@{activity.getFullStr(dayModel.friendList)}"
                                 android:hint="여기를 눌러 입력"
-                                android:textSize="15dp"
-                                android:textColor="#30000000"
+                                android:textSize="16dp"
+                                android:textColor="@color/colorDarkGray"
                                 android:gravity="right"/>
                         </LinearLayout>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_alignParentBottom="true"
-                            android:background="#300000"/>
+                            android:background="@color/colorLightGray"/>
                     </RelativeLayout>
                     <!-- 주류 -->
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="100dp">
+                        android:layout_height="100dp"
+                        android:background="@color/colorPureWhite">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -190,31 +202,33 @@
                                 android:layout_marginTop="15dp"
                                 android:layout_marginLeft="20dp"
                                 android:text="@string/calendar_detail_liquor_title"
-                                android:textSize="20dp"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
                                 android:textColor="@color/colorMain"/>
-                            <EditText
+                            <TextView
                                 android:id="@+id/liquarList"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="15dp"
                                 android:layout_marginRight="20dp"
                                 android:focusable="false"
-                                android:text="@{activity.getFullStr(dayModel.liquorList)}"
+                                android:text="@{activity.getFullStr(dayModel.friendList)}"
                                 android:hint="여기를 눌러 입력"
-                                android:textSize="15dp"
-                                android:textColor="#30000000"
+                                android:textSize="16dp"
+                                android:textColor="@color/colorDarkGray"
                                 android:gravity="right"/>
                         </LinearLayout>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_alignParentBottom="true"
-                            android:background="#300000"/>
+                            android:background="@color/colorLightGray"/>
                     </RelativeLayout>
                     <!-- 메모 -->
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="100dp">
+                        android:layout_height="100dp"
+                        android:background="@color/colorPureWhite">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -225,26 +239,29 @@
                                 android:layout_marginTop="15dp"
                                 android:layout_marginLeft="20dp"
                                 android:text="@string/calendar_detail_memo_title"
-                                android:textSize="20dp"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
                                 android:textColor="@color/colorMain"/>
                             <EditText
                                 android:id="@+id/memo"
+                                android:focusedByDefault="false"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="15dp"
                                 android:layout_marginRight="20dp"
                                 android:hint="여기를 눌러 입력"
                                 android:text="@{dayModel.memo}"
-                                android:textSize="15dp"
-                                android:textColor="#30000000"
+                                android:textSize="16dp"
+                                android:textColor="@color/colorDarkGray"
                                 android:gravity="right"
-                                android:textColorLink="@color/colorMain"/>
+                                android:backgroundTint="@color/colorTransparent"
+                                android:textCursorDrawable="@null"/>
                         </LinearLayout>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_alignParentBottom="true"
-                            android:background="#300000"/>
+                            android:background="@color/colorLightGray"/>
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -256,7 +273,7 @@
                 android:background="#000000"
                 android:gravity="center"
                 android:text="AD"
-                android:textColor="#fff"></TextView>
+                android:textColor="#fff"/>
 
         </LinearLayout>
     </RelativeLayout>

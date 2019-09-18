@@ -33,6 +33,7 @@ import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayView;
 import com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.dayDetail.CalendarDayDetailActivity;
 
 
+import static android.app.Activity.RESULT_OK;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.dayDetail.CalendarDayDetailActivity.KEY_DAY_MODEL;
 
@@ -41,7 +42,6 @@ public class TabCalendarFragment extends BaseFragment {
     private FragmentTabCalendarBinding mBinding;
 
     private CalendarView calendarView;
-//    private Observer<CalendarModel> calendarObserver;
 
     private Context mContext;
 
@@ -59,25 +59,11 @@ public class TabCalendarFragment extends BaseFragment {
                              Bundle savedInstanceState) {
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_tab_calendar, container, false);
-//        mBinding.setLifecycleOwner(this);
 
         addCalendar(mBinding.bodyLayout);
 
-        Log.d("ABC", "[ Test ] onCreateView");
-
         return mBinding.getRoot();
     }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-//        // @TODO: 느려짐 포인트 2, 1.6 초 증가...
-//        Log.d("ABC", "[ Test ] onResume");
-//        calendarView.post(()-> calendarView.notifyDataChanged(CalendarDataController.getCalendarModel()) );
-    }
-
 
     private void addCalendar(ViewGroup parent){
 
@@ -96,12 +82,12 @@ public class TabCalendarFragment extends BaseFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Log.d("ABC", "" + data.getStringExtra(KEY_DAY_MODEL));
-        DayModel dayModel = new Gson().fromJson(data.getStringExtra(KEY_DAY_MODEL), DayModel.class);
+        if(resultCode == RESULT_OK){
+            DayModel dayModel = new Gson().fromJson(data.getStringExtra(KEY_DAY_MODEL), DayModel.class);
 
-        DayView dayView = this.calendarView.findViewById(dayModel.dayViewId);
-        dayView.setDayModel(dayModel);
-        dayView.invalidate();
-
+            DayView dayView = this.calendarView.findViewById(dayModel.dayViewId);
+            dayView.setDayModel(dayModel);
+            dayView.invalidate();
+        }
     }
 }

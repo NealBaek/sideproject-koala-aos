@@ -191,7 +191,6 @@ public class CalendarDataController {
                     DayModel dModel = dModelList.get(j);
                     if(dModel.dayIdx == dayModel.dayIdx){
                         dModelList.set(j, dayModel);
-                        Log.d("ABC", "memo2: " + dModelList.get(j).memo);
                         break;
                     }
                 }
