@@ -9,6 +9,7 @@
     <color name="colorLightGray">#a9a9a9</color>
     <color name="colorDarkGray">#484848</color>
     <color name="colorTransparent">#00000000</color>
+    <color name="colorYellow">#fae100</color>
 
 
 </resources>

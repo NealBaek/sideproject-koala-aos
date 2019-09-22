@@ -25,5 +25,78 @@
                 android:text="@string/tap3_title"/>
         </LinearLayout>
 
+        <!-- Body -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="준비 중입니다."
+                android:textSize="35dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorDarkGray"
+                android:gravity="center"
+                android:layout_marginBottom="15dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="통계 기능이 빨리 생기길 원하신다면,"
+                android:textSize="13dp"
+                android:textColor="@color/colorDarkGray"
+                android:gravity="center"
+                android:layout_marginBottom="3dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="설정"
+                    android:textSize="13dp"
+                    android:textColor="@color/colorMain"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 탭 > "
+                    android:textSize="13dp"
+                    android:textColor="@color/colorDarkGray"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="개발자에게 실시간 문의하기"
+                    android:textSize="13dp"
+                    android:textColor="@color/colorMain"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="로 독촉해주세요!"
+                    android:textSize="13dp"
+                    android:textColor="@color/colorDarkGray"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="- 건강을 생각하는 애주가 코알라 팀 -"
+                android:textSize="13dp"
+                android:textColor="@color/colorDarkGray"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 </layout>

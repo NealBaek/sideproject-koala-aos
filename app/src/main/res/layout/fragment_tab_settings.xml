@@ -2,6 +2,11 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="fragment"
+            type="com.ksdigtalnomad.koala.ui.views.tabs.settings.TabSettingsFragment"/>
+    </data>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,6 +28,164 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPureWhite"
                 android:text="@string/tap4_title"/>
+        </LinearLayout>
+
+        <!-- Body -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- Layout 1 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="26dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="26dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="내 음주를 "
+                        android:textStyle="bold"
+                        android:textColor="@color/colorDarkGray"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="기록하고 확인"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorMain"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="하는 것"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorDarkGray"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="절주와 금주의 시작입니다."
+                    android:textStyle="bold"
+                    android:textColor="@color/colorDarkGray"
+                    android:layout_marginBottom="15dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="- 건강을 생각하는 애주가 코알라 팀"
+                    android:textSize="12dp"
+                    android:textColor="@color/colorDarkGray"
+                    android:layout_gravity="right" />
+
+            </LinearLayout>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                layout="@layout/view_line"/>
+
+            <!-- Layout 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="20dp"
+                android:onClick="@{()->fragment.onLayoutClick(2)}">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="개발자에게 실시간 문의하기"
+                    android:textColor="@color/colorDarkGray"/>
+                
+                <TextView
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="TALK"
+                    android:textSize="11dp"
+                    android:textStyle="bold"
+                    android:textColor="#3b1e1e"
+                    android:background="@color/colorYellow"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                layout="@layout/view_line"/>
+
+            <!-- Layout 3 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp"
+                android:onClick="@{()->fragment.onLayoutClick(3)}">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="앱 칭찬하기"
+                    android:textColor="@color/colorDarkGray"/>
+
+            </LinearLayout>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                layout="@layout/view_line"/>
+
+            <!-- Layout 4 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp"
+                android:onClick="@{()->fragment.onLayoutClick(4)}">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="앱 공유하기"
+                    android:textColor="@color/colorDarkGray"/>
+
+            </LinearLayout>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                layout="@layout/view_line"/>
+
+            <!-- Layout 5 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:onClick="@{()->fragment.onLayoutClick(5)}">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="버전 정보"
+                    android:textColor="@color/colorDarkGray"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="ver 0.1"
+                    android:textColor="@color/colorLightGray"/>
+
+            </RelativeLayout>
+
         </LinearLayout>
 
     </LinearLayout>

@@ -24,5 +24,56 @@
                 android:textColor="@color/colorPureWhite"/>
         </LinearLayout>
 
+        <!-- BodyLayout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tap_today_drink_state"
+                android:textColor="@color/colorMain"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"/>
+
+            <TextView
+                android:id="@+id/avgDrinkState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="위험"
+                android:textColor="@color/colorMain"
+                android:textSize="50dp"
+                android:textStyle="bold"
+                android:gravity="right"
+                android:layout_marginBottom="5dp"/>
+            <TextView
+                android:id="@+id/avgDrinkTimes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="최근~~~"
+                android:textColor="@color/colorLightGray"
+                android:gravity="right"
+                android:layout_marginBottom="5dp"/>
+            <TextView
+                android:id="@+id/avgDrinkLevel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="최근~~~"
+                android:textColor="@color/colorLightGray"
+                android:gravity="right"
+                android:layout_marginBottom="10dp"/>
+
+        </LinearLayout>
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            layout="@layout/view_line"/>
     </LinearLayout>
 </layout>

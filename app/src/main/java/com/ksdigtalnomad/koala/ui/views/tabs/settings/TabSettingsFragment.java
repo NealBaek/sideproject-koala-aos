@@ -13,13 +13,11 @@ import android.view.ViewGroup;
 import com.ksdigtalnomad.koala.ui.base.BaseFragment;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendar.CalendarView;
+import com.ksdigtalnomad.koala.util.ToastWriter;
 
 public class TabSettingsFragment extends BaseFragment {
 
     private FragmentTabSettingsBinding mBinding;
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     private Context mContext;
 
@@ -43,4 +41,14 @@ public class TabSettingsFragment extends BaseFragment {
         return mBinding.getRoot();
     }
 
+    public void onLayoutClick(int layoutNum){
+        switch (layoutNum){
+            case 2:  break;
+            case 3:  break;
+            case 4:  break;
+            case 5:  break;
+        }
+
+        ToastWriter.writeBottomLongToast("" + layoutNum);
+    }
 }

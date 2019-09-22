@@ -11,4 +11,18 @@
     <string name="calendar_detail_liquor_title">어떤 술을</string>
     <string name="calendar_detail_foods_title">어떤 안주에</string>
     <string name="calendar_detail_memo_title">메모</string>
+
+
+
+    <!-- 오늘 -->
+    <string name="tap_today_drink_state">요즘의 음주 상태</string>
+    <string name="drink_state_nowadays_0">안전</string>
+    <string name="drink_state_nowadays_1">양호</string>
+    <string name="drink_state_nowadays_2">자제</string>
+    <string name="drink_state_nowadays_3">위험</string>
+    <string name="drink_state_nowadays_4">금지</string>
+    <string name="tap_today_drink_times">최근 7일간 음주 %s회</string>
+    <string name="tap_today_drink_level">최근 7일간 음주량 평균 %s%</string>
+
+
 </resources>
