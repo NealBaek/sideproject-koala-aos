@@ -20,6 +20,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
+        <!-- Line View -->
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            layout="@layout/view_line"/>
+
         <!-- Tap Layout -->
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout"
@@ -30,7 +36,8 @@
             app:tabTextColor="@color/colorLightGray"
             app:tabSelectedTextColor="@color/colorMain"
             app:tabIndicatorColor="@color/colorMain"
-            app:tabIndicatorGravity="top" />
+            app:tabIndicatorGravity="top"
+            app:tabIndicatorHeight="1dp"/>
 
         <!-- Banner Ads -->
         <TextView

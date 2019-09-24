@@ -37,18 +37,15 @@ public class TabSettingsFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_tab_settings, container, false);
+        mBinding.setFragment(this);
+
 
         return mBinding.getRoot();
     }
 
-    public void onLayoutClick(int layoutNum){
-        switch (layoutNum){
-            case 2:  break;
-            case 3:  break;
-            case 4:  break;
-            case 5:  break;
-        }
-
-        ToastWriter.writeBottomLongToast("" + layoutNum);
-    }
+    // OnClick
+    public void onKakaoOpenChatRoomClick(){ ToastWriter.writeBottomLongToast("onKakaoOpenChatRoomClick"); }
+    public void onOpenPlayStoreClick(){ ToastWriter.writeBottomLongToast("onOpenPlayStoreClick"); }
+    public void onShareClick(){ ToastWriter.writeBottomLongToast("onShareClick"); }
+    public void onVersionClick(){ ToastWriter.writeBottomLongToast("onVersionClick"); }
 }

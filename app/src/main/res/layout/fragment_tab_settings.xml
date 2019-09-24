@@ -99,7 +99,7 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:padding="20dp"
-                android:onClick="@{()->fragment.onLayoutClick(2)}">
+                android:onClick="@{()->fragment.onKakaoOpenChatRoomClick()}">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="20dp"
-                android:onClick="@{()->fragment.onLayoutClick(3)}">
+                android:onClick="@{()->fragment.onOpenPlayStoreClick()}">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -150,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="20dp"
-                android:onClick="@{()->fragment.onLayoutClick(4)}">
+                android:onClick="@{()->fragment.onShareClick()}">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -169,7 +169,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="20dp"
-                android:onClick="@{()->fragment.onLayoutClick(5)}">
+                android:onClick="@{()->fragment.onVersionClick()}">
 
                 <TextView
                     android:layout_width="wrap_content"

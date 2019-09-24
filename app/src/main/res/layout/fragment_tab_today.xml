@@ -51,23 +51,23 @@
                 android:textSize="50dp"
                 android:textStyle="bold"
                 android:gravity="right"
-                android:layout_marginBottom="5dp"/>
+                android:layout_marginBottom="3dp"/>
             <TextView
                 android:id="@+id/avgDrinkTimes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="최근~~~"
+                android:text="최근 7일간 음주 4"
                 android:textColor="@color/colorLightGray"
                 android:gravity="right"
-                android:layout_marginBottom="5dp"/>
+                android:layout_marginBottom="1dp"/>
             <TextView
                 android:id="@+id/avgDrinkLevel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="최근~~~"
+                android:text="최근 7일간 음주 평균 80%"
                 android:textColor="@color/colorLightGray"
                 android:gravity="right"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="15dp"/>
 
         </LinearLayout>
 
