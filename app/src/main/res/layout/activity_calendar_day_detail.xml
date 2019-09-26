@@ -50,7 +50,7 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_done"
+                    android:src="@drawable/ic_done_white"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="15dp"
                     android:layout_centerVertical="true"
@@ -85,7 +85,7 @@
                                 android:text="@string/calendar_detail_drunk_level_title"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
-                                android:textColor="@color/colorMain"/>
+                                android:textColor="@color/colorDarkGray"/>
                             <android.support.v7.widget.AppCompatSeekBar
                                 android:id="@+id/drunkLevel"
                                 android:layout_width="match_parent"
@@ -130,7 +130,7 @@
                                 android:text="@string/calendar_detail_friends_title"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
-                                android:textColor="@color/colorMain"/>
+                                android:textColor="@color/colorDarkGray"/>
                             <TextView
                                 android:id="@+id/friendList"
                                 android:layout_width="match_parent"
@@ -142,7 +142,8 @@
                                 android:hint="여기를 눌러 입력"
                                 android:textSize="16dp"
                                 android:textColor="@color/colorDarkGray"
-                                android:gravity="right"/>
+                                android:gravity="right"
+                                android:onClick="@{()->activity.moveToDetailListEditActivity()}"/>
                         </LinearLayout>
                         <View
                             android:layout_width="match_parent"
@@ -167,7 +168,7 @@
                                 android:text="@string/calendar_detail_foods_title"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
-                                android:textColor="@color/colorMain"/>
+                                android:textColor="@color/colorDarkGray"/>
                             <TextView
                                 android:id="@+id/foodList"
                                 android:layout_width="match_parent"
@@ -179,7 +180,8 @@
                                 android:hint="여기를 눌러 입력"
                                 android:textSize="16dp"
                                 android:textColor="@color/colorDarkGray"
-                                android:gravity="right"/>
+                                android:gravity="right"
+                                android:onClick="@{()->activity.moveToDetailListEditActivity()}"/>
                         </LinearLayout>
                         <View
                             android:layout_width="match_parent"
@@ -204,7 +206,7 @@
                                 android:text="@string/calendar_detail_liquor_title"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
-                                android:textColor="@color/colorMain"/>
+                                android:textColor="@color/colorDarkGray"/>
                             <TextView
                                 android:id="@+id/liquarList"
                                 android:layout_width="match_parent"
@@ -216,7 +218,8 @@
                                 android:hint="여기를 눌러 입력"
                                 android:textSize="16dp"
                                 android:textColor="@color/colorDarkGray"
-                                android:gravity="right"/>
+                                android:gravity="right"
+                                android:onClick="@{()->activity.moveToDetailListEditActivity()}"/>
                         </LinearLayout>
                         <View
                             android:layout_width="match_parent"
@@ -241,7 +244,7 @@
                                 android:text="@string/calendar_detail_memo_title"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
-                                android:textColor="@color/colorMain"/>
+                                android:textColor="@color/colorDarkGray"/>
                             <EditText
                                 android:id="@+id/memo"
                                 android:focusedByDefault="false"
@@ -269,7 +272,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="52dp"
                 android:background="#000000"
                 android:gravity="center"
                 android:text="AD"

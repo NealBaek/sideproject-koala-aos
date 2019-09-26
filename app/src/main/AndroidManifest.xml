@@ -17,8 +17,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.views.tabs.calendar.detail.dayDetail.CalendarDayDetailActivity" />
-        <activity android:name=".ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity"></activity>
+        <activity android:name=".ui.views.tabs.calendar.detail.dayDetail.CalendarDayDetailActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity" android:screenOrientation="portrait"/>
+
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9300115819443880~2843172061"/>
     </application>
 
 </manifest>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+
+    </data>
+    <RelativeLayout
+        android:id="@+id/dialogLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorHalfTransparent">
+
+        <LinearLayout
+            android:layout_width="270dp"
+            android:layout_height="160dp"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:elevation="8dp"
+            android:background="@drawable/bg_dialog">
+
+            <!-- Header -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/colorMain">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="삭제하기"
+                    android:textColor="@color/colorPureWhite"
+                    android:textStyle="bold"
+                    android:textSize="16dp"/>
+
+            </RelativeLayout>
+
+            <!-- Body -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
+
+                <TextView
+                    android:id="@+id/textTF"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="김치욱"
+                    android:textSize="24dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorDarkGray"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+
+            <!-- Footer -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentRight="true">
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:text="삭제"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorMain"
+                        android:onClick="onDeleteClick"/>
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:text="취소"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorDarkGray"
+                        android:onClick="onCancelClick"/>
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

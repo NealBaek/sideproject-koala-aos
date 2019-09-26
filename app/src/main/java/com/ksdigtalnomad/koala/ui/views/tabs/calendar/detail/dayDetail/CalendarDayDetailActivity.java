@@ -62,7 +62,7 @@ public class CalendarDayDetailActivity extends BaseActivity {
     }
 
     public void moveToDetailListEditActivity(){
-//        CalendarDetailListEditActivity
+//        CalendarDetailListEditActivity.
     }
 
     public String getFullStr(ArrayList<String> strList){

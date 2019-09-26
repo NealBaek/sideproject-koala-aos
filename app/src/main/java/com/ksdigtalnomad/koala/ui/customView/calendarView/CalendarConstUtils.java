@@ -62,7 +62,7 @@ public class CalendarConstUtils {
 
         switch (drunkLv){
             case DRUNK_LV_0:
-                return "'오늘은 간이 푹 쉬는 날'";
+                return "'단 한잔도 하지 않았어요'";
             case DRUNK_LV_1:
                 return "'맥주 한 두잔?'";
             case DRUNK_LV_2:

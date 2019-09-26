@@ -9,6 +9,10 @@ import android.support.multidex.MultiDexApplication;
 import android.util.Base64;
 import android.util.Log;
 
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -28,6 +32,8 @@ public class BaseApplication extends MultiDexApplication {
 //                .addItalic(Typekit.createFromAsset(this, "fonts/Roboto-Italic.ttf"));
 //
 //        KakaoSDK.init(new KAKAOSDKAdapter());
+
+        MobileAds.initialize(this, (InitializationStatus initializationStatus) -> {});
 
         printKeyHash();
     }

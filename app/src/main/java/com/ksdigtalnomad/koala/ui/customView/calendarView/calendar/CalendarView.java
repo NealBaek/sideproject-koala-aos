@@ -1,6 +1,7 @@
 package com.ksdigtalnomad.koala.ui.customView.calendarView.calendar;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.view.ViewPager;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendarBody.CalendarBodyViewPager;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendarBody.CalendarBodyPagerAdapter;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendarBody.CalendarModel;
@@ -36,6 +38,11 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
     // 3. YearViewPager
     private CalendarBodyViewPager calendarBodyViewPager;
 
+    final int COLOR_LIGHT_GRAY = getContext().getResources().getColor(R.color.colorLightGray);
+    // Color.parseColor("#eaeaea");
+    final int COLOR_MAIN = getContext().getResources().getColor(R.color.colorMain);
+    final int COLOR_PURE_WHITE = getContext().getResources().getColor(R.color.colorPureWhite);
+
 
     public CalendarView(Context context, CalendarModel calendarModel, EventInterface eventInterface){
         super(context);
@@ -44,14 +51,14 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         this.eventInterface = eventInterface;
 
         // 1. CalendarView 설정
-        final int BG_COLOR = Color.parseColor("#eaeaea");
+
 
         this.setOrientation(LinearLayout.VERTICAL);
-        this.setBackgroundColor(BG_COLOR);
+        this.setBackgroundColor(COLOR_LIGHT_GRAY);
 
 
         // 2. 자식 Layout 생성
-        initViews(BG_COLOR, calendarModel, eventInterface);
+        initViews(calendarModel, eventInterface);
 
 
         // 3. Presenter 생성
@@ -70,11 +77,11 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
 
 
     /** Create Layouts */
-    private void initViews(int bgColor, final CalendarModel calendarModel, EventInterface eventInterface){
+    private void initViews(final CalendarModel calendarModel, EventInterface eventInterface){
 
         // 1. Create Views
-        calendarHeaderLayout  = createCalendarHeaderLayout(bgColor);
-        dayLayout             = createDayHeaderLayout(bgColor);
+        calendarHeaderLayout  = createCalendarHeaderLayout();
+        dayLayout             = createDayHeaderLayout();
         calendarBodyViewPager = createYearViewPager(calendarModel, eventInterface);
 
         // 2. Add Views
@@ -92,7 +99,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
             public void onPageScrollStateChanged(int i) {}
         });
     }
-    private RelativeLayout createCalendarHeaderLayout(int bgColor){
+    private RelativeLayout createCalendarHeaderLayout(){
 
 
         final float MONTH_TITLE_TEXT_SIZE = 20;
@@ -104,9 +111,11 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
 
 
 
+
+
         // 1. Calendar Header Layout
         RelativeLayout layout = new RelativeLayout(getContext());
-        layout.setBackgroundColor(bgColor);
+        layout.setBackgroundColor(COLOR_MAIN);
 
 
         // 2. Month Title TextView
@@ -114,6 +123,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         monthTitleTv.setTextSize(MONTH_TITLE_TEXT_SIZE);
         monthTitleTv.setGravity(Gravity.CENTER);
         monthTitleTv.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        monthTitleTv.setTextColor(COLOR_PURE_WHITE);
 
         layout.addView(monthTitleTv);
 
@@ -164,6 +174,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         moveToTodayTv.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
         moveToTodayTv.setGravity(Gravity.CENTER);
         moveToTodayTv.setLayoutParams(moveToTodayLp);
+        moveToTodayTv.setTextColor(COLOR_PURE_WHITE);
 
         moveToTodayTv.setOnClickListener(new OnClickListener() {
             @Override
@@ -175,7 +186,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
 
         return layout;
     }
-    private LinearLayout createDayHeaderLayout(int bgColor){
+    private LinearLayout createDayHeaderLayout(){
 
         LinearLayout layout = new LinearLayout(getContext());
         layout.setOrientation(LinearLayout.HORIZONTAL);
@@ -186,7 +197,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
 
         for(int i = 0; i < 7; ++ i){
             TextView textView = createCenterSideTextView(dayList[i], colorList[i]);
-            textView.setBackgroundColor(bgColor);
+            textView.setBackgroundColor(COLOR_PURE_WHITE);
             layout.addView(textView);
         }
 
@@ -240,16 +251,14 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         // 1. Measure 자식 Layouts
         final int parentHeightSize = MeasureSpec.getSize(heightMeasureSpec);
 
-        final int PARENT_H_RATIO = 7;
-        final int C_RV_H_RATIO = 6;
-        final int D_HEADER_H_SIZE = 45;
+        final int D_HEADER_H_SIZE = (int) (15 * Resources.getSystem().getDisplayMetrics().density);
+        final int C_HEADER_H_SIZE = (int) (45 * Resources.getSystem().getDisplayMetrics().density);
 
-        int rvHeightSize = (parentHeightSize * C_RV_H_RATIO/PARENT_H_RATIO);
-        int cHeaderHeightSize = parentHeightSize - rvHeightSize - D_HEADER_H_SIZE;
+        int rvHeightSize = parentHeightSize - (D_HEADER_H_SIZE + C_HEADER_H_SIZE);
 
-        int cHeaderHeightSpec = MeasureSpec.makeMeasureSpec(cHeaderHeightSize, MeasureSpec.AT_MOST);
+        int cHeaderHeightSpec = MeasureSpec.makeMeasureSpec(C_HEADER_H_SIZE, MeasureSpec.EXACTLY);
         int dHeaderHeightSpec = MeasureSpec.makeMeasureSpec(D_HEADER_H_SIZE, MeasureSpec.EXACTLY);
-        int rvHeightSpec = MeasureSpec.makeMeasureSpec(rvHeightSize, MeasureSpec.EXACTLY);
+        int rvHeightSpec = MeasureSpec.makeMeasureSpec(rvHeightSize, MeasureSpec.AT_MOST);
 
         calendarHeaderLayout.measure(widthMeasureSpec, cHeaderHeightSpec);
         dayLayout.measure(widthMeasureSpec, dHeaderHeightSpec);
