@@ -35,8 +35,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="준비 중입니다."
-                android:textSize="35dp"
+                android:text="준비중입니다"
+                android:textSize="30dp"
                 android:textStyle="bold"
                 android:textColor="@color/colorDarkGray"
                 android:gravity="center"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:text="통계 기능이 빨리 생기길 원하신다면,"
                 android:textSize="13dp"
-                android:textColor="@color/colorDarkGray"
+                android:textColor="@color/colorGray"
                 android:gravity="center"
                 android:layout_marginBottom="3dp"/>
 
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:text=" 탭 > "
                     android:textSize="13dp"
-                    android:textColor="@color/colorDarkGray"/>
+                    android:textColor="@color/colorGray"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:text="로 독촉해주세요!"
                     android:textSize="13dp"
-                    android:textColor="@color/colorDarkGray"/>
+                    android:textColor="@color/colorGray"/>
 
             </LinearLayout>
 
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:text="- 건강을 생각하는 애주가 코알라 팀 -"
                 android:textSize="13dp"
-                android:textColor="@color/colorDarkGray"
+                android:textColor="@color/colorGray"
                 android:gravity="center"/>
 
         </LinearLayout>

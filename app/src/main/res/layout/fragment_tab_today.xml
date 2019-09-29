@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="최근 7일간 음주 4"
-                android:textColor="@color/colorLightGray"
+                android:textColor="@color/colorDarkGray"
                 android:gravity="right"
                 android:layout_marginBottom="1dp"/>
             <TextView
@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="최근 7일간 음주 평균 80%"
-                android:textColor="@color/colorLightGray"
+                android:textColor="@color/colorDarkGray"
                 android:gravity="right"
                 android:layout_marginBottom="15dp"/>
 

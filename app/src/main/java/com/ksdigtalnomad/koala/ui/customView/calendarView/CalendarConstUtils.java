@@ -59,22 +59,20 @@ public class CalendarConstUtils {
 
     }
     public static String getDrunkLvComment(int drunkLv){
-
         switch (drunkLv){
             case DRUNK_LV_0:
                 return "'단 한잔도 하지 않았어요'";
             case DRUNK_LV_1:
-                return "'맥주 한 두잔?'";
+                return "'그냥 가볍게 마셨어요'";
             case DRUNK_LV_2:
-                return "'칵테일 한 두잔..?'";
+                return "'나름 취할 정도로 마셨어요'";
             case DRUNK_LV_3:
-                return "'소주 한 두병..?'";
+                return "'많이 취할 정도로 마셨어요'";
             case DRUNK_LV_MAX:
-                return "'만취'";
+                return "'필름 끊길 정도로 폭음했어요'";
             default:
                 return "";
         }
-
     }
 
 

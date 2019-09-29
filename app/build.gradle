@@ -67,6 +67,11 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
     // AdMob
-    implementation 'com.google.android.gms:play-services-ads:18.2.0'
+    implementation 'com.google.android.gms:play-services-ads:17.0.0'
 
+    // TedPermission
+    implementation 'gun0912.ted:tedpermission-rx2:2.1.1'
+
+    // Font - Typekit
+    implementation 'com.github.katoro:typekit:1.0.1'
 }

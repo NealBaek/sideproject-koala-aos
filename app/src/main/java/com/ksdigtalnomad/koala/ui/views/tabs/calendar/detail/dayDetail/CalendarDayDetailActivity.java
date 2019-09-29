@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 
@@ -21,6 +22,7 @@ import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
+import com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity;
 import com.ksdigtalnomad.koala.util.KeyboardUtil;
 import com.ksdigtalnomad.koala.util.ProgressHelper;
 
@@ -55,6 +57,12 @@ public class CalendarDayDetailActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        mBinding.memo.clearFocus();
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+    }
 
     public void onDrunkLevelChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
         dayModel.drunkLevel = progresValue;
@@ -62,7 +70,7 @@ public class CalendarDayDetailActivity extends BaseActivity {
     }
 
     public void moveToDetailListEditActivity(){
-//        CalendarDetailListEditActivity.
+        startActivity(CalendarDetailListEditActivity.intent(this));
     }
 
     public String getFullStr(ArrayList<String> strList){

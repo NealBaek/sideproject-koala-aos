@@ -1,12 +1,18 @@
 package com.ksdigtalnomad.koala.fcm;
 
-import com.ksdigtalnomad.koala.util.PreferenceManager;
+import com.google.firebase.messaging.RemoteMessage;
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
-    @Override public void onNewToken(String pushToken) {
-        super.onNewToken(pushToken);
-        PreferenceManager.setPushToken(pushToken);
-        if (PreferenceManager.isLogin()) postPushToken(pushToken);
+//    @Override public void onNewToken(String pushToken) {
+//        super.onNewToken(pushToken);
+//        PreferenceHelper.setPushToken(pushToken);
+//        if (PreferenceHelper.isLogin()) postPushToken(pushToken);
+//    }
+
+
+    @Override
+    public void onMessageReceived(RemoteMessage remoteMessage) {
+        super.onMessageReceived(remoteMessage);
     }
 
     private void postPushToken(String pushToken) {

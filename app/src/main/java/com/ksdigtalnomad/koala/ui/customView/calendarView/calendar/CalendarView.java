@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import com.ksdigtalnomad.koala.ui.customView.calendarView.calendarBody.CalendarB
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendarBody.CalendarModel;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.month.MonthModel;
+import com.ksdigtalnomad.koala.util.TypeKitHelper;
+import com.tsengvn.typekit.Typekit;
 
 public class CalendarView extends LinearLayout implements CalendarContract.CalendarView{
 
@@ -105,7 +108,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         final float MONTH_TITLE_TEXT_SIZE = 20;
         final float MOVE_TO_TODAY_TEXT_SIZE = 14;
 
-        final int MARGIN_R_MOVE_TO_TODAY = 40;
+        final int MARGIN_R_MOVE_TO_TODAY = (int) (18 * Resources.getSystem().getDisplayMetrics().density);;
 
         final String TODAY_TEXT = "오늘";
 
@@ -119,11 +122,16 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
 
 
         // 2. Month Title TextView
-        monthTitleTv = new TextView(getContext());
+        monthTitleTv = new AppCompatTextView(getContext());
         monthTitleTv.setTextSize(MONTH_TITLE_TEXT_SIZE);
-        monthTitleTv.setGravity(Gravity.CENTER);
         monthTitleTv.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         monthTitleTv.setTextColor(COLOR_PURE_WHITE);
+        monthTitleTv.setTypeface(TypeKitHelper.getNotoBold(), Typeface.BOLD);
+        monthTitleTv.setBackgroundColor(getContext().getResources().getColor(R.color.colorDarkGray));
+        monthTitleTv.setGravity(Gravity.CENTER);
+
+        // @TODO: xml inflater 로 변경해서 TypeKit 적용 시켜보기
+        // 동적으로 만들어서 gravity 가 무시되는 현상
 
         layout.addView(monthTitleTv);
 
@@ -251,7 +259,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         // 1. Measure 자식 Layouts
         final int parentHeightSize = MeasureSpec.getSize(heightMeasureSpec);
 
-        final int D_HEADER_H_SIZE = (int) (15 * Resources.getSystem().getDisplayMetrics().density);
+        final int D_HEADER_H_SIZE = (int) (20 * Resources.getSystem().getDisplayMetrics().density);
         final int C_HEADER_H_SIZE = (int) (45 * Resources.getSystem().getDisplayMetrics().density);
 
         int rvHeightSize = parentHeightSize - (D_HEADER_H_SIZE + C_HEADER_H_SIZE);
@@ -274,6 +282,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(parentWidth/childCnt, parentHeight, 1);
 
         for(int i = 0; i < childCnt; ++ i){ dayLayout.getChildAt(i).setLayoutParams(params); }
+
     }
 
 

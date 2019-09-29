@@ -10,8 +10,9 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.ksdigtalnomad.koala.R;
+import com.tsengvn.typekit.Typekit;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -26,14 +27,11 @@ public class BaseApplication extends MultiDexApplication {
         super.onCreate();
         instance = this;
 
-//        Typekit.getInstance()
-//                .addNormal(Typekit.createFromAsset(this, "fonts/Roboto-Regular.ttf"))
-//                .addBold(Typekit.createFromAsset(this, "fonts/Roboto-Medium.ttf"))
-//                .addItalic(Typekit.createFromAsset(this, "fonts/Roboto-Italic.ttf"));
-//
-//        KakaoSDK.init(new KAKAOSDKAdapter());
+        Typekit.getInstance()
+                .addNormal(Typekit.createFromAsset(this, "fonts/noto_sans_cjk_kr_regular.otf"))
+                .addBold(Typekit.createFromAsset(this, "fonts/noto_sans_cjk_kr_bold.otf"));
 
-        MobileAds.initialize(this, (InitializationStatus initializationStatus) -> {});
+        MobileAds.initialize(this, getResources().getString(R.string.admob_app_id));
 
         printKeyHash();
     }
@@ -61,7 +59,7 @@ public class BaseApplication extends MultiDexApplication {
 
     @Override
     protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
+        super.attachBaseContext(TypekitContextWrapper.wrap(base)); // TypeKit
         MultiDex.install(this);
     }
 }

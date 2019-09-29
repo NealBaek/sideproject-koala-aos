@@ -6,7 +6,8 @@
 
     <color name="colorMain">#2b8a32</color>
     <color name="colorPureWhite">#fff</color>
-    <color name="colorLightGray">#a9a9a9</color>
+    <color name="colorLightGray">#e4e4e4</color>
+    <color name="colorGray">#a9a9a9</color>
     <color name="colorDarkGray">#484848</color>
     <color name="colorTransparent">#00000000</color>
     <color name="colorHalfTransparent">#50000000</color>

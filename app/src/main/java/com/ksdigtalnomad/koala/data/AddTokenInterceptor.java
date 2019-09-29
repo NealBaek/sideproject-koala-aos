@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.ksdigtalnomad.koala.data.models.User;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
-import com.ksdigtalnomad.koala.util.PreferenceManager;
+import com.ksdigtalnomad.koala.util.PreferenceHelper;
 
 import java.io.IOException;
 
@@ -22,8 +22,8 @@ public class AddTokenInterceptor implements Interceptor {
 
         if (BaseApplication.getInstance() != null &&
                 BaseApplication.getInstance().getApplicationContext() != null &&
-                PreferenceManager.isLogin()) {
-            String token = PreferenceManager.getAccessToken();
+                PreferenceHelper.isLogin()) {
+            String token = PreferenceHelper.getAccessToken();
             if (token != null) builder.addHeader(TOKEN_HEADER, token);
 
             Response response = chain.proceed(builder.build());
@@ -43,7 +43,7 @@ public class AddTokenInterceptor implements Interceptor {
     private static String tokenRefresh() {
         User user = null;
 
-        User loginUser = PreferenceManager.getUser();
+        User loginUser = PreferenceHelper.getUser();
 //        if (loginUser.getSocialId() != null) {
 //            user = ServiceManager.getInstance().getUserService()
 //                    .socialLogin(loginUser)
@@ -57,7 +57,7 @@ public class AddTokenInterceptor implements Interceptor {
 //            user.setPassword(loginUser.getPassword());
 //        }
 
-        PreferenceManager.setLoginInfo(user);
+        PreferenceHelper.setLoginInfo(user);
         return user.getAccessToken();
     }
 }

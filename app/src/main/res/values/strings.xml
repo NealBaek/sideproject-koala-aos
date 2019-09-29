@@ -1,4 +1,9 @@
 <resources>
+
+    <!-- Key Values -->
+    <string name="admob_app_id">ca-app-pub-9300115819443880~2843172061</string>
+    <string name="admob_banner_home_id">ca-app-pub-9300115819443880/6399273693</string>
+
     <string name="app_name">Koala</string>
     <string name="tap1_title">오늘</string>
     <string name="tap2_title">달력</string>

@@ -3,10 +3,11 @@ package com.ksdigtalnomad.koala.ui.views.home;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
+import android.util.Log;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.databinding.ActivityHomeBinding;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
@@ -48,6 +49,63 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
+            }
+        });
+
+
+        loadBannerRequest();
+
+
+    }
+
+    private void loadBannerRequest(){
+        MobileAds.initialize(this, getResources().getString(R.string.admob_app_id));
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        mBinding.adView.loadAd(adRequest);
+        mBinding.adView.setAdListener(new AdListener(){
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                Log.d("ABC", "banner_home onAdClosed");
+            }
+
+            @Override
+            public void onAdFailedToLoad(int i) {
+                super.onAdFailedToLoad(i);
+                Log.d("ABC", "banner_home onAdFailedToLoad : " + i);
+
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                super.onAdLeftApplication();
+                Log.d("ABC", "banner_home onAdLeftApplication");
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+                Log.d("ABC", "banner_home onAdOpened");
+            }
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                Log.d("ABC", "banner_home onAdLoaded");
+            }
+
+            @Override
+            public void onAdClicked() {
+                super.onAdClicked();
+                Log.d("ABC", "banner_home onAdClicked");
+            }
+
+            @Override
+            public void onAdImpression() {
+                super.onAdImpression();
+                Log.d("ABC", "banner_home onAdImpression");
             }
         });
     }

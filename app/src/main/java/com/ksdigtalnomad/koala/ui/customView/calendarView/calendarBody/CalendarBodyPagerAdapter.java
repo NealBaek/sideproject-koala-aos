@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendar.CalendarView;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.month.MonthItemDecoration;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.month.MonthModel;
@@ -22,7 +23,12 @@ public class CalendarBodyPagerAdapter extends PagerAdapter {
     private CalendarView.EventInterface eventInterface;
     ArrayList<View> parentList = new ArrayList<>();
 
+    private int COLOR_LIGHT_GRAY = Color.LTGRAY;
+
     public CalendarBodyPagerAdapter(Context context, CalendarModel calendarModel, CalendarView.EventInterface eventInterface){
+
+        COLOR_LIGHT_GRAY = context.getResources().getColor(R.color.colorLightGray);
+
         this.calendarModel = calendarModel;
         this.eventInterface = eventInterface;
 
@@ -75,7 +81,7 @@ public class CalendarBodyPagerAdapter extends PagerAdapter {
         RecyclerView recyclerView = new RecyclerView(context);
 
         // Bg Color
-        recyclerView.setBackgroundColor(Color.LTGRAY);
+        recyclerView.setBackgroundColor(COLOR_LIGHT_GRAY);
 
         // Layout Manager & dividers
         MonthRvLayoutManager layoutManager = new MonthRvLayoutManager(context, 7);
