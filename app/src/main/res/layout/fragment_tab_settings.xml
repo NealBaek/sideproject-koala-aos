@@ -87,8 +87,7 @@
                     android:text="- 건강을 생각하는 애주가 코알라 팀"
                     android:textSize="12dp"
                     android:textColor="@color/colorDarkGray"
-                    android:layout_gravity="right"
-                    android:layout_marginRight="20dp"/>
+                    android:layout_gravity="right"/>
 
             </LinearLayout>
             <include
@@ -179,7 +178,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
                     android:layout_alignParentRight="true"
                     android:text="ver 0.1"
                     android:textColor="@color/colorDarkGray"/>

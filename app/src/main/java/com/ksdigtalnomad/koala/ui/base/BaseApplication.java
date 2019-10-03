@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.google.android.gms.ads.MobileAds;
 import com.ksdigtalnomad.koala.R;
+import com.ksdigtalnomad.koala.util.TypeKitHelper;
 import com.tsengvn.typekit.Typekit;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
@@ -28,8 +29,8 @@ public class BaseApplication extends MultiDexApplication {
         instance = this;
 
         Typekit.getInstance()
-                .addNormal(Typekit.createFromAsset(this, "fonts/noto_sans_cjk_kr_regular.otf"))
-                .addBold(Typekit.createFromAsset(this, "fonts/noto_sans_cjk_kr_bold.otf"));
+                .addNormal(TypeKitHelper.getNotoRegular())
+                .addBold(TypeKitHelper.getNotoBold());
 
         MobileAds.initialize(this, getResources().getString(R.string.admob_app_id));
 
