@@ -1,5 +1,7 @@
 package com.ksdigtalnomad.koala.ui.views.home;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -15,6 +17,9 @@ import com.ksdigtalnomad.koala.ui.base.BaseActivity;
 public class HomeActivity extends BaseActivity {
     private ActivityHomeBinding mBinding;
     private HomeTapAdapter tapAdapter;
+
+    public static Intent intent(Context context) {  return new Intent(context, HomeActivity.class);  }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

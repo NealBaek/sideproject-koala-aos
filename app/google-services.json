@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "395855009566",
+    "firebase_url": "https://koala-dbfe0.firebaseio.com",
+    "project_id": "koala-dbfe0",
+    "storage_bucket": "koala-dbfe0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395855009566:android:f6d6bd8aea0ad493865b0f",
+        "android_client_info": {
+          "package_name": "com.ksdigtalnomad.koala"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "395855009566-vqn8uoi759t3b1v5tqrb1ac3n9k74rk1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQ2HVN7XTvrmaGWKjZlu-GofEQGBKqUio"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "395855009566-vqn8uoi759t3b1v5tqrb1ac3n9k74rk1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
