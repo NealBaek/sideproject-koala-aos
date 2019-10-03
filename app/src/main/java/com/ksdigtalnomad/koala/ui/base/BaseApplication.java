@@ -60,7 +60,10 @@ public class BaseApplication extends MultiDexApplication {
 
     @Override
     protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
+        super.attachBaseContext(TypekitContextWrapper.wrap(base));
         MultiDex.install(this);
     }
+
+
+
 }

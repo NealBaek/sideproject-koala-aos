@@ -43,4 +43,8 @@ public abstract class BaseFragment extends Fragment {
 //    protected void initEventBus() {
 //        if (!eventBus.isRegistered(this)) eventBus.register(this);
 //    }
+
+
+
+
 }
