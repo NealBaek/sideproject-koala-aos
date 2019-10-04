@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ksdigtalnomad.koala.ui.base.BaseFragment;
+import com.ksdigtalnomad.koala.util.PlayStoreHelper;
+import com.ksdigtalnomad.koala.util.FBRemoteControlHelper;
 import com.ksdigtalnomad.koala.util.ShareHelper;
 
 public class TabSettingsFragment extends BaseFragment {
@@ -45,10 +47,8 @@ public class TabSettingsFragment extends BaseFragment {
     }
 
     // OnClick
-    public void onKakaoOpenChatRoomClick(){ startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://open.kakao.com/o/shfNqYEb")));  }
-    public void onOpenPlayStoreClick(){
-
-    }
-    public void onShareClick(){ ShareHelper.startShareIntent(getContext()); }
+    public void onKakaoOpenChatRoomClick(){ startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(FBRemoteControlHelper.getInstance().getKakaoOpenChatRoomUrl())));  }
+    public void onOpenPlayStoreClick(){ PlayStoreHelper.openMyAppInPlayStore(getContext()); }
+    public void onShareClick(){ ShareHelper.startShareIntent(getContext(), FBRemoteControlHelper.getInstance().getShareMessage()); }
     public void onVersionClick(){  }
 }

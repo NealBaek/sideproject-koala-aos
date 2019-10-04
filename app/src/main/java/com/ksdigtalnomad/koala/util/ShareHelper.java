@@ -30,7 +30,7 @@ public class ShareHelper {
 //                );
     }
 
-    public static void startShareIntent(Context context) {
+    public static void startShareIntent(Context context, String message) {
 
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
@@ -46,7 +46,7 @@ public class ShareHelper {
             Intent shareIntent = (Intent) intent.clone();
 
             shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_TEXT, "코알라 앱을 설치해보세요 \n플레이스토어: ~~~\n문의 오픈 채팅방: https://open.kakao.com/o/shfNqYEb");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, message);
             shareIntent.setPackage(info.activityInfo.packageName);
             shareIntentList.add(shareIntent);
         }
