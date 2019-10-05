@@ -17,6 +17,8 @@ public class FBRemoteControlHelper {
 
     public void activateFetch(RemoteFetchListener fetchListener){
         if(FirebaseRemoteConfig.getInstance().activateFetched()){
+            if (fetchListener == null){ return; }
+
             fetchListener.onComplete(FirebaseRemoteConfig.getInstance().getString("host_url_v1"));
             return;
         }else{

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ksdigtalnomad.koala">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".ui.base.BaseApplication"
@@ -16,25 +16,29 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/admob_app_id"/>
+            android:value="@string/admob_id_app" />
 
-        <activity android:name=".ui.views.home.HomeActivity">
+
+        <activity android:name=".ui.views.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.views.tabs.calendar.detail.dayDetail.CalendarDayDetailActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity" android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.views.home.HomeActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.views.tabs.calendar.detail.dayDetail.CalendarDayDetailActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity" android:screenOrientation="portrait" />
+
 
         <!-- FCM -->
         <service
             android:name=".fcm.FirebaseMessagingService"
             android:stopWithTask="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 

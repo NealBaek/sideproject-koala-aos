@@ -34,12 +34,12 @@ public class BaseApplication extends MultiDexApplication {
                 .addNormal(TypeKitHelper.getNotoRegular())
                 .addBold(TypeKitHelper.getNotoBold());
 
-        MobileAds.initialize(this, getResources().getString(R.string.admob_app_id));
+        MobileAds.initialize(this, getResources().getString(R.string.admob_id_app));
 
         printKeyHash();
 
         FBRemoteControlHelper.getInstance().activateFetch(null);
-        FBEventLogHelper.sendEvent();
+
     }
 
     public static void printKeyHash() {

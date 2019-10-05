@@ -42,16 +42,16 @@
         <!-- Banner Ads -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="50dp"
             android:gravity="center"
-            android:background="@color/colorDarkGray">
+            android:background="@color/colorPureBlack">
             <com.google.android.gms.ads.AdView
                 xmlns:ads="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/adView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 ads:adSize="BANNER"
-                ads:adUnitId="@string/admob_banner_home_id"/>
+                ads:adUnitId="@string/admob_id_banner_test"/>
         </LinearLayout>
 
 

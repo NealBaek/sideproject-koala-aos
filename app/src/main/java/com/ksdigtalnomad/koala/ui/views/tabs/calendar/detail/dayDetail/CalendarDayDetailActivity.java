@@ -12,6 +12,9 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
 import com.google.gson.Gson;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.data.viewModels.CalendarViewModel;
@@ -54,7 +57,10 @@ public class CalendarDayDetailActivity extends BaseActivity {
         mBinding.setActivity(this);
         mBinding.setDayModel(dayModel);
 
+        mBinding.adView.loadAd(new AdRequest.Builder().build());
     }
+
+
 
 
     @Override

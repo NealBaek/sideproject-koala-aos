@@ -21,7 +21,7 @@ public class DayModel implements Cloneable{
     public int drunkLevel;
     public ArrayList<String> friendList = new ArrayList<String>();
     public ArrayList<String> foodList = new ArrayList<String>();
-    public ArrayList<String> liquorList = new ArrayList<String>();
+    public ArrayList<String> drinkList = new ArrayList<String>();
     public String memo = "";
 
 

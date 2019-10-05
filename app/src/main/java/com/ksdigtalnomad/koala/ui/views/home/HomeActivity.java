@@ -13,6 +13,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.databinding.ActivityHomeBinding;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
+import com.ksdigtalnomad.koala.ui.views.dialogs.ExitDialog;
 
 public class HomeActivity extends BaseActivity {
     private ActivityHomeBinding mBinding;
@@ -37,7 +38,6 @@ public class HomeActivity extends BaseActivity {
 
         mBinding.homeTabViewPager.setAdapter(tapAdapter);
         mBinding.homeTabViewPager.setOffscreenPageLimit(4);
-//        mBinding.homeTabViewPager.setPagingEnabled(true);
         mBinding.homeTabViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mBinding.tabLayout));
         mBinding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
@@ -57,62 +57,17 @@ public class HomeActivity extends BaseActivity {
             }
         });
 
-
-        loadBannerRequest();
-
-
     }
 
-    private void loadBannerRequest(){
-        MobileAds.initialize(this, getResources().getString(R.string.admob_app_id));
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-        mBinding.adView.loadAd(adRequest);
-        mBinding.adView.setAdListener(new AdListener(){
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-                Log.d("ABC", "banner_home onAdClosed");
-            }
-
-            @Override
-            public void onAdFailedToLoad(int i) {
-                super.onAdFailedToLoad(i);
-                Log.d("ABC", "banner_home onAdFailedToLoad : " + i);
-
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                super.onAdLeftApplication();
-                Log.d("ABC", "banner_home onAdLeftApplication");
-            }
-
-            @Override
-            public void onAdOpened() {
-                super.onAdOpened();
-                Log.d("ABC", "banner_home onAdOpened");
-            }
-
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-                Log.d("ABC", "banner_home onAdLoaded");
-            }
-
-            @Override
-            public void onAdClicked() {
-                super.onAdClicked();
-                Log.d("ABC", "banner_home onAdClicked");
-            }
-
-            @Override
-            public void onAdImpression() {
-                super.onAdImpression();
-                Log.d("ABC", "banner_home onAdImpression");
-            }
-        });
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mBinding.adView.loadAd(new AdRequest.Builder().build());
     }
 
+
+    @Override
+    public void onBackPressed() {
+        ExitDialog.newInstance().show(getFragmentManager(), "Exit Dialog");
+    }
 }

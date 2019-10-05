@@ -203,7 +203,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="11.5dp"
                                 android:layout_marginLeft="20dp"
-                                android:text="@string/calendar_detail_liquor_title"
+                                android:text="@string/calendar_detail_drink_title"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/colorDarkGray"/>
@@ -283,13 +283,20 @@
                 android:textColor="@color/colorPureWhite"
                 android:onClick="onSaveClick"/>
 
-            <TextView
+            <!-- Banner Ads -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:background="#000000"
+                android:layout_height="50dp"
                 android:gravity="center"
-                android:text="AD"
-                android:textColor="#fff"/>
+                android:background="@color/colorPureBlack">
+                <com.google.android.gms.ads.AdView
+                    xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/adView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    ads:adSize="BANNER"
+                    ads:adUnitId="@string/admob_id_banner_test"/>
+            </LinearLayout>
 
         </LinearLayout>
     </RelativeLayout>

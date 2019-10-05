@@ -213,14 +213,14 @@ public class DayView extends RelativeLayout {
 
         String friendStr = CalendarConstUtils.getShortStr(dayModel.friendList);
         String foodStr = CalendarConstUtils.getShortStr(dayModel.foodList);
-        String liquorStr = CalendarConstUtils.getShortStr(dayModel.liquorList);
+        String drinkStr = CalendarConstUtils.getShortStr(dayModel.drinkList);
         String memoStr = CalendarConstUtils.getShortStr(dayModel.memo);
 
         ArrayList<String> toDrawList = new ArrayList<>();
 
         if(friendStr != "") { toDrawList.add(friendStr); }
         if(foodStr != "")   { toDrawList.add(foodStr); }
-        if(liquorStr != "") { toDrawList.add(liquorStr); }
+        if(drinkStr != "") { toDrawList.add(drinkStr); }
         if(memoStr != "")   { toDrawList.add(memoStr); }
 
 

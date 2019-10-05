@@ -1,10 +1,19 @@
 <resources>
 
+
     <!-- Key Values -->
-    <string name="admob_app_id">ca-app-pub-9300115819443880~2843172061</string>
-<!--    <string name="admob_banner_home_id">ca-app-pub-9300115819443880/6399273693</string>-->
+    <string name="admob_id_app">ca-app-pub-9300115819443880~2843172061</string>
+
     <!--Test Id-->
-    <string name="admob_banner_home_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_id_banner_test">ca-app-pub-3940256099942544/6300978111</string>
+
+    <!--    <string name="admob_id_banner_home">ca-app-pub-9300115819443880/6399273693</string>-->
+    <!--    <string name="admob_id_banner_day_detail">ca-app-pub-9300115819443880/3530766886</string>-->
+    <!--    <string name="admob_id_banner_day_detail_edit">ca-app-pub-9300115819443880/7286179061</string>-->
+    <!--    <string name="admob_id_banner_exit">ca-app-pub-9300115819443880/2787217778</string>-->
+
+
+
 
     <string name="app_name">Koala</string>
     <string name="tap1_title">오늘</string>
@@ -15,10 +24,9 @@
 
     <string name="calendar_detail_drunk_level_title">얼마나 마셨나요?</string>
     <string name="calendar_detail_friends_title">누구와</string>
-    <string name="calendar_detail_liquor_title">어떤 술을</string>
+    <string name="calendar_detail_drink_title">어떤 술을</string>
     <string name="calendar_detail_foods_title">어떤 안주에</string>
     <string name="calendar_detail_memo_title">메모</string>
-
 
 
     <!-- 오늘 -->

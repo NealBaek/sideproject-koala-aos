@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.views.splash.SplashActivity"
+    android:background="@color/colorPureWhite">
+
+    <TextView
+        android:id="@+id/appTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="코알라"
+        android:textSize="55dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorDarkGray"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="112dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="진지하게 시작하는\n절주금주 프로젝트"
+        android:textSize="20dp"
+        android:textColor="@color/colorMain"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/appTitle"/>
+
+    <ImageView
+        android:layout_width="512dp"
+        android:layout_height="512dp"
+
+        android:scaleType="center"
+        android:layout_marginTop="278dp"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>
