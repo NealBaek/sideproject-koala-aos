@@ -9,6 +9,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -105,10 +106,15 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
     private RelativeLayout createCalendarHeaderLayout(){
 
 
-        final float MONTH_TITLE_TEXT_SIZE = 20;
-        final float MOVE_TO_TODAY_TEXT_SIZE = 14;
+        final float MONTH_TITLE_TEXT_SIZE = 16;
+        final float TODAY_TEXT_SIZE = 16;
 
-        final int MARGIN_R_MOVE_TO_TODAY = (int) (18 * Resources.getSystem().getDisplayMetrics().density);;
+        final int WIDTH_MONTH_TITLE_LAYOUT = (int) (150 * Resources.getSystem().getDisplayMetrics().density);
+        final int WIDTH_MONTH_TITLE_TOUCH_LISTENER = (int) (160 * Resources.getSystem().getDisplayMetrics().density);
+        final int HEIGHT_MONTH_TITLE_LAYOUT = (int) (28 * Resources.getSystem().getDisplayMetrics().density);
+        final int MARGIN_R_MOVE_TO_TODAY = (int) (18 * Resources.getSystem().getDisplayMetrics().density);
+        final int MARGIN_ARROW = (int) (5 * Resources.getSystem().getDisplayMetrics().density);
+
 
         final String TODAY_TEXT = "오늘";
 
@@ -121,19 +127,56 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         layout.setBackgroundColor(COLOR_MAIN);
 
 
-        // 2. Month Title TextView
-        monthTitleTv = new AppCompatTextView(getContext());
+        // 2. Month Title Layout
+        RelativeLayout monthTitleLayout = new RelativeLayout(getContext());
+        RelativeLayout.LayoutParams monthTitleLayoutLp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        monthTitleLayoutLp.addRule(RelativeLayout.CENTER_IN_PARENT);
+        monthTitleLayoutLp.width = WIDTH_MONTH_TITLE_LAYOUT;
+        monthTitleLayout.setLayoutParams(monthTitleLayoutLp);
+
+
+        // 2-1. Month Title TextView
+        RelativeLayout.LayoutParams monthTitleLp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        monthTitleLp.addRule(RelativeLayout.CENTER_VERTICAL);
+        monthTitleLp.addRule(RelativeLayout.CENTER_HORIZONTAL);
+
+        monthTitleTv = new TextView(getContext());
         monthTitleTv.setTextSize(MONTH_TITLE_TEXT_SIZE);
-        monthTitleTv.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        monthTitleTv.setTextColor(COLOR_PURE_WHITE);
-        monthTitleTv.setTypeface(TypeKitHelper.getNotoBold(), Typeface.BOLD);
-        monthTitleTv.setBackgroundColor(getContext().getResources().getColor(R.color.colorDarkGray));
+        monthTitleTv.setTypeface(TypeKitHelper.getNotoBold());
         monthTitleTv.setGravity(Gravity.CENTER);
+        monthTitleTv.setTextColor(COLOR_PURE_WHITE);
+        monthTitleTv.setLayoutParams(monthTitleLp);
 
-        // @TODO: xml inflater 로 변경해서 TypeKit 적용 시켜보기
-        // 동적으로 만들어서 gravity 가 무시되는 현상
+        // 2-2. < Arrow ImageViews
+        RelativeLayout.LayoutParams leftArrowLp= new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        leftArrowLp.width = HEIGHT_MONTH_TITLE_LAYOUT;
+        leftArrowLp.height = HEIGHT_MONTH_TITLE_LAYOUT;
+        leftArrowLp.leftMargin = MARGIN_ARROW;
+        leftArrowLp.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        leftArrowLp.addRule(RelativeLayout.CENTER_VERTICAL);
 
-        layout.addView(monthTitleTv);
+        ImageView leftArrowImageView = new ImageView(getContext());
+        leftArrowImageView.setBackgroundResource(R.drawable.ic_arrow_left);
+        leftArrowImageView.setLayoutParams(leftArrowLp);
+
+        // 2-3. < Arrow ImageViews
+        RelativeLayout.LayoutParams rightArrowLp  = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        rightArrowLp.width = HEIGHT_MONTH_TITLE_LAYOUT;
+        rightArrowLp.height = HEIGHT_MONTH_TITLE_LAYOUT;
+        rightArrowLp.rightMargin = MARGIN_ARROW;
+        rightArrowLp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        rightArrowLp.addRule(RelativeLayout.CENTER_VERTICAL);
+
+        ImageView rightArrowImageView = new ImageView(getContext());
+        rightArrowImageView.setBackgroundResource(R.drawable.ic_arrow_right);
+        rightArrowImageView.setLayoutParams(rightArrowLp);
+
+        // 2-4. Add Views on MonthTitleLayout
+        monthTitleLayout.addView(leftArrowImageView);
+        monthTitleLayout.addView(monthTitleTv);
+        monthTitleLayout.addView(rightArrowImageView);
+        layout.addView(monthTitleLayout);
+
 
 
 
@@ -145,49 +188,36 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
 
         View leftTouchLayout = new View(getContext());
-        leftTouchLayout.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onMoveToPreviousMonth();
-            }
-        });
+        leftTouchLayout.setOnClickListener((v) -> onMoveToPreviousMonth());
         touchLinearLayout.addView(leftTouchLayout, lp);
 
 
         View rightTouchLayout = new View(getContext());
-        rightTouchLayout.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onMoveToNextMonth();
-            }
-        });
+        rightTouchLayout.setOnClickListener((v) -> onMoveToNextMonth());
         touchLinearLayout.addView(rightTouchLayout, lp);
 
         RelativeLayout.LayoutParams touchLp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
-        touchLp.height = 200;
-        touchLp.width = 500;
+        touchLp.width = WIDTH_MONTH_TITLE_TOUCH_LISTENER;
         touchLp.addRule(RelativeLayout.CENTER_IN_PARENT);
         layout.addView(touchLinearLayout, touchLp);
 
 
         // 4. MoveToToday TextView
-        RelativeLayout.LayoutParams moveToTodayLp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        RelativeLayout.LayoutParams moveToTodayLp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         moveToTodayLp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        moveToTodayLp.addRule(RelativeLayout.CENTER_VERTICAL);
         moveToTodayLp.setMargins(0,0,MARGIN_R_MOVE_TO_TODAY,0);
 
         TextView moveToTodayTv = new TextView(getContext());
         moveToTodayTv.setText(TODAY_TEXT);
-        moveToTodayTv.setTextSize(MOVE_TO_TODAY_TEXT_SIZE);
-        moveToTodayTv.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+        moveToTodayTv.setTextSize(TODAY_TEXT_SIZE);
+        moveToTodayTv.setTypeface(TypeKitHelper.getNotoBold());
         moveToTodayTv.setGravity(Gravity.CENTER);
         moveToTodayTv.setLayoutParams(moveToTodayLp);
         moveToTodayTv.setTextColor(COLOR_PURE_WHITE);
 
-        moveToTodayTv.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) { onMoveToToday(presenter.getThisMonthIdx()); }
-        });
+        moveToTodayTv.setOnClickListener((v) -> onMoveToToday(presenter.getThisMonthIdx()));
 
         layout.addView(moveToTodayTv);
 
@@ -243,7 +273,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         final int YEAR = previousMonth.year;
         final int MONTH = previousMonth.month;
 
-        String monthTitle = "<  " + YEAR + "." + (MONTH < 10 ? "0" + MONTH : MONTH) + "  >";
+        String monthTitle = YEAR + "." + (MONTH < 10 ? "0" + MONTH : MONTH);
         monthTitleTv.setText(monthTitle);
     }
 

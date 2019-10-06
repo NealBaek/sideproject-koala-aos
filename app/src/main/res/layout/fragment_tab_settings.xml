@@ -114,7 +114,7 @@
                     android:layout_width="53dp"
                     android:layout_height="25dp"
                     android:layout_marginLeft="12dp"
-                    android:src="@drawable/ic_btn_kakao"/>
+                    android:src="@drawable/ic_kakao"/>
 
             </LinearLayout>
             <include

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-public class KeyboardUtil {
+public class KeyboardHelper {
 
     // 엑티비티에서
     public static void hide(Activity activity) {

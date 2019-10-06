@@ -28,7 +28,7 @@ public class CalendarDetailListAdapter extends BaseRecyclerViewAdapter<CalendarD
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(
-                R.layout.recycler_calendar_detail_edit, parent, false);
+                R.layout.cell_calendar_detail_edit, parent, false);
         return new ViewHolder(view);
     }
 

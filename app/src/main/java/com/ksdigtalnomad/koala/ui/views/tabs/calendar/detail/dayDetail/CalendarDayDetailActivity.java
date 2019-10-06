@@ -1,33 +1,25 @@
 package com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.dayDetail;
 
-import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.ProgressBar;
+import android.view.inputmethod.EditorInfo;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.MobileAds;
 import com.google.gson.Gson;
 import com.ksdigtalnomad.koala.R;
-import com.ksdigtalnomad.koala.data.viewModels.CalendarViewModel;
-import com.ksdigtalnomad.koala.data.viewModels.ViewModelHelper;
 import com.ksdigtalnomad.koala.databinding.ActivityCalendarDayDetailBinding;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
-import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity;
-import com.ksdigtalnomad.koala.util.KeyboardUtil;
-import com.ksdigtalnomad.koala.util.ProgressHelper;
+import com.ksdigtalnomad.koala.util.KeyboardHelper;
 
 import java.util.ArrayList;
 
@@ -58,16 +50,31 @@ public class CalendarDayDetailActivity extends BaseActivity {
         mBinding.setDayModel(dayModel);
 
         mBinding.adView.loadAd(new AdRequest.Builder().build());
+
+        mBinding.memo.setOnEditorActionListener((TextView v, int actionId, KeyEvent event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                KeyboardHelper.hide(CalendarDayDetailActivity.this);
+                mBinding.memo.clearFocus();
+                return true;
+            }
+            return false;
+        });
     }
 
-
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mBinding.memo.clearFocus();
+    }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        mBinding.memo.clearFocus();
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        if(mBinding.memo.hasFocus()){
+            mBinding.memo.clearFocus();
+            KeyboardHelper.hide(CalendarDayDetailActivity.this);
+        }else{
+            super.onBackPressed();
+        }
     }
 
     public void onDrunkLevelChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
@@ -83,8 +90,7 @@ public class CalendarDayDetailActivity extends BaseActivity {
         String toReturn = "";
         int cnt = strList.size();
 
-        for(int i = 0; i < cnt; ++ i){  toReturn += (i == 0 ? ""
-                : ", ") + strList.get(i);  }
+        for(int i = 0; i < cnt; ++ i){  toReturn += (i == 0 ? "" : ", ") + strList.get(i);  }
 
         return toReturn;
     }
@@ -93,7 +99,7 @@ public class CalendarDayDetailActivity extends BaseActivity {
 
         dayModel.memo = mBinding.memo.getText().toString();
 
-//        runOnUiThread(()->KeyboardUtil.hide(CalendarDayDetailActivity.this));
+//        runOnUiThread(()->KeyboardHelper.hide(CalendarDayDetailActivity.this));
 
         Runnable task = () -> CalendarDataController.updateDayModel(dayModel);
         task.run();

@@ -31,10 +31,11 @@
                 android:background="@color/colorMain">
                 <ImageView
                     android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_arrow_left"
+                    android:layout_height="40dp"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_back"
                     android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="14dp"
                     android:layout_centerVertical="true"
                     android:onClick="onBackClick"/>
 
@@ -260,7 +261,9 @@
                                 android:textColor="@color/colorDarkGray"
                                 android:gravity="right"
                                 android:backgroundTint="@color/colorTransparent"
-                                android:textCursorDrawable="@null"/>
+                                android:textCursorDrawable="@null"
+                                android:singleLine="true"
+                                android:imeOptions="actionDone"/>
                         </LinearLayout>
                         <include
                             android:layout_width="match_parent"

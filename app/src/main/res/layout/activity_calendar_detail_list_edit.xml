@@ -11,7 +11,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:id="@+id/bodyLayout"
-        tools:context=".ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity">
+        tools:context=".ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity"
+        android:focusableInTouchMode="true">
 
         <!--Header -->
         <RelativeLayout
@@ -20,10 +21,11 @@
             android:background="@color/colorMain">
             <ImageView
                 android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_arrow_left"
+                android:layout_height="40dp"
+                android:padding="4dp"
+                android:src="@drawable/ic_back"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="14dp"
                 android:layout_centerVertical="true"
                 android:onClick="onBackClick"/>
 
@@ -38,13 +40,14 @@
                 android:textStyle="bold"/>
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_done_white"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="4dp"
+                android:src="@drawable/ic_add"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="15dp"
+                android:layout_marginRight="14dp"
                 android:layout_centerVertical="true"
-                android:onClick="onSaveClick"/>
+                android:onClick="onAddClick"/>
         </RelativeLayout>
 
         <LinearLayout
@@ -60,10 +63,10 @@
                 android:gravity="center_vertical">
 
                 <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@color/colorMain"/>
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_search"/>
                 
                 <EditText
                     android:id="@+id/searchEt"
@@ -72,12 +75,13 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
-                    android:hint="검색해주세요"
                     android:textSize="16dp"
                     android:textColor="@color/colorDarkGray"
                     android:gravity="left"
                     android:backgroundTint="@color/colorTransparent"
-                    android:textCursorDrawable="@null"/>
+                    android:textCursorDrawable="@null"
+                    android:singleLine="true"
+                    android:imeOptions="actionSearch"/>
 
             </LinearLayout>
 
