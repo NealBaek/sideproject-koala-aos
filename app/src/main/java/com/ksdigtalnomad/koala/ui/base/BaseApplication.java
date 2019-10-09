@@ -38,7 +38,7 @@ public class BaseApplication extends MultiDexApplication {
 
         printKeyHash();
 
-        FBRemoteControlHelper.getInstance().activateFetch(null);
+        FBRemoteControlHelper.getInstance().activateFetch(null, null);
 
     }
 
@@ -65,7 +65,7 @@ public class BaseApplication extends MultiDexApplication {
 
     @Override
     protected void attachBaseContext(Context base) {
-        super.attachBaseContext(TypekitContextWrapper.wrap(base));
+        super.attachBaseContext(base);
         MultiDex.install(this);
     }
 

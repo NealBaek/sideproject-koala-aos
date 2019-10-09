@@ -11,4 +11,5 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(0,0);
     }
+
 }

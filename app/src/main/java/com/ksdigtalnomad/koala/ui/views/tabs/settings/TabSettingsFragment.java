@@ -2,6 +2,8 @@ package com.ksdigtalnomad.koala.ui.views.tabs.settings;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 
 import com.ksdigtalnomad.koala.R;
@@ -9,6 +11,7 @@ import com.ksdigtalnomad.koala.databinding.FragmentTabSettingsBinding;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,13 +45,22 @@ public class TabSettingsFragment extends BaseFragment {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_tab_settings, container, false);
         mBinding.setFragment(this);
 
+        try {
+            PackageInfo info = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
+            mBinding.version.setText("ver " + info.versionName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
 
         return mBinding.getRoot();
     }
 
     // OnClick
-    public void onKakaoOpenChatRoomClick(){ startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(FBRemoteControlHelper.getInstance().getKakaoOpenChatRoomUrl())));  }
-    public void onOpenPlayStoreClick(){ PlayStoreHelper.openMyAppInPlayStore(getContext()); }
+    public void onKakaoOpenChatRoomClick(){
+        String chatRoomUrl = FBRemoteControlHelper.getInstance().getKakaoOpenChatRoomUrl();
+        Log.d("ABC", "chatRoomUrl: " + chatRoomUrl);
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(chatRoomUrl)));  }
+    public void onOpenPlayStoreClick(){ PlayStoreHelper.openMyAppInPlayStore(getActivity()); }
     public void onShareClick(){ ShareHelper.startShareIntent(getContext(), FBRemoteControlHelper.getInstance().getShareMessage()); }
     public void onVersionClick(){  }
 }

@@ -49,7 +49,7 @@ public class TabTodayFragment extends BaseFragment {
 
     private void setData(){
 
-        SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd.");
         mBinding.headerText.setText(df.format(new Date()));
 
 

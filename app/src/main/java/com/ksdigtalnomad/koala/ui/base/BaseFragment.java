@@ -1,9 +1,12 @@
 package com.ksdigtalnomad.koala.ui.base;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 public abstract class BaseFragment extends Fragment {
 //    private ProgressDialog pDialog;
@@ -43,8 +46,5 @@ public abstract class BaseFragment extends Fragment {
 //    protected void initEventBus() {
 //        if (!eventBus.isRegistered(this)) eventBus.register(this);
 //    }
-
-
-
 
 }

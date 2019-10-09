@@ -59,6 +59,11 @@ public class CalendarDayDetailActivity extends BaseActivity {
             }
             return false;
         });
+
+        mBinding.headerText.setText(
+                dayModel.year + "." +
+                (dayModel.month >= 10 ? String.valueOf(dayModel.month) : ("0" + dayModel.month)) + "." +
+                (dayModel.day >= 10 ? String.valueOf(dayModel.day) : ("0" + dayModel.day)) + ".");
     }
 
     @Override

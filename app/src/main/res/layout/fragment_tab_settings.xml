@@ -23,7 +23,7 @@
                 android:id="@+id/headerText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textColor="@color/colorPureWhite"
@@ -53,6 +53,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@color/colorLightGray"
                         android:text="내 음주를 "
                         android:textSize="16dp"
                         android:textStyle="bold"
@@ -176,10 +177,11 @@
                     android:textColor="@color/colorDarkGray"/>
 
                 <TextView
+                    android:id="@+id/version"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="ver 0.1"
+                    android:text=""
                     android:textColor="@color/colorDarkGray"/>
 
             </RelativeLayout>

@@ -40,11 +40,11 @@
                     android:onClick="onBackClick"/>
 
                 <TextView
+                    android:id="@+id/headerText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:gravity="center"
-                    android:text="@{String.valueOf(dayModel.year) + '.' + String.valueOf(dayModel.month) + '.' + String.valueOf(dayModel.day)}"
                     android:textSize="18dp"
                     android:textColor="#fff"
                     android:textStyle="bold"/>

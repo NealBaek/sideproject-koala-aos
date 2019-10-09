@@ -8,7 +8,11 @@ import android.os.Message;
 
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
+import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.views.home.HomeActivity;
+import com.ksdigtalnomad.koala.util.FBRemoteControlHelper;
+import com.ksdigtalnomad.koala.util.ToastHelper;
+import com.ksdigtalnomad.koala.util.VersionCheckHelper;
 
 
 public class SplashActivity extends BaseActivity {
@@ -20,8 +24,19 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        handler = new SplashHandler(this);
-        handler.sendEmptyMessageDelayed(0, 2000);
+        // 1. Version 정보 가져오기
+        FBRemoteControlHelper.getInstance().getVersion((versionStr)->{
+            if(versionStr == null || versionStr == "") {
+                ToastHelper.writeBottomLongToast("서버 업데이트 중입니다.");
+                return;
+            }else{
+
+                VersionCheckHelper.getUpdateState(versionStr, this, ()->{
+                    handler = new SplashHandler(this);
+                    handler.sendEmptyMessageDelayed(0, 1000);
+                });
+            }
+        });
     }
 
     private static class SplashHandler extends Handler {
@@ -32,18 +47,9 @@ public class SplashActivity extends BaseActivity {
             super.handleMessage(msg);
 
 //            LanguageUtil.initLanguage(activity);
-
-            // 1. RemoteControl -> Host Url
-            // 2. Version 정보 가져오기
-            // 2-1. Version 정보 있으면
-
-            // 2-2. Version 정보 없으면
-
-
             activity.startActivity(HomeActivity.intent(activity));
             activity.finish();
         }
-
 
     }
 }

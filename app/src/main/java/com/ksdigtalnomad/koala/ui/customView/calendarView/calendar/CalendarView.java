@@ -111,13 +111,11 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
 
         final int WIDTH_MONTH_TITLE_LAYOUT = (int) (150 * Resources.getSystem().getDisplayMetrics().density);
         final int WIDTH_MONTH_TITLE_TOUCH_LISTENER = (int) (160 * Resources.getSystem().getDisplayMetrics().density);
-        final int HEIGHT_MONTH_TITLE_LAYOUT = (int) (28 * Resources.getSystem().getDisplayMetrics().density);
+        final int HEIGHT_MONTH_TITLE_LAYOUT = (int) (24 * Resources.getSystem().getDisplayMetrics().density);
         final int MARGIN_R_MOVE_TO_TODAY = (int) (18 * Resources.getSystem().getDisplayMetrics().density);
         final int MARGIN_ARROW = (int) (5 * Resources.getSystem().getDisplayMetrics().density);
 
-
         final String TODAY_TEXT = "오늘";
-
 
 
 
@@ -146,6 +144,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         monthTitleTv.setGravity(Gravity.CENTER);
         monthTitleTv.setTextColor(COLOR_PURE_WHITE);
         monthTitleTv.setLayoutParams(monthTitleLp);
+
 
         // 2-2. < Arrow ImageViews
         RelativeLayout.LayoutParams leftArrowLp= new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
