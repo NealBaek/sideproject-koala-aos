@@ -8,7 +8,6 @@ import android.os.Message;
 
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
-import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.views.home.HomeActivity;
 import com.ksdigtalnomad.koala.util.FBRemoteControlHelper;
 import com.ksdigtalnomad.koala.util.ToastHelper;
@@ -23,6 +22,11 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         // 1. Version 정보 가져오기
         FBRemoteControlHelper.getInstance().getVersion((versionStr)->{

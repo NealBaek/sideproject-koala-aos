@@ -255,6 +255,7 @@
                                 android:layout_marginTop="8dp"
                                 android:layout_marginBottom="6dp"
                                 android:layout_marginRight="17dp"
+                                android:maxLength="@integer/limit_memo_length"
                                 android:hint="여기를 눌러 입력"
                                 android:text="@{dayModel.memo}"
                                 android:textSize="16dp"

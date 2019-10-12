@@ -89,8 +89,8 @@ public class CalendarConstUtils {
 
         if(string == null || string.isEmpty()) return "";
 
-        if(string.length() < 10) return string;
+        if(string.length() < 5) return string;
 
-        return string.substring(1, 0) + " ..";
+        return string.substring(0, 4) + " ..";
     }
 }
