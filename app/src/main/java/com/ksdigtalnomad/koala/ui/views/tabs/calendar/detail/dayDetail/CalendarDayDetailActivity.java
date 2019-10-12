@@ -110,8 +110,8 @@ public class CalendarDayDetailActivity extends BaseActivity {
         mBinding.drunkLevelComment.setText(CalendarConstUtils.getDrunkLvComment(dayModel.drunkLevel));
     }
 
-    public void moveToDetailListEditActivity(){
-        startActivity(CalendarDetailListEditActivity.intent(this));
+    public void moveToDetailListEditActivity(String viewType){
+        startActivity(CalendarDetailListEditActivity.intent(this, viewType));
     }
 
     public String getFullStr(ArrayList<String> strList){

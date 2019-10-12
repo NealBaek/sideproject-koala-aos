@@ -19,9 +19,9 @@ public class CalendarDetailListAdapter extends BaseRecyclerViewAdapter<CalendarD
     private Context context;
     private ArrayList<String> list;
 
-    CalendarDetailListAdapter(Context context) {
+    CalendarDetailListAdapter(Context context, ArrayList<String> list) {
         this.context = context;
-//        this.list = list;
+        this.list = list;
     }
 
     @NonNull

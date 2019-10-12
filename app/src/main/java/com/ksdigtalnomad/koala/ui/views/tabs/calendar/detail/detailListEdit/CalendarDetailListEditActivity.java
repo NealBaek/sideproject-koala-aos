@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -20,16 +21,23 @@ import com.ksdigtalnomad.koala.ui.views.dialogs.UpdateDialog;
 import com.ksdigtalnomad.koala.util.KeyboardHelper;
 import com.ksdigtalnomad.koala.util.ToastHelper;
 
+import java.util.ArrayList;
+
 public class CalendarDetailListEditActivity extends BaseActivity {
 
-    public static final String KEY_DAY_MODEL = "KEY_DAY_MODEL";
+    private String viewType = "";
+    private static final String KEY_HEADER_TITLE = "KEY_HEADER_TITLE";
+    public static final String TYPE_FRIENDS = "TYPE_FRIENDS";
+    public static final String TYPE_FOODS = "TYPE_FOODS";
+    public static final String TYPE_DRINKS = "TYPE_DRINKS";
 
     private ActivityCalendarDetailListEditBinding mBinding;
 
-    public static Intent intent(Context context) {  return new Intent(context, CalendarDetailListEditActivity.class);  }
-    public static Intent intent(Context context, DayModel dayModel) {
-        Intent intent = intent(context);
-        intent.putExtra(KEY_DAY_MODEL, new Gson().toJson(dayModel));
+    private ArrayList<String> dataList = new ArrayList<>();
+
+    public static Intent intent(Context context, String type) {
+        Intent intent = new Intent(context, CalendarDetailListEditActivity.class);
+        intent.putExtra(KEY_HEADER_TITLE, type);
         return intent;
     }
 
@@ -37,12 +45,15 @@ public class CalendarDetailListEditActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        this.viewType = getIntent().getStringExtra(KEY_HEADER_TITLE);
+
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_calendar_detail_list_edit);
         mBinding.setLifecycleOwner(this);
 //        mBinding.setActivity(this);
 
-        mBinding.adView.loadAd(new AdRequest.Builder().build());
+        setViewType(viewType);
 
+        mBinding.adView.loadAd(new AdRequest.Builder().build());
         mBinding.searchEt.setOnEditorActionListener((TextView v, int actionId, KeyEvent event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 KeyboardHelper.hide(CalendarDetailListEditActivity.this);
@@ -51,7 +62,35 @@ public class CalendarDetailListEditActivity extends BaseActivity {
             }
             return false;
         });
+
+        mBinding.dataRv.setAdapter(new CalendarDetailListAdapter(this, dataList));
+
+        if(dataList.size() > 0){
+            mBinding.emptyDataLayout.setVisibility(View.GONE);
+            mBinding.dataRv.setVisibility(View.VISIBLE);
+        }
     }
+
+    private void setViewType(String viewType){
+        if(viewType.equals(TYPE_FRIENDS)){
+            mBinding.headerText.setText(getResources().getString(R.string.calendar_detail_friends_title));
+//            dataList =
+
+        }else if(viewType.equals(TYPE_DRINKS)){
+            mBinding.headerText.setText(getResources().getString(R.string.calendar_detail_drink_title));
+
+
+        }else if(viewType.equals(TYPE_FOODS)){
+            mBinding.headerText.setText(getResources().getString(R.string.calendar_detail_foods_title));
+
+
+        }
+    }
+
+
+
+
+
 
     @Override
     public void onBackPressed() {
@@ -62,7 +101,6 @@ public class CalendarDetailListEditActivity extends BaseActivity {
             super.onBackPressed();
         }
     }
-
     public void onBackClick(View v){ finish(); }
     public void onAddClick(View v){
         String toAdd = "";
