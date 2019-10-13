@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -13,8 +14,12 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.gson.Gson;
 import com.ksdigtalnomad.koala.R;
+import com.ksdigtalnomad.koala.data.MainDataController;
+import com.ksdigtalnomad.koala.data.models.BaseData;
+import com.ksdigtalnomad.koala.data.models.Friend;
 import com.ksdigtalnomad.koala.databinding.ActivityCalendarDetailListEditBinding;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
+import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.views.dialogs.AddDialog;
 import com.ksdigtalnomad.koala.ui.views.dialogs.UpdateDialog;
@@ -33,7 +38,10 @@ public class CalendarDetailListEditActivity extends BaseActivity {
 
     private ActivityCalendarDetailListEditBinding mBinding;
 
-    private ArrayList<String> dataList = new ArrayList<>();
+    private ArrayList dataList = new ArrayList<>();
+
+    private final int COLOR_ON = BaseApplication.getInstance().getResources().getColor(R.color.colorMain);
+    private final int COLOR_OFF = BaseApplication.getInstance().getResources().getColor(R.color.colorLightGray);
 
     public static Intent intent(Context context, String type) {
         Intent intent = new Intent(context, CalendarDetailListEditActivity.class);
@@ -49,7 +57,7 @@ public class CalendarDetailListEditActivity extends BaseActivity {
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_calendar_detail_list_edit);
         mBinding.setLifecycleOwner(this);
-//        mBinding.setActivity(this);
+        mBinding.setActivity(this);
 
         setViewType(viewType);
 
@@ -63,26 +71,46 @@ public class CalendarDetailListEditActivity extends BaseActivity {
             return false;
         });
 
-        mBinding.dataRv.setAdapter(new CalendarDetailListAdapter(this, dataList));
+        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        CalendarDetailListAdapter adapter = new CalendarDetailListAdapter(this, dataList, viewType);
+        adapter.setItemClickListener(position -> {
+            ArrayList<Friend> list = (ArrayList<Friend>) dataList;
+            int listSize = list.size();
+            for(int i = 0; i < listSize; ++i){
+                if(list.get(i).isSelected()){
+                    mBinding.saveBtn.setEnabled(true);
+                    mBinding.saveBtn.setBackgroundColor(COLOR_ON);
+                    return;
+                }
+            }
+            mBinding.saveBtn.setEnabled(false);
+            mBinding.saveBtn.setBackgroundColor(COLOR_OFF);
+        });
+
+        mBinding.dataRv.setLayoutManager(manager);
+        mBinding.dataRv.setAdapter(adapter);
+
+
 
         if(dataList.size() > 0){
             mBinding.emptyDataLayout.setVisibility(View.GONE);
             mBinding.dataRv.setVisibility(View.VISIBLE);
         }
+
     }
 
     private void setViewType(String viewType){
         if(viewType.equals(TYPE_FRIENDS)){
             mBinding.headerText.setText(getResources().getString(R.string.calendar_detail_friends_title));
-//            dataList =
+            dataList = MainDataController.getFriendList();
 
         }else if(viewType.equals(TYPE_DRINKS)){
             mBinding.headerText.setText(getResources().getString(R.string.calendar_detail_drink_title));
-
+            dataList = MainDataController.getDrinkList();
 
         }else if(viewType.equals(TYPE_FOODS)){
             mBinding.headerText.setText(getResources().getString(R.string.calendar_detail_foods_title));
-
+            dataList = MainDataController.getFoodList();
 
         }
     }
@@ -101,8 +129,8 @@ public class CalendarDetailListEditActivity extends BaseActivity {
             super.onBackPressed();
         }
     }
-    public void onBackClick(View v){ finish(); }
-    public void onAddClick(View v){
+    public void onBackClick(){ finish(); }
+    public void onAddClick(){
         String toAdd = "";
         if(mBinding.searchEt != null && mBinding.searchEt.getText() != null){
             toAdd = mBinding.searchEt.getText().toString();
@@ -111,5 +139,8 @@ public class CalendarDetailListEditActivity extends BaseActivity {
         AddDialog dialog = AddDialog.newInstance(toAdd);
         dialog.setDialogListener(()->{  });
         dialog.show(getFragmentManager(), "Add Dialog");
+    }
+    public void onSaveClick(){
+        finish();
     }
 }

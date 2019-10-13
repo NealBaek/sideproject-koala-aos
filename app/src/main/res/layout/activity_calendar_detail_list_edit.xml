@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-
+        <variable
+            name="activity"
+            type="com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +29,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="14dp"
                 android:layout_centerVertical="true"
-                android:onClick="onBackClick"/>
+                android:onClick="@{()->activity.onBackClick()}"/>
 
             <TextView
                 android:id="@+id/headerText"
@@ -48,7 +50,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="14dp"
                 android:layout_centerVertical="true"
-                android:onClick="onAddClick"/>
+                android:onClick="@{()->activity.onAddClick()}"/>
         </RelativeLayout>
 
         <LinearLayout
@@ -101,7 +103,8 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/dataRv"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPureWhite"/>
 
                 <!-- 데이터 없을 시 문구 -->
                 <LinearLayout
@@ -167,13 +170,15 @@
 
             <!-- 저장하기 버튼 -->
             <TextView
+                android:id="@+id/saveBtn"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:background="@color/colorLightGray"
                 android:gravity="center"
                 android:text="저장하기"
                 android:textColor="#fff"
-                android:textSize="19dp"/>
+                android:textSize="19dp"
+                android:onClick="@{()->activity.onSaveClick()}"/>
             <!-- Banner Ads -->
             <LinearLayout
                 android:layout_width="match_parent"

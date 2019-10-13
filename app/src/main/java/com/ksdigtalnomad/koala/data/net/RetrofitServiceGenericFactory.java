@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.data;
+package com.ksdigtalnomad.koala.data.net;
 
 import com.ksdigtalnomad.koala.BuildConfig;
 

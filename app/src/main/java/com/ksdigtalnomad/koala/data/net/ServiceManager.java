@@ -1,10 +1,9 @@
-package com.ksdigtalnomad.koala.data;
+package com.ksdigtalnomad.koala.data.net;
 
-import com.ksdigtalnomad.koala.data.services.UserService;
 
 public enum  ServiceManager {
     INSTANCE;
-    private UserService userService;
+//    private UserService userService;
 //    private BalanceService balanceService;
 //    private ReceiptService receiptService;
 //    private TransactionService transactionService;
@@ -17,7 +16,7 @@ public enum  ServiceManager {
 //    private M12Service m12Service;
 
     ServiceManager() {
-        userService = RetrofitServiceGenericFactory.createService(UserService.class);
+//        userService = RetrofitServiceGenericFactory.createService(UserService.class);
 //        balanceService = RetrofitServiceGenericFactory.createService(BalanceService.class);
 //        receiptService = RetrofitServiceGenericFactory.createService(ReceiptService.class);
 //        transactionService = RetrofitServiceGenericFactory.createService(TransactionService.class);
@@ -34,9 +33,9 @@ public enum  ServiceManager {
         return INSTANCE;
     }
 
-    public UserService getUserService() {
-        return userService;
-    }
+//    public UserService getUserService() {
+//        return userService;
+//    }
 //
 //    public BalanceService getBalanceService() {
 //        return balanceService;

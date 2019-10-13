@@ -68,20 +68,22 @@ public class CalendarDayDetailActivity extends BaseActivity {
             return false;
         });
 
-        mBinding.memo.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+        mBinding.memo.postDelayed(()->
+            mBinding.memo.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) { }
 
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(s.length() >= MEMO_LEN_LIMIT){
-                    ToastHelper.writeBottomLongToast("메모는 최대 "+MEMO_LEN_LIMIT+"자까지 작성 가능합니다.");
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if(s.length() >= MEMO_LEN_LIMIT){
+                        ToastHelper.writeBottomLongToast("메모는 최대 "+MEMO_LEN_LIMIT+"자까지 작성 가능합니다.");
+                    }
                 }
-            }
-        });
+            })
+        , 1000);
 
         mBinding.headerText.setText(
                 dayModel.year + "." +

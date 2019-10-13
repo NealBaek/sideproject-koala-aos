@@ -50,7 +50,8 @@ public class AddDialog extends BaseDialogFragment {
 //            return false;
 //        });
 
-        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+//        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE|);
 
         view.findViewById(R.id.btnAdd).setOnClickListener((v)->{
             completeClickListener.onClick(); dismiss();

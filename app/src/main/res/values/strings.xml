@@ -6,7 +6,6 @@
 
     <!--Test Id-->
     <string name="admob_id_banner_test">ca-app-pub-3940256099942544/6300978111</string>
-
     <!--    <string name="admob_id_banner_home">ca-app-pub-9300115819443880/6399273693</string>-->
     <!--    <string name="admob_id_banner_day_detail">ca-app-pub-9300115819443880/3530766886</string>-->
     <!--    <string name="admob_id_banner_day_detail_edit">ca-app-pub-9300115819443880/7286179061</string>-->
@@ -38,6 +37,10 @@
     <string name="drink_state_nowadays_4">금지</string>
     <string name="tap_today_drink_times">최근 7일간 음주 %s회</string>
     <string name="tap_today_drink_level">최근 7일간 음주량 평균 %s%</string>
+
+
+    <string name="default_friend_list">혼술</string>
+    <string name="default_food_list">깡술</string>
 
 
 </resources>
