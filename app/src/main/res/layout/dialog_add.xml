@@ -59,7 +59,8 @@
                     android:backgroundTint="@color/colorTransparent"
                     android:textCursorDrawable="@null"
                     android:singleLine="true"
-                    android:imeOptions="actionDone"/>
+                    android:imeOptions="actionDone"
+                    android:maxLength="@integer/limit_name_length"/>
 
             </RelativeLayout>
 

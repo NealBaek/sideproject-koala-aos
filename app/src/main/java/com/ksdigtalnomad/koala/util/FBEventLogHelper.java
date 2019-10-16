@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 
 import java.util.ArrayList;
@@ -29,9 +30,9 @@ public class FBEventLogHelper {
         Runnable task = ()->{
             Bundle bundle = new Bundle();
             bundle.putInt("drunk_level", dayModel.drunkLevel);
-            bundle.putStringArrayList("friend_list", dayModel.friendList);
-            bundle.putStringArrayList("food_list", dayModel.foodList);
-            bundle.putStringArrayList("drink_list", dayModel.drinkList);
+            bundle.putString("friend_list", CalendarConstUtils.getFullStrFromFriendList(dayModel.friendList));
+            bundle.putString("food_list", CalendarConstUtils.getFullStrFromFoodList(dayModel.foodList));
+            bundle.putString("drink_list", CalendarConstUtils.getFullStrFromDrinkList(dayModel.drinkList));
             bundle.putString("memo", dayModel.memo);
 
 

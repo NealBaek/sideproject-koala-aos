@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.gson.Gson;
 import com.ksdigtalnomad.koala.R;
+import com.ksdigtalnomad.koala.data.models.Friend;
 import com.ksdigtalnomad.koala.databinding.ActivityCalendarDayDetailBinding;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
@@ -113,23 +115,26 @@ public class CalendarDayDetailActivity extends BaseActivity {
     }
 
     public void moveToDetailListEditActivity(String viewType){
-        startActivity(CalendarDetailListEditActivity.intent(this, viewType));
+        startActivityForResult(CalendarDetailListEditActivity.intent(this, viewType, dayModel), 0);
     }
 
-    public String getFullStr(ArrayList<String> strList){
-        String toReturn = "";
-        int cnt = strList.size();
-
-        for(int i = 0; i < cnt; ++ i){  toReturn += (i == 0 ? "" : ", ") + strList.get(i);  }
-
-        return toReturn;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == 1){
+            dayModel = new Gson().fromJson(data.getStringExtra(KEY_DAY_MODEL), DayModel.class);
+            setDayModel(dayModel);
+        }
+    }
+    private void setDayModel(DayModel dayModel){
+        mBinding.friendList.setText(CalendarConstUtils.getLongStrFromFriendList(dayModel.friendList));
+        mBinding.foodList.setText(CalendarConstUtils.getLongStrFromFoodList(dayModel.foodList));
+        mBinding.drinkList.setText(CalendarConstUtils.getLongStrFromDrinkList(dayModel.drinkList));
     }
 
     public void onSaveClick(View v){
 
         dayModel.memo = mBinding.memo.getText().toString();
-
-//        runOnUiThread(()->KeyboardHelper.hide(CalendarDayDetailActivity.this));
 
         Runnable task = () -> CalendarDataController.updateDayModel(dayModel);
         task.run();

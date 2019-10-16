@@ -1,5 +1,9 @@
 package com.ksdigtalnomad.koala.ui.customView.calendarView.day;
 
+import com.ksdigtalnomad.koala.data.models.Drink;
+import com.ksdigtalnomad.koala.data.models.Food;
+import com.ksdigtalnomad.koala.data.models.Friend;
+
 import java.util.ArrayList;
 
 public class DayModel implements Cloneable{
@@ -19,9 +23,9 @@ public class DayModel implements Cloneable{
     public int yearIdx; //
 
     public int drunkLevel;
-    public ArrayList<String> friendList = new ArrayList<String>();
-    public ArrayList<String> foodList = new ArrayList<String>();
-    public ArrayList<String> drinkList = new ArrayList<String>();
+    public ArrayList<Friend> friendList = new ArrayList<>();
+    public ArrayList<Food> foodList = new ArrayList<>();
+    public ArrayList<Drink> drinkList = new ArrayList<>();
     public String memo = "";
 
 

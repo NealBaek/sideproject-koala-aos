@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.data.models.Drink;
 import com.ksdigtalnomad.koala.data.models.Food;
@@ -13,6 +14,7 @@ import com.ksdigtalnomad.koala.data.models.Friend;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainDataController {
     private static final String PREF_FILE_NAME = "CALENDAR_DATA";
@@ -212,7 +214,7 @@ public class MainDataController {
         getEditPreference().putString(KEY_FRIEND_LIST, new Gson().toJson(list)).apply();
     }
     private static ArrayList<Friend> dumpFriendList(){
-        ArrayList<Friend> dump = new Gson().fromJson(getReadPreference().getString(KEY_FRIEND_LIST, null), ArrayList.class);
+        ArrayList<Friend> dump = new Gson().fromJson(getReadPreference().getString(KEY_FRIEND_LIST, null), new TypeToken<ArrayList<Friend>>(){}.getType());
         if(dump == null) dump = createFriendList();
         return dump;
     }
@@ -220,7 +222,7 @@ public class MainDataController {
         getEditPreference().putString(KEY_FOOD_LIST, new Gson().toJson(list)).apply();
     }
     private static ArrayList<Food> dumpFoodList(){
-        ArrayList<Food> dump = new Gson().fromJson(getReadPreference().getString(KEY_FOOD_LIST, null), ArrayList.class);
+        ArrayList<Food> dump = new Gson().fromJson(getReadPreference().getString(KEY_FOOD_LIST, null), new TypeToken<ArrayList<Food>>(){}.getType());
         if(dump == null) dump = createFoodList();
         return dump;
     }
@@ -228,7 +230,7 @@ public class MainDataController {
         getEditPreference().putString(KEY_DRINK_LIST, new Gson().toJson(list)).apply();
     }
     private static ArrayList<Drink> dumpDrinkList(){
-        ArrayList<Drink> dump = new Gson().fromJson(getReadPreference().getString(KEY_DRINK_LIST, null), ArrayList.class);
+        ArrayList<Drink> dump = new Gson().fromJson(getReadPreference().getString(KEY_DRINK_LIST, null), new TypeToken<ArrayList<Drink>>(){}.getType());
         if(dump == null) dump = createDrinkList();
         return dump;
     }

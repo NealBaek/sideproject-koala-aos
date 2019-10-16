@@ -2,12 +2,14 @@ package com.ksdigtalnomad.koala.ui.views.dialogs;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ksdigtalnomad.koala.R;
@@ -18,6 +20,8 @@ public class AddDialog extends BaseDialogFragment {
     private static final String KEY_TO_ADD = "KEY_TO_ADD";
 
     private CompleteClickListener completeClickListener;
+
+    public EditText editText;
 
     private static AddDialog newInstance() {
         return new AddDialog();
@@ -42,23 +46,41 @@ public class AddDialog extends BaseDialogFragment {
         super.onViewCreated(view, savedInstanceState);
         getArguments().getString(KEY_TO_ADD);
 
-//        mBinding.searchEt.setOnEditorActionListener((TextView v, int actionId, KeyEvent event) -> {
-//            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-//                ToastHelper.writeBottomLongToast("검색!");
-//            }
-//            return false;
-//        });
-
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-//        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE|);
+
+        editText = view.findViewById(R.id.textTF);
+
+        editText.setOnEditorActionListener((TextView v, int actionId, KeyEvent event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                if(isNameValidate()){
+//                    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                    completeClickListener.onClick(editText.getText().toString()); dismiss();
+                }else{
+                    getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+                }
+            }
+            return false;
+        });
 
         view.findViewById(R.id.btnAdd).setOnClickListener((v)->{
-            completeClickListener.onClick(); dismiss();
+            if(isNameValidate()){
+                completeClickListener.onClick(editText.getText().toString()); dismiss();
+            }
         });
         view.findViewById(R.id.btnCancel).setOnClickListener((v)->{
             dismiss();
         });
+    }
+
+    private boolean isNameValidate(){
+        Editable editable = editText.getText();
+
+        if (editable == null || editable.toString() == "" || editable.toString().length() <= 0){
+            ToastHelper.writeBottomLongToast("최소 1글자 이상 입력하셔야 합니다.");
+            return false;
+        }
+
+        return true;
     }
 
     public void setDialogListener(CompleteClickListener completeClickListener) {
@@ -66,9 +88,6 @@ public class AddDialog extends BaseDialogFragment {
     }
 
     public interface CompleteClickListener {
-        void onClick();
+        void onClick(String newName);
     }
-
-    public void onCancelClick(View v){ dismiss(); }
-    public void onAddClick(View v){ completeClickListener.onClick(); dismiss(); }
 }

@@ -11,6 +11,9 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.ksdigtalnomad.koala.data.models.Drink;
+import com.ksdigtalnomad.koala.data.models.Food;
+import com.ksdigtalnomad.koala.data.models.Friend;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendar.CalendarView;
 
@@ -210,10 +213,9 @@ public class DayView extends RelativeLayout {
     private void drawListTvs(Canvas canvas, int TEXT_HEIGHT, int TARGET_Y, Paint txPaint, DayModel dayModel){
 
         //  1. list text 검증
-
-        String friendStr = CalendarConstUtils.getShortStr(dayModel.friendList);
-        String foodStr = CalendarConstUtils.getShortStr(dayModel.foodList);
-        String drinkStr = CalendarConstUtils.getShortStr(dayModel.drinkList);
+        String friendStr = CalendarConstUtils.getShortStrFromFriendList(dayModel.friendList);
+        String foodStr = CalendarConstUtils.getShortStrFromFoodList(dayModel.foodList);
+        String drinkStr = CalendarConstUtils.getShortStrFromDrinkList(dayModel.drinkList);
         String memoStr = CalendarConstUtils.getShortStr(dayModel.memo);
 
         ArrayList<String> toDrawList = new ArrayList<>();

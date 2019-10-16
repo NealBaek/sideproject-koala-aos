@@ -1,5 +1,7 @@
 package com.ksdigtalnomad.koala.data.models;
 
+import android.os.Parcelable;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,4 +12,6 @@ public class Friend extends BaseData{
     String name;
     int selectedCnt;
     boolean isSelected;
+
+
 }

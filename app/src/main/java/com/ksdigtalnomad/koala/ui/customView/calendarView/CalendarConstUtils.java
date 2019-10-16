@@ -3,6 +3,10 @@ package com.ksdigtalnomad.koala.ui.customView.calendarView;
 import android.graphics.Color;
 import android.support.v4.graphics.ColorUtils;
 
+import com.ksdigtalnomad.koala.data.models.Drink;
+import com.ksdigtalnomad.koala.data.models.Food;
+import com.ksdigtalnomad.koala.data.models.Friend;
+
 import java.util.ArrayList;
 
 /**
@@ -77,13 +81,74 @@ public class CalendarConstUtils {
 
 
     // DayView Texts
-    public static String getShortStr(ArrayList<String> strList){
+//    public static String getShortStr(ArrayList<String> strList){
+//
+//        if(strList == null || strList.isEmpty()) return "";
+//
+//        if(strList.size() == 1) return strList.get(0);
+//
+//        return strList.get(0) + " 외 1";
+//    }
 
-        if(strList == null || strList.isEmpty()) return "";
+    public static String getLongStrFromFriendList(ArrayList<Friend> list){
+        return getLongStr(getFullStrFromFriendList(list));
+    }
+    public static String getLongStrFromFoodList(ArrayList<Food> list){
+        return getLongStr(getFullStrFromFoodList(list));
+    }
+    public static String getLongStrFromDrinkList(ArrayList<Drink> list){
+        return getLongStr(getFullStrFromDrinkList(list));
+    }
 
-        if(strList.size() == 1) return strList.get(0);
+    public static String getShortStrFromFriendList(ArrayList<Friend> list){
+        return getShortStr(getFullStrFromFriendList(list));
+    }
+    public static String getShortStrFromFoodList(ArrayList<Food> list){
+        return getShortStr(getFullStrFromFoodList(list));
+    }
+    public static String getShortStrFromDrinkList(ArrayList<Drink> list){
+        return getShortStr(getFullStrFromDrinkList(list));
+    }
 
-        return strList.get(0) + " 외 1";
+
+    public static String getFullStrFromFriendList(ArrayList<Friend> list){
+        if(list == null || list.size() <= 0) return "";
+
+        String toReturn = "";
+        int cnt = list.size();
+
+        for(int i = 0; i < cnt; ++ i){  toReturn += (i == 0 ? "" : ", ") + list.get(i).getName();  }
+
+        return toReturn;
+    }
+    public static String getFullStrFromFoodList(ArrayList<Food> list){
+        if(list == null || list.size() <= 0) return "";
+
+        String toReturn = "";
+        int cnt = list.size();
+
+        for(int i = 0; i < cnt; ++ i){  toReturn += (i == 0 ? "" : ", ") + list.get(i).getName();  }
+
+        return toReturn;
+    }
+    public static String getFullStrFromDrinkList(ArrayList<Drink> list){
+        if(list == null || list.size() <= 0) return "";
+
+        String toReturn = "";
+        int cnt = list.size();
+
+        for(int i = 0; i < cnt; ++ i){  toReturn += (i == 0 ? "" : ", ") + list.get(i).getName();  }
+
+        return toReturn;
+    }
+
+    public static String getLongStr(String string){
+
+        if(string == null || string.isEmpty()) return "";
+
+        if(string.length() < 25) return string;
+
+        return string.substring(0, 25) + " ..";
     }
     public static String getShortStr(String string){
 
