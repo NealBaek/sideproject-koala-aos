@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.ui.base.BaseDialogFragment;
@@ -35,7 +36,16 @@ public class DeleteDialog extends BaseDialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        this.content.setText(getArguments().getString(KEY_TEXT));
+        ((TextView)view.findViewById(R.id.textTF)).setText(getArguments().getString(KEY_TEXT));
+
+        view.findViewById(R.id.btnCancel).setOnClickListener((v)->{
+            dismiss();
+        });
+        view.findViewById(R.id.btnDelete).setOnClickListener((v)->{
+            // 삭제 처리
+            completeClickListener.onClick();
+            dismiss();
+        });
     }
 
     public void setDialogListener(CompleteClickListener completeClickListener) {
@@ -46,6 +56,6 @@ public class DeleteDialog extends BaseDialogFragment {
         void onClick();
     }
 
-    public void onCancelClick(View v){ dismiss(); }
-    public void onDeleteClick(View v){ completeClickListener.onClick(); dismiss(); }
+//    public void onCancelClick(View v){ dismiss(); }
+//    public void onDeleteClick(View v){ completeClickListener.onClick(); dismiss(); }
 }

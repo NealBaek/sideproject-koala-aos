@@ -48,6 +48,11 @@ public class CalendarDetailListAdapter extends BaseRecyclerViewAdapter<CalendarD
             holder.onItemClick();
             itemClickListener.onItemClick(holder.getAdapterPosition());
         });
+
+        holder.itemView.setOnLongClickListener(v -> {
+            itemClickListener.onItemLongClick(holder.getAdapterPosition());
+            return true;
+        });
     }
 
     @Override

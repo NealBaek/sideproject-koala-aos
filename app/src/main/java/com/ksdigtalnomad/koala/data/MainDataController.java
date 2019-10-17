@@ -30,12 +30,12 @@ public class MainDataController {
     public static ArrayList<Friend> getFriendList(){
         return dumpFriendList();
     }
-    public static ArrayList<Friend> addFriend(String name){
+    public static void addFriend(String name){
 
         ArrayList<Friend> list =  dumpFriendList();
 
         if(name == null || name.length() <= 0){
-            return list;
+            return;
         }
 
         Friend item = Friend.builder().build();
@@ -45,7 +45,7 @@ public class MainDataController {
 
         storeFriendList(list);
 
-        return list;
+        return;
     }
     public static ArrayList<Friend> updateFriend(String before, String after){
         ArrayList<Friend> list =  dumpFriendList();
@@ -90,12 +90,12 @@ public class MainDataController {
     public static ArrayList<Food> getFoodList(){
         return dumpFoodList();
     }
-    public static ArrayList<Food> addFood(String name){
+    public static void addFood(String name){
 
         ArrayList<Food> list =  dumpFoodList();
 
         if(name == null || name.length() <= 0){
-            return list;
+            return;
         }
 
         Food item = Food.builder().build();
@@ -105,7 +105,7 @@ public class MainDataController {
 
         storeFoodList(list);
 
-        return list;
+        return;
     }
     public static ArrayList<Food> updateFood(String before, String after){
         ArrayList<Food> list =  dumpFoodList();
@@ -150,12 +150,12 @@ public class MainDataController {
     public static ArrayList<Drink> getDrinkList(){
         return dumpDrinkList();
     }
-    public static ArrayList<Drink> addDrink(String name){
+    public static void addDrink(String name){
 
         ArrayList<Drink> list =  dumpDrinkList();
 
         if(name == null || name.length() <= 0){
-            return list;
+            return;
         }
 
         Drink item = Drink.builder().build();
@@ -165,7 +165,7 @@ public class MainDataController {
 
         storeDrinkList(list);
 
-        return list;
+        return;
     }
     public static ArrayList<Drink> updateDrink(String before, String after){
         ArrayList<Drink> list =  dumpDrinkList();

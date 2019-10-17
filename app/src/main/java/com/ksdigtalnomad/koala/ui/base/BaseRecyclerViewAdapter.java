@@ -10,14 +10,25 @@ public abstract class BaseRecyclerViewAdapter<VH extends RecyclerView.ViewHolder
     public void setItemClickListener(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
     }
-
     protected void setItemClickListener(@NonNull VH holder) {
         holder.itemView.setOnClickListener(view -> {
             if (itemClickListener != null) itemClickListener.onItemClick(holder.getAdapterPosition());
         });
     }
 
+
+    public void setItemLongClickListener(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+    }
+
+    protected void setItemLongClickListener(@NonNull VH holder) {
+        holder.itemView.setOnClickListener(view -> {
+            if (itemClickListener != null) itemClickListener.onItemLongClick(holder.getAdapterPosition());
+        });
+    }
+
     public interface ItemClickListener {
         void onItemClick(int position);
+        void onItemLongClick(int position);
     }
 }

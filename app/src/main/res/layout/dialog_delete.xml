@@ -51,7 +51,6 @@
                     android:layout_centerInParent="true"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:text="김치욱"
                     android:textSize="24dp"
                     android:textStyle="bold"
                     android:textColor="@color/colorDarkGray"
@@ -69,21 +68,21 @@
                     android:orientation="horizontal"
                     android:layout_alignParentRight="true">
                     <TextView
+                        android:id="@+id/btnDelete"
                         android:layout_width="50dp"
                         android:layout_height="40dp"
                         android:text="삭제"
                         android:textSize="16dp"
                         android:textStyle="bold"
-                        android:textColor="@color/colorMain"
-                        android:onClick="onDeleteClick"/>
+                        android:textColor="@color/colorMain"/>
                     <TextView
+                        android:id="@+id/btnCancel"
                         android:layout_width="50dp"
                         android:layout_height="40dp"
                         android:text="취소"
                         android:textSize="16dp"
                         android:textStyle="bold"
-                        android:textColor="@color/colorDarkGray"
-                        android:onClick="onCancelClick"/>
+                        android:textColor="@color/colorDarkGray"/>
                 </LinearLayout>
 
 

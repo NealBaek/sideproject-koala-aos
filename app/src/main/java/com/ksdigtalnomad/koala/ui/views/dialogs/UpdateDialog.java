@@ -2,9 +2,13 @@ package com.ksdigtalnomad.koala.ui.views.dialogs;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.ui.base.BaseDialogFragment;
@@ -13,6 +17,9 @@ public class UpdateDialog extends BaseDialogFragment {
     private static final String KEY_TO_ADD = "KEY_TO_ADD";
 
     private CompleteClickListener completeClickListener;
+
+    private EditText editText;
+    private String originalName;
 
     private static UpdateDialog newInstance() {
         return new UpdateDialog();
@@ -35,7 +42,7 @@ public class UpdateDialog extends BaseDialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getArguments().getString(KEY_TO_ADD);
+        originalName = getArguments().getString(KEY_TO_ADD);
 
 //        mBinding.searchEt.setOnEditorActionListener((TextView v, int actionId, KeyEvent event) -> {
 //            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -45,6 +52,15 @@ public class UpdateDialog extends BaseDialogFragment {
 //            return false;
 //        });
 
+        editText = view.findViewById(R.id.textTF);
+        editText.setText(originalName);
+
+        editText.setOnEditorActionListener((TextView v, int actionId, KeyEvent event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                completeClickListener.onClick(); dismiss();
+            }
+            return false;
+        });
         view.findViewById(R.id.btnUpdate).setOnClickListener((v)->{
             completeClickListener.onClick(); dismiss();
         });
@@ -52,8 +68,10 @@ public class UpdateDialog extends BaseDialogFragment {
             dismiss();
         });
         view.findViewById(R.id.btnDelete).setOnClickListener((v)->{
-            DeleteDialog dialog = DeleteDialog.newInstance("");
-            dialog.setDialogListener(()->{});
+            DeleteDialog dialog = DeleteDialog.newInstance(originalName);
+            dialog.setDialogListener(()->{
+                // 삭제 처리
+            });
             dialog.show(getActivity().getFragmentManager(), "Delete Dialog");
         });
     }

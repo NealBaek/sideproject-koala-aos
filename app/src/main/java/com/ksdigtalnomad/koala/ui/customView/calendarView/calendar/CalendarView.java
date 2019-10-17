@@ -272,7 +272,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         final int YEAR = previousMonth.year;
         final int MONTH = previousMonth.month;
 
-        String monthTitle = YEAR + "." + (MONTH < 10 ? "0" + MONTH : MONTH);
+        String monthTitle = YEAR + "." + (MONTH < 10 ? "0" + MONTH : MONTH) + ".";
         monthTitleTv.setText(monthTitle);
     }
 

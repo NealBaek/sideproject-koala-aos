@@ -22,6 +22,7 @@ import com.ksdigtalnomad.koala.data.models.Friend;
 import com.ksdigtalnomad.koala.databinding.ActivityCalendarDetailListEditBinding;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
+import com.ksdigtalnomad.koala.ui.base.BaseRecyclerViewAdapter;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.views.dialogs.AddDialog;
 import com.ksdigtalnomad.koala.ui.views.dialogs.UpdateDialog;
@@ -64,7 +65,6 @@ public class CalendarDetailListEditActivity extends BaseActivity {
         this.dayModel = new Gson().fromJson(getIntent().getStringExtra(KEY_DAY_MODEL), DayModel.class);
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_calendar_detail_list_edit);
-        mBinding.setLifecycleOwner(this);
         mBinding.setActivity(this);
 
         setViewType(viewType);
@@ -80,8 +80,61 @@ public class CalendarDetailListEditActivity extends BaseActivity {
         });
 
         CalendarDetailListAdapter adapter = new CalendarDetailListAdapter(this, dataList, viewType);
-        adapter.setItemClickListener(position -> {
-            setSaveBtnEnable(viewType);
+        adapter.setItemClickListener(new BaseRecyclerViewAdapter.ItemClickListener(){
+            @Override
+            public void onItemClick(int position) {
+                setSaveBtnEnable(viewType);
+            }
+
+            @Override
+            public void onItemLongClick(int position) {
+//                AddDialog dialog = AddDialog.newInstance(toAdd);
+//                dialog.setDialogListener((newName)->{
+//                    Runnable runnable = ()->{
+//                        dataList.clear();
+//
+//                        if(viewType.equals(TYPE_FRIENDS)){
+//                            dataList.addAll(MainDataController.addFriend(newName));
+//
+//                        }else if(viewType.equals(TYPE_DRINKS)){
+//                            dataList.addAll(MainDataController.addDrink(newName));
+//
+//                        }else if(viewType.equals(TYPE_FOODS)){
+//                            dataList.addAll(MainDataController.addFood(newName));
+//                        }
+//
+//                        CalendarDetailListEditActivity.this.runOnUiThread(()->{
+//                            mBinding.dataRv.getAdapter().notifyDataSetChanged();
+//                            setDataListVisible();
+//                        });
+//
+//                    };
+//                    runnable.run();
+//
+//                });
+//
+//                dialog.show(getFragmentManager(), "Add Dialog");
+
+                String toUpdate = "";
+
+                if(viewType.equals(TYPE_FRIENDS)){
+                    toUpdate = ((ArrayList<Friend>)dataList).get(position).getName();
+                }else if(viewType.equals(TYPE_FOODS)){
+                    toUpdate = ((ArrayList<Food>)dataList).get(position).getName();
+                }else if(viewType.equals(TYPE_DRINKS)){
+                    toUpdate = ((ArrayList<Drink>)dataList).get(position).getName();
+                }
+
+                UpdateDialog dialog = UpdateDialog.newInstance(toUpdate);
+                dialog.setDialogListener(()->{
+                    Runnable runnable = ()->{
+
+                    };
+                    runnable.run();
+                });
+
+                dialog.show(getFragmentManager(), "Update Dialog");
+            }
         });
 
         mBinding.dataRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -111,7 +164,8 @@ public class CalendarDetailListEditActivity extends BaseActivity {
                 }
             }
 
-            dataList = savedList;
+            dataList.clear();
+            dataList.addAll(savedList);
 
         }else if(viewType.equals(TYPE_DRINKS)){
             mBinding.headerText.setText(getResources().getString(R.string.calendar_detail_drink_title));
@@ -122,6 +176,7 @@ public class CalendarDetailListEditActivity extends BaseActivity {
             int selectedCnt = selectedList.size();
             for(int i = 0; i < selectedCnt; ++i){
                 Drink selected = selectedList.get(i);
+                if(selected.isSelected()) break;
 
                 int savedCnt = savedList.size();
                 for(int j = 0; j < savedCnt; ++j){
@@ -133,7 +188,8 @@ public class CalendarDetailListEditActivity extends BaseActivity {
                 }
             }
 
-            dataList = savedList;
+            dataList.clear();
+            dataList.addAll(savedList);
 
         }else if(viewType.equals(TYPE_FOODS)){
             mBinding.headerText.setText(getResources().getString(R.string.calendar_detail_foods_title));
@@ -144,6 +200,7 @@ public class CalendarDetailListEditActivity extends BaseActivity {
             int selectedCnt = selectedList.size();
             for(int i = 0; i < selectedCnt; ++i){
                 Food selected = selectedList.get(i);
+                if(selected.isSelected()) break;
 
                 int savedCnt = savedList.size();
                 for(int j = 0; j < savedCnt; ++j){
@@ -155,8 +212,8 @@ public class CalendarDetailListEditActivity extends BaseActivity {
                 }
             }
 
-            dataList = savedList;
-
+            dataList.clear();
+            dataList.addAll(savedList);
         }
 
         setSaveBtnEnable(viewType);
@@ -225,17 +282,22 @@ public class CalendarDetailListEditActivity extends BaseActivity {
         AddDialog dialog = AddDialog.newInstance(toAdd);
         dialog.setDialogListener((newName)->{
             Runnable runnable = ()->{
-                dataList.clear();
-
-                if(viewType.equals(TYPE_FRIENDS)){
-                    dataList.addAll(MainDataController.addFriend(newName));
-
-                }else if(viewType.equals(TYPE_DRINKS)){
-                    dataList.addAll(MainDataController.addDrink(newName));
-
-                }else if(viewType.equals(TYPE_FOODS)){
-                    dataList.addAll(MainDataController.addFood(newName));
-                }
+                 if(viewType.equals(TYPE_FRIENDS)){
+                     MainDataController.addFriend(newName);
+                     Friend item = Friend.builder().build();
+                     item.setName(newName);
+                     dataList.add(0, item);
+                 }else if(viewType.equals(TYPE_FOODS)){
+                    MainDataController.addFood(newName);
+                    Food item = Food.builder().build();
+                    item.setName(newName);
+                     dataList.add(0, item);
+                 }else if(viewType.equals(TYPE_DRINKS)){
+                     MainDataController.addDrink(newName);
+                     Drink item = Drink.builder().build();
+                     item.setName(newName);
+                     dataList.add(0, item);
+                 }
 
                 CalendarDetailListEditActivity.this.runOnUiThread(()->{
                     mBinding.dataRv.getAdapter().notifyDataSetChanged();
