@@ -44,11 +44,11 @@ public class AddDialog extends BaseDialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getArguments().getString(KEY_TO_ADD);
 
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         editText = view.findViewById(R.id.textTF);
+        editText.setText(getArguments().getString(KEY_TO_ADD));
 
         editText.setOnEditorActionListener((TextView v, int actionId, KeyEvent event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {

@@ -57,7 +57,9 @@ public class MainDataController {
         int listSize = list.size();
         for(int i = 0; i < listSize; ++ i){
             Friend temp = list.get(i);
-            if(temp.getName() == before){
+
+            Log.d("ABC", "a: " + temp.getName() + ", b: " + before);
+            if(temp.getName().equals(before)){
                 temp.setName(after);
                 list.set(i, temp);
                 storeFriendList(list);
@@ -77,7 +79,7 @@ public class MainDataController {
         int listSize = list.size();
         for(int i = 0; i < listSize; ++ i){
             Friend temp = list.get(i);
-            if(temp.getName() == name){
+            if(temp.getName().equals(name)){
                 list.remove(i);
                 storeFriendList(list);
                 break;
@@ -117,7 +119,7 @@ public class MainDataController {
         int listSize = list.size();
         for(int i = 0; i < listSize; ++ i){
             Food temp = list.get(i);
-            if(temp.getName() == before){
+            if(temp.getName().equals(before)){
                 temp.setName(after);
                 list.set(i, temp);
                 storeFoodList(list);
@@ -137,7 +139,7 @@ public class MainDataController {
         int listSize = list.size();
         for(int i = 0; i < listSize; ++ i){
             Food temp = list.get(i);
-            if(temp.getName() == name){
+            if(temp.getName().equals(name)){
                 list.remove(i);
                 storeFoodList(list);
                 break;
@@ -177,7 +179,7 @@ public class MainDataController {
         int listSize = list.size();
         for(int i = 0; i < listSize; ++ i){
             Drink temp = list.get(i);
-            if(temp.getName() == before){
+            if(temp.getName().equals(before)){
                 temp.setName(after);
                 list.set(i, temp);
                 storeDrinkList(list);
@@ -197,7 +199,7 @@ public class MainDataController {
         int listSize = list.size();
         for(int i = 0; i < listSize; ++ i){
             Drink temp = list.get(i);
-            if(temp.getName() == name){
+            if(temp.getName().equals(name)){
                 list.remove(i);
                 storeDrinkList(list);
                 break;

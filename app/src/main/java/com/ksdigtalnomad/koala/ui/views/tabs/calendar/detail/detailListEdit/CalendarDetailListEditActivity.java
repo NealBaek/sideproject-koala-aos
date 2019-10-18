@@ -88,33 +88,6 @@ public class CalendarDetailListEditActivity extends BaseActivity {
 
             @Override
             public void onItemLongClick(int position) {
-//                AddDialog dialog = AddDialog.newInstance(toAdd);
-//                dialog.setDialogListener((newName)->{
-//                    Runnable runnable = ()->{
-//                        dataList.clear();
-//
-//                        if(viewType.equals(TYPE_FRIENDS)){
-//                            dataList.addAll(MainDataController.addFriend(newName));
-//
-//                        }else if(viewType.equals(TYPE_DRINKS)){
-//                            dataList.addAll(MainDataController.addDrink(newName));
-//
-//                        }else if(viewType.equals(TYPE_FOODS)){
-//                            dataList.addAll(MainDataController.addFood(newName));
-//                        }
-//
-//                        CalendarDetailListEditActivity.this.runOnUiThread(()->{
-//                            mBinding.dataRv.getAdapter().notifyDataSetChanged();
-//                            setDataListVisible();
-//                        });
-//
-//                    };
-//                    runnable.run();
-//
-//                });
-//
-//                dialog.show(getFragmentManager(), "Add Dialog");
-
                 String toUpdate = "";
 
                 if(viewType.equals(TYPE_FRIENDS)){
@@ -125,9 +98,30 @@ public class CalendarDetailListEditActivity extends BaseActivity {
                     toUpdate = ((ArrayList<Drink>)dataList).get(position).getName();
                 }
 
-                UpdateDialog dialog = UpdateDialog.newInstance(toUpdate);
-                dialog.setDialogListener(()->{
+                UpdateDialog dialog = UpdateDialog.newInstance(position, toUpdate);
+                dialog.setDialogListener((pos, newName)->{
                     Runnable runnable = ()->{
+                        boolean isDelete = (newName == null || newName.equals(""));
+                        if(viewType.equals(TYPE_FRIENDS)){
+                            Friend item = (Friend) dataList.get(pos);
+                            // TODO:!!
+                            if(isDelete){
+                                dataList.remove(pos);
+                                MainDataController.deleteFriend(item.getName());
+                            }else{
+                                ((Friend) dataList.get(pos)).setName(newName);
+                                MainDataController.updateFriend(item.getName(), newName);
+                            }
+                        }else if(viewType.equals(TYPE_FOODS)){
+
+                        }else if(viewType.equals(TYPE_DRINKS)){
+
+                        }
+
+                        CalendarDetailListEditActivity.this.runOnUiThread(()->{
+                            mBinding.dataRv.getAdapter( ).notifyDataSetChanged();
+                            setDataListVisible();
+                        });
 
                     };
                     runnable.run();

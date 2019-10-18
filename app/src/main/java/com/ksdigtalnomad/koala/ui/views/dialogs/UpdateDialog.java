@@ -14,20 +14,23 @@ import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.ui.base.BaseDialogFragment;
 
 public class UpdateDialog extends BaseDialogFragment {
+    private static final String KEY_POSITION = "KEY_POSITION";
     private static final String KEY_TO_ADD = "KEY_TO_ADD";
 
     private CompleteClickListener completeClickListener;
 
     private EditText editText;
     private String originalName;
+    private int originalPos;
 
     private static UpdateDialog newInstance() {
         return new UpdateDialog();
     }
 
-    public static UpdateDialog newInstance(String text) {
+    public static UpdateDialog newInstance(int position, String text) {
         UpdateDialog dialog = newInstance();
         Bundle bundle = new Bundle();
+        bundle.putInt(KEY_POSITION, position);
         bundle.putString(KEY_TO_ADD, text);
         dialog.setArguments(bundle);
         return dialog;
@@ -43,6 +46,7 @@ public class UpdateDialog extends BaseDialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         originalName = getArguments().getString(KEY_TO_ADD);
+        originalPos = getArguments().getInt(KEY_POSITION);
 
 //        mBinding.searchEt.setOnEditorActionListener((TextView v, int actionId, KeyEvent event) -> {
 //            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -57,12 +61,16 @@ public class UpdateDialog extends BaseDialogFragment {
 
         editText.setOnEditorActionListener((TextView v, int actionId, KeyEvent event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                completeClickListener.onClick(); dismiss();
+                if(editText.getText() != null || !editText.getText().toString().equals("")){
+                    completeClickListener.onClick(originalPos, editText.getText().toString()); dismiss();
+                }
             }
             return false;
         });
         view.findViewById(R.id.btnUpdate).setOnClickListener((v)->{
-            completeClickListener.onClick(); dismiss();
+            if(editText.getText() != null || !editText.getText().toString().equals("")){
+                completeClickListener.onClick(originalPos, editText.getText().toString()); dismiss();
+            }
         });
         view.findViewById(R.id.btnCancel).setOnClickListener((v)->{
             dismiss();
@@ -81,6 +89,6 @@ public class UpdateDialog extends BaseDialogFragment {
     }
 
     public interface CompleteClickListener {
-        void onClick();
+        void onClick(int pos, String toChange);
     }
 }
