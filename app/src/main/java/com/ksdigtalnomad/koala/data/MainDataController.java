@@ -58,7 +58,6 @@ public class MainDataController {
         for(int i = 0; i < listSize; ++ i){
             Friend temp = list.get(i);
 
-            Log.d("ABC", "a: " + temp.getName() + ", b: " + before);
             if(temp.getName().equals(before)){
                 temp.setName(after);
                 list.set(i, temp);

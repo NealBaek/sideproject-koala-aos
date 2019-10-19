@@ -53,10 +53,7 @@ public class AddDialog extends BaseDialogFragment {
         editText.setOnEditorActionListener((TextView v, int actionId, KeyEvent event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 if(isNameValidate()){
-//                    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
                     completeClickListener.onClick(editText.getText().toString()); dismiss();
-                }else{
-                    getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
                 }
             }
             return false;
@@ -76,6 +73,7 @@ public class AddDialog extends BaseDialogFragment {
         Editable editable = editText.getText();
 
         if (editable == null || editable.toString() == "" || editable.toString().length() <= 0){
+            getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
             ToastHelper.writeBottomLongToast("최소 1글자 이상 입력하셔야 합니다.");
             return false;
         }

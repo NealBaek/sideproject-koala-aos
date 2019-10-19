@@ -98,19 +98,20 @@ public class CalendarDetailListEditActivity extends BaseActivity {
                     toUpdate = ((ArrayList<Drink>)dataList).get(position).getName();
                 }
 
+                Log.d("ABC", "1: toUpdate: " + toUpdate + ", position: " + position);
+
                 UpdateDialog dialog = UpdateDialog.newInstance(position, toUpdate);
                 dialog.setDialogListener((pos, newName)->{
                     Runnable runnable = ()->{
                         boolean isDelete = (newName == null || newName.equals(""));
                         if(viewType.equals(TYPE_FRIENDS)){
                             Friend item = (Friend) dataList.get(pos);
-                            // TODO:!!
                             if(isDelete){
                                 dataList.remove(pos);
                                 MainDataController.deleteFriend(item.getName());
                             }else{
-                                ((Friend) dataList.get(pos)).setName(newName);
                                 MainDataController.updateFriend(item.getName(), newName);
+                                item.setName(newName);
                             }
                         }else if(viewType.equals(TYPE_FOODS)){
 
