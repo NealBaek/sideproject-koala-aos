@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -44,6 +46,7 @@ public class CalendarDetailListEditActivity extends BaseActivity {
     private DayModel dayModel;
 
     private ActivityCalendarDetailListEditBinding mBinding;
+    private CalendarDetailListAdapter adapter;
 
     private ArrayList dataList = new ArrayList<>();
 
@@ -70,16 +73,20 @@ public class CalendarDetailListEditActivity extends BaseActivity {
         setViewType(viewType);
 
         mBinding.adView.loadAd(new AdRequest.Builder().build());
-        mBinding.searchEt.setOnEditorActionListener((TextView v, int actionId, KeyEvent event) -> {
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                KeyboardHelper.hide(CalendarDetailListEditActivity.this);
-                ToastHelper.writeBottomLongToast("검색!");
-                return true;
+        mBinding.searchEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                adapter.filter(s.toString());
             }
-            return false;
         });
 
-        CalendarDetailListAdapter adapter = new CalendarDetailListAdapter(this, dataList, viewType);
+        adapter = new CalendarDetailListAdapter(this, dataList, viewType);
         adapter.setItemClickListener(new BaseRecyclerViewAdapter.ItemClickListener(){
             @Override
             public void onItemClick(int position) {

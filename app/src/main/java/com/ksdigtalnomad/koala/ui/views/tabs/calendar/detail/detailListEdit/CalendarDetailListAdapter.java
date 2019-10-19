@@ -18,17 +18,46 @@ import com.ksdigtalnomad.koala.data.models.Friend;
 import com.ksdigtalnomad.koala.ui.base.BaseRecyclerViewAdapter;
 
 import java.util.ArrayList;
+import java.util.Locale;
+
+import static com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity.TYPE_DRINKS;
+import static com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity.TYPE_FOODS;
+import static com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity.TYPE_FRIENDS;
 
 
 public class CalendarDetailListAdapter extends BaseRecyclerViewAdapter<CalendarDetailListAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<BaseData> list;
+    private ArrayList<BaseData> originalList;
+    private ArrayList<BaseData> searchList = new ArrayList<>();
     private String viewType;
 
     CalendarDetailListAdapter(Context context, ArrayList<BaseData> list, String viewType) {
         this.context = context;
-        this.list = list;
+        this.originalList = list;
         this.viewType = viewType;
+        this.searchList.addAll(list);
+    }
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        searchList.clear();
+        if (charText.length() == 0) {
+            searchList.addAll(originalList);
+        } else {
+            for (BaseData item : originalList) {
+                String name = "";
+                if(viewType.equals(TYPE_FRIENDS)){
+                    name = ((Friend)item).getName();
+                }else if(viewType.equals(TYPE_FOODS)){
+                    name = ((Food)item).getName();
+                }else if(viewType.equals(TYPE_DRINKS)){
+                    name = ((Drink)item).getName();
+                }
+                if (name.toLowerCase().contains(charText)) {
+                    searchList.add(item);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -42,11 +71,27 @@ public class CalendarDetailListAdapter extends BaseRecyclerViewAdapter<CalendarD
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.setBaseData(list.get(position), viewType);
+        holder.setBaseData(searchList.get(position), viewType);
 
         holder.itemView.setOnClickListener(v -> {
-            holder.onItemClick();
-            itemClickListener.onItemClick(holder.getAdapterPosition());
+
+            BaseData searchBaseData = holder.baseData;
+            if(viewType.equals(TYPE_FRIENDS)){
+                Friend searchItem = (Friend) searchBaseData;
+
+                for (BaseData originalBaseData : originalList){
+                    Friend item = (Friend) originalBaseData;
+                    if(searchItem.getName().equals(item.getName())){
+                        item.setSelected(searchItem.isSelected());
+                        break;
+                    }
+                }
+            }
+
+            holder.itemView.post(()->{
+                holder.onItemClick(); // Change cell selected
+                itemClickListener.onItemClick(holder.getAdapterPosition()); // change save btn enable
+            });
         });
 
         holder.itemView.setOnLongClickListener(v -> {
@@ -57,13 +102,13 @@ public class CalendarDetailListAdapter extends BaseRecyclerViewAdapter<CalendarD
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return searchList.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         ImageView checkBtn;
-        BaseData baseData;
+        public BaseData baseData;
         String viewType;
 
         ViewHolder(View itemView) {
@@ -75,28 +120,29 @@ public class CalendarDetailListAdapter extends BaseRecyclerViewAdapter<CalendarD
 
         public void onItemClick(){
             switch (viewType) {
-                case CalendarDetailListEditActivity.TYPE_FRIENDS :
+                case TYPE_FRIENDS :
                     Friend friend = (Friend) baseData;
                     friend.setSelected(!friend.isSelected());
-                    title.setSelected(friend.isSelected());
-                    checkBtn.setVisibility(friend.isSelected() ? View.VISIBLE : View.INVISIBLE);
+                    setSelected(friend.isSelected());
 
                     break;
                 case CalendarDetailListEditActivity.TYPE_FOODS :
                     Food food = (Food) baseData;
                     food.setSelected(!food.isSelected());
-                    title.setSelected(food.isSelected());
-                    checkBtn.setVisibility(food.isSelected() ? View.VISIBLE : View.INVISIBLE);
+                    setSelected(food.isSelected());
 
                     break;
                 case CalendarDetailListEditActivity.TYPE_DRINKS :
                     Drink drink = (Drink) baseData;
                     drink.setSelected(!drink.isSelected());
-                    title.setSelected(drink.isSelected());
-                    checkBtn.setVisibility(drink.isSelected() ? View.VISIBLE : View.INVISIBLE);
+                    setSelected(drink.isSelected());
 
                     break;
             }
+        }
+        private void setSelected(boolean isSelected){
+            title.setSelected(isSelected);
+            checkBtn.setVisibility(isSelected ? View.VISIBLE : View.INVISIBLE);
         }
 
         public void setBaseData(BaseData baseData, String viewType){
@@ -105,7 +151,7 @@ public class CalendarDetailListAdapter extends BaseRecyclerViewAdapter<CalendarD
             this.viewType = viewType;
 
             switch (viewType) {
-                case CalendarDetailListEditActivity.TYPE_FRIENDS :
+                case TYPE_FRIENDS :
                     Friend friend = (Friend) baseData;
                     title.setText(friend.getName());
                     checkBtn.setVisibility(friend.isSelected() ? View.VISIBLE : View.INVISIBLE);
