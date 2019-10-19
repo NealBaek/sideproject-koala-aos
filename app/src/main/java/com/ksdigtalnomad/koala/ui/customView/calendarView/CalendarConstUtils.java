@@ -154,8 +154,8 @@ public class CalendarConstUtils {
 
         if(string == null || string.isEmpty()) return "";
 
-        if(string.length() < 5) return string;
+        if(string.length() < 7) return string;
 
-        return string.substring(0, 4) + " ..";
+        return string.substring(0, 6) + " ..";
     }
 }

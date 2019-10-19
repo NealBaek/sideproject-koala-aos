@@ -98,8 +98,6 @@ public class CalendarDetailListEditActivity extends BaseActivity {
                     toUpdate = ((ArrayList<Drink>)dataList).get(position).getName();
                 }
 
-                Log.d("ABC", "1: toUpdate: " + toUpdate + ", position: " + position);
-
                 UpdateDialog dialog = UpdateDialog.newInstance(position, toUpdate);
                 dialog.setDialogListener((pos, newName)->{
                     Runnable runnable = ()->{
@@ -114,9 +112,23 @@ public class CalendarDetailListEditActivity extends BaseActivity {
                                 item.setName(newName);
                             }
                         }else if(viewType.equals(TYPE_FOODS)){
-
+                            Food item = (Food) dataList.get(pos);
+                            if(isDelete){
+                                dataList.remove(pos);
+                                MainDataController.deleteFood(item.getName());
+                            }else{
+                                MainDataController.updateFood(item.getName(), newName);
+                                item.setName(newName);
+                            }
                         }else if(viewType.equals(TYPE_DRINKS)){
-
+                            Drink item = (Drink) dataList.get(pos);
+                            if(isDelete){
+                                dataList.remove(pos);
+                                MainDataController.deleteDrink(item.getName());
+                            }else{
+                                MainDataController.updateDrink(item.getName(), newName);
+                                item.setName(newName);
+                            }
                         }
 
                         CalendarDetailListEditActivity.this.runOnUiThread(()->{
