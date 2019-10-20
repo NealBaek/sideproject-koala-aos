@@ -11,13 +11,18 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.data.models.Drink;
 import com.ksdigtalnomad.koala.data.models.Food;
 import com.ksdigtalnomad.koala.data.models.Friend;
+import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendar.CalendarView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DayView extends RelativeLayout {
 
@@ -26,6 +31,8 @@ public class DayView extends RelativeLayout {
 
     // Data
     private DayModel dayModel = null;
+    private Date thisDate = null;
+    private Date today = new Date();
 
 
     // Paints
@@ -60,21 +67,29 @@ public class DayView extends RelativeLayout {
         setBackgroundColor(Color.WHITE);
 
 
+
         // 2. 클릭 이벤트 설정
         setOnClickListener(view -> {
-            if(!dayModel.isOutMonth){
-                int id = (int) (Math.random() * 10000000);
-                dayModel.dayViewId =  id;
-                setId(id);
+            if(!dayModel.isOutMonth && !thisDate.after(today)){
                 eventInterface.onDayViewTouch(dayModel);
             }
         });
     }
 
 
-    /** set Data*/
+    /** get & set Data */
+    public DayModel getDayModel(){
+        return this.dayModel;
+    }
     public void setDayModel(DayModel dayModel){
         this.dayModel = dayModel;
+        try{
+            // TODO: 2일 시간 텀 있다.. 확인해보자
+            this.thisDate = new SimpleDateFormat("yyyyMMdd").parse("" + dayModel.year + "." + dayModel.month + "." + dayModel.day);
+        }catch (ParseException e){
+            this.thisDate = new Date();
+        }
+
 
         // 1. 페인트 준비
         initPaints(dayModel);
@@ -110,7 +125,7 @@ public class DayView extends RelativeLayout {
         txHeightForBody = bodyTvBound.height();
 
         // 5. Blinder Rect Paint 만들기
-        blinderRectPt = createRectPaint(ColorUtils.setAlphaComponent(Color.WHITE, 200));
+        blinderRectPt = createRectPaint(ColorUtils.setAlphaComponent(BaseApplication.getInstance().getResources().getColor(R.color.colorLightGray), 200));
     }
 
     // Create Paints
@@ -161,20 +176,19 @@ public class DayView extends RelativeLayout {
         drawDayTv(canvas, txHeightForHeader, TEXT_PADDING_LEFT, dayTvTopMargin, dayTvHeight, dayTvPt, dayModel);
 
 
-        // 2. drunkLv 그리기
+        // 2. DayModel 내용 그리기
+        if(dayModel.isSaved){
+            //  2-1. DrinkLv Rect Bottom 계산
+            int drunkLvRectBottom = dayTvTopMargin + (dayTvHeight * 2);
+            //  2-2. DrinkLv Rect & Text 그리기
+            drawDrunkLv(canvas, txHeightForHeader, dayTvTopMargin, dayTvHeight, drunkLvRectBottom, parentWidth, drunkLvRectPt, drunkLvTvPt, DRUNK_LV_STR, dayModel.drunkLevel);
 
-        //  2-1. DrinkLv Rect Bottom 계산
-        int drunkLvRectBottom = dayTvTopMargin + (dayTvHeight * 2);
-
-        //  2-2. DrinkLv Rect & Text 그리기
-        drawDrunkLv(canvas, txHeightForHeader, dayTvTopMargin, dayTvHeight, drunkLvRectBottom, parentWidth, drunkLvRectPt, drunkLvTvPt, DRUNK_LV_STR, dayModel.drunkLevel);
+            // 2-3. 리스트 텍스트 그리기
+            drawListTvs(canvas, txHeightForBody ,drunkLvRectBottom, listTvPt, dayModel);
+        }
 
 
-        // 3. 리스트 텍스트 그리기
-        drawListTvs(canvas, txHeightForBody ,drunkLvRectBottom, listTvPt, dayModel);
-
-
-        // 4. OutMonth 블라인더 그리기
+        // 3. OutMonth 블라인더 그리기
         if(dayModel.isOutMonth) drawBlinderRect(canvas, parentWidth, parentHeight, blinderRectPt);
     }
 

@@ -3,9 +3,12 @@ package com.ksdigtalnomad.koala.ui.customView.calendarView.month;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ViewGroup;
 
+import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendar.CalendarView;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayView;
 
 /**
@@ -17,12 +20,16 @@ public class MonthRvAdapter extends RecyclerView.Adapter{
     private Context context;
     private MonthModel monthModel;
     private CalendarView.EventInterface eventInterface;
+    private int randomId;
 
 
-    public MonthRvAdapter(Context context, MonthModel monthModel, CalendarView.EventInterface eventInterface){
+    public MonthRvAdapter(Context context, MonthModel monthModel, CalendarView.EventInterface eventInterface, int randomId){
         this.context = context;
         this.monthModel = monthModel;
         this.eventInterface = eventInterface;
+        this.randomId = randomId;
+
+        Log.d("ABC", "randomId: " + randomId);
     }
 
     public void notifyDataChange(MonthModel monthModel){
@@ -47,9 +54,17 @@ public class MonthRvAdapter extends RecyclerView.Adapter{
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 
+        DayModel dayModel = monthModel.dayList.get(i);
+
         DayView dayView = ((ViewHolder) viewHolder).dayView;
+        dayView.setId(randomId + dayModel.day + (dayModel.isOutMonth ? CalendarConstUtils.ID_CNT_ISOUTMONTH : 0));
+        dayModel.dayViewId = dayView.getId();
 
         dayView.setDayModel(monthModel.dayList.get(i));
+
+        Log.d("ABC", "day: " + dayModel.day);
+        Log.d("ABC", "ViewID1: " + randomId + dayModel.day + (dayModel.isOutMonth ? CalendarConstUtils.ID_CNT_ISOUTMONTH : 0));
+        Log.d("ABC", "ViewID2: " + dayView.getId());
 
     }
 

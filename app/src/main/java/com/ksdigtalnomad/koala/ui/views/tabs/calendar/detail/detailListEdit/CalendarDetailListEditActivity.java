@@ -108,33 +108,54 @@ public class CalendarDetailListEditActivity extends BaseActivity {
                 UpdateDialog dialog = UpdateDialog.newInstance(position, toUpdate);
                 dialog.setDialogListener((pos, newName)->{
                     Runnable runnable = ()->{
+
+                        ArrayList<BaseData> searchList = adapter.getSearchList();
+                        int dataListCnt = dataList.size();
+
                         boolean isDelete = (newName == null || newName.equals(""));
+
                         if(viewType.equals(TYPE_FRIENDS)){
-                            Friend item = (Friend) dataList.get(pos);
+                            Friend searchItem = (Friend) searchList.get(pos);
                             if(isDelete){
-                                dataList.remove(pos);
-                                MainDataController.deleteFriend(item.getName());
+                                for(int i = 0; i < dataListCnt; ++i){
+                                    Friend originalItem = (Friend) dataList.get(i);
+                                    Log.d("ABC", "originName: " + originalItem.getName() + ", searchName: " + searchItem.getName());
+                                    if(searchItem.getName().equals(originalItem.getName())){
+                                        dataList.remove(i);
+                                        break;
+                                    }
+                                }
+                                searchList.remove(pos);
                             }else{
-                                MainDataController.updateFriend(item.getName(), newName);
-                                item.setName(newName);
+                                searchItem.setName(newName);
                             }
                         }else if(viewType.equals(TYPE_FOODS)){
-                            Food item = (Food) dataList.get(pos);
+                            Food searchItem = (Food) searchList.get(pos);
                             if(isDelete){
-                                dataList.remove(pos);
-                                MainDataController.deleteFood(item.getName());
+                                for(int i = 0; i < dataListCnt; ++i){
+                                    Food originalItem = (Food) dataList.get(i);
+                                    if(searchItem.getName().equals(originalItem.getName())){
+                                        dataList.remove(i);
+                                        break;
+                                    }
+                                }
+                                searchList.remove(pos);
                             }else{
-                                MainDataController.updateFood(item.getName(), newName);
-                                item.setName(newName);
+                                searchItem.setName(newName);
                             }
                         }else if(viewType.equals(TYPE_DRINKS)){
-                            Drink item = (Drink) dataList.get(pos);
+                            Drink searchItem = (Drink) searchList.get(pos);
                             if(isDelete){
-                                dataList.remove(pos);
-                                MainDataController.deleteDrink(item.getName());
+                                for(int i = 0; i < dataListCnt; ++i){
+                                    Drink originalItem = (Drink) dataList.get(i);
+                                    if(searchItem.getName().equals(originalItem.getName())){
+                                        dataList.remove(i);
+                                        break;
+                                    }
+                                }
+                                searchList.remove(pos);
                             }else{
-                                MainDataController.updateDrink(item.getName(), newName);
-                                item.setName(newName);
+                                searchItem.setName(newName);
                             }
                         }
 
@@ -297,20 +318,20 @@ public class CalendarDetailListEditActivity extends BaseActivity {
         dialog.setDialogListener((newName)->{
             Runnable runnable = ()->{
                  if(viewType.equals(TYPE_FRIENDS)){
-                     MainDataController.addFriend(newName);
                      Friend item = Friend.builder().build();
                      item.setName(newName);
                      dataList.add(0, item);
+                     adapter.getSearchList().add(0, item);
                  }else if(viewType.equals(TYPE_FOODS)){
-                    MainDataController.addFood(newName);
                     Food item = Food.builder().build();
                     item.setName(newName);
-                     dataList.add(0, item);
+                    dataList.add(0, item);
+                    adapter.getSearchList().add(0, item);
                  }else if(viewType.equals(TYPE_DRINKS)){
-                     MainDataController.addDrink(newName);
                      Drink item = Drink.builder().build();
                      item.setName(newName);
                      dataList.add(0, item);
+                     adapter.getSearchList().add(0, item);
                  }
 
                 CalendarDetailListEditActivity.this.runOnUiThread(()->{
@@ -326,8 +347,11 @@ public class CalendarDetailListEditActivity extends BaseActivity {
         dialog.show(getFragmentManager(), "Add Dialog");
     }
     public void onSaveClick(){
+
         if(viewType.equals(TYPE_FRIENDS)){
             ArrayList<Friend> list = (ArrayList<Friend>) dataList;
+
+            MainDataController.setFriendList(list);
 
             for (int i = 0; i < list.size(); ++i){
                 if(!list.get(i).isSelected()){ list.remove(list.get(i)); i -= 1;}
@@ -337,6 +361,8 @@ public class CalendarDetailListEditActivity extends BaseActivity {
         }else if(viewType.equals(TYPE_DRINKS)){
             ArrayList<Drink> list = (ArrayList<Drink>) dataList;
 
+            MainDataController.setDrinkList(list);
+
             for (int i = 0; i < list.size(); ++i){
                 if(!list.get(i).isSelected()){ list.remove(list.get(i)); i -= 1;}
             }
@@ -345,6 +371,8 @@ public class CalendarDetailListEditActivity extends BaseActivity {
 
         }else if(viewType.equals(TYPE_FOODS)){
             ArrayList<Food> list = (ArrayList<Food>) dataList;
+
+            MainDataController.setFoodList(list);
 
             for (int i = 0; i < list.size(); ++i){
                 if(!list.get(i).isSelected()){ list.remove(list.get(i)); i -= 1;}

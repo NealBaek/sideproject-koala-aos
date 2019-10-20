@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ksdigtalnomad.koala.R;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendar.CalendarView;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.month.MonthItemDecoration;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.month.MonthModel;
@@ -33,9 +34,13 @@ public class CalendarBodyPagerAdapter extends PagerAdapter {
         this.eventInterface = eventInterface;
 
         int parentCnt = calendarModel.monthList.size();
+        int randomId = (int) (Math.random() * 10000000);
+
         for(int i = 0; i < parentCnt; ++i){
-            RecyclerView calendarRv = createCalendarRv(context, calendarModel.monthList.get(i), eventInterface);
+            RecyclerView calendarRv = createCalendarRv(context, calendarModel.monthList.get(i), eventInterface, randomId);
             parentList.add(calendarRv);
+
+            randomId += CalendarConstUtils.ID_CNT_MONTH;
         }
     }
 
@@ -76,7 +81,7 @@ public class CalendarBodyPagerAdapter extends PagerAdapter {
         container.removeView(((View) object));
     }
 
-    private RecyclerView createCalendarRv(Context context, MonthModel monthModel, CalendarView.EventInterface eventInterface){
+    private RecyclerView createCalendarRv(Context context, MonthModel monthModel, CalendarView.EventInterface eventInterface, int randomId){
 
         RecyclerView recyclerView = new RecyclerView(context);
 
@@ -85,13 +90,13 @@ public class CalendarBodyPagerAdapter extends PagerAdapter {
 
         // Layout Manager & dividers
         MonthRvLayoutManager layoutManager = new MonthRvLayoutManager(context, 7);
-        MonthItemDecoration itemDecoration    = new MonthItemDecoration(1);
+        MonthItemDecoration itemDecoration = new MonthItemDecoration(1);
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(itemDecoration);
 
         // Adapter
-        recyclerView.setAdapter(new MonthRvAdapter(context, monthModel, eventInterface));
+        recyclerView.setAdapter(new MonthRvAdapter(context, monthModel, eventInterface, randomId));
 
         return recyclerView;
     }

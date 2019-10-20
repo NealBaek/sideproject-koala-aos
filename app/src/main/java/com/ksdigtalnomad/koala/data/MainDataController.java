@@ -30,183 +30,195 @@ public class MainDataController {
     public static ArrayList<Friend> getFriendList(){
         return dumpFriendList();
     }
-    public static void addFriend(String name){
-
-        ArrayList<Friend> list =  dumpFriendList();
-
-        if(name == null || name.length() <= 0){
-            return;
-        }
-
-        Friend item = Friend.builder().build();
-        item.setName(name);
-
-        list.add(0, item);
-
-        storeFriendList(list);
-
-        return;
+    public static void setFriendList(ArrayList<Friend> list){
+        for(Friend item: list){ item.setSelected(false); }
+        MainDataController.storeFriendList(list);
     }
-    public static ArrayList<Friend> updateFriend(String before, String after){
-        ArrayList<Friend> list =  dumpFriendList();
-
-        if(before == null || before.length() <= 0 || after == null || after.length() <= 0){
-            return list;
-        }
-
-        int listSize = list.size();
-        for(int i = 0; i < listSize; ++ i){
-            Friend temp = list.get(i);
-
-            if(temp.getName().equals(before)){
-                temp.setName(after);
-                list.set(i, temp);
-                storeFriendList(list);
-                break;
-            }
-        }
-
-        return list;
-    }
-    public static ArrayList<Friend> deleteFriend(String name){
-        ArrayList<Friend> list =  dumpFriendList();
-
-        if(name == null || name.length() <= 0){
-            return list;
-        }
-
-        int listSize = list.size();
-        for(int i = 0; i < listSize; ++ i){
-            Friend temp = list.get(i);
-            if(temp.getName().equals(name)){
-                list.remove(i);
-                storeFriendList(list);
-                break;
-            }
-        }
-
-        return list;
-    }
+//    public static void addFriend(String name){
+//
+//        ArrayList<Friend> list =  dumpFriendList();
+//
+//        if(name == null || name.length() <= 0){
+//            return;
+//        }
+//
+//        Friend item = Friend.builder().build();
+//        item.setName(name);
+//
+//        list.add(0, item);
+//
+//        storeFriendList(list);
+//
+//        return;
+//    }
+//    public static ArrayList<Friend> updateFriend(String before, String after){
+//        ArrayList<Friend> list =  dumpFriendList();
+//
+//        if(before == null || before.length() <= 0 || after == null || after.length() <= 0){
+//            return list;
+//        }
+//
+//        int listSize = list.size();
+//        for(int i = 0; i < listSize; ++ i){
+//            Friend temp = list.get(i);
+//
+//            if(temp.getName().equals(before)){
+//                temp.setName(after);
+//                list.set(i, temp);
+//                storeFriendList(list);
+//                break;
+//            }
+//        }
+//
+//        return list;
+//    }
+//    public static ArrayList<Friend> deleteFriend(String name){
+//        ArrayList<Friend> list =  dumpFriendList();
+//
+//        if(name == null || name.length() <= 0){
+//            return list;
+//        }
+//
+//        int listSize = list.size();
+//        for(int i = 0; i < listSize; ++ i){
+//            Friend temp = list.get(i);
+//            if(temp.getName().equals(name)){
+//                list.remove(i);
+//                storeFriendList(list);
+//                break;
+//            }
+//        }
+//
+//        return list;
+//    }
 
     public static ArrayList<Food> getFoodList(){
         return dumpFoodList();
     }
-    public static void addFood(String name){
-
-        ArrayList<Food> list =  dumpFoodList();
-
-        if(name == null || name.length() <= 0){
-            return;
-        }
-
-        Food item = Food.builder().build();
-        item.setName(name);
-
-        list.add(0, item);
-
-        storeFoodList(list);
-
-        return;
+    public static void setFoodList(ArrayList<Food> list){
+        for(Food item: list){ item.setSelected(false); }
+        MainDataController.storeFoodList(list);
     }
-    public static ArrayList<Food> updateFood(String before, String after){
-        ArrayList<Food> list =  dumpFoodList();
-
-        if(before == null || before.length() <= 0 || after == null || after.length() <= 0){
-            return list;
-        }
-
-        int listSize = list.size();
-        for(int i = 0; i < listSize; ++ i){
-            Food temp = list.get(i);
-            if(temp.getName().equals(before)){
-                temp.setName(after);
-                list.set(i, temp);
-                storeFoodList(list);
-                break;
-            }
-        }
-
-        return list;
-    }
-    public static ArrayList<Food> deleteFood(String name){
-        ArrayList<Food> list =  dumpFoodList();
-
-        if(name == null || name.length() <= 0){
-            return list;
-        }
-
-        int listSize = list.size();
-        for(int i = 0; i < listSize; ++ i){
-            Food temp = list.get(i);
-            if(temp.getName().equals(name)){
-                list.remove(i);
-                storeFoodList(list);
-                break;
-            }
-        }
-
-        return list;
-    }
+//    public static void addFood(String name){
+//
+//        ArrayList<Food> list =  dumpFoodList();
+//
+//        if(name == null || name.length() <= 0){
+//            return;
+//        }
+//
+//        Food item = Food.builder().build();
+//        item.setName(name);
+//
+//        list.add(0, item);
+//
+//        storeFoodList(list);
+//
+//        return;
+//    }
+//    public static ArrayList<Food> updateFood(String before, String after){
+//        ArrayList<Food> list =  dumpFoodList();
+//
+//        if(before == null || before.length() <= 0 || after == null || after.length() <= 0){
+//            return list;
+//        }
+//
+//        int listSize = list.size();
+//        for(int i = 0; i < listSize; ++ i){
+//            Food temp = list.get(i);
+//            if(temp.getName().equals(before)){
+//                temp.setName(after);
+//                list.set(i, temp);
+//                storeFoodList(list);
+//                break;
+//            }
+//        }
+//
+//        return list;
+//    }
+//    public static ArrayList<Food> deleteFood(String name){
+//        ArrayList<Food> list =  dumpFoodList();
+//
+//        if(name == null || name.length() <= 0){
+//            return list;
+//        }
+//
+//        int listSize = list.size();
+//        for(int i = 0; i < listSize; ++ i){
+//            Food temp = list.get(i);
+//            if(temp.getName().equals(name)){
+//                list.remove(i);
+//                storeFoodList(list);
+//                break;
+//            }
+//        }
+//
+//        return list;
+//    }
 
     public static ArrayList<Drink> getDrinkList(){
         return dumpDrinkList();
     }
-    public static void addDrink(String name){
-
-        ArrayList<Drink> list =  dumpDrinkList();
-
-        if(name == null || name.length() <= 0){
-            return;
-        }
-
-        Drink item = Drink.builder().build();
-        item.setName(name);
-
-        list.add(0, item);
-
-        storeDrinkList(list);
-
-        return;
+    public static void setDrinkList(ArrayList<Drink> list){
+        for(Drink item: list){ item.setSelected(false); }
+        MainDataController.storeDrinkList(list);
     }
-    public static ArrayList<Drink> updateDrink(String before, String after){
-        ArrayList<Drink> list =  dumpDrinkList();
-
-        if(before == null || before.length() <= 0 || after == null || after.length() <= 0){
-            return list;
-        }
-
-        int listSize = list.size();
-        for(int i = 0; i < listSize; ++ i){
-            Drink temp = list.get(i);
-            if(temp.getName().equals(before)){
-                temp.setName(after);
-                list.set(i, temp);
-                storeDrinkList(list);
-                break;
-            }
-        }
-
-        return list;
-    }
-    public static ArrayList<Drink> deleteDrink(String name){
-        ArrayList<Drink> list =  dumpDrinkList();
-
-        if(name == null || name.length() <= 0){
-            return list;
-        }
-
-        int listSize = list.size();
-        for(int i = 0; i < listSize; ++ i){
-            Drink temp = list.get(i);
-            if(temp.getName().equals(name)){
-                list.remove(i);
-                storeDrinkList(list);
-                break;
-            }
-        }
-
-        return list;
-    }
+//    public static void addDrink(String name){
+//
+//        ArrayList<Drink> list =  dumpDrinkList();
+//
+//        if(name == null || name.length() <= 0){
+//            return;
+//        }
+//
+//        Drink item = Drink.builder().build();
+//        item.setName(name);
+//
+//        list.add(0, item);
+//
+//        storeDrinkList(list);
+//
+//        return;
+//    }
+//    public static ArrayList<Drink> updateDrink(String before, String after){
+//        ArrayList<Drink> list =  dumpDrinkList();
+//
+//        if(before == null || before.length() <= 0 || after == null || after.length() <= 0){
+//            return list;
+//        }
+//
+//        int listSize = list.size();
+//        for(int i = 0; i < listSize; ++ i){
+//            Drink temp = list.get(i);
+//            if(temp.getName().equals(before)){
+//                temp.setName(after);
+//                list.set(i, temp);
+//                storeDrinkList(list);
+//                break;
+//            }
+//        }
+//
+//        return list;
+//    }
+//    public static ArrayList<Drink> deleteDrink(String name){
+//        ArrayList<Drink> list =  dumpDrinkList();
+//
+//        if(name == null || name.length() <= 0){
+//            return list;
+//        }
+//
+//        int listSize = list.size();
+//        for(int i = 0; i < listSize; ++ i){
+//            Drink temp = list.get(i);
+//            if(temp.getName().equals(name)){
+//                list.remove(i);
+//                storeDrinkList(list);
+//                break;
+//            }
+//        }
+//
+//        return list;
+//    }
 
 
 

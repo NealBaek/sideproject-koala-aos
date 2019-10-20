@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.ksdigtalnomad.koala.data.models.Drink;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendar.CalendarView;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendarBody.CalendarModel;
@@ -24,11 +26,25 @@ public class CalendarDataController {
 
     private static final String PREF_FILE_NAME = "CALENDAR_DATA";
     private static final String KEY_CALENDAR_MODEL = "CALENDAR_MODEL";
+    private static final String KEY_TOTAL_DAY_LIST = "TOTAL_DAY_LIST";
 
 
     private CalendarDataController(){}
+    private static SharedPreferences.Editor getEditPreference() {
+        Context context = BaseApplication.getInstance().getApplicationContext();
+        SharedPreferences pref = context.getSharedPreferences(PREF_FILE_NAME, Activity.MODE_PRIVATE);
+        return pref.edit();
+    }
+    private static SharedPreferences getReadPreference() {
+        Context context = BaseApplication.getInstance().getApplicationContext();
+        return context.getSharedPreferences(PREF_FILE_NAME, Activity.MODE_PRIVATE);
+    }
 
 
+
+
+
+    // Calendar Model - 달력을 위한 Calendar Model (익월/전월 포함)
     private static CalendarModel createCalendarModel(){
 
         // 시작 날짜 정하기 (2019.01.01 부터 시작)
@@ -174,6 +190,10 @@ public class CalendarDataController {
 
         storeCalendarModel(calendarModel);
 
+        Log.d("ABC", "totalDay: " + dayModelList.size());
+
+        createTotalDayList(dayModelList);
+
         return calendarModel;
     }
     public static CalendarModel getCalendarModel(){ return dumpCalendarModel(); }
@@ -182,29 +202,100 @@ public class CalendarDataController {
         // @TODO: 느려짐 포인트 1-1
         CalendarModel calendarModel = CalendarDataController.dumpCalendarModel();
         ArrayList<MonthModel> mModelList = calendarModel.monthList;
+        int mModelCnt = mModelList.size();
 
-        for(int i = 0; i < mModelList.size(); ++ i){
+        for(int i = 0; i < mModelCnt; ++ i){
             MonthModel mModel = mModelList.get(i);
+//            if(mModel.index == dayModel.monthIdx){
+//                ArrayList<DayModel> dModelList = mModel.dayList;
+//                int dModelCnt = dModelList.size();
+//
+//                for(int j = 0; j < dModelCnt; ++ j){
+//                    DayModel dModel = dModelList.get(j);
+//                    if(dModel.dayIdx == dayModel.dayIdx){
+//                        dModelList.set(j, dayModel);
+//                        break;
+//                    }
+//                }
+//                break;
+//            }
+
+            // 전월 previous month
+            if(dayModel.day <= 15 && dayModel.monthIdx > 0 && mModel.index == (dayModel.monthIdx - 1)){
+                ArrayList<DayModel> pDayList = mModel.dayList;
+                int dayCnt = pDayList.size();
+
+                for(int j = 0; j < dayCnt; ++ j){
+                    DayModel pDay = pDayList.get(j);
+                    if(pDay.isOutMonth && pDay.day == dayModel.day){
+                        pDay.drunkLevel = dayModel.drunkLevel;
+                        pDay.friendList.clear();
+                        pDay.friendList.addAll(dayModel.friendList);
+                        pDay.foodList.clear();
+                        pDay.foodList.addAll(dayModel.foodList);
+                        pDay.drinkList.clear();
+                        pDay.drinkList.addAll(dayModel.drinkList);
+                        pDay.memo = dayModel.memo;
+                        pDay.isSaved = dayModel.isSaved;
+                        pDayList.set(j, pDay);
+                        break;
+                    }
+                }
+            }
+            // 금월
             if(mModel.index == dayModel.monthIdx){
-                ArrayList<DayModel> dModelList = mModel.dayList;
-                for(int j = 0; j < dModelList.size(); ++ j){
-                    DayModel dModel = dModelList.get(j);
-                    if(dModel.dayIdx == dayModel.dayIdx){
-                        dModelList.set(j, dayModel);
+                ArrayList<DayModel> cDayList = mModel.dayList;
+                int dayCnt = cDayList.size();
+
+                for(int j = 0; j < dayCnt; ++ j){
+                    DayModel cDay = cDayList.get(j);
+                    if(cDay.month == dayModel.month && cDay.day == dayModel.day){
+                        cDayList.set(j, dayModel);
+                        break;
+                    }
+                }
+            }
+            // 익월
+            if(dayModel.day >= 13 && dayModel.monthIdx < mModelCnt && mModel.index == (dayModel.monthIdx + 1)){
+                ArrayList<DayModel> nDayList = mModel.dayList;
+                int dayCnt = nDayList.size();
+
+                for(int j = 0; j < dayCnt; ++ j){
+                    DayModel nDay = nDayList.get(j);
+                    if(nDay.isOutMonth && nDay.day == dayModel.day){
+                        nDay.drunkLevel = dayModel.drunkLevel;
+                        nDay.friendList.clear();
+                        nDay.friendList.addAll(dayModel.friendList);
+                        nDay.foodList.clear();
+                        nDay.foodList.addAll(dayModel.foodList);
+                        nDay.drinkList.clear();
+                        nDay.drinkList.addAll(dayModel.drinkList);
+                        nDay.memo = dayModel.memo;
+                        nDay.isSaved = dayModel.isSaved;
+                        nDayList.set(j, nDay);
                         break;
                     }
                 }
                 break;
             }
+
+            if(mModel.index == (dayModel.monthIdx + 1)){
+                break;
+            }
+
         }
 
         // preference 에 저장
         // @TODO: 느려짐 포인트 1-2
         storeCalendarModel(calendarModel);
 
+
+        // Total Day List 비동기 저장
+//        Runnable task = () -> updateTotalDayList(dayModel);
+//        task.run();
+
         return calendarModel;
     }
-
 
     private static void storeCalendarModel(CalendarModel model){ getEditPreference().putString(KEY_CALENDAR_MODEL, new Gson().toJson(model)).apply(); }
     private static CalendarModel dumpCalendarModel(){
@@ -214,13 +305,37 @@ public class CalendarDataController {
     }
 
 
-    private static SharedPreferences.Editor getEditPreference() {
-        Context context = BaseApplication.getInstance().getApplicationContext();
-        SharedPreferences pref = context.getSharedPreferences(PREF_FILE_NAME, Activity.MODE_PRIVATE);
-        return pref.edit();
+
+    // Total Day List - 통계를 위한 모든 DayModel 리스트 (일월/ 전월 없음)
+    private static void createTotalDayList(ArrayList<DayModel> list){
+        storeTotalDayList(list);
     }
-    private static SharedPreferences getReadPreference() {
-        Context context = BaseApplication.getInstance().getApplicationContext();
-        return context.getSharedPreferences(PREF_FILE_NAME, Activity.MODE_PRIVATE);
+    public static ArrayList<DayModel> getTotalDayList(){
+        return dumpTotalDayList();
     }
+    public static void updateTotalDayList(DayModel dayModel){
+        ArrayList<DayModel> totalDayList = CalendarDataController.dumpTotalDayList();
+        int totalDayListCnt = totalDayList.size();
+
+        for(int i = 0; i < totalDayListCnt; ++ i){
+            DayModel item = totalDayList.get(i);
+            if(item.dayIdx == dayModel.dayIdx){
+                totalDayList.set(i, dayModel);
+                break;
+            }
+        }
+
+        CalendarDataController.storeTotalDayList(totalDayList);
+    }
+
+    private static void storeTotalDayList(ArrayList<DayModel> list){
+        Log.d("ABC", "store_totalday cnt : " + list.size());
+        getEditPreference().putString(KEY_TOTAL_DAY_LIST, new Gson().toJson(list)).apply();
+    }
+    private static ArrayList<DayModel> dumpTotalDayList(){
+        ArrayList<DayModel> dump = new Gson().fromJson(getReadPreference().getString(KEY_TOTAL_DAY_LIST, null), new TypeToken<ArrayList<DayModel>>(){}.getType());
+        Log.d("ABC", "dump_totalday cnt : " + dump.size());
+        return dump;
+    }
+
 }

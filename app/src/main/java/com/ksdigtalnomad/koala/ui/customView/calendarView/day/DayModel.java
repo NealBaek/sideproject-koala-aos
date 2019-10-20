@@ -28,6 +28,8 @@ public class DayModel implements Cloneable{
     public ArrayList<Drink> drinkList = new ArrayList<>();
     public String memo = "";
 
+    public boolean isSaved; // 한번이라도 저장되었는지 확인.
+
 
     public DayModel clone(){
         //내 객체 생성

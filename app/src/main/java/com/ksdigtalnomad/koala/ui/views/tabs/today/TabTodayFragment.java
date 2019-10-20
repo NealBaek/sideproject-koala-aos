@@ -10,9 +10,16 @@ import android.view.ViewGroup;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.databinding.FragmentTabTodayBinding;
 import com.ksdigtalnomad.koala.ui.base.BaseFragment;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.month.MonthModel;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class TabTodayFragment extends BaseFragment {
 
@@ -36,21 +43,58 @@ public class TabTodayFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_tab_today, container, false);
 
-        setData();
+        mBinding.headerText.setText(new SimpleDateFormat("yyyy.MM.dd.").format(new Date()));
 
         return mBinding.getRoot();
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
+//        Runnable task = ()->setData();
+//        task.run();
     }
 
     private void setData(){
+        Date today = new Date();
 
-        SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd.");
-        mBinding.headerText.setText(df.format(new Date()));
+        int fromDayIdx = 0;
+        int toDayIdx = 0;
+        ArrayList<DayModel> totalDayList = CalendarDataController.getTotalDayList();
+
+        // 1. 오늘 날짜 계산
+        SimpleDateFormat dfYear = new SimpleDateFormat("yyyy");
+        SimpleDateFormat dfMonth = new SimpleDateFormat("MM");
+        SimpleDateFormat dfDate = new SimpleDateFormat("dd");
+
+        int thisYear = Integer.parseInt(dfYear.format(today));
+        int thisMonth = Integer.parseInt(dfMonth.format(today));
+        int thisDate = Integer.parseInt(dfDate.format(today));
+
+
+        // 2. 오늘 모델 값 구하기
+        int dayListCnt =  totalDayList.size();
+        for(int i = 0; i < dayListCnt; ++i){
+            DayModel day = totalDayList.get(i);
+            boolean isThisYear  = (thisYear == day.year);
+            boolean isThisMonth = (thisMonth == day.month);
+            boolean isThisDate = (thisDate == day.day);
+
+            if (isThisYear && isThisMonth && isThisDate){
+                fromDayIdx = (i - 7 <= 0 ? 0 : i - 7);
+                toDayIdx = i;
+                break;
+            }
+        }
+
+        // 3. 최근 7일
+        List<DayModel> recent7Days = totalDayList.subList(fromDayIdx, toDayIdx);
+
+        if(recent7Days.size() <= 0){
+            // 데이터 부족
+        }
+
+
 
 
 //        음주량별 가중치를 음주횟수에 곱해서 계산하여 나온 지표를 근거로 상태를 표시

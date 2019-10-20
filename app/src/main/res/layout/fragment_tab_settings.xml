@@ -77,6 +77,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="절주와 금주의 시작입니다."
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     android:textColor="@color/colorDarkGray"
                     android:layout_marginBottom="15dp"/>

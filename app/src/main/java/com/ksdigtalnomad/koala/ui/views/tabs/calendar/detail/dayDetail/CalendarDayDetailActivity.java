@@ -24,6 +24,7 @@ import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity;
+import com.ksdigtalnomad.koala.util.FBEventLogHelper;
 import com.ksdigtalnomad.koala.util.KeyboardHelper;
 import com.ksdigtalnomad.koala.util.ToastHelper;
 
@@ -135,9 +136,13 @@ public class CalendarDayDetailActivity extends BaseActivity {
     public void onSaveClick(View v){
 
         dayModel.memo = mBinding.memo.getText().toString();
+        dayModel.isSaved = true;
 
         Runnable task = () -> CalendarDataController.updateDayModel(dayModel);
         task.run();
+
+        Runnable task1 = () -> FBEventLogHelper.onInputDoenClick(dayModel);
+        task1.run();
 
         Intent resultIntent = new Intent();
         resultIntent.putExtra(KEY_DAY_MODEL, new Gson().toJson(dayModel));

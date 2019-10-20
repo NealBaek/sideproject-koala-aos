@@ -3,9 +3,11 @@ package com.ksdigtalnomad.koala.ui.customView.calendarView;
 import android.graphics.Color;
 import android.support.v4.graphics.ColorUtils;
 
+import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.data.models.Drink;
 import com.ksdigtalnomad.koala.data.models.Food;
 import com.ksdigtalnomad.koala.data.models.Friend;
+import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 
 import java.util.ArrayList;
 
@@ -22,11 +24,15 @@ public class CalendarConstUtils {
     public static final int DAY_SEQ_SUNDAY = 0;
     public static final int DAY_SEQ_SATURDAY = 6;
 
+    public static final int ID_CNT_MONTH = 100;
+    public static final int ID_CNT_ISOUTMONTH = 50;
+
 
     // Color
     public static final int COLOR_SUNDAY = Color.RED;
     public static final int COLOR_SATURDAY = Color.BLUE;
     public static final int COLOR_WEEKDAY = Color.BLACK;
+    public static final int COLOL_MAIN = BaseApplication.getInstance().getResources().getColor(R.color.colorMain);
     public static int getDayColor(int daySeq){
 
         final int NUM_DAYS_IN_WEEK = 7;
@@ -50,13 +56,13 @@ public class CalendarConstUtils {
 
         switch (drunkLv){
             case DRUNK_LV_1:
-                return ColorUtils.setAlphaComponent(Color.RED, /** 0~ 255 */ 255 * 1/5);
+                return ColorUtils.setAlphaComponent(COLOL_MAIN, /** 0~ 255 */ 255 * 1/5);
             case DRUNK_LV_2:
-                return ColorUtils.setAlphaComponent(Color.RED, /** 0~ 255 */ 255 * 2/5);
+                return ColorUtils.setAlphaComponent(COLOL_MAIN, /** 0~ 255 */ 255 * 2/5);
             case DRUNK_LV_3:
-                return ColorUtils.setAlphaComponent(Color.RED, /** 0~ 255 */ 255 * 3/5);
+                return ColorUtils.setAlphaComponent(COLOL_MAIN, /** 0~ 255 */ 255 * 3/5);
             case DRUNK_LV_MAX:
-                return ColorUtils.setAlphaComponent(Color.RED, /** 0~ 255 */ 255 * 4/4);
+                return ColorUtils.setAlphaComponent(COLOL_MAIN, /** 0~ 255 */ 255 * 4/4);
             default:
                 return ColorUtils.setAlphaComponent(Color.LTGRAY, 100);
         }

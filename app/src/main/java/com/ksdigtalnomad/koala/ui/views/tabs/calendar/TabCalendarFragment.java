@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.ksdigtalnomad.koala.ui.base.BaseFragment;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendar.CalendarView;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
@@ -75,9 +76,44 @@ public class TabCalendarFragment extends BaseFragment {
         if(resultCode == RESULT_OK){
             DayModel dayModel = new Gson().fromJson(data.getStringExtra(KEY_DAY_MODEL), DayModel.class);
 
-            DayView dayView = this.calendarView.findViewById(dayModel.dayViewId);
-            dayView.setDayModel(dayModel);
-            dayView.invalidate();
+            // 전월
+            DayView pDayView = this.calendarView.findViewById(dayModel.dayViewId - (CalendarConstUtils.ID_CNT_MONTH - CalendarConstUtils.ID_CNT_ISOUTMONTH));
+            if(pDayView != null){
+                DayModel pDayModel = pDayView.getDayModel();
+                pDayModel.drunkLevel = dayModel.drunkLevel;
+                pDayModel.friendList.clear();
+                pDayModel.friendList.addAll(dayModel.friendList);
+                pDayModel.foodList.clear();
+                pDayModel.foodList.addAll(dayModel.foodList);
+                pDayModel.drinkList.clear();
+                pDayModel.drinkList.addAll(dayModel.drinkList);
+                pDayModel.memo = dayModel.memo;
+                pDayView.setDayModel(pDayModel);
+                pDayView.invalidate();
+            }
+
+            // 금월
+            DayView cDayView = this.calendarView.findViewById(dayModel.dayViewId);
+            cDayView.setDayModel(dayModel);
+            cDayView.invalidate();
+
+            // 익월
+            DayView nDayView = this.calendarView.findViewById(dayModel.dayViewId + (CalendarConstUtils.ID_CNT_MONTH + CalendarConstUtils.ID_CNT_ISOUTMONTH));
+            if(nDayView != null){
+                DayModel nDayModel = nDayView.getDayModel();
+                nDayModel.drunkLevel = dayModel.drunkLevel;
+                nDayModel.friendList.clear();
+                nDayModel.friendList.addAll(dayModel.friendList);
+                nDayModel.foodList.clear();
+                nDayModel.foodList.addAll(dayModel.foodList);
+                nDayModel.drinkList.clear();
+                nDayModel.drinkList.addAll(dayModel.drinkList);
+                nDayModel.memo = dayModel.memo;
+                nDayView.setDayModel(nDayModel);
+                nDayView.invalidate();
+            }
+
+
         }
     }
 }

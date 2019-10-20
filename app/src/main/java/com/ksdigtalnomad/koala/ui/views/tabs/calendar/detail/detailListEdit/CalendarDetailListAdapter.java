@@ -59,6 +59,9 @@ public class CalendarDetailListAdapter extends BaseRecyclerViewAdapter<CalendarD
         }
         notifyDataSetChanged();
     }
+    public ArrayList<BaseData> getSearchList(){
+        return searchList;
+    }
 
     @NonNull
     @Override
