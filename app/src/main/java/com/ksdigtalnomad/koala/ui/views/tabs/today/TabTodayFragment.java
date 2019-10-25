@@ -27,6 +27,9 @@ public class TabTodayFragment extends BaseFragment {
 
     private Context mContext;
 
+    private static final String PREFIX_1 = "최근 7일간 음주 ";
+    private static final String PREFIX_2 = "최근 7일간 음주량 평균 ";
+
     public static BaseFragment newInstance(){
         TabTodayFragment fragment = new TabTodayFragment();
         return fragment;
@@ -90,10 +93,32 @@ public class TabTodayFragment extends BaseFragment {
         // 3. 최근 7일
         List<DayModel> recent7Days = totalDayList.subList(fromDayIdx, toDayIdx);
 
-        if(recent7Days.size() <= 0){
-            // 데이터 부족
+        if((recent7Days.size() <= 0)){
+            showEmptyLayout(true);
+            return;
         }
 
+
+        double avgDrinkLevel = 0;
+        int drinkCnt = 0;
+        int drinkLevelCnt = 0;
+
+        List<DayModel> recentSavedList = new ArrayList<>();
+
+        for(DayModel item: recent7Days){
+            if(item.isSaved){
+                recentSavedList.add(item);
+                avgDrinkLevel += item.drunkLevel * 25/100; // 0 ~ 4
+                drinkCnt += item.drunkLevel > 0 ? 1 : 0;
+                drinkLevelCnt += item.drunkLevel * 25;
+            }
+        }
+
+
+        if(recentSavedList.size() <= 0){
+            showEmptyLayout(true);
+            return;
+        }
 
 
 
@@ -105,14 +130,35 @@ public class TabTodayFragment extends BaseFragment {
 //        2.01 ~ 3.00 : "자제"
 //        3.01 ~ 4.00 : "위험"
 //        4.01 ~ 5.00 : "금지"
-//
-//
+
+        String drinkState = "";
+
+
+        if(avgDrinkLevel > 0 && avgDrinkLevel <= 1){
+            drinkState = "안전";
+        }else if(avgDrinkLevel > 1 && avgDrinkLevel <= 2 ){
+            drinkState = "양호";
+        }else if(avgDrinkLevel > 2 && avgDrinkLevel <= 3 ) {
+            drinkState = "자제";
+        }else if(avgDrinkLevel > 3 && avgDrinkLevel <= 4 ) {
+            drinkState = "위험";
+        }else if(avgDrinkLevel > 4 && avgDrinkLevel <= 5 ) {
+            drinkState = "금지";
+        }
+
+
+        mBinding.avgDrinkState.setText(drinkState);
+        mBinding.avgDrinkTimes.setText(PREFIX_1 + drinkCnt + "회");
+        mBinding.avgDrinkLevel.setText(PREFIX_2 + drinkLevelCnt/drinkCnt + "%");
+
+        showEmptyLayout(false);
+    }
+
+    private void showEmptyLayout(boolean shouldShow){
 //        "데이터 부족"
 //        최근 7일간 하루라도 데이터가 없으면 표시
 //        누르면 월간 달력화면 이동 버튼으로 변신(밑줄이 쳐진 안내설명  문구)
-
-//        mBinding.avgDrinkState.setText();
-//        mBinding.avgDrinkTimes.setText();
-//        mBinding.avgDrinkLevel.setText();
+        mBinding.stateLayout.setVisibility(shouldShow ? View.INVISIBLE : View.VISIBLE);
+        mBinding.emptyLayout.setVisibility(shouldShow ? View.VISIBLE : View.INVISIBLE);
     }
 }

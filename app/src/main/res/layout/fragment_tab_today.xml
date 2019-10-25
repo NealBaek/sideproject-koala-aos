@@ -42,32 +42,60 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"/>
 
-            <TextView
-                android:id="@+id/avgDrinkState"
+            <LinearLayout
+                android:id="@+id/stateLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="위험"
-                android:textColor="@color/colorMain"
-                android:textSize="50dp"
-                android:textStyle="bold"
-                android:gravity="right"
-                android:layout_marginBottom="3dp"/>
-            <TextView
-                android:id="@+id/avgDrinkTimes"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="invisible">
+
+                <TextView
+                    android:id="@+id/avgDrinkState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="위험"
+                    android:textColor="@color/colorMain"
+                    android:textSize="50dp"
+                    android:textStyle="bold"
+                    android:gravity="right"
+                    android:layout_marginBottom="3dp"/>
+                <TextView
+                    android:id="@+id/avgDrinkTimes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="최근 7일간 음주 4"
+                    android:textColor="@color/colorDarkGray"
+                    android:gravity="right"
+                    android:layout_marginBottom="1dp"/>
+                <TextView
+                    android:id="@+id/avgDrinkLevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="최근 7일간 음주 평균 80%"
+                    android:textColor="@color/colorDarkGray"
+                    android:gravity="right"
+                    android:layout_marginBottom="15dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/emptyLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="최근 7일간 음주 4"
-                android:textColor="@color/colorDarkGray"
-                android:gravity="right"
-                android:layout_marginBottom="1dp"/>
-            <TextView
-                android:id="@+id/avgDrinkLevel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="최근 7일간 음주 평균 80%"
-                android:textColor="@color/colorDarkGray"
-                android:gravity="right"
-                android:layout_marginBottom="15dp"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="데이터 없음"
+                    android:textColor="@color/colorMain"
+                    android:textSize="50dp"
+                    android:textStyle="bold"
+                    android:gravity="right"
+                    android:layout_marginBottom="3dp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
