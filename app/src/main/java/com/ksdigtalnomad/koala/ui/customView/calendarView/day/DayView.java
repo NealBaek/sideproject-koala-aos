@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.support.v4.graphics.ColorUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -84,9 +85,12 @@ public class DayView extends RelativeLayout {
     public void setDayModel(DayModel dayModel){
         this.dayModel = dayModel;
         try{
-            // TODO: 2일 시간 텀 있다.. 확인해보자
-            this.thisDate = new SimpleDateFormat("yyyyMMdd").parse("" + dayModel.year + "." + dayModel.month + "." + dayModel.day);
+            // FIXME: 2일 시간 텀 있다.. 확인해보자
+            this.thisDate = new SimpleDateFormat("yyyyMMdd").parse("" + dayModel.year + "." + (dayModel.month < 10 ? ("0" + dayModel.month) : dayModel.month) + "." + (dayModel.day < 10 ? ("0" + dayModel.day) : dayModel.day));
+
+            Log.d("ABC", "thisDate: " + thisDate + ", today: " + today);
         }catch (ParseException e){
+            Log.d("ABC", "Parsing Error: " + e.getLocalizedMessage());
             this.thisDate = new Date();
         }
 
