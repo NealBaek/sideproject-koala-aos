@@ -10,6 +10,7 @@ import com.ksdigtalnomad.koala.databinding.FragmentTabCalendarBinding;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,42 +77,43 @@ public class TabCalendarFragment extends BaseFragment {
         if(resultCode == RESULT_OK){
             DayModel dayModel = new Gson().fromJson(data.getStringExtra(KEY_DAY_MODEL), DayModel.class);
 
-            // 전월
-            DayView pDayView = this.calendarView.findViewById(dayModel.dayViewId - (CalendarConstUtils.ID_CNT_MONTH - CalendarConstUtils.ID_CNT_ISOUTMONTH));
-            if(pDayView != null){
-                DayModel pDayModel = pDayView.getDayModel();
-                pDayModel.drunkLevel = dayModel.drunkLevel;
-                pDayModel.friendList.clear();
-                pDayModel.friendList.addAll(dayModel.friendList);
-                pDayModel.foodList.clear();
-                pDayModel.foodList.addAll(dayModel.foodList);
-                pDayModel.drinkList.clear();
-                pDayModel.drinkList.addAll(dayModel.drinkList);
-                pDayModel.memo = dayModel.memo;
-                pDayView.setDayModel(pDayModel);
-                pDayView.invalidate();
-            }
+
+//            // 전월
+//            DayView pDayView = this.calendarView.findViewById(dayModel.dayViewId - (CalendarConstUtils.ID_CNT_MONTH - CalendarConstUtils.ID_CNT_ISOUTMONTH));
+//            if(pDayView != null){
+//                DayModel pDayModel = pDayView.getDayModel();
+//                pDayModel.drunkLevel = dayModel.drunkLevel;
+//                pDayModel.friendList.clear();
+//                pDayModel.friendList.addAll(dayModel.friendList);
+//                pDayModel.foodList.clear();
+//                pDayModel.foodList.addAll(dayModel.foodList);
+//                pDayModel.drinkList.clear();
+//                pDayModel.drinkList.addAll(dayModel.drinkList);
+//                pDayModel.memo = dayModel.memo;
+//                pDayView.setDayModel(pDayModel);
+//                pDayView.invalidate();
+//            }
 
             // 금월
             DayView cDayView = this.calendarView.findViewById(dayModel.dayViewId);
             cDayView.setDayModel(dayModel);
             cDayView.invalidate();
 
-            // 익월
-            DayView nDayView = this.calendarView.findViewById(dayModel.dayViewId + (CalendarConstUtils.ID_CNT_MONTH + CalendarConstUtils.ID_CNT_ISOUTMONTH));
-            if(nDayView != null){
-                DayModel nDayModel = nDayView.getDayModel();
-                nDayModel.drunkLevel = dayModel.drunkLevel;
-                nDayModel.friendList.clear();
-                nDayModel.friendList.addAll(dayModel.friendList);
-                nDayModel.foodList.clear();
-                nDayModel.foodList.addAll(dayModel.foodList);
-                nDayModel.drinkList.clear();
-                nDayModel.drinkList.addAll(dayModel.drinkList);
-                nDayModel.memo = dayModel.memo;
-                nDayView.setDayModel(nDayModel);
-                nDayView.invalidate();
-            }
+//            // 익월
+//            DayView nDayView = this.calendarView.findViewById(dayModel.dayViewId + (CalendarConstUtils.ID_CNT_MONTH + CalendarConstUtils.ID_CNT_ISOUTMONTH));
+//            if(nDayView != null){
+//                DayModel nDayModel = nDayView.getDayModel();
+//                nDayModel.drunkLevel = dayModel.drunkLevel;
+//                nDayModel.friendList.clear();
+//                nDayModel.friendList.addAll(dayModel.friendList);
+//                nDayModel.foodList.clear();
+//                nDayModel.foodList.addAll(dayModel.foodList);
+//                nDayModel.drinkList.clear();
+//                nDayModel.drinkList.addAll(dayModel.drinkList);
+//                nDayModel.memo = dayModel.memo;
+//                nDayView.setDayModel(nDayModel);
+//                nDayView.invalidate();
+//            }
 
 
         }

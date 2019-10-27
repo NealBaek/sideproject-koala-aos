@@ -62,6 +62,9 @@ public class CalendarDetailListAdapter extends BaseRecyclerViewAdapter<CalendarD
     public ArrayList<BaseData> getSearchList(){
         return searchList;
     }
+    public ArrayList<BaseData> getOriginalList(){
+        return originalList;
+    }
 
     @NonNull
     @Override
@@ -78,21 +81,69 @@ public class CalendarDetailListAdapter extends BaseRecyclerViewAdapter<CalendarD
 
         holder.itemView.setOnClickListener(v -> {
 
+            holder.onItemClick(); // Change cell selected
+
+
+            int originalDataCnt = originalList.size();
+
             BaseData searchBaseData = holder.baseData;
             if(viewType.equals(TYPE_FRIENDS)){
                 Friend searchItem = (Friend) searchBaseData;
 
-                for (BaseData originalBaseData : originalList){
-                    Friend item = (Friend) originalBaseData;
+                for(int i = 0; i < originalDataCnt; ++i){
+
+                    Friend item = (Friend) originalList.get(i);
+                    if(searchItem.getName().equals(item.getName())){
+                        item.setSelected(searchItem.isSelected());
+                        originalList.set(i, item);
+                        break;
+                    }
+                }
+
+            }
+
+            if(viewType.equals(TYPE_FRIENDS)){
+                Friend searchItem = (Friend) searchBaseData;
+
+                for(int i = 0; i < originalDataCnt; ++i){
+
+                    Friend item = (Friend) originalList.get(i);
                     if(searchItem.getName().equals(item.getName())){
                         item.setSelected(searchItem.isSelected());
                         break;
                     }
                 }
+
+            }else if(viewType.equals(TYPE_FOODS)){
+                Food searchItem = (Food) searchBaseData;
+
+                for(int i = 0; i < originalDataCnt; ++i){
+
+                    Food item = (Food) originalList.get(i);
+                    if(searchItem.getName().equals(item.getName())){
+                        item.setSelected(searchItem.isSelected());
+                        break;
+                    }
+                }
+
+            }else if(viewType.equals(TYPE_DRINKS)){
+                Drink searchItem = (Drink) searchBaseData;
+
+                for(int i = 0; i < originalDataCnt; ++i){
+
+                    Drink item = (Drink) originalList.get(i);
+                    if(searchItem.getName().equals(item.getName())){
+                        item.setSelected(searchItem.isSelected());
+                        break;
+                    }
+                }
+
             }
 
+
+
+
             holder.itemView.post(()->{
-                holder.onItemClick(); // Change cell selected
                 itemClickListener.onItemClick(holder.getAdapterPosition()); // change save btn enable
             });
         });

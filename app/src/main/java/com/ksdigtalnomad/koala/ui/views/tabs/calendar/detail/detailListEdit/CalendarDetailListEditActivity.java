@@ -120,7 +120,6 @@ public class CalendarDetailListEditActivity extends BaseActivity {
                             if(isDelete){
                                 for(int i = 0; i < dataListCnt; ++i){
                                     Friend originalItem = (Friend) dataList.get(i);
-                                    Log.d("ABC", "originName: " + originalItem.getName() + ", searchName: " + searchItem.getName());
                                     if(searchItem.getName().equals(originalItem.getName())){
                                         dataList.remove(i);
                                         break;

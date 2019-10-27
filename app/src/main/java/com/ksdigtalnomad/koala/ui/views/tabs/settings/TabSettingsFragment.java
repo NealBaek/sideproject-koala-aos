@@ -59,7 +59,6 @@ public class TabSettingsFragment extends BaseFragment {
     // OnClick
     public void onKakaoOpenChatRoomClick(){
         String chatRoomUrl = FBRemoteControlHelper.getInstance().getKakaoOpenChatRoomUrl();
-        Log.d("ABC", "chatRoomUrl: " + chatRoomUrl);
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(chatRoomUrl)));
 
         FBEventLogHelper.onKakaoOpenChatRoom();

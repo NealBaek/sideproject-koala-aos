@@ -31,8 +31,17 @@ public class MainDataController {
         return dumpFriendList();
     }
     public static void setFriendList(ArrayList<Friend> list){
-        for(Friend item: list){ item.setSelected(false); }
-        MainDataController.storeFriendList(list);
+        ArrayList<Friend> toSaveList = new ArrayList<>();
+        toSaveList.addAll(list);
+
+        int cnt = toSaveList.size();
+
+        for(int i = 0; i < cnt; ++i){
+            Friend cloned = toSaveList.get(i).clone();
+            cloned.setSelected(false);
+            toSaveList.set(i, cloned);
+        }
+        MainDataController.storeFriendList(toSaveList);
     }
 //    public static void addFriend(String name){
 //
@@ -96,8 +105,17 @@ public class MainDataController {
         return dumpFoodList();
     }
     public static void setFoodList(ArrayList<Food> list){
-        for(Food item: list){ item.setSelected(false); }
-        MainDataController.storeFoodList(list);
+        ArrayList<Food> toSaveList = new ArrayList<>();
+        toSaveList.addAll(list);
+
+        int cnt = toSaveList.size();
+
+        for(int i = 0; i < cnt; ++i){
+            Food cloned = toSaveList.get(i).clone();
+            cloned.setSelected(false);
+            toSaveList.set(i, cloned);
+        }
+        MainDataController.storeFoodList(toSaveList);
     }
 //    public static void addFood(String name){
 //
@@ -160,8 +178,16 @@ public class MainDataController {
         return dumpDrinkList();
     }
     public static void setDrinkList(ArrayList<Drink> list){
-        for(Drink item: list){ item.setSelected(false); }
-        MainDataController.storeDrinkList(list);
+        ArrayList<Drink> toSaveList = new ArrayList<>();
+        toSaveList.addAll(list);
+        int cnt = toSaveList.size();
+
+        for(int i = 0; i < cnt; ++i){
+            Drink cloned = toSaveList.get(i).clone();
+            cloned.setSelected(false);
+            toSaveList.set(i, cloned);
+        }
+        MainDataController.storeDrinkList(toSaveList);
     }
 //    public static void addDrink(String name){
 //
