@@ -202,6 +202,28 @@ public class CalendarDetailListEditActivity extends BaseActivity {
             dataList.clear();
             dataList.addAll(savedList);
 
+        }else if(viewType.equals(TYPE_FOODS)){
+            mBinding.headerText.setText(getResources().getString(R.string.calendar_detail_foods_title));
+
+            ArrayList<Food> selectedList = dayModel.foodList;
+            ArrayList<Food> savedList = MainDataController.getFoodList();
+
+            int selectedCnt = selectedList.size();
+            for(int i = 0; i < selectedCnt; ++i){
+                Food selected = selectedList.get(i);
+
+                int savedCnt = savedList.size();
+                for(int j = 0; j < savedCnt; ++j){
+                    Food saved = savedList.get(j);
+                    if(selected.getName().equals(saved.getName())){
+                        saved.setSelected(selected.isSelected());
+                        break;
+                    }
+                }
+            }
+
+            dataList.clear();
+            dataList.addAll(savedList);
         }else if(viewType.equals(TYPE_DRINKS)){
             mBinding.headerText.setText(getResources().getString(R.string.calendar_detail_drink_title));
 
@@ -211,7 +233,6 @@ public class CalendarDetailListEditActivity extends BaseActivity {
             int selectedCnt = selectedList.size();
             for(int i = 0; i < selectedCnt; ++i){
                 Drink selected = selectedList.get(i);
-                if(selected.isSelected()) break;
 
                 int savedCnt = savedList.size();
                 for(int j = 0; j < savedCnt; ++j){
@@ -226,29 +247,6 @@ public class CalendarDetailListEditActivity extends BaseActivity {
             dataList.clear();
             dataList.addAll(savedList);
 
-        }else if(viewType.equals(TYPE_FOODS)){
-            mBinding.headerText.setText(getResources().getString(R.string.calendar_detail_foods_title));
-
-            ArrayList<Food> selectedList = dayModel.foodList;
-            ArrayList<Food> savedList = MainDataController.getFoodList();
-
-            int selectedCnt = selectedList.size();
-            for(int i = 0; i < selectedCnt; ++i){
-                Food selected = selectedList.get(i);
-                if(selected.isSelected()) break;
-
-                int savedCnt = savedList.size();
-                for(int j = 0; j < savedCnt; ++j){
-                    Food saved = savedList.get(j);
-                    if(selected.getName().equals(saved.getName())){
-                        saved.setSelected(selected.isSelected());
-                        break;
-                    }
-                }
-            }
-
-            dataList.clear();
-            dataList.addAll(savedList);
         }
 
         setSaveBtnEnable(viewType);

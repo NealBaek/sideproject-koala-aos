@@ -122,14 +122,12 @@ public class TabTodayFragment extends BaseFragment {
                 recentSavedList.add(item);
                 avgDrinkLevel += item.drunkLevel * 25; // 0 ~ 4
                 drinkCnt += item.drunkLevel > 0 ? 1 : 0;
+            }else{
+                showEmptyLayout(true);
+                return;
             }
         }
 
-
-        if(recentSavedList.size() <= 0){
-            showEmptyLayout(true);
-            return;
-        }
 
 
 

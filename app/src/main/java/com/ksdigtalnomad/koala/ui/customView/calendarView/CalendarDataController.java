@@ -147,9 +147,7 @@ public class CalendarDataController {
 
                     try{
                         dayModel.date = df.parse("" + dayModel.year + "." + (dayModel.month < 10 ? ("0" + dayModel.month) : dayModel.month) + "." + (dayModel.day < 10 ? ("0" + dayModel.day) : dayModel.day));
-                        Log.d("ABC", "date: " + dayModel.date);
                     }catch (ParseException e){
-                        Log.d("ABC", "e: " + e.getLocalizedMessage());
                         dayModel.date = new Date();
                     }
 
@@ -179,9 +177,7 @@ public class CalendarDataController {
                         nDayModel.yearIdx = yearIdx;
                         try{
                             nDayModel.date = df.parse("" + nDayModel.year + "." + (nDayModel.month < 10 ? ("0" + nDayModel.month) : nDayModel.month) + "." + (nDayModel.day < 10 ? ("0" + nDayModel.day) : nDayModel.day));
-                            Log.d("ABC", "date: " + nDayModel.date);
                         }catch (ParseException e){
-                            Log.d("ABC", "e: " + e.getLocalizedMessage());
                             nDayModel.date = new Date();
                         }
                         nDayModel.isOutMonth = true;

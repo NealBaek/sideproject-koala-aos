@@ -28,8 +28,6 @@ public class MonthRvAdapter extends RecyclerView.Adapter{
         this.monthModel = monthModel;
         this.eventInterface = eventInterface;
         this.randomId = randomId;
-
-        Log.d("ABC", "randomId: " + randomId);
     }
 
     public void notifyDataChange(MonthModel monthModel){
@@ -58,17 +56,15 @@ public class MonthRvAdapter extends RecyclerView.Adapter{
 
         DayView dayView = ((ViewHolder) viewHolder).dayView;
 
-        Log.d("ABC", "day: " + dayModel.day);
-        Log.d("ABC", "ViewID1: " + (randomId + dayModel.day + (dayModel.isOutMonth ? CalendarConstUtils.ID_CNT_ISOUTMONTH : 0)));
-        Log.d("ABC", "ViewID2: " + dayView.getId());
-
-
         dayView.setId(randomId + dayModel.day + (dayModel.isOutMonth ? CalendarConstUtils.ID_CNT_ISOUTMONTH : 0));
         dayModel.dayViewId = dayView.getId();
 
         dayView.setDayModel(monthModel.dayList.get(i));
 
 
+        Log.d("ABC", "day: " + dayModel.day);
+        Log.d("ABC", "ViewID1: " + (randomId + dayModel.day + (dayModel.isOutMonth ? CalendarConstUtils.ID_CNT_ISOUTMONTH : 0)));
+        Log.d("ABC", "ViewID2: " + dayView.getId());
 
     }
 

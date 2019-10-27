@@ -66,8 +66,6 @@ public class DayView extends RelativeLayout {
 
         // 2. 클릭 이벤트 설정
         setOnClickListener(view -> {
-            Log.d("ABC", "date: " + today);
-            Log.d("ABC", "date: " + dayModel.date);
             if(!dayModel.isOutMonth && !dayModel.date.after(today)){
                 eventInterface.onDayViewTouch(dayModel);
             }
