@@ -27,7 +27,7 @@ public class TabSettingsFragment extends BaseFragment {
 
     private Context mContext;
 
-    public static BaseFragment newInstance(){
+    public static TabSettingsFragment newInstance(){
         TabSettingsFragment fragment = new TabSettingsFragment();
         return fragment;
     }

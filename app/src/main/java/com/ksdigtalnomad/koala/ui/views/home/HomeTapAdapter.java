@@ -12,10 +12,10 @@ import com.ksdigtalnomad.koala.ui.views.tabs.today.TabTodayFragment;
 public class HomeTapAdapter extends FragmentStatePagerAdapter {
 
     private final int FRAGMENT_CNT = 4;
-    private Fragment fragment1;
-    private Fragment fragment2;
-    private Fragment fragment3;
-    private Fragment fragment4;
+    private TabTodayFragment fragment1;
+    private TabCalendarFragment fragment2;
+    private TabStatisticsFragment fragment3;
+    private TabSettingsFragment fragment4;
 
 
     public HomeTapAdapter(FragmentManager fm ){
@@ -44,4 +44,8 @@ public class HomeTapAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() { return FRAGMENT_CNT; }
+
+    public void refreshTodayTab(){
+        fragment1.refreshData();
+    }
 }

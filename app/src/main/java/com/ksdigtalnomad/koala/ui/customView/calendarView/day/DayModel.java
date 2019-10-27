@@ -5,6 +5,7 @@ import com.ksdigtalnomad.koala.data.models.Food;
 import com.ksdigtalnomad.koala.data.models.Friend;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DayModel implements Cloneable{
     public int dayViewId; // Day View 에 접근하기 위한 아이디
@@ -15,6 +16,7 @@ public class DayModel implements Cloneable{
     public int year;
     public int month;
     public int day;
+    public Date date;
 
     public String dayOfTheWeek;
 

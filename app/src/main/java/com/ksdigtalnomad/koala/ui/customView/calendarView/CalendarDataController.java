@@ -14,9 +14,11 @@ import com.ksdigtalnomad.koala.ui.customView.calendarView.calendarBody.CalendarM
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.month.MonthModel;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by ooddy on 11/07/2019.
@@ -55,6 +57,8 @@ public class CalendarDataController {
         int monthIdx = 0;
         int yearIdx = 0;
         boolean isLeapYear = false;
+        SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd");
+        df.setTimeZone(TimeZone.getDefault());
 
 
         // 오늘 날짜 구하기
@@ -141,6 +145,12 @@ public class CalendarDataController {
                     dayModel.monthIdx = monthIdx;
                     dayModel.yearIdx = yearIdx;
 
+                    try{
+                        dayModel.date = df.parse("" + dayModel.year + "." + (dayModel.month < 10 ? ("0" + dayModel.month) : dayModel.month) + "." + (dayModel.day < 10 ? ("0" + dayModel.day) : dayModel.day));
+                    }catch (ParseException e){
+                        dayModel.date = new Date();
+                    }
+
                     dayModelList.add(dayModel);
                     monthModel.dayList.add(dayModel);
 
@@ -166,6 +176,11 @@ public class CalendarDataController {
                         nDayModel.dayIdx = nDayIdx;
                         nDayModel.monthIdx = monthIdx;
                         nDayModel.yearIdx = yearIdx;
+                        try{
+                            nDayModel.date = df.parse("" + nDayModel.year + "." + (nDayModel.month < 10 ? ("0" + nDayModel.month) : nDayModel.month) + "." + (nDayModel.day < 10 ? ("0" + nDayModel.day) : nDayModel.day));
+                        }catch (ParseException e){
+                            nDayModel.date = new Date();
+                        }
                         nDayModel.isOutMonth = true;
 
                         monthModel.dayList.add(nDayModel);
@@ -189,8 +204,6 @@ public class CalendarDataController {
         }
 
         storeCalendarModel(calendarModel);
-
-        Log.d("ABC", "totalDay: " + dayModelList.size());
 
         createTotalDayList(dayModelList);
 
@@ -291,8 +304,8 @@ public class CalendarDataController {
 
 
         // Total Day List 비동기 저장
-//        Runnable task = () -> updateTotalDayList(dayModel);
-//        task.run();
+        Runnable task = () -> updateTotalDayList(dayModel);
+        task.run();
 
         return calendarModel;
     }
@@ -334,7 +347,7 @@ public class CalendarDataController {
     }
     private static ArrayList<DayModel> dumpTotalDayList(){
         ArrayList<DayModel> dump = new Gson().fromJson(getReadPreference().getString(KEY_TOTAL_DAY_LIST, null), new TypeToken<ArrayList<DayModel>>(){}.getType());
-        Log.d("ABC", "dump_totalday cnt : " + dump.size());
+        if(dump == null){ return  new ArrayList<>(); }
         return dump;
     }
 

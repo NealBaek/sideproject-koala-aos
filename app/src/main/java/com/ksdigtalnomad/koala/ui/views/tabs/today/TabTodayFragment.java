@@ -3,6 +3,7 @@ package com.ksdigtalnomad.koala.ui.views.tabs.today;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.databinding.FragmentTabTodayBinding;
 import com.ksdigtalnomad.koala.ui.base.BaseFragment;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.month.MonthModel;
@@ -30,7 +32,12 @@ public class TabTodayFragment extends BaseFragment {
     private static final String PREFIX_1 = "최근 7일간 음주 ";
     private static final String PREFIX_2 = "최근 7일간 음주량 평균 ";
 
-    public static BaseFragment newInstance(){
+    private Date today;
+    private int thisYear;
+    private int thisMonth;
+    private int thisDate;
+
+    public static TabTodayFragment newInstance(){
         TabTodayFragment fragment = new TabTodayFragment();
         return fragment;
     }
@@ -48,74 +55,88 @@ public class TabTodayFragment extends BaseFragment {
 
         mBinding.headerText.setText(new SimpleDateFormat("yyyy.MM.dd.").format(new Date()));
 
+        // 1. 오늘 날짜 계산
+        today = new Date();
+
+        SimpleDateFormat dfYear = new SimpleDateFormat("yyyy");
+        SimpleDateFormat dfMonth = new SimpleDateFormat("MM");
+        SimpleDateFormat dfDate = new SimpleDateFormat("dd");
+
+        thisYear = Integer.parseInt(dfYear.format(today));
+        thisMonth = Integer.parseInt(dfMonth.format(today));
+        thisDate = Integer.parseInt(dfDate.format(today));
+
         return mBinding.getRoot();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-//        Runnable task = ()->setData();
-//        task.run();
+        refreshData();
+    }
+
+    public void refreshData(){
+        Runnable task = ()->setData();
+        task.run();
     }
 
     private void setData(){
-        Date today = new Date();
 
         int fromDayIdx = 0;
         int toDayIdx = 0;
         ArrayList<DayModel> totalDayList = CalendarDataController.getTotalDayList();
 
-        // 1. 오늘 날짜 계산
-        SimpleDateFormat dfYear = new SimpleDateFormat("yyyy");
-        SimpleDateFormat dfMonth = new SimpleDateFormat("MM");
-        SimpleDateFormat dfDate = new SimpleDateFormat("dd");
 
-        int thisYear = Integer.parseInt(dfYear.format(today));
-        int thisMonth = Integer.parseInt(dfMonth.format(today));
-        int thisDate = Integer.parseInt(dfDate.format(today));
-
-
-        // 2. 오늘 모델 값 구하기
+        // 1. 오늘 모델 값 구하기
         int dayListCnt =  totalDayList.size();
         for(int i = 0; i < dayListCnt; ++i){
             DayModel day = totalDayList.get(i);
             boolean isThisYear  = (thisYear == day.year);
             boolean isThisMonth = (thisMonth == day.month);
-            boolean isThisDate = (thisDate == day.day);
+            boolean isThisDate = (thisDate == day.day - 1);
 
             if (isThisYear && isThisMonth && isThisDate){
                 fromDayIdx = (i - 7 <= 0 ? 0 : i - 7);
                 toDayIdx = i;
+
+                Log.d("ABC", "fromDayIdx: " + fromDayIdx);
+                Log.d("ABC", "toDayIdx: " + toDayIdx);
                 break;
             }
         }
 
-        // 3. 최근 7일
+
+        // 2. 최근 7일
         List<DayModel> recent7Days = totalDayList.subList(fromDayIdx, toDayIdx);
 
         if((recent7Days.size() <= 0)){
+            Log.d("ABC", "no recent7Days");
             showEmptyLayout(true);
             return;
         }
 
 
+        Log.d("ABC", "recent7Days: " + recent7Days.size());
+
+        // 3. 최근 7일 중 저장된 데이터 리스트
         double avgDrinkLevel = 0;
         int drinkCnt = 0;
-        int drinkLevelCnt = 0;
 
         List<DayModel> recentSavedList = new ArrayList<>();
 
         for(DayModel item: recent7Days){
+            Log.d("ABC", "recent7Days: " + item.isSaved);
+            Log.d("ABC", "recent7Days: " + item.date);
             if(item.isSaved){
                 recentSavedList.add(item);
-                avgDrinkLevel += item.drunkLevel * 25/100; // 0 ~ 4
+                avgDrinkLevel += item.drunkLevel * 25; // 0 ~ 4
                 drinkCnt += item.drunkLevel > 0 ? 1 : 0;
-                drinkLevelCnt += item.drunkLevel * 25;
             }
         }
 
 
         if(recentSavedList.size() <= 0){
+            Log.d("ABC", "no recentSavedList");
             showEmptyLayout(true);
             return;
         }
@@ -133,23 +154,21 @@ public class TabTodayFragment extends BaseFragment {
 
         String drinkState = "";
 
-
-        if(avgDrinkLevel > 0 && avgDrinkLevel <= 1){
+        if(avgDrinkLevel >= 0 && avgDrinkLevel <= 100){
             drinkState = "안전";
-        }else if(avgDrinkLevel > 1 && avgDrinkLevel <= 2 ){
+        }else if(avgDrinkLevel > 100 && avgDrinkLevel <= 200 ){
             drinkState = "양호";
-        }else if(avgDrinkLevel > 2 && avgDrinkLevel <= 3 ) {
+        }else if(avgDrinkLevel > 200 && avgDrinkLevel <= 300 ) {
             drinkState = "자제";
-        }else if(avgDrinkLevel > 3 && avgDrinkLevel <= 4 ) {
+        }else if(avgDrinkLevel > 300 && avgDrinkLevel <= 400 ) {
             drinkState = "위험";
-        }else if(avgDrinkLevel > 4 && avgDrinkLevel <= 5 ) {
+        }else if(avgDrinkLevel > 400 && avgDrinkLevel <= 500 ) {
             drinkState = "금지";
         }
 
-
         mBinding.avgDrinkState.setText(drinkState);
         mBinding.avgDrinkTimes.setText(PREFIX_1 + drinkCnt + "회");
-        mBinding.avgDrinkLevel.setText(PREFIX_2 + drinkLevelCnt/drinkCnt + "%");
+        mBinding.avgDrinkLevel.setText(PREFIX_2 + Math.round(avgDrinkLevel/drinkCnt) + "%");
 
         showEmptyLayout(false);
     }

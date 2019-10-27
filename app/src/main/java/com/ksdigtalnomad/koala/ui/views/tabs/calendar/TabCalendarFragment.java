@@ -36,7 +36,7 @@ public class TabCalendarFragment extends BaseFragment {
 
     private Context mContext;
 
-    public static BaseFragment newInstance(){ return new TabCalendarFragment(); }
+    public static TabCalendarFragment newInstance(){ return new TabCalendarFragment(); }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -17,7 +17,7 @@ public class TabStatisticsFragment extends BaseFragment {
 
     private Context mContext;
 
-    public static BaseFragment newInstance(){
+    public static TabStatisticsFragment newInstance(){
         TabStatisticsFragment fragment = new TabStatisticsFragment();
         return fragment;
     }

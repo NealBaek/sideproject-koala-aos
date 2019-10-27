@@ -9,13 +9,9 @@ import android.graphics.Typeface;
 import android.support.v4.graphics.ColorUtils;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.ksdigtalnomad.koala.R;
-import com.ksdigtalnomad.koala.data.models.Drink;
-import com.ksdigtalnomad.koala.data.models.Food;
-import com.ksdigtalnomad.koala.data.models.Friend;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendar.CalendarView;
@@ -32,7 +28,6 @@ public class DayView extends RelativeLayout {
 
     // Data
     private DayModel dayModel = null;
-    private Date thisDate = null;
     private Date today = new Date();
 
 
@@ -71,7 +66,7 @@ public class DayView extends RelativeLayout {
 
         // 2. 클릭 이벤트 설정
         setOnClickListener(view -> {
-            if(!dayModel.isOutMonth && !thisDate.after(today)){
+            if(!dayModel.isOutMonth && !dayModel.date.after(today)){
                 eventInterface.onDayViewTouch(dayModel);
             }
         });
@@ -84,16 +79,6 @@ public class DayView extends RelativeLayout {
     }
     public void setDayModel(DayModel dayModel){
         this.dayModel = dayModel;
-        try{
-            // FIXME: 2일 시간 텀 있다.. 확인해보자
-            this.thisDate = new SimpleDateFormat("yyyyMMdd").parse("" + dayModel.year + "." + (dayModel.month < 10 ? ("0" + dayModel.month) : dayModel.month) + "." + (dayModel.day < 10 ? ("0" + dayModel.day) : dayModel.day));
-
-            Log.d("ABC", "thisDate: " + thisDate + ", today: " + today);
-        }catch (ParseException e){
-            Log.d("ABC", "Parsing Error: " + e.getLocalizedMessage());
-            this.thisDate = new Date();
-        }
-
 
         // 1. 페인트 준비
         initPaints(dayModel);
