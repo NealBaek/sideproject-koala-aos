@@ -157,7 +157,6 @@ public class CalendarDataController {
                     startDay += 1;
                     dayIdx += 1;
 
-                    Log.d("ABC", "dayIdx: " + dayIdx);
                 }
 
                 // 익월 일 추가
@@ -342,7 +341,6 @@ public class CalendarDataController {
     }
 
     private static void storeTotalDayList(ArrayList<DayModel> list){
-        Log.d("ABC", "store_totalday cnt : " + list.size());
         getEditPreference().putString(KEY_TOTAL_DAY_LIST, new Gson().toJson(list)).apply();
     }
     private static ArrayList<DayModel> dumpTotalDayList(){

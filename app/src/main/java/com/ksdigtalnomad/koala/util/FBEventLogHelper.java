@@ -1,13 +1,17 @@
 package com.ksdigtalnomad.koala.util;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class FBEventLogHelper {
 
@@ -29,13 +33,18 @@ public class FBEventLogHelper {
 
     public static void onInputDoenClick(DayModel dayModel){
         Runnable task = ()->{
+
+            SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+
             Bundle bundle = new Bundle();
             bundle.putInt("drunk_level", dayModel.drunkLevel);
             bundle.putString("friend_list", CalendarConstUtils.getFullStrFromFriendList(dayModel.friendList));
             bundle.putString("food_list", CalendarConstUtils.getFullStrFromFoodList(dayModel.foodList));
             bundle.putString("drink_list", CalendarConstUtils.getFullStrFromDrinkList(dayModel.drinkList));
             bundle.putString("memo", dayModel.memo);
-
+            bundle.putString("date", df.format(dayModel.date));
+            bundle.putString("place", Locale.getDefault().toString());
+            bundle.putString("createdAt", df.format(new Date()));
 
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())

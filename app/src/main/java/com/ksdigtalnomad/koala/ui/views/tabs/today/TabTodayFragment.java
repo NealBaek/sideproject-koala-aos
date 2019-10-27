@@ -93,14 +93,11 @@ public class TabTodayFragment extends BaseFragment {
             DayModel day = totalDayList.get(i);
             boolean isThisYear  = (thisYear == day.year);
             boolean isThisMonth = (thisMonth == day.month);
-            boolean isThisDate = (thisDate == day.day - 1);
+            boolean isThisDate = (thisDate == day.day);
 
             if (isThisYear && isThisMonth && isThisDate){
                 fromDayIdx = (i - 7 <= 0 ? 0 : i - 7);
                 toDayIdx = i;
-
-                Log.d("ABC", "fromDayIdx: " + fromDayIdx);
-                Log.d("ABC", "toDayIdx: " + toDayIdx);
                 break;
             }
         }
@@ -110,13 +107,9 @@ public class TabTodayFragment extends BaseFragment {
         List<DayModel> recent7Days = totalDayList.subList(fromDayIdx, toDayIdx);
 
         if((recent7Days.size() <= 0)){
-            Log.d("ABC", "no recent7Days");
             showEmptyLayout(true);
             return;
         }
-
-
-        Log.d("ABC", "recent7Days: " + recent7Days.size());
 
         // 3. 최근 7일 중 저장된 데이터 리스트
         double avgDrinkLevel = 0;
@@ -125,8 +118,6 @@ public class TabTodayFragment extends BaseFragment {
         List<DayModel> recentSavedList = new ArrayList<>();
 
         for(DayModel item: recent7Days){
-            Log.d("ABC", "recent7Days: " + item.isSaved);
-            Log.d("ABC", "recent7Days: " + item.date);
             if(item.isSaved){
                 recentSavedList.add(item);
                 avgDrinkLevel += item.drunkLevel * 25; // 0 ~ 4
@@ -136,7 +127,6 @@ public class TabTodayFragment extends BaseFragment {
 
 
         if(recentSavedList.size() <= 0){
-            Log.d("ABC", "no recentSavedList");
             showEmptyLayout(true);
             return;
         }
@@ -177,7 +167,7 @@ public class TabTodayFragment extends BaseFragment {
 //        "데이터 부족"
 //        최근 7일간 하루라도 데이터가 없으면 표시
 //        누르면 월간 달력화면 이동 버튼으로 변신(밑줄이 쳐진 안내설명  문구)
-        mBinding.stateLayout.setVisibility(shouldShow ? View.INVISIBLE : View.VISIBLE);
-        mBinding.emptyLayout.setVisibility(shouldShow ? View.VISIBLE : View.INVISIBLE);
+        mBinding.stateLayout.setVisibility(shouldShow ? View.GONE : View.VISIBLE);
+        mBinding.emptyLayout.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
     }
 }

@@ -21,7 +21,6 @@ public class FBRemoteControlHelper {
 
 
     public void activateFetch(HostListener hostListener, VersionListener versionListener){
-        Log.d("ABC", "Remote: " + FirebaseRemoteConfig.getInstance().activateFetched());
         FirebaseRemoteConfigSettings configSettings =
                 new FirebaseRemoteConfigSettings.Builder()
                         .setDeveloperModeEnabled(BuildConfig.DEBUG)
@@ -31,17 +30,11 @@ public class FBRemoteControlHelper {
 
         boolean isDebug = FirebaseRemoteConfig.getInstance().getInfo().getConfigSettings().isDeveloperModeEnabled();
 
-        Log.d("ABC", "isDebug: " + isDebug);
-
         FirebaseRemoteConfig.getInstance().fetch(isDebug ? 0 : 2000).addOnSuccessListener((Void aVoid)->{
             FirebaseRemoteConfig.getInstance().activateFetched();
         }).addOnFailureListener((@NonNull Exception e)->{
             Log.d("ABC", "remote failed: " + e.getLocalizedMessage());
         }).addOnCompleteListener((@NonNull Task<Void> task) -> {
-            Log.d("ABC", "remote app_version_android: " + FirebaseRemoteConfig.getInstance().getString("app_version_android"));
-            Log.d("ABC", "remote host_url_v1: " + FirebaseRemoteConfig.getInstance().getString("host_url_v1"));
-            Log.d("ABC", "remote kakao_open_chat_room_url: " + FirebaseRemoteConfig.getInstance().getString("kakao_open_chat_room_url"));
-            Log.d("ABC", "remote host_url_v1: " + FirebaseRemoteConfig.getInstance().getString("share_message"));
 
             if(hostListener != null){
                 hostListener.onComplete(FirebaseRemoteConfig.getInstance().getString("host_url_v1"));
