@@ -29,6 +29,7 @@ import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.views.dialogs.AddDialog;
 import com.ksdigtalnomad.koala.ui.views.dialogs.UpdateDialog;
 import com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.dayDetail.CalendarDayDetailActivity;
+import com.ksdigtalnomad.koala.util.FBEventLogHelper;
 import com.ksdigtalnomad.koala.util.KeyboardHelper;
 import com.ksdigtalnomad.koala.util.ToastHelper;
 
@@ -309,6 +310,17 @@ public class CalendarDetailListEditActivity extends BaseActivity {
     }
     public void onBackClick(){ finish(); }
     public void onAddClick(){
+
+        // Firebase Event Log - add
+        if(viewType.equals(TYPE_FRIENDS)){
+            FBEventLogHelper.onFriendsAdd();
+        }else if(viewType.equals(TYPE_FOODS)){
+            FBEventLogHelper.onFoodAdd();
+        }else if(viewType.equals(TYPE_DRINKS)){
+            FBEventLogHelper.onDrinkAdd();
+        }
+
+
         String toAdd = "";
         if(mBinding.searchEt != null && mBinding.searchEt.getText() != null){
             toAdd = mBinding.searchEt.getText().toString();
@@ -322,16 +334,19 @@ public class CalendarDetailListEditActivity extends BaseActivity {
                      item.setName(newName);
                      dataList.add(0, item);
                      adapter.getSearchList().add(0, item);
+                     FBEventLogHelper.onFriendsAddDone();
                  }else if(viewType.equals(TYPE_FOODS)){
                     Food item = Food.builder().build();
                     item.setName(newName);
                     dataList.add(0, item);
                     adapter.getSearchList().add(0, item);
+                     FBEventLogHelper.onFoodAddDone();
                  }else if(viewType.equals(TYPE_DRINKS)){
                      Drink item = Drink.builder().build();
                      item.setName(newName);
                      dataList.add(0, item);
                      adapter.getSearchList().add(0, item);
+                     FBEventLogHelper.onDrinkAddDone();
                  }
 
                 CalendarDetailListEditActivity.this.runOnUiThread(()->{
@@ -358,17 +373,8 @@ public class CalendarDetailListEditActivity extends BaseActivity {
             }
             dayModel.friendList.clear();
             dayModel.friendList.addAll(list);
-        }else if(viewType.equals(TYPE_DRINKS)){
-            ArrayList<Drink> list = (ArrayList<Drink>) dataList;
 
-            MainDataController.setDrinkList(list);
-
-            for (int i = 0; i < list.size(); ++i){
-                if(!list.get(i).isSelected()){ list.remove(list.get(i)); i -= 1;}
-            }
-            dayModel.drinkList.clear();
-            dayModel.drinkList.addAll(list);
-
+            FBEventLogHelper.onFriendsInputDone();
         }else if(viewType.equals(TYPE_FOODS)){
             ArrayList<Food> list = (ArrayList<Food>) dataList;
 
@@ -379,7 +385,25 @@ public class CalendarDetailListEditActivity extends BaseActivity {
             }
             dayModel.foodList.clear();
             dayModel.foodList.addAll(list);
+
+            FBEventLogHelper.onFoodInputDone();
+        }else if(viewType.equals(TYPE_DRINKS)) {
+            ArrayList<Drink> list = (ArrayList<Drink>) dataList;
+
+            MainDataController.setDrinkList(list);
+
+            for (int i = 0; i < list.size(); ++i) {
+                if (!list.get(i).isSelected()) {
+                    list.remove(list.get(i));
+                    i -= 1;
+                }
+            }
+            dayModel.drinkList.clear();
+            dayModel.drinkList.addAll(list);
+
+            FBEventLogHelper.onDrinkInputDone();
         }
+
         Intent intent = new Intent();
         intent.putExtra(KEY_DAY_MODEL, new Gson().toJson(dayModel));
         setResult(1, intent);

@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ksdigtalnomad.koala.ui.base.BaseFragment;
+import com.ksdigtalnomad.koala.util.FBEventLogHelper;
 import com.ksdigtalnomad.koala.util.PlayStoreHelper;
 import com.ksdigtalnomad.koala.util.FBRemoteControlHelper;
 import com.ksdigtalnomad.koala.util.ShareHelper;
@@ -59,8 +60,18 @@ public class TabSettingsFragment extends BaseFragment {
     public void onKakaoOpenChatRoomClick(){
         String chatRoomUrl = FBRemoteControlHelper.getInstance().getKakaoOpenChatRoomUrl();
         Log.d("ABC", "chatRoomUrl: " + chatRoomUrl);
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(chatRoomUrl)));  }
-    public void onOpenPlayStoreClick(){ PlayStoreHelper.openMyAppInPlayStore(getActivity()); }
-    public void onShareClick(){ ShareHelper.startShareIntent(getContext(), FBRemoteControlHelper.getInstance().getShareMessage()); }
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(chatRoomUrl)));
+
+        FBEventLogHelper.onKakaoOpenChatRoom();
+    }
+    public void onOpenPlayStoreComplementClick(){
+        PlayStoreHelper.openMyAppInPlayStore(getActivity());
+        FBEventLogHelper.onPlayStoreComplement();
+    }
+    public void onShareClick(){
+        ShareHelper.startShareIntent(getContext(), FBRemoteControlHelper.getInstance().getShareMessage());
+        FBEventLogHelper.onAppShare();
+
+    }
     public void onVersionClick(){  }
 }

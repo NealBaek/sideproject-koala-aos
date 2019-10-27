@@ -22,6 +22,7 @@ public class FBEventLogHelper {
     private static final String FOOD_ADD_DONE = "DAY_DETAIL_LIST_EDIT_FOOD_add_done";
     private static final String FOOD_INPUT_DONE = "DAY_DETAIL_LIST_EDIT_FOOD_input_done";
     private static final String KAKAO_OPEN_CHAT_ROON = "TAB_SETTINGS_kakao_open_chat_room";
+    private static final String PLAY_STORE_COMPLEMENT = "TAB_SETTINGS_play_store_compliment";
     private static final String APP_SHARE = "TAB_SETTINGS_app_share";
     private static final String EXIT = "EXIT";
 
@@ -52,7 +53,7 @@ public class FBEventLogHelper {
         };
         task.run();
     }
-    public static void onFriendsAddDoen(){
+    public static void onFriendsAddDone(){
         Runnable task = ()->{
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
@@ -121,6 +122,14 @@ public class FBEventLogHelper {
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
                     .logEvent(KAKAO_OPEN_CHAT_ROON, new Bundle());
+        };
+        task.run();
+    }
+    public static void onPlayStoreComplement(){
+        Runnable task = ()->{
+            FirebaseAnalytics
+                    .getInstance(BaseApplication.getInstance().getApplicationContext())
+                    .logEvent(PLAY_STORE_COMPLEMENT, new Bundle());
         };
         task.run();
     }

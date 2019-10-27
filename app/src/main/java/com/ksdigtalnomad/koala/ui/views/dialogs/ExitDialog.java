@@ -16,6 +16,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.ui.base.BaseDialogFragment;
+import com.ksdigtalnomad.koala.util.FBEventLogHelper;
 
 public class ExitDialog extends BaseDialogFragment {
 
@@ -38,6 +39,8 @@ public class ExitDialog extends BaseDialogFragment {
         view.findViewById(R.id.dialogLayout).setOnClickListener((v) -> dismiss());
         view.findViewById(R.id.btnCancel).setOnClickListener((v) -> dismiss());
         view.findViewById(R.id.btnExit).setOnClickListener((v) -> {
+            FBEventLogHelper.onExit();
+
             ActivityCompat.finishAffinity(getActivity());
             System.runFinalizersOnExit(true);
             System.exit(0);
