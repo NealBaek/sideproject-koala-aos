@@ -218,19 +218,6 @@ public class CalendarDataController {
 
         for(int i = 0; i < mModelCnt; ++ i){
             MonthModel mModel = mModelList.get(i);
-//            if(mModel.index == dayModel.monthIdx){
-//                ArrayList<DayModel> dModelList = mModel.dayList;
-//                int dModelCnt = dModelList.size();
-//
-//                for(int j = 0; j < dModelCnt; ++ j){
-//                    DayModel dModel = dModelList.get(j);
-//                    if(dModel.dayIdx == dayModel.dayIdx){
-//                        dModelList.set(j, dayModel);
-//                        break;
-//                    }
-//                }
-//                break;
-//            }
 
             // 전월 previous month
             if(dayModel.day <= 15 && dayModel.monthIdx > 0 && mModel.index == (dayModel.monthIdx - 1)){

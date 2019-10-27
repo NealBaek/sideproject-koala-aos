@@ -100,8 +100,21 @@ public class TabCalendarFragment extends BaseFragment {
 
             // 금월
             DayView cDayView = this.calendarView.findViewById(dayModel.dayViewId);
-            cDayView.setDayModel(dayModel);
-            cDayView.invalidate();
+            if(cDayView != null){
+                DayModel cDayModel = cDayView.getDayModel();
+                cDayModel.drunkLevel = dayModel.drunkLevel;
+                cDayModel.friendList.clear();
+                cDayModel.friendList.addAll(dayModel.friendList);
+                cDayModel.foodList.clear();
+                cDayModel.foodList.addAll(dayModel.foodList);
+                cDayModel.drinkList.clear();
+                cDayModel.drinkList.addAll(dayModel.drinkList);
+                cDayModel.memo = dayModel.memo;
+                cDayModel.isSaved = dayModel.isSaved;
+                cDayView.setDayModel(cDayModel);
+                cDayView.invalidate();
+            }
+
 
             // 익월
             if(dayModel.day > 20){
