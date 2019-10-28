@@ -2,6 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'io.fabric' // Crashlytics
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'koala'
+            keyPassword '191028'
+            storeFile file('koala.jks')
+            storePassword '191028'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.ksdigtalnomad.koala"
@@ -11,16 +19,22 @@ android {
         versionName "0.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
     }
     buildTypes {
         release {
             buildConfigField "String", "SERVER_URL", '""'
             buildConfigField "String", "SERVER_PORT", '""'
             buildConfigField "String", "API_PREFIX", '"/api/"'
-            debuggable false
-            minifyEnabled true
-            useProguard true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            debuggable false
+//            minifyEnabled true
+//            useProguard true
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
             buildConfigField "String", "SERVER_URL", '""'
@@ -40,6 +54,12 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     dataBinding { enabled = true }
+    lintOptions {
+        disable 'MissingTranslation'
+        disable 'ExtraTranslation'
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -60,8 +80,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
     // lombok
-    compileOnly 'org.projectlombok:lombok:1.18.6'
-    annotationProcessor 'org.projectlombok:lombok:1.18.6'
+    compileOnly 'org.projectlombok:lombok:1.18.2'
+    annotationProcessor 'org.projectlombok:lombok:1.18.2'
 
     // rxAndroid
     implementation 'io.reactivex.rxjava2:rxjava:2.1.7'

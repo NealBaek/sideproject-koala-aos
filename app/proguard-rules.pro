@@ -19,3 +19,47 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# retrofit2
+-dontnote retrofit2.Platform
+-dontwarn retrofit2.Platform$Java8
+-keepattributes Signature
+-keepattributes Exceptions
+-dontwarn javax.annotation.**
+
+# okio
+-dontwarn okhttp3.**
+-dontwarn okio.**
+-dontwarn org.conscrypt.**
+
+# model
+-keep class com.ksdigtalnomad.koala.data.models.** { *; }
+-keepclassmembers class com.ksdigtalnomad.koala.data.models.** { *; }
+
+# glide
+ -keep public class * implements com.bumptech.glide.module.GlideModule
+ -keep public class * extends com.bumptech.glide.module.AppGlideModule
+ -keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+   **[] $VALUES;
+   public *;
+ }
+
+# retrolambda
+-dontwarn java.lang.invoke.**
+
+#-dontwarn android.databinding.**
+#-keep class android.databinding.** { *; }
+
+
+
+-ignorewarnings
+-keep class * {
+    public private *;
+}
+
+# Firebase Crashlytics
+-keep class com.crashlytics.** { *; }
+-dontwarn com.crashlytics.**
+
+# GMS
+-dontwarn android.support.v4.**,org.slf4j.**,com.google.android.gms.**
