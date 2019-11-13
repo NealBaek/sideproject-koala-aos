@@ -30,14 +30,12 @@ public class DayView extends RelativeLayout {
 
 
     // Paints
+    private Paint borderRectPt = null;
     private Paint dayTvPt = null;
     private Paint drunkLvRectPt = null;
     private Paint drunkLvTvPt = null;
     private Paint listTvPt = null;
     private Paint blinderRectPt = null;
-
-    // Border
-    private GradientDrawable border = null;
 
 
     // Text attributes
@@ -73,10 +71,6 @@ public class DayView extends RelativeLayout {
             }
         });
 
-        //use a GradientDrawable with only one color set, to make it a solid color
-        GradientDrawable border = new GradientDrawable();
-        border.setColor(getResources().getColor(R.color.colorPureWhite)); //white background
-        border.setStroke(1, getResources().getColor(R.color.colorMain)); //black border with full opacity
     }
 
 
@@ -94,7 +88,10 @@ public class DayView extends RelativeLayout {
     /** Paints */
     private void initPaints(DayModel dayModel){
 
-        // 1. day text Pain 만들기
+        // 0. Border Paint 만들기
+        borderRectPt = createBorderRectPaint(getResources().getColor(R.color.colorMain));
+
+        // 1. day text Paint 만들기
         int DAY_COLOR = CalendarConstUtils.getDayColor(dayModel.daySeq);
         dayTvPt = createTxPaint(DAY_COLOR, Paint.Align.LEFT, null);
 
@@ -146,7 +143,15 @@ public class DayView extends RelativeLayout {
 
         return rectP;
     }
+    private Paint createBorderRectPaint(int color){
+        Paint rectP = new Paint();
 
+        rectP.setColor(color);
+        rectP.setStrokeWidth(2);
+        rectP.setStyle(Paint.Style.STROKE);
+
+        return rectP;
+    }
 
 
 
@@ -158,11 +163,6 @@ public class DayView extends RelativeLayout {
 
         if(dayModel == null) return;
 
-        // 0. 오늘이면 Border 추가
-        if(DateHelper.getInstance().isToday(dayModel.date)){
-            setBackground(border);
-        }
-
 
         int parentWidth  = getMeasuredWidth();
         int parentHeight = getMeasuredHeight();
@@ -173,8 +173,12 @@ public class DayView extends RelativeLayout {
         int dayTvHeight = txHeightForHeader * 2;
         int dayTvTopMargin = txHeightForHeader/2;
 
+        //   1-2. 오늘이면 Border 추가
+        if(DateHelper.getInstance().isToday(dayModel.date)){
+            canvas.drawRect(1, 1, parentWidth - 1, parentHeight - 1, borderRectPt);
+        }
 
-        //  1-2. 텍스트 그리기
+        //  1-3. 텍스트 그리기
         drawDayTv(canvas, txHeightForHeader, TEXT_PADDING_LEFT, dayTvTopMargin, dayTvHeight, dayTvPt, dayModel);
 
 

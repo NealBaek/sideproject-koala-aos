@@ -4,11 +4,11 @@
     <!-- Key Values -->
 
     <!-- AdMob -->
-    <string name="admob_id_app">ca-app-pub-9300115819443880~2843172061</string>
-    <string name="admob_id_banner_home">ca-app-pub-9300115819443880/6399273693</string>
-    <string name="admob_id_banner_day_detail">ca-app-pub-9300115819443880/3530766886</string>
-    <string name="admob_id_banner_day_detail_edit">ca-app-pub-9300115819443880/7286179061</string>
-    <string name="admob_id_banner_exit">ca-app-pub-9300115819443880/2787217778</string>
+    <string name="admob_id_app">ca-app-pub-9300115819443880~3936988190</string>
+    <string name="admob_id_banner_home">ca-app-pub-9300115819443880/3629882345</string>
+    <string name="admob_id_banner_day_detail">ca-app-pub-9300115819443880/7377555662</string>
+    <string name="admob_id_banner_day_detail_edit">ca-app-pub-9300115819443880/7865459065</string>
+    <string name="admob_id_banner_exit">ca-app-pub-9300115819443880/3926214052</string>
 
 
 
