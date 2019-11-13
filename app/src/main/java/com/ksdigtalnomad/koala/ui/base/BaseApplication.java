@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.google.android.gms.ads.MobileAds;
 import com.ksdigtalnomad.koala.R;
+import com.ksdigtalnomad.koala.service.DailyAlarmJobScheduler;
 import com.ksdigtalnomad.koala.util.FBEventLogHelper;
 import com.ksdigtalnomad.koala.util.FBRemoteControlHelper;
 import com.ksdigtalnomad.koala.util.TypeKitHelper;
@@ -39,6 +40,8 @@ public class BaseApplication extends MultiDexApplication {
         printKeyHash();
 
         FBRemoteControlHelper.getInstance().activateFetch(null, null);
+
+        DailyAlarmJobScheduler.start(this);
 
     }
 

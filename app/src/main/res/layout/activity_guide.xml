@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@color/colorPureBlack">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <com.rd.PageIndicatorView
+            android:id="@+id/circleIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="56dp"
+            app:piv_unselectedColor="#727475"
+            app:piv_selectedColor="@color/colorPureWhite"
+            app:piv_radius="3dp"
+            app:piv_viewPager="@id/viewPager"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/nextBtn"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:background="@color/colorYellow"
+        android:textColor="@color/colorPureWhite"
+        android:textSize="19dp"
+        android:textStyle="bold"
+        android:text="@string/btn_next"/>
+
+    <TextView
+        android:id="@+id/startBtn"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:background="@color/colorYellow"
+        android:textColor="@color/colorPureWhite"
+        android:textSize="19dp"
+        android:textStyle="bold"
+        android:text="@string/guide_start"/>
+
+</LinearLayout>

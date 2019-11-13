@@ -62,10 +62,6 @@ public class MonthRvAdapter extends RecyclerView.Adapter{
         dayView.setDayModel(monthModel.dayList.get(i));
 
 
-        Log.d("ABC", "day: " + dayModel.day);
-        Log.d("ABC", "ViewID1: " + (randomId + dayModel.day + (dayModel.isOutMonth ? CalendarConstUtils.ID_CNT_ISOUTMONTH : 0)));
-        Log.d("ABC", "ViewID2: " + dayView.getId());
-
     }
 
     @Override

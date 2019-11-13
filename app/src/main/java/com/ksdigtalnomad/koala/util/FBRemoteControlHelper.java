@@ -52,6 +52,7 @@ public class FBRemoteControlHelper {
 
     public String getShareMessage(){ return FirebaseRemoteConfig.getInstance().getString("share_message"); }
     public String getKakaoOpenChatRoomUrl(){ return FirebaseRemoteConfig.getInstance().getString("kakao_open_chat_room_url"); }
+    public String getAlarmDaily(){ return FirebaseRemoteConfig.getInstance().getString("alarm_daily"); }
 
     public interface HostListener{ void onComplete(String hostUrl);}
     public interface VersionListener{ void onComplete(String version);}

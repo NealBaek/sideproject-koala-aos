@@ -43,4 +43,13 @@
 
 
     <string name="warning_cannot_edit_after_day">오늘 이후 날짜는 입력하실 수 없어요</string>
+
+
+    <string name="btn_next">다음</string>
+
+    <!-- 가이드 -->
+    <string name="guide_start">시작하기</string>
+    <string name="guide_first">가이드 1</string>
+    <string name="guide_second">가이드 2</string>
+    <string name="guide_third">가이드 3</string>
 </resources>
