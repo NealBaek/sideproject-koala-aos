@@ -12,4 +12,9 @@ public class BaseActivity extends AppCompatActivity {
         overridePendingTransition(0,0);
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(0,0);
+    }
 }
