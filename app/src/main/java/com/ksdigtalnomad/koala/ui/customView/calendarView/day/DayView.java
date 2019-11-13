@@ -6,8 +6,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v4.graphics.ColorUtils;
-import android.util.Log;
 import android.util.TypedValue;
 import android.widget.RelativeLayout;
 
@@ -15,11 +15,10 @@ import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendar.CalendarView;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.utils.DateHelper;
+import com.ksdigtalnomad.koala.util.ToastHelper;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class DayView extends RelativeLayout {
 
@@ -28,7 +27,6 @@ public class DayView extends RelativeLayout {
 
     // Data
     private DayModel dayModel = null;
-    private Date today = new Date();
 
 
     // Paints
@@ -38,6 +36,8 @@ public class DayView extends RelativeLayout {
     private Paint listTvPt = null;
     private Paint blinderRectPt = null;
 
+    // Border
+    private GradientDrawable border = null;
 
 
     // Text attributes
@@ -66,10 +66,17 @@ public class DayView extends RelativeLayout {
 
         // 2. 클릭 이벤트 설정
         setOnClickListener(view -> {
-            if(!dayModel.isOutMonth && !dayModel.date.after(today)){
+            if(!dayModel.isOutMonth && !DateHelper.getInstance().isAfterToday(dayModel.date)){
                 eventInterface.onDayViewTouch(dayModel);
+            }else{
+                ToastHelper.writeBottomShortToast(getResources().getString(R.string.warning_cannot_edit_after_day));
             }
         });
+
+        //use a GradientDrawable with only one color set, to make it a solid color
+        GradientDrawable border = new GradientDrawable();
+        border.setColor(getResources().getColor(R.color.colorPureWhite)); //white background
+        border.setStroke(1, getResources().getColor(R.color.colorMain)); //black border with full opacity
     }
 
 
@@ -115,6 +122,7 @@ public class DayView extends RelativeLayout {
 
         // 5. Blinder Rect Paint 만들기
         blinderRectPt = createRectPaint(ColorUtils.setAlphaComponent(BaseApplication.getInstance().getResources().getColor(R.color.colorLightGray), 200));
+
     }
 
     // Create Paints
@@ -149,6 +157,11 @@ public class DayView extends RelativeLayout {
         super.onDraw(canvas);
 
         if(dayModel == null) return;
+
+        // 0. 오늘이면 Border 추가
+        if(DateHelper.getInstance().isToday(dayModel.date)){
+            setBackground(border);
+        }
 
 
         int parentWidth  = getMeasuredWidth();

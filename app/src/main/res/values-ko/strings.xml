@@ -39,4 +39,7 @@
 
     <string name="default_friend_list">혼술</string>
     <string name="default_food_list">깡술</string>
+
+
+    <string name="warning_cannot_edit_after_day">오늘 이후 날짜는 입력하실 수 없어요</string>
 </resources>

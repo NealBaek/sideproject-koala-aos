@@ -3,7 +3,6 @@ package com.ksdigtalnomad.koala.ui.views.tabs.today;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +10,12 @@ import android.view.ViewGroup;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.databinding.FragmentTabTodayBinding;
 import com.ksdigtalnomad.koala.ui.base.BaseFragment;
-import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
-import com.ksdigtalnomad.koala.ui.customView.calendarView.month.MonthModel;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.utils.DateHelper;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class TabTodayFragment extends BaseFragment {
 
@@ -32,10 +26,6 @@ public class TabTodayFragment extends BaseFragment {
     private static final String PREFIX_1 = "최근 7일간 음주 ";
     private static final String PREFIX_2 = "최근 7일간 음주량 평균 ";
 
-    private Date today;
-    private int thisYear;
-    private int thisMonth;
-    private int thisDate;
 
     public static TabTodayFragment newInstance(){
         TabTodayFragment fragment = new TabTodayFragment();
@@ -53,18 +43,7 @@ public class TabTodayFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_tab_today, container, false);
 
-        mBinding.headerText.setText(new SimpleDateFormat("yyyy.MM.dd.").format(new Date()));
-
-        // 1. 오늘 날짜 계산
-        today = new Date();
-
-        SimpleDateFormat dfYear = new SimpleDateFormat("yyyy");
-        SimpleDateFormat dfMonth = new SimpleDateFormat("MM");
-        SimpleDateFormat dfDate = new SimpleDateFormat("dd");
-
-        thisYear = Integer.parseInt(dfYear.format(today));
-        thisMonth = Integer.parseInt(dfMonth.format(today));
-        thisDate = Integer.parseInt(dfDate.format(today));
+        mBinding.headerText.setText(DateHelper.getInstance().getTodayStr("yyyy.MM.dd."));
 
         return mBinding.getRoot();
     }
@@ -91,11 +70,8 @@ public class TabTodayFragment extends BaseFragment {
         int dayListCnt =  totalDayList.size();
         for(int i = 0; i < dayListCnt; ++i){
             DayModel day = totalDayList.get(i);
-            boolean isThisYear  = (thisYear == day.year);
-            boolean isThisMonth = (thisMonth == day.month);
-            boolean isThisDate = (thisDate == day.day);
 
-            if (isThisYear && isThisMonth && isThisDate){
+            if (DateHelper.getInstance().isToday(day.date)){
                 fromDayIdx = (i - 7 <= 0 ? 0 : i - 7);
                 toDayIdx = i;
                 break;
