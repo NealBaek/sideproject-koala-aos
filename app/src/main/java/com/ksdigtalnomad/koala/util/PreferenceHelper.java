@@ -12,8 +12,11 @@ import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 public class PreferenceHelper {
     private static final String PREF_FILE_NAME = "BUDDY_COIN";
     private static final String KEY_ACCESS_TOKEN = "ACCESS_TOKEN";
+    private static final String KEY_FIRST_OPEN = "FIRST_OPEN";
     private static final String KEY_USER = "USER";
     private static final String KEY_PUSH_TOKEN = "PUSH_TOKEN";
+    private static final String KEY_LANGUAGE_CODE = "LANGUAGE_CODE";
+
 
     private static SharedPreferences.Editor getEditPreference() {
         Context context = BaseApplication.getInstance().getApplicationContext();
@@ -31,6 +34,20 @@ public class PreferenceHelper {
 
 
 
+    public static void setLanguageCode(String language) {
+        getEditPreference().putString(KEY_LANGUAGE_CODE, language).apply();
+    }
+    public static String getLanguageCode() {
+        return getReadPreference().getString(KEY_LANGUAGE_CODE, null);
+    }
+
+
+    public static void setFirstOpen(boolean flag) {
+        getEditPreference().putBoolean(KEY_FIRST_OPEN, flag).apply();
+    }
+    public static boolean isFirstOpen() {
+        return getReadPreference().getBoolean(KEY_FIRST_OPEN, true);
+    }
 
 
 

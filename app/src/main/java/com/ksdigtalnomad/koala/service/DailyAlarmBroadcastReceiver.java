@@ -67,16 +67,5 @@ public class DailyAlarmBroadcastReceiver extends BroadcastReceiver {
 
         notificationManager.notify(NOTICATION_ID /* ID of notification */, notificationBuilder.build());
 
-
-
-
-//        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-//                .setSmallIcon(R.drawable.ic_launcher_foreground) //알람 아이콘
-//                .setContentTitle(alarmDaily.getTitle())  //알람 제목
-//                .setContentText(alarmDaily.getContent()) //알람 내용
-//                .setPriority(NotificationCompat.PRIORITY_DEFAULT); //알람 중요도
-//
-//        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-//        notificationManager.notify(NOTICATION_ID, builder.build()); //알람 생성
     }
 }

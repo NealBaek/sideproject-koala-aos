@@ -2,15 +2,18 @@ package com.ksdigtalnomad.koala.ui.views.guide;
 
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.ksdigtalnomad.koala.R;
+import com.ksdigtalnomad.koala.databinding.ActivityGuideBinding;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
-import com.rd.PageIndicatorView;
+import com.ksdigtalnomad.koala.ui.views.home.HomeActivity;
+import com.ksdigtalnomad.koala.util.PreferenceHelper;
 
 public class GuideActivity extends BaseActivity {
 
@@ -18,14 +21,11 @@ public class GuideActivity extends BaseActivity {
     public static final String GUIDE_SECOND = "SECOND";
     public static final String GUIDE_THIRD = "THIRD";
 
+    private ActivityGuideBinding mBinding;
 
-    PageIndicatorView pageIndicatorView;
 
-    ViewPager viewPager;
     private GuideAdapter viewPagerAdapter;
 
-    TextView nextBtn;
-    TextView startBtn;
 
     public static Intent intent(Context context) {
         return new Intent(context, GuideActivity.class);
@@ -34,26 +34,32 @@ public class GuideActivity extends BaseActivity {
     @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_guide);
+        mBinding.setActivity(this);
+
         this.viewPagerAdapter = new GuideAdapter(this);
         initViewPager();
     }
 
     private void initViewPager() {
-        pageIndicatorView.setCount(3);
-        pageIndicatorView.setSelected(0);
-        viewPager.setAdapter(viewPagerAdapter);
-        viewPager.addOnPageChangeListener(new onPageChangeListenerClass());
+        mBinding.pageIndicatorView.setCount(3);
+        mBinding.pageIndicatorView.setSelected(0);
+        mBinding.viewPager.setAdapter(viewPagerAdapter);
+        mBinding.viewPager.addOnPageChangeListener(new onPageChangeListenerClass());
     }
 
-//    @OnClick(R.id.nextBtn) public void nextBtnClick() {
-//        int current = viewPager.getCurrentItem();
-//        viewPager.setCurrentItem(current + 1);
-//    }
-//
-//    @OnClick(R.id.startBtn) public void startBtnClick() {
-//        startActivity(LoginActivity.intent(this));
-//        finish();
-//    }
+
+
+    public void onNextBtnClick() {
+        int current = mBinding.viewPager.getCurrentItem();
+        mBinding.viewPager.setCurrentItem(current + 1);
+    }
+
+    public void onStartBtnClick() {
+        PreferenceHelper.setFirstOpen(false);
+        startActivity(HomeActivity.intent(this));
+        finish();
+    }
 
     class onPageChangeListenerClass implements ViewPager.OnPageChangeListener {
 
@@ -63,11 +69,11 @@ public class GuideActivity extends BaseActivity {
 
         @Override public void onPageSelected(int position) {
             if (position >= 2) {
-                nextBtn.setVisibility(View.GONE);
-                startBtn.setVisibility(View.VISIBLE);
+                mBinding.nextBtn.setVisibility(View.GONE);
+                mBinding.startBtn.setVisibility(View.VISIBLE);
             } else {
-                nextBtn.setVisibility(View.VISIBLE);
-                startBtn.setVisibility(View.GONE);
+                mBinding.nextBtn.setVisibility(View.VISIBLE);
+                mBinding.startBtn.setVisibility(View.GONE);
             }
         }
 
