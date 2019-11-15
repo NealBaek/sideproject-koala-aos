@@ -10,16 +10,25 @@ import android.util.Log;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
+import com.google.gson.Gson;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.databinding.ActivityHomeBinding;
+import com.ksdigtalnomad.koala.service.alarm.DailyAlarmReceiver;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
 import com.ksdigtalnomad.koala.ui.views.dialogs.ExitDialog;
+import com.ksdigtalnomad.koala.util.PreferenceHelper;
 
 public class HomeActivity extends BaseActivity {
     private ActivityHomeBinding mBinding;
     private HomeTapAdapter tapAdapter;
+    private static final String KEY_NOTI_ALARM_DAILY = "NOTI_ALARM_DAILY";
 
     public static Intent intent(Context context) {  return new Intent(context, HomeActivity.class);  }
+    public static Intent intentFromNotiAlarmDaily(Context context) {
+        Intent intent = new Intent(context, HomeActivity.class);
+        intent.putExtra(KEY_NOTI_ALARM_DAILY, true);
+        return intent;
+    }
 
 
     @Override
@@ -58,6 +67,18 @@ public class HomeActivity extends BaseActivity {
             }
         });
 
+        if(PreferenceHelper.isFirstOpen()){
+            mBinding.homeTabViewPager.setCurrentItem(1);
+            PreferenceHelper.setFirstOpen(false);
+        }
+
+        DailyAlarmReceiver.setAlarm();
+
+        // From AlarmDaily Noti
+        if(getIntent().getBooleanExtra(KEY_NOTI_ALARM_DAILY, false)){
+            mBinding.homeTabViewPager.setCurrentItem(1);
+            mBinding.homeTabViewPager.postDelayed(()->tapAdapter.moveToTodayDetail(), 1000);
+        }
     }
 
     @Override

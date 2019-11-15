@@ -48,4 +48,7 @@ public class HomeTapAdapter extends FragmentStatePagerAdapter {
     public void refreshTodayTab(){
         fragment1.refreshData();
     }
+    public void moveToTodayDetail(){
+        fragment2.moveToTodayDetail();
+    }
 }

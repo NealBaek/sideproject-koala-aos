@@ -1,13 +1,13 @@
 package com.ksdigtalnomad.koala.ui.views.splash;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
 import com.ksdigtalnomad.koala.R;
+import com.ksdigtalnomad.koala.service.alarm.DailyAlarmReceiver;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
 import com.ksdigtalnomad.koala.ui.views.guide.GuideActivity;
 import com.ksdigtalnomad.koala.ui.views.home.HomeActivity;
@@ -41,7 +41,7 @@ public class SplashActivity extends BaseActivity {
     private void getVersion(){
         FBRemoteControlHelper.getInstance().getVersion((versionStr)->{
             if(versionStr == null || versionStr == "") {
-                ToastHelper.writeBottomLongToast("서버 업데이트 중입니다.");
+                ToastHelper.writeBottomLongToast(getResources().getString(R.string.warning_server_updating));
                 return;
             }else{
 
@@ -61,7 +61,7 @@ public class SplashActivity extends BaseActivity {
             super.handleMessage(msg);
 
             if(PreferenceHelper.isFirstOpen()){
-                // @TODO: Alarm Service 등록
+                DailyAlarmReceiver.setAlarm();
 
                 activity.startActivity(GuideActivity.intent(activity));
                 activity.finish();

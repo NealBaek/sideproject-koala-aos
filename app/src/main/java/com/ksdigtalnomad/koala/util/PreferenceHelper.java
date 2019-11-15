@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 
 //import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
+import com.ksdigtalnomad.koala.data.models.AlarmDaily;
 import com.ksdigtalnomad.koala.data.models.User;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 
@@ -16,6 +17,7 @@ public class PreferenceHelper {
     private static final String KEY_USER = "USER";
     private static final String KEY_PUSH_TOKEN = "PUSH_TOKEN";
     private static final String KEY_LANGUAGE_CODE = "LANGUAGE_CODE";
+    private static final String KEY_ALARM_DAILY_HOUR = "ALARM_DAILY_HOUR";
 
 
     private static SharedPreferences.Editor getEditPreference() {
@@ -32,6 +34,21 @@ public class PreferenceHelper {
         getEditPreference().clear().commit();
     }
 
+
+
+    public static void setAlarmDailyHour(int alarmDailyHour) {
+        getEditPreference().putInt(KEY_ALARM_DAILY_HOUR, alarmDailyHour).apply();
+    }
+    public static int getAlarmDailyHour() {
+        AlarmDaily alarmDaily = new Gson().fromJson(FBRemoteControlHelper.getInstance().getAlarmDaily(), AlarmDaily.class);
+        if(alarmDaily == null){
+            return 10; // defaultHour
+        }
+
+        int defaultHour = alarmDaily.getDefaultAlarmHour();
+
+        return getReadPreference().getInt(KEY_ALARM_DAILY_HOUR, defaultHour);
+    }
 
 
     public static void setLanguageCode(String language) {

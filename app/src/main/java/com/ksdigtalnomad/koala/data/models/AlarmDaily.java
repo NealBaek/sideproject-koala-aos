@@ -9,6 +9,7 @@ import lombok.ToString;
 public class AlarmDaily extends BaseData implements Cloneable{
     String title;
     String content;
+    int defaultAlarmHour;
 
     public AlarmDaily clone(){
         //내 객체 생성

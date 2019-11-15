@@ -22,6 +22,7 @@ import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendar.CalendarView;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayView;
+import com.ksdigtalnomad.koala.ui.views.home.HomeActivity;
 import com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.dayDetail.CalendarDayDetailActivity;
 
 
@@ -137,5 +138,12 @@ public class TabCalendarFragment extends BaseFragment {
             }
 
         }
+    }
+
+
+    public void moveToTodayDetail(){
+        calendarView.postDelayed(() -> {
+            TabCalendarFragment.this.startActivityForResult((CalendarDayDetailActivity.intent(mContext, CalendarDataController.getTodayModelFromDayView())), 0);
+        }, 100);
     }
 }

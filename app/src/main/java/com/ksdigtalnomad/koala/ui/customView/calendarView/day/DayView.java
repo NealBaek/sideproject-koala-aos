@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendar.CalendarView;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.utils.DateHelper;
 import com.ksdigtalnomad.koala.util.ToastHelper;
@@ -80,6 +81,8 @@ public class DayView extends RelativeLayout {
     }
     public void setDayModel(DayModel dayModel){
         this.dayModel = dayModel;
+
+        CalendarDataController.checkThenSetTodayModel(dayModel);
 
         // 1. 페인트 준비
         initPaints(dayModel);

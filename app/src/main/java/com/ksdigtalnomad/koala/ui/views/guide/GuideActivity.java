@@ -56,7 +56,6 @@ public class GuideActivity extends BaseActivity {
     }
 
     public void onStartBtnClick() {
-        PreferenceHelper.setFirstOpen(false);
         startActivity(HomeActivity.intent(this));
         finish();
     }

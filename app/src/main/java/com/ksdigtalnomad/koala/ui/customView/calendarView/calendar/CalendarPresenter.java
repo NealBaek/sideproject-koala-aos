@@ -18,6 +18,8 @@ class CalendarPresenter implements CalendarContract.CalendarPresenter{
     private int thisMonthIdx;
     private MonthModel thisMonthMondel;
 
+    private Date today = new Date();
+
 
     public CalendarPresenter(CalendarContract.CalendarView view, CalendarModel calendarModel){
         this.view = view;
@@ -31,8 +33,8 @@ class CalendarPresenter implements CalendarContract.CalendarPresenter{
         SimpleDateFormat dfYear = new SimpleDateFormat("yyyy");
         SimpleDateFormat dfMonth = new SimpleDateFormat("MM");
 
-        int thisMonth = Integer.parseInt(dfMonth.format(new Date()));
-        int thisYear = Integer.parseInt(dfYear.format(new Date()));
+        int thisMonth = Integer.parseInt(dfMonth.format(today));
+        int thisYear = Integer.parseInt(dfYear.format(today));
 
 
 

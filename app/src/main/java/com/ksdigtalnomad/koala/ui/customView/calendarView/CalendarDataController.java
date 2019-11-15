@@ -13,6 +13,7 @@ import com.ksdigtalnomad.koala.ui.customView.calendarView.calendar.CalendarView;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendarBody.CalendarModel;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.month.MonthModel;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.utils.DateHelper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,6 +31,7 @@ public class CalendarDataController {
     private static final String KEY_CALENDAR_MODEL = "CALENDAR_MODEL";
     private static final String KEY_TOTAL_DAY_LIST = "TOTAL_DAY_LIST";
 
+    private static DayModel todayModelFromDayView = new DayModel();
 
     private CalendarDataController(){}
     private static SharedPreferences.Editor getEditPreference() {
@@ -301,6 +303,41 @@ public class CalendarDataController {
         CalendarModel dumpModel = new Gson().fromJson(getReadPreference().getString(KEY_CALENDAR_MODEL, null), CalendarModel.class);
         if(dumpModel == null) dumpModel = createCalendarModel();
         return dumpModel;
+    }
+
+
+
+
+
+    // Today Model
+    public static DayModel getTodayModelFromDayView(){
+        return todayModelFromDayView;
+    }
+    public static void checkThenSetTodayModel(DayModel dayModel){
+        if(getTodayModel().dayIdx == dayModel.dayIdx){
+            setTodayModel(dayModel);
+        }
+    }
+    private static DayModel getTodayModel(){
+        if(todayModelFromDayView.date == null){
+            ArrayList<DayModel> totalDayList = CalendarDataController.getTotalDayList();
+
+            // 1. 오늘 모델 값 구하기
+            int dayListCnt =  totalDayList.size();
+            for(int i = 0; i < dayListCnt; ++i){
+                DayModel day = totalDayList.get(i);
+
+                if (DateHelper.getInstance().isToday(day.date)){
+                    setTodayModel(day);
+                    break;
+                }
+            }
+        }
+
+        return todayModelFromDayView;
+    }
+    private static void setTodayModel(DayModel dayModel){
+        todayModelFromDayView = dayModel;
     }
 
 
