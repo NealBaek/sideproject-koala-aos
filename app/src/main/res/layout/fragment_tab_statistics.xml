@@ -35,7 +35,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="준비중입니다"
+                android:text="@string/fragment_tab_statistics_info_1"
                 android:textSize="30dp"
                 android:textStyle="bold"
                 android:textColor="@color/colorDarkGray"
@@ -45,7 +45,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="통계 기능이 빨리 생기길 원하신다면,"
+                android:text="@string/fragment_tab_statistics_info_2"
                 android:textSize="13dp"
                 android:textColor="@color/colorGray"
                 android:gravity="center"
@@ -61,28 +61,28 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="설정"
+                    android:text="@string/fragment_tab_statistics_info_3"
                     android:textSize="13dp"
                     android:textColor="@color/colorMain"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" 탭 > "
+                    android:text="@string/fragment_tab_statistics_info_4"
                     android:textSize="13dp"
                     android:textColor="@color/colorGray"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="개발자에게 실시간 문의하기"
+                    android:text="@string/fragment_tab_statistics_info_5"
                     android:textSize="13dp"
                     android:textColor="@color/colorMain"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="로 독촉해주세요!"
+                    android:text="@string/fragment_tab_statistics_info_6"
                     android:textSize="13dp"
                     android:textColor="@color/colorGray"/>
 
@@ -91,7 +91,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="- 건강을 생각하는 애주가 코알라 팀 -"
+                android:text="@string/fragment_tab_statistics_info_7"
                 android:textSize="13dp"
                 android:textColor="@color/colorGray"
                 android:gravity="center"/>

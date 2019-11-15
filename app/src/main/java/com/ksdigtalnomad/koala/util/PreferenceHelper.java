@@ -18,8 +18,12 @@ public class PreferenceHelper {
     private static final String KEY_PUSH_TOKEN = "PUSH_TOKEN";
     private static final String KEY_LANGUAGE_CODE = "LANGUAGE_CODE";
     private static final String KEY_ALARM_DAILY_HOUR = "ALARM_DAILY_HOUR";
+    private static final String KEY_ALARM_DAILY_ENABLE = "ALARM_DAILY_ENABLE";
 
 
+    public static void clear() {
+        getEditPreference().clear().commit();
+    }
     private static SharedPreferences.Editor getEditPreference() {
         Context context = BaseApplication.getInstance().getApplicationContext();
         SharedPreferences pref = context.getSharedPreferences(PREF_FILE_NAME, Activity.MODE_PRIVATE);
@@ -30,12 +34,10 @@ public class PreferenceHelper {
         return context.getSharedPreferences(PREF_FILE_NAME, Activity.MODE_PRIVATE);
     }
 
-    public static void clear() {
-        getEditPreference().clear().commit();
-    }
 
 
 
+    // DailyAlarm
     public static void setAlarmDailyHour(int alarmDailyHour) {
         getEditPreference().putInt(KEY_ALARM_DAILY_HOUR, alarmDailyHour).apply();
     }
@@ -49,8 +51,15 @@ public class PreferenceHelper {
 
         return getReadPreference().getInt(KEY_ALARM_DAILY_HOUR, defaultHour);
     }
+    public static void setAlarmDailyEnabled(boolean flag) {
+        getEditPreference().putBoolean(KEY_ALARM_DAILY_ENABLE, flag).apply();
+    }
+    public static boolean isAlarmDailyEnabled() {
+        return getReadPreference().getBoolean(KEY_ALARM_DAILY_ENABLE, true);
+    }
 
 
+    // Language Code
     public static void setLanguageCode(String language) {
         getEditPreference().putString(KEY_LANGUAGE_CODE, language).apply();
     }
@@ -59,6 +68,7 @@ public class PreferenceHelper {
     }
 
 
+    // First Open
     public static void setFirstOpen(boolean flag) {
         getEditPreference().putBoolean(KEY_FIRST_OPEN, flag).apply();
     }
@@ -78,12 +88,15 @@ public class PreferenceHelper {
         return userString != null && !userString.equals("null");
     }
 
+    // AccessToken
     private static void setAccessToken(String accessToken) {
         getEditPreference().putString(KEY_ACCESS_TOKEN, accessToken).apply();
     }
     public static String getAccessToken() {
         return getReadPreference().getString(KEY_ACCESS_TOKEN, null);
     }
+
+    // User
     public static void setUser(User user) {
         getEditPreference().putString(KEY_USER, new Gson().toJson(user)).apply();
     }
@@ -93,6 +106,7 @@ public class PreferenceHelper {
         return user;
     }
 
+    // Push Token
     public static void setPushToken(String pushToken) {
         getEditPreference().putString(KEY_PUSH_TOKEN, pushToken).apply();
     }

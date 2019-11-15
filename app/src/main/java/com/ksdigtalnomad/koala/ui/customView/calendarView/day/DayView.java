@@ -82,7 +82,7 @@ public class DayView extends RelativeLayout {
     public void setDayModel(DayModel dayModel){
         this.dayModel = dayModel;
 
-        CalendarDataController.checkThenSetTodayModel(dayModel);
+        CalendarDataController.checkThenSetYesterdayModel(dayModel);
 
         // 1. 페인트 준비
         initPaints(dayModel);

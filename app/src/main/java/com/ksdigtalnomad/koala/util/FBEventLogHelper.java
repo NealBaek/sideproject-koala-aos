@@ -16,6 +16,7 @@ import java.util.Locale;
 
 public class FBEventLogHelper {
 
+    // v 0.1.0
     private static final String INPUT_DONE = "DAY_DETAIL_input_done";
     private static final String FRIENDS_ADD = "DAY_DETAIL_LIST_EDIT_FRIEND_add";
     private static final String FRIENDS_ADD_DONE = "DAY_DETAIL_LIST_EDIT_FRIEND_add_done";
@@ -32,7 +33,7 @@ public class FBEventLogHelper {
     private static final String EXIT = "EXIT";
 
 
-    public static void onInputDoenClick(DayModel dayModel){
+    public static void onInputDoneClick(DayModel dayModel){
         Runnable task = ()->{
 
             Bundle bundle = new Bundle();
@@ -155,6 +156,66 @@ public class FBEventLogHelper {
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
                     .logEvent(EXIT, new Bundle());
+        };
+        task.run();
+    }
+
+
+
+
+
+    // v 0.2.1
+    private static final String ALARM_DAILY_AGREE = "TAB_SETTINGS_push_alarm_daily_agree";
+    private static final String ALARM_DAILY_TIME = "TAB_SETTINGS_push_alarm_daily_time";
+    private static final String ALARM_DAILY_PUSH_CLICK = "Push_alarm_daily_click";
+    private static final String ALARM_DAILY_PUSH_INPUT_DONE = "Push_alarm_daily_click_detail_input_done";
+
+
+    public static void onAlarmDailyAgree(boolean isAgree){
+        Runnable task = ()->{
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("isAgree", isAgree);
+            bundle.putString("createdAt", DateHelper.getInstance().getTodayStr("yyyy.MM.dd HH:mm:ss"));
+
+            FirebaseAnalytics
+                    .getInstance(BaseApplication.getInstance().getApplicationContext())
+                    .logEvent(ALARM_DAILY_AGREE, bundle);
+        };
+        task.run();
+    }
+    public static void onAlarmDailyTime(String settingTime){
+        Runnable task = ()->{
+            Bundle bundle = new Bundle();
+            bundle.putString("settingTime", settingTime); // hh시mm분
+            bundle.putString("createdAt", DateHelper.getInstance().getTodayStr("yyyy.MM.dd HH:mm:ss"));
+
+            FirebaseAnalytics
+                    .getInstance(BaseApplication.getInstance().getApplicationContext())
+                    .logEvent(ALARM_DAILY_TIME, bundle);
+        };
+        task.run();
+    }
+    public static void ALARM_DAILY_PUSH_CLICK(){
+        Runnable task = ()->{
+            Bundle bundle = new Bundle();
+//            bundle.putString("settingTime", settingTime); // hh시mm분
+            bundle.putString("createdAt", DateHelper.getInstance().getTodayStr("yyyy.MM.dd HH:mm:ss"));
+
+            FirebaseAnalytics
+                    .getInstance(BaseApplication.getInstance().getApplicationContext())
+                    .logEvent(ALARM_DAILY_PUSH_CLICK, new Bundle());
+        };
+        task.run();
+    }
+    public static void onAlarmDailyInputDoen(){
+        Runnable task = ()->{
+            Bundle bundle = new Bundle();
+//            bundle.putString("settingTime", settingTime); // hh시mm분
+            bundle.putString("createdAt", DateHelper.getInstance().getTodayStr("yyyy.MM.dd HH:mm:ss"));
+
+            FirebaseAnalytics
+                    .getInstance(BaseApplication.getInstance().getApplicationContext())
+                    .logEvent(ALARM_DAILY_PUSH_INPUT_DONE, bundle);
         };
         task.run();
     }

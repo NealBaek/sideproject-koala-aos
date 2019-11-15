@@ -141,7 +141,7 @@ public class CalendarDayDetailActivity extends BaseActivity {
         Runnable task = () -> CalendarDataController.updateDayModel(dayModel);
         task.run();
 
-        Runnable task1 = () -> FBEventLogHelper.onInputDoenClick(dayModel);
+        Runnable task1 = () -> FBEventLogHelper.onInputDoneClick(dayModel);
         task1.run();
 
         Intent resultIntent = new Intent();

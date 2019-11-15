@@ -53,21 +53,21 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="내 음주를 "
+                        android:text="@string/fragment_tab_settings_info_team_1"
                         android:textSize="16dp"
                         android:textStyle="bold"
                         android:textColor="@color/colorDarkGray"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="기록하고 확인"
+                        android:text="@string/fragment_tab_settings_info_team_2"
                         android:textSize="16dp"
                         android:textStyle="bold"
                         android:textColor="@color/colorMain"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="하는 것"
+                        android:text="@string/fragment_tab_settings_info_team_3"
                         android:textSize="16dp"
                         android:textStyle="bold"
                         android:textColor="@color/colorDarkGray"/>
@@ -76,7 +76,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="절주와 금주의 시작입니다."
+                    android:text="@string/fragment_tab_settings_info_team_4"
                     android:textSize="16dp"
                     android:textStyle="bold"
                     android:textColor="@color/colorDarkGray"
@@ -85,7 +85,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="- 건강을 생각하는 애주가 코알라 팀"
+                    android:text="@string/fragment_tab_settings_info_team_5"
                     android:textSize="12dp"
                     android:textColor="@color/colorDarkGray"
                     android:layout_gravity="right"/>
@@ -108,7 +108,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="개발자에게 실시간 문의하기"
+                    android:text="@string/fragment_tab_settings_info_kakao"
                     android:textColor="@color/colorDarkGray"/>
                 
                 <ImageView
@@ -134,7 +134,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="앱 칭찬하기"
+                    android:text="@string/fragment_tab_settings_info_play_store"
                     android:textColor="@color/colorDarkGray"/>
 
             </LinearLayout>
@@ -154,7 +154,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="앱 공유하기"
+                    android:text="@string/fragment_tab_settings_info_share"
                     android:textColor="@color/colorDarkGray"/>
 
             </LinearLayout>
@@ -173,7 +173,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="버전 정보"
+                    android:text="@string/fragment_tab_settings_info_version"
                     android:textColor="@color/colorDarkGray"/>
 
                 <TextView
@@ -181,7 +181,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text=""
                     android:textColor="@color/colorDarkGray"/>
 
             </RelativeLayout>

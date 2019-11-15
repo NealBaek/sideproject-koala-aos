@@ -143,7 +143,7 @@ public class TabCalendarFragment extends BaseFragment {
 
     public void moveToTodayDetail(){
         calendarView.postDelayed(() -> {
-            TabCalendarFragment.this.startActivityForResult((CalendarDayDetailActivity.intent(mContext, CalendarDataController.getTodayModelFromDayView())), 0);
+            TabCalendarFragment.this.startActivityForResult((CalendarDayDetailActivity.intent(mContext, CalendarDataController.getYesterdayModelWithViewId())), 0);
         }, 100);
     }
 }

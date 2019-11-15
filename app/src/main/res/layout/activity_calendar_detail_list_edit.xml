@@ -126,7 +126,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="데이터가 없습니다."
+                            android:text="@string/acitivity_calendar_detail_list_edit_no_date"
                             android:textColor="@color/colorDarkGray"
                             android:textSize="16dp"
                             android:textStyle="bold"
@@ -140,7 +140,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="우측 상단의 "
+                                android:text="@string/acitivity_calendar_detail_list_edit_info_add_1"
                                 android:textColor="@color/colorDarkGray"
                                 android:textSize="16dp"
                                 android:textStyle="bold"/>
@@ -148,7 +148,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="[+]"
+                                android:text="@string/acitivity_calendar_detail_list_edit_info_add_2"
                                 android:textColor="@color/colorMain"
                                 android:textSize="16dp"
                                 android:textStyle="bold"/>
@@ -156,7 +156,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="을 눌러 추가해주세요."
+                                android:text="@string/acitivity_calendar_detail_list_edit_info_add_3"
                                 android:textColor="@color/colorDarkGray"
                                 android:textSize="16dp"
                                 android:textStyle="bold"/>
@@ -176,7 +176,7 @@
                 android:layout_height="55dp"
                 android:background="@color/colorLightGray"
                 android:gravity="center"
-                android:text="저장하기"
+                android:text="@string/btn_save_long"
                 android:textColor="#fff"
                 android:textSize="19dp"
                 android:onClick="@{()->activity.onSaveClick()}"/>

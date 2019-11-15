@@ -3,6 +3,7 @@ package com.ksdigtalnomad.koala.util;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.util.Log;
 
 import java.util.Locale;
 
@@ -30,6 +31,11 @@ public class LanguageHelper {
         config.locale = local;
         context.getResources().updateConfiguration(config,
                 context.getResources().getDisplayMetrics());
+    }
+
+    public static boolean isSameLanguage(String toCompare){
+        Log.d("ABC", "item: " + toCompare + ", locale: " + PreferenceHelper.getLanguageCode());
+        return toCompare.equals(PreferenceHelper.getLanguageCode());
     }
 
 }

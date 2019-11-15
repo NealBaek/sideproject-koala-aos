@@ -1,5 +1,7 @@
 package com.ksdigtalnomad.koala.data.models;
 
+import java.util.ArrayList;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,8 +9,7 @@ import lombok.ToString;
 
 @Builder @Setter @Getter @ToString
 public class AlarmDaily extends BaseData implements Cloneable{
-    String title;
-    String content;
+    ArrayList<AlarmDailyBody> bodyList;
     int defaultAlarmHour;
 
     public AlarmDaily clone(){

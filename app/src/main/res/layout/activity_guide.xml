@@ -48,7 +48,7 @@
             android:textColor="@color/colorPureWhite"
             android:textSize="19dp"
             android:textStyle="bold"
-            android:text="@string/btn_next"
+            android:text="@string/btn_next_short"
             android:onClick="@{()->activity.onNextBtnClick()}"/>
 
         <TextView

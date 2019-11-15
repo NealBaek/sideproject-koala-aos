@@ -11,7 +11,7 @@
         android:id="@+id/appTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="코알라"
+        android:text="@string/app_name"
         android:textSize="55dp"
         android:textStyle="bold"
         android:textColor="@color/colorDarkGray"
@@ -21,7 +21,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="진지하게 시작하는\n절주금주 프로젝트"
+        android:text="@string/activity_splash_sub_title"
         android:textSize="20dp"
         android:textColor="@color/colorMain"
         android:layout_centerHorizontal="true"

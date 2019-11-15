@@ -282,7 +282,7 @@
                 android:layout_height="55dp"
                 android:background="@color/colorMain"
                 android:gravity="center"
-                android:text="저장하기"
+                android:text="@string/btn_save_long"
                 android:textStyle="bold"
                 android:textSize="19dp"
                 android:textColor="@color/colorPureWhite"

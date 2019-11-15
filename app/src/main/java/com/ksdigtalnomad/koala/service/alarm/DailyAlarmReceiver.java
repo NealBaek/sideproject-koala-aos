@@ -32,8 +32,6 @@ public class DailyAlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Log.d("ABC", "onReceive");
-
         /* enqueue the job */
         DailyAlarmJobIntentService.enqueueWork(context, intent);
     }
@@ -58,15 +56,11 @@ public class DailyAlarmReceiver extends BroadcastReceiver {
 
 
         Calendar when = Calendar.getInstance();
-        when.set(Calendar.HOUR, PreferenceHelper.getAlarmDailyHour());
-        when.set(Calendar.MINUTE, 0);
-        when.set(Calendar.SECOND, 0);
-        when.add(Calendar.DATE, 1);
-//        when.add(Calendar.MINUTE, 1);ㄴ
-
-
-        Log.d("ABC", "toWakeUp : " + DateHelper.getInstance().getDateStr("yyyy.MM.dd HH:mm:ss", when.getTime()));
-
+//        when.set(Calendar.HOUR, PreferenceHelper.getAlarmDailyHour());
+//        when.set(Calendar.MINUTE, 0);
+//        when.set(Calendar.SECOND, 0);
+//        when.add(Calendar.DATE, 1);
+        when.add(Calendar.MINUTE, 1);
 
 
 
@@ -97,7 +91,5 @@ public class DailyAlarmReceiver extends BroadcastReceiver {
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                 PackageManager.DONT_KILL_APP);
 
-
-        Log.d("ABC", "setAlarm alarm.set");
     }
 }

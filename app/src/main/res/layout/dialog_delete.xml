@@ -32,7 +32,7 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="15dp"
-                    android:text="삭제하기"
+                    android:text="@string/btn_delete_long"
                     android:textColor="@color/colorPureWhite"
                     android:textStyle="bold"
                     android:textSize="16dp"/>
@@ -71,7 +71,7 @@
                         android:id="@+id/btnCancel"
                         android:layout_width="50dp"
                         android:layout_height="40dp"
-                        android:text="취소"
+                        android:text="@string/btn_cancel_short"
                         android:textSize="16dp"
                         android:textStyle="bold"
                         android:textColor="@color/colorDarkGray"/>
@@ -79,7 +79,7 @@
                         android:id="@+id/btnDelete"
                         android:layout_width="50dp"
                         android:layout_height="40dp"
-                        android:text="삭제"
+                        android:text="@string/btn_delete_short"
                         android:textSize="16dp"
                         android:textStyle="bold"
                         android:textColor="@color/colorMain"/>

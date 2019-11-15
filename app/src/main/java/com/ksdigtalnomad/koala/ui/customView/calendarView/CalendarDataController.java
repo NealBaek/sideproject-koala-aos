@@ -32,6 +32,7 @@ public class CalendarDataController {
     private static final String KEY_TOTAL_DAY_LIST = "TOTAL_DAY_LIST";
 
     private static DayModel todayModelFromDayView = new DayModel();
+    private static DayModel yesterdayModelFromDayView = new DayModel();
 
     private CalendarDataController(){}
     private static SharedPreferences.Editor getEditPreference() {
@@ -310,16 +311,51 @@ public class CalendarDataController {
 
 
     // Today Model
-    public static DayModel getTodayModelFromDayView(){
-        return todayModelFromDayView;
+//    private static DayModel getTodayModelWithViewId(){
+//        return todayModelFromDayView;
+//    }
+//    private static void checkThenSetTodayModel(DayModel dayModel){
+//        if(getTodayModel().dayIdx == dayModel.dayIdx){
+//            setTodayModel(dayModel);
+//        }
+//    }
+//    private static DayModel getTodayModel(){
+//        if(todayModelFromDayView.date == null){
+//            ArrayList<DayModel> totalDayList = CalendarDataController.getTotalDayList();
+//
+//            // 1. 오늘 모델 값 구하기
+//            int dayListCnt =  totalDayList.size();
+//            for(int i = 0; i < dayListCnt; ++i){
+//                DayModel day = totalDayList.get(i);
+//
+//                if (DateHelper.getInstance().isToday(day.date) && !day.isOutMonth){
+//                    setTodayModel(day);
+//                    break;
+//                }
+//            }
+//        }
+//
+//        return todayModelFromDayView;
+//    }
+//    private static void setTodayModel(DayModel dayModel){
+//        todayModelFromDayView = dayModel;
+//    }
+
+
+
+
+
+    // Yesterday Model
+    public static DayModel getYesterdayModelWithViewId(){
+        return yesterdayModelFromDayView;
     }
-    public static void checkThenSetTodayModel(DayModel dayModel){
-        if(getTodayModel().dayIdx == dayModel.dayIdx){
-            setTodayModel(dayModel);
+    public static void checkThenSetYesterdayModel(DayModel dayModel){
+        if(getYesterdayModel().dayIdx == dayModel.dayIdx){
+            setYesterdayModel(dayModel);
         }
     }
-    private static DayModel getTodayModel(){
-        if(todayModelFromDayView.date == null){
+    public static DayModel getYesterdayModel(){
+        if(yesterdayModelFromDayView.date == null){
             ArrayList<DayModel> totalDayList = CalendarDataController.getTotalDayList();
 
             // 1. 오늘 모델 값 구하기
@@ -327,18 +363,20 @@ public class CalendarDataController {
             for(int i = 0; i < dayListCnt; ++i){
                 DayModel day = totalDayList.get(i);
 
-                if (DateHelper.getInstance().isToday(day.date)){
-                    setTodayModel(day);
+                if (DateHelper.getInstance().isYesterday(day.date) && !day.isOutMonth){
+                    setYesterdayModel(day);
                     break;
                 }
             }
         }
 
-        return todayModelFromDayView;
+        return yesterdayModelFromDayView;
     }
-    private static void setTodayModel(DayModel dayModel){
-        todayModelFromDayView = dayModel;
+    private static void setYesterdayModel(DayModel dayModel){
+        yesterdayModelFromDayView = dayModel;
     }
+
+
 
 
 
