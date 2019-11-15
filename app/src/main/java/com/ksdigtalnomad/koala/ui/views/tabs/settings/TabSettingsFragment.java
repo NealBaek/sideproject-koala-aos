@@ -15,12 +15,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
+import com.ksdigtalnomad.koala.service.alarm.DailyAlarmReceiver;
 import com.ksdigtalnomad.koala.ui.base.BaseFragment;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.utils.DateHelper;
+import com.ksdigtalnomad.koala.ui.views.dialogs.CustomTimePickerDialog;
 import com.ksdigtalnomad.koala.util.FBEventLogHelper;
 import com.ksdigtalnomad.koala.util.PlayStoreHelper;
 import com.ksdigtalnomad.koala.util.FBRemoteControlHelper;
+import com.ksdigtalnomad.koala.util.PreferenceHelper;
 import com.ksdigtalnomad.koala.util.ShareHelper;
+import com.ksdigtalnomad.koala.util.ToastHelper;
 
 public class TabSettingsFragment extends BaseFragment {
 
@@ -53,8 +59,37 @@ public class TabSettingsFragment extends BaseFragment {
             e.printStackTrace();
         }
 
+
+        boolean isPushEnabled = PreferenceHelper.isAlarmDailyEnabled();
+        mBinding.alarmDailySwitch.setChecked(isPushEnabled);
+        mBinding.alarmDailySwitch.setOnCheckedChangeListener((CompoundButton compoundButton, boolean isChecked) -> {
+
+            String todayStr = DateHelper.getInstance().getTodayStr("yyyy.MM.dd.");
+
+            ToastHelper.writeBottomLongToast(getResources().getString(R.string.warning_push_agree, todayStr, (isChecked ? "동의" : "거부")));
+
+            // 동의 설정
+            PreferenceHelper.setAlarmDailyEnabled(isChecked);
+
+            // 시간 설정 레이아웃 Disable
+            setPushTimeLayoutEnabled(isChecked);
+
+            // 로깅
+            FBEventLogHelper.onAlarmDailyAgree(isChecked, todayStr);
+        });
+        setPushTimeLayoutEnabled(isPushEnabled);
+
+
         return mBinding.getRoot();
     }
+
+
+
+    private void setPushTimeLayoutEnabled(boolean isChecked){
+        mBinding.pushTimeLayout.setEnabled(isChecked);
+        mBinding.pushTimeLayout.setAlpha(isChecked ? 1f : 0.5f);
+    }
+
 
     // OnClick
     public void onKakaoOpenChatRoomClick(){
@@ -62,6 +97,25 @@ public class TabSettingsFragment extends BaseFragment {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(chatRoomUrl)));
 
         FBEventLogHelper.onKakaoOpenChatRoom();
+    }
+    public void onPushAgreeClick(){
+        mBinding.alarmDailySwitch.setChecked(!mBinding.alarmDailySwitch.isChecked());
+    }
+    public void onPushTimeClick(){
+        CustomTimePickerDialog customTimePickerDialog = CustomTimePickerDialog.newInstance(PreferenceHelper.getAlarmDailyHour(), PreferenceHelper.getAlarmDailyMinute());
+        customTimePickerDialog.setDialogListener((int hour, int minute)->{
+            PreferenceHelper.setAlarmDailyHour(hour);
+            PreferenceHelper.setAlarmDailyMinute(minute);
+
+            DailyAlarmReceiver.setAlarm();
+
+            String settingTime = PreferenceHelper.getAlarmDailySettingTimeStr();
+            FBEventLogHelper.onAlarmDailyTime(settingTime);
+            mBinding.bodyLayout.postDelayed(() -> ToastHelper.writeBottomLongToast(getResources().getString(R.string.warning_push_time, settingTime)), 100);
+        });
+
+        customTimePickerDialog.show(getActivity().getFragmentManager(), "CustomTimePickerDialog");
+
     }
     public void onOpenPlayStoreComplementClick(){
         PlayStoreHelper.openMyAppInPlayStore(getActivity());
@@ -73,4 +127,5 @@ public class TabSettingsFragment extends BaseFragment {
 
     }
     public void onVersionClick(){  }
+
 }

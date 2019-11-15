@@ -72,6 +72,11 @@
     <string name="fragment_tab_settings_info_play_store">앱 칭찬하기</string>
     <string name="fragment_tab_settings_info_share">앱 공유하기</string>
     <string name="fragment_tab_settings_info_version">버전 정보</string>
+    <string name="fragment_tab_settings_info_push_title_1">Push알람 수신동의</string>
+    <string name="fragment_tab_settings_info_push_title_2">Push알람 시간설정</string>
+    <string name="fragment_tab_settings_info_push_1">매일마다 기록을 위한 Push 메시지가 도착합니다.</string>
+    <string name="fragment_tab_settings_info_push_2">매일마다 Push 메시지가 도착하는 시간을 설정합니다.</string>
+
 
     <!-- fragment_tab_statistics -->
     <string name="fragment_tab_statistics_info_1">준비중입니다</string>
@@ -107,7 +112,8 @@
     <!-- 토스트 문구 -->
     <string name="warning_cannot_edit_after_day">오늘 이후 날짜는 입력하실 수 없어요</string>
     <string name="warning_server_updating">서버 업데이트 중입니다.</string>
-
+    <string name="warning_push_agree" formatted="true">%1$s Push 알람 수신에 %2$s하셨습니다.</string>
+    <string name="warning_push_time" formatted="true">%1$s 로 저장하셨습니다</string>
 
 
 
@@ -136,4 +142,8 @@
     <string name="guide_first">가이드 1 내용</string>
     <string name="guide_second">가이드 2 내용</string>
     <string name="guide_third">가이드 3 내용</string>
+
+
+
+
 </resources>

@@ -56,11 +56,9 @@ public class DailyAlarmReceiver extends BroadcastReceiver {
 
 
         Calendar when = Calendar.getInstance();
-//        when.set(Calendar.HOUR, PreferenceHelper.getAlarmDailyHour());
-//        when.set(Calendar.MINUTE, 0);
-//        when.set(Calendar.SECOND, 0);
-//        when.add(Calendar.DATE, 1);
-        when.add(Calendar.MINUTE, 1);
+        when.set(Calendar.HOUR, PreferenceHelper.getAlarmDailyHour());
+        when.set(Calendar.MINUTE, PreferenceHelper.getAlarmDailyMinute());
+        when.add(Calendar.DATE, 1);
 
 
 

@@ -18,7 +18,10 @@ public class PreferenceHelper {
     private static final String KEY_PUSH_TOKEN = "PUSH_TOKEN";
     private static final String KEY_LANGUAGE_CODE = "LANGUAGE_CODE";
     private static final String KEY_ALARM_DAILY_HOUR = "ALARM_DAILY_HOUR";
+    private static final String KEY_ALARM_DAILY_MINUTE = "ALARM_DAILY_MINUTE";
     private static final String KEY_ALARM_DAILY_ENABLE = "ALARM_DAILY_ENABLE";
+
+
 
 
     public static void clear() {
@@ -38,24 +41,43 @@ public class PreferenceHelper {
 
 
     // DailyAlarm
+    public static String getAlarmDailySettingTimeStr(){
+        int hour = getAlarmDailyHour();
+        int mintue = getAlarmDailyMinute();
+
+        return "" + (hour < 10 ? ( "0" + hour ) : ( "" + hour)) + ":" + (mintue < 10 ? ( "0" + mintue ) : ( "" + mintue)) ;
+    }
     public static void setAlarmDailyHour(int alarmDailyHour) {
         getEditPreference().putInt(KEY_ALARM_DAILY_HOUR, alarmDailyHour).apply();
     }
     public static int getAlarmDailyHour() {
         AlarmDaily alarmDaily = new Gson().fromJson(FBRemoteControlHelper.getInstance().getAlarmDaily(), AlarmDaily.class);
         if(alarmDaily == null){
-            return 10; // defaultHour
+            return 12; // defaultHour
         }
 
         int defaultHour = alarmDaily.getDefaultAlarmHour();
 
         return getReadPreference().getInt(KEY_ALARM_DAILY_HOUR, defaultHour);
     }
+    public static void setAlarmDailyMinute(int alarmDailyMinute) {
+        getEditPreference().putInt(KEY_ALARM_DAILY_MINUTE, alarmDailyMinute).apply();
+    }
+    public static int getAlarmDailyMinute() {
+        AlarmDaily alarmDaily = new Gson().fromJson(FBRemoteControlHelper.getInstance().getAlarmDaily(), AlarmDaily.class);
+        if(alarmDaily == null){
+            return 0; // defaultMinute
+        }
+
+        int defaultMinute = alarmDaily.getDefaultAlarmMinute();
+
+        return getReadPreference().getInt(KEY_ALARM_DAILY_MINUTE, defaultMinute);
+    }
     public static void setAlarmDailyEnabled(boolean flag) {
         getEditPreference().putBoolean(KEY_ALARM_DAILY_ENABLE, flag).apply();
     }
     public static boolean isAlarmDailyEnabled() {
-        return getReadPreference().getBoolean(KEY_ALARM_DAILY_ENABLE, true);
+        return getReadPreference().getBoolean(KEY_ALARM_DAILY_ENABLE, false);
     }
 
 

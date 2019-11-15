@@ -16,6 +16,7 @@ import com.ksdigtalnomad.koala.databinding.ActivityHomeBinding;
 import com.ksdigtalnomad.koala.service.alarm.DailyAlarmReceiver;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
 import com.ksdigtalnomad.koala.ui.views.dialogs.ExitDialog;
+import com.ksdigtalnomad.koala.util.FBEventLogHelper;
 import com.ksdigtalnomad.koala.util.PreferenceHelper;
 
 public class HomeActivity extends BaseActivity {
@@ -78,6 +79,7 @@ public class HomeActivity extends BaseActivity {
         if(getIntent().getBooleanExtra(KEY_NOTI_ALARM_DAILY, false)){
             mBinding.homeTabViewPager.setCurrentItem(1);
             mBinding.homeTabViewPager.postDelayed(()->tapAdapter.moveToTodayDetail(), 1000);
+            FBEventLogHelper.onAlarmDailyPushClick(PreferenceHelper.getAlarmDailySettingTimeStr());
         }
     }
 

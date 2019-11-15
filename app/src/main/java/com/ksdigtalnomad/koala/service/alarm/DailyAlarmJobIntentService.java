@@ -48,8 +48,7 @@ public class DailyAlarmJobIntentService extends JobIntentService {
     protected void onHandleWork(@NonNull Intent intent) {
 
         // 1. 푸시 허용 & 어제 입력을 안했으면 푸시 알림 @TODO:
-//        if(PreferenceHelper.isAlarmDailyEnabled() && !CalendarDataController.getYesterdayModel().isSaved){
-        if(!CalendarDataController.getYesterdayModel().isSaved){
+        if(PreferenceHelper.isAlarmDailyEnabled() && !CalendarDataController.getYesterdayModel().isSaved){
 
             // 알림 내용 받아오기
             AlarmDaily alarmDaily = new Gson().fromJson(FBRemoteControlHelper.getInstance().getAlarmDaily(), AlarmDaily.class);

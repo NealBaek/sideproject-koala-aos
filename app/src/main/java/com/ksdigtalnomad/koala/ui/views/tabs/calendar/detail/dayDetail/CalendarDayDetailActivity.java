@@ -26,6 +26,7 @@ import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity;
 import com.ksdigtalnomad.koala.util.FBEventLogHelper;
 import com.ksdigtalnomad.koala.util.KeyboardHelper;
+import com.ksdigtalnomad.koala.util.PreferenceHelper;
 import com.ksdigtalnomad.koala.util.ToastHelper;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class CalendarDayDetailActivity extends BaseActivity {
 
     private ActivityCalendarDayDetailBinding mBinding;
     public static final String KEY_DAY_MODEL = "KEY_DAY_MODEL";
+    private static final String KEY_NOTI_ALARM_DAILY = "NOTI_ALARM_DAILY";
 
     private int MEMO_LEN_LIMIT = 0;
 
@@ -42,6 +44,11 @@ public class CalendarDayDetailActivity extends BaseActivity {
     private static Intent intent(Context context) {  return new Intent(context, CalendarDayDetailActivity.class);  }
     public static Intent intent(Context context, DayModel dayModel) {
         Intent intent = intent(context);
+        intent.putExtra(KEY_DAY_MODEL, new Gson().toJson(dayModel));
+        return intent;
+    }public static Intent intentFromNotiAlarmDaily(Context context, DayModel dayModel) {
+        Intent intent = intent(context);
+        intent.putExtra(KEY_NOTI_ALARM_DAILY, true);
         intent.putExtra(KEY_DAY_MODEL, new Gson().toJson(dayModel));
         return intent;
     }
@@ -143,6 +150,12 @@ public class CalendarDayDetailActivity extends BaseActivity {
 
         Runnable task1 = () -> FBEventLogHelper.onInputDoneClick(dayModel);
         task1.run();
+
+        if(getIntent().getBooleanExtra(KEY_NOTI_ALARM_DAILY, false)){
+            Runnable task2 = () -> FBEventLogHelper.onAlarmDailyInputDone(PreferenceHelper.getAlarmDailySettingTimeStr());
+            task2.run();
+        }
+
 
         Intent resultIntent = new Intent();
         resultIntent.putExtra(KEY_DAY_MODEL, new Gson().toJson(dayModel));
