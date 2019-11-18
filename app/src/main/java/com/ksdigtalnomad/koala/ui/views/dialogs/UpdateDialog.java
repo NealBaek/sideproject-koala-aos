@@ -54,6 +54,7 @@ public class UpdateDialog extends BaseDialogFragment {
         editText = view.findViewById(R.id.textTF);
         editText.setText(originalName);
         editText.setSelection(originalName.length());
+        editText.requestFocus();
 
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 

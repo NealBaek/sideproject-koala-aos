@@ -50,6 +50,7 @@ public class AddDialog extends BaseDialogFragment {
         editText = view.findViewById(R.id.textTF);
         editText.setText(getArguments().getString(KEY_TO_ADD));
         editText.setSelection(editText.getText().length());
+        editText.requestFocus();
 
         editText.setOnEditorActionListener((TextView v, int actionId, KeyEvent event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {

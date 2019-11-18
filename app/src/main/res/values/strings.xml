@@ -114,6 +114,7 @@
     <string name="warning_server_updating">서버 업데이트 중입니다.</string>
     <string name="warning_push_agree" formatted="true">%1$s Push 알람 수신에 %2$s하셨습니다.</string>
     <string name="warning_push_time" formatted="true">%1$s 로 저장하셨습니다</string>
+    <string name="warning_duplicate_name">등록하신 이름이 이미 존재합니다.</string>
 
 
 

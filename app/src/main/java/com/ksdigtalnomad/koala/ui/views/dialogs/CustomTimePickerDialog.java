@@ -5,10 +5,8 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.widget.TimePicker;
 
-import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.base.BaseDialogFragment;
 
-import java.text.DateFormat;
 
 /**
  * Created by ooddy on 15/11/2019.
@@ -38,7 +36,9 @@ public class CustomTimePickerDialog extends BaseDialogFragment implements TimePi
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        return new TimePickerDialog(getActivity(), this, getArguments().getInt(KEY_TIME_HOUR), getArguments().getInt(KEY_TIME_MINUTE), false);
+        hour = getArguments().getInt(KEY_TIME_HOUR);
+        minute = getArguments().getInt(KEY_TIME_MINUTE);
+        return new TimePickerDialog(getActivity(), this, hour, minute, false);
     }
 
     @Override

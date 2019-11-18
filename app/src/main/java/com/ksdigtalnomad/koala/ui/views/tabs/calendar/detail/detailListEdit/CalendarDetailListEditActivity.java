@@ -110,6 +110,9 @@ public class CalendarDetailListEditActivity extends BaseActivity {
                 dialog.setDialogListener((pos, newName)->{
                     Runnable runnable = ()->{
 
+                        if(isDuplicate(newName, viewType, dataList)) return;
+
+
                         ArrayList<BaseData> searchList = adapter.getSearchList();
                         int dataListCnt = dataList.size();
 
@@ -160,7 +163,7 @@ public class CalendarDetailListEditActivity extends BaseActivity {
                         }
 
                         CalendarDetailListEditActivity.this.runOnUiThread(()->{
-                            mBinding.dataRv.getAdapter( ).notifyDataSetChanged();
+                            mBinding.dataRv.getAdapter().notifyDataSetChanged();
                             setDataListVisible();
                         });
 
@@ -326,6 +329,8 @@ public class CalendarDetailListEditActivity extends BaseActivity {
         AddDialog dialog = AddDialog.newInstance(toAdd);
         dialog.setDialogListener((newName)->{
             Runnable runnable = ()->{
+                if(isDuplicate(newName, viewType, dataList)) return;
+
                  if(viewType.equals(TYPE_FRIENDS)){
                      Friend item = Friend.builder().build();
                      item.setName(newName);
@@ -405,5 +410,37 @@ public class CalendarDetailListEditActivity extends BaseActivity {
         intent.putExtra(KEY_DAY_MODEL, new Gson().toJson(dayModel));
         setResult(1, intent);
         finish();
+    }
+
+
+    private boolean isDuplicate(String newName, String viewType, ArrayList dataList){
+        boolean isDuplicate = false;
+
+        for(Object data : dataList){
+            if(viewType.equals(TYPE_FRIENDS)){
+                Friend item = (Friend) data;
+                if(item.getName().equals(newName)){
+                    isDuplicate = true;
+                    break;
+                }
+            }else if(viewType.equals(TYPE_FOODS)){
+                Food item = (Food) data;
+                if(item.getName().equals(newName)){
+                    isDuplicate = true;
+                    break;
+                }
+            }else if(viewType.equals(TYPE_DRINKS)){
+                Drink item = (Drink) data;
+                if(item.getName().equals(newName)){
+                    isDuplicate = true;
+                    break;
+                }
+            }
+        }
+
+
+        if(isDuplicate) ToastHelper.writeBottomLongToast(getResources().getString(R.string.warning_duplicate_name));
+
+        return isDuplicate;
     }
 }
