@@ -12,6 +12,10 @@
 
 
 
+
+
+
+
     <string name="app_name">코알라</string>
     <string name="tap1_title">요즘</string>
     <string name="tap2_title">달력</string>
@@ -45,7 +49,7 @@
 
     <!-- acitivity_calendar_detail_list_edit -->
     <string name="acitivity_calendar_detail_list_edit_no_date">데이터가 없습니다.</string>
-    <string name="acitivity_calendar_detail_list_edit_info_add_1">우측 상단의 </string>
+    <string name="acitivity_calendar_detail_list_edit_info_add_1">우측 상단의&#160;</string>
     <string name="acitivity_calendar_detail_list_edit_info_add_2">[+]</string>
     <string name="acitivity_calendar_detail_list_edit_info_add_3">을 눌러 추가해주세요.</string>
 
@@ -62,7 +66,7 @@
 
 
     <!-- fragment_tab_settings -->
-    <string name="fragment_tab_settings_info_team_1">내 음주를 </string>
+    <string name="fragment_tab_settings_info_team_1">내 음주를&#160;</string>
     <string name="fragment_tab_settings_info_team_2">기록하고 확인</string>
     <string name="fragment_tab_settings_info_team_3">하는 것</string>
     <string name="fragment_tab_settings_info_team_4">절주와 금주의 시작입니다.</string>
@@ -77,12 +81,11 @@
     <string name="fragment_tab_settings_info_push_2">매일마다 Push 메시지가 도착하는 시간을 설정합니다.</string>
 
 
-
     <!-- fragment_tab_statistics -->
     <string name="fragment_tab_statistics_info_1">준비중입니다</string>
     <string name="fragment_tab_statistics_info_2">통계 기능이 빨리 생기길 원하신다면,</string>
     <string name="fragment_tab_statistics_info_3">설정</string>
-    <string name="fragment_tab_statistics_info_4"> 탭 > </string>
+    <string name="fragment_tab_statistics_info_4">&#160;탭 >&#160;</string>
     <string name="fragment_tab_statistics_info_5">개발자에게 실시간 문의하기</string>
     <string name="fragment_tab_statistics_info_6">로 독촉해주세요!</string>
     <string name="fragment_tab_statistics_info_7">- 건강을 생각하는 애주가 코알라 팀 -</string>
@@ -112,7 +115,11 @@
     <!-- 토스트 문구 -->
     <string name="warning_cannot_edit_after_day">오늘 이후 날짜는 입력하실 수 없어요</string>
     <string name="warning_server_updating">서버 업데이트 중입니다.</string>
-
+    <string name="warning_push_agree" formatted="true">%1$s Push 알람 수신에 %2$s하셨습니다.</string>
+    <string name="warning_push_time" formatted="true">%1$s 로 저장하셨습니다</string>
+    <string name="warning_duplicate_name">등록하신 이름이 이미 존재합니다.</string>
+    <string name="prefix_time_AM">오전</string>
+    <string name="prefix_time_PM">오후</string>
 
 
 
@@ -141,4 +148,5 @@
     <string name="guide_first">가이드 1 내용</string>
     <string name="guide_second">가이드 2 내용</string>
     <string name="guide_third">가이드 3 내용</string>
+
 </resources>

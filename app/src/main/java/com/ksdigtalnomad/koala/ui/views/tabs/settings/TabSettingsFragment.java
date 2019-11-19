@@ -103,7 +103,9 @@ public class TabSettingsFragment extends BaseFragment {
     }
     public void onPushTimeClick(){
         CustomTimePickerDialog customTimePickerDialog = CustomTimePickerDialog.newInstance(PreferenceHelper.getAlarmDailyHour(), PreferenceHelper.getAlarmDailyMinute());
-        customTimePickerDialog.setDialogListener((int hour, int minute)->{
+        customTimePickerDialog.setDialogListener((boolean isTimeSet, int hour, int minute)->{
+            if(!isTimeSet) return;
+
             PreferenceHelper.setAlarmDailyHour(hour);
             PreferenceHelper.setAlarmDailyMinute(minute);
 

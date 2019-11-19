@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 
 //import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
+import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.data.models.AlarmDaily;
 import com.ksdigtalnomad.koala.data.models.User;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
@@ -43,9 +44,14 @@ public class PreferenceHelper {
     // DailyAlarm
     public static String getAlarmDailySettingTimeStr(){
         int hour = getAlarmDailyHour();
-        int mintue = getAlarmDailyMinute();
+        int minute = getAlarmDailyMinute();
 
-        return "" + (hour < 10 ? ( "0" + hour ) : ( "" + hour)) + ":" + (mintue < 10 ? ( "0" + mintue ) : ( "" + mintue)) ;
+//        String hourStr = (hour < 10 ? ( "0" + hour ) : ( "" + hour));
+        String hourStr = (hour > 12 ? ("0" + (hour - 12)) : (hour < 10 ? ( "0" + hour ) : ( "" + hour)));
+        String minuteStr = (minute < 10 ? ( "0" + minute ) : ( "" + minute));
+        String hourPrefix = BaseApplication.getInstance().getApplicationContext().getResources().getString((hour > 12 ? R.string.prefix_time_PM : R.string.prefix_time_AM));
+
+        return hourPrefix + " " + hourStr + ":" + minuteStr;
     }
     public static void setAlarmDailyHour(int alarmDailyHour) {
         getEditPreference().putInt(KEY_ALARM_DAILY_HOUR, alarmDailyHour).apply();

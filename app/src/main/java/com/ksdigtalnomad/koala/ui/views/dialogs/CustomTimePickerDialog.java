@@ -21,6 +21,7 @@ public class CustomTimePickerDialog extends BaseDialogFragment implements TimePi
 
     private int hour;
     private int minute;
+    private boolean isTimeSet = false;
 
     private static CustomTimePickerDialog newInstance() {
         return new CustomTimePickerDialog();
@@ -43,6 +44,8 @@ public class CustomTimePickerDialog extends BaseDialogFragment implements TimePi
 
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+        isTimeSet = true;
+
         this.hour = hour;
         this.minute = minute;
     }
@@ -50,7 +53,7 @@ public class CustomTimePickerDialog extends BaseDialogFragment implements TimePi
     @Override
     public void onDetach() {
         super.onDetach();
-        timeSetListener.onFinish(hour, minute);
+        timeSetListener.onFinish(isTimeSet, hour, minute);
     }
 
     public void setDialogListener(TimeSetListener timeSetListener) {
@@ -58,6 +61,6 @@ public class CustomTimePickerDialog extends BaseDialogFragment implements TimePi
     }
 
     public interface TimeSetListener {
-        void onFinish(int hour, int minute);
+        void onFinish(boolean isTimeSet, int hour, int minute);
     }
 }
