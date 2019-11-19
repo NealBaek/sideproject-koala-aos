@@ -77,15 +77,14 @@
     <string name="fragment_tab_settings_info_push_2">Set the time to receive push messages daily.</string>
 
 
-
     <!-- fragment_tab_statistics -->
-    <string name="fragment_tab_statistics_info_1">준비중입니다</string>
-    <string name="fragment_tab_statistics_info_2">통계 기능이 빨리 생기길 원하신다면,</string>
-    <string name="fragment_tab_statistics_info_3">설정</string>
-    <string name="fragment_tab_statistics_info_4">&#160;탭 >&#160;</string>
-    <string name="fragment_tab_statistics_info_5">개발자에게 실시간 문의하기</string>
-    <string name="fragment_tab_statistics_info_6">로 독촉해주세요!</string>
-    <string name="fragment_tab_statistics_info_7">- 건강을 생각하는 애주가 코알라 팀 -</string>
+    <string name="fragment_tab_statistics_info_1">Still working on it.</string>
+    <string name="fragment_tab_statistics_info_2">If you want it faster, complain to the developer at</string>
+    <string name="fragment_tab_statistics_info_3">Setting</string>
+    <string name="fragment_tab_statistics_info_4">&#160;tab >&#160;</string>
+    <string name="fragment_tab_statistics_info_5">1:1 Chat with Koala team</string>
+    <string name="fragment_tab_statistics_info_6">&#160;please.</string>
+    <string name="fragment_tab_statistics_info_7">- Koala team for your challenge -</string>
 
 
 
@@ -93,9 +92,9 @@
 
 
     <!-- fragment_tab_today -->
-    <string name="fragment_tab_today_info_not_enough_data_1">데이터 부족</string>
-    <string name="fragment_tab_today_info_not_enough_data_2">최근 7일간의 음주가 모두 기록되지 않았습니다.</string>
-    <string name="fragment_tab_today_info_not_enough_data_3">월간 탭에서 기록을 완료해주세요.</string>
+    <string name="fragment_tab_today_info_not_enough_data_1">No data</string>
+    <string name="fragment_tab_today_info_not_enough_data_2">Not all recent 7 days are recorded.</string>
+    <string name="fragment_tab_today_info_not_enough_data_3">Please finish recording at Monthly tab.</string>
 
 
 
@@ -110,38 +109,37 @@
 
 
     <!-- 토스트 문구 -->
-    <string name="warning_cannot_edit_after_day">오늘 이후 날짜는 입력하실 수 없어요</string>
-    <string name="warning_server_updating">서버 업데이트 중입니다.</string>
-    <string name="warning_push_agree" formatted="true">%1$s Push 알람 수신에 %2$s하셨습니다.</string>
-    <string name="warning_push_time" formatted="true">%1$s 로 저장하셨습니다</string>
-    <string name="warning_duplicate_name">등록하신 이름이 이미 존재합니다.</string>
+    <string name="warning_cannot_edit_after_day">You cannot record days after today.</string>
+    <string name="warning_server_updating">Server is being updated now.</string>
+    <string name="warning_push_agree" formatted="true">Push alarm is set : %2$s at %1$s</string>
+    <string name="warning_push_time" formatted="true">%1$s is set for the time.</string>
+    <string name="warning_duplicate_name">Already existing name.</string>
     <string name="prefix_time_AM">A.M.</string>
     <string name="prefix_time_PM">P.M.</string>
 
 
-
     <!-- 버튼 -->
-    <string name="btn_next_short">다음</string>
+    <string name="btn_next_short">Next</string>
 
-    <string name="btn_save_long">저장하기</string>
+    <string name="btn_save_long">Save</string>
 
-    <string name="btn_add_short">추가</string>
-    <string name="btn_add_long">추가하기</string>
+    <string name="btn_add_short">OK</string>
+    <string name="btn_add_long">Add</string>
 
-    <string name="btn_cancel_short">취소</string>
+    <string name="btn_cancel_short">Cancel</string>
 
-    <string name="btn_delete_short">삭제</string>
-    <string name="btn_delete_long">삭제하기</string>
+    <string name="btn_delete_short">OK</string>
+    <string name="btn_delete_long">Delete</string>
 
-    <string name="btn_exit_short">종료</string>
+    <string name="btn_exit_short">OK</string>
 
-    <string name="btn_update_short">수정</string>
-    <string name="btn_update_long">수정하기</string>
+    <string name="btn_update_short">OK</string>
+    <string name="btn_update_long">Rename</string>
 
 
 
     <!-- 가이드 -->
-    <string name="guide_start">시작하기</string>
+    <string name="guide_start">I am ready!</string>
     <string name="guide_first">가이드 1 내용</string>
     <string name="guide_second">가이드 2 내용</string>
     <string name="guide_third">가이드 3 내용</string>
