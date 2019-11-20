@@ -8,15 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.util.Log;
 
-import com.google.gson.Gson;
-import com.ksdigtalnomad.koala.data.models.AlarmDaily;
 import com.ksdigtalnomad.koala.service.PackageReceiver;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
-import com.ksdigtalnomad.koala.ui.customView.calendarView.utils.DateHelper;
-import com.ksdigtalnomad.koala.util.FBRemoteControlHelper;
-import com.ksdigtalnomad.koala.util.PreferenceHelper;
 
 import java.util.Calendar;
 
@@ -56,9 +50,10 @@ public class DailyAlarmReceiver extends BroadcastReceiver {
 
 
         Calendar when = Calendar.getInstance();
-        when.set(Calendar.HOUR, PreferenceHelper.getAlarmDailyHour());
-        when.set(Calendar.MINUTE, PreferenceHelper.getAlarmDailyMinute());
-        when.add(Calendar.DATE, 1);
+//        when.set(Calendar.HOUR, PreferenceHelper.getAlarmDailyHour());
+//        when.set(Calendar.MINUTE, PreferenceHelper.getAlarmDailyMinute());
+//        when.add(Calendar.DATE, 1);
+        when.add(Calendar.MINUTE, 1); // Test Code
 
 
 

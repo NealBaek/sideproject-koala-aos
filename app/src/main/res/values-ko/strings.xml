@@ -23,11 +23,26 @@
     <string name="tap4_title">설정</string>
 
 
+    <!-- Calendar -->
+    <string name="calendar_day_sun">일</string>
+    <string name="calendar_day_mon">월</string>
+    <string name="calendar_day_tue">화</string>
+    <string name="calendar_day_wed">수</string>
+    <string name="calendar_day_thu">목</string>
+    <string name="calendar_day_fri">금</string>
+    <string name="calendar_day_sat">토</string>
+
+    <string name="calendar_detail_drunk_level_0">단 한잔도 하지 않았어요</string>
+    <string name="calendar_detail_drunk_level_1">그냥 가볍게 마셨어요</string>
+    <string name="calendar_detail_drunk_level_2">나름 취할 정도로 마셨어요</string>
+    <string name="calendar_detail_drunk_level_3">많이 취할 정도로 마셨어요</string>
+    <string name="calendar_detail_drunk_level_max">필름 끊길 정도로 폭음했어요</string>
     <string name="calendar_detail_drunk_level_title">얼마나 마셨나요?</string>
     <string name="calendar_detail_friends_title">누구와</string>
     <string name="calendar_detail_drink_title">어떤 술을</string>
     <string name="calendar_detail_foods_title">어떤 안주에</string>
     <string name="calendar_detail_memo_title">메모</string>
+    <string name="calendar_detail_hint_click_to_save">여기를 눌러 입력</string>
 
 
     <!-- 오늘 -->
@@ -37,8 +52,9 @@
     <string name="drink_state_nowadays_2">자제</string>
     <string name="drink_state_nowadays_3">위험</string>
     <string name="drink_state_nowadays_4">금지</string>
-    <string name="tap_today_drink_times">최근 7일간 음주 %s회</string>
-    <string name="tap_today_drink_level">최근 7일간 음주량 평균 %s%</string>
+    <string name="tap_today_drink_times" formatted="true">최근 7일간 음주 %s회</string>
+    <string name="tap_today_drink_level" formatted="true">최근 7일간 음주량 평균 %s<![CDATA[%]]></string>
+
 
 
     <string name="default_friend_list">혼술</string>
@@ -120,7 +136,8 @@
     <string name="warning_duplicate_name">등록하신 이름이 이미 존재합니다.</string>
     <string name="prefix_time_AM">오전</string>
     <string name="prefix_time_PM">오후</string>
-
+    <string name="prefix_agree">동의</string>
+    <string name="prefix_disagree">거부</string>
 
 
     <!-- 버튼 -->

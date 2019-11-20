@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.gson.Gson;
 import com.ksdigtalnomad.koala.R;
-import com.ksdigtalnomad.koala.data.models.Friend;
 import com.ksdigtalnomad.koala.databinding.ActivityCalendarDayDetailBinding;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
@@ -28,8 +26,6 @@ import com.ksdigtalnomad.koala.util.FBEventLogHelper;
 import com.ksdigtalnomad.koala.util.KeyboardHelper;
 import com.ksdigtalnomad.koala.util.PreferenceHelper;
 import com.ksdigtalnomad.koala.util.ToastHelper;
-
-import java.util.ArrayList;
 
 public class CalendarDayDetailActivity extends BaseActivity {
 

@@ -19,11 +19,27 @@
     <string name="tap4_title">Setting</string>
 
 
+    <!-- Calendar -->
+    <string name="calendar_day_sun">Sun</string>
+    <string name="calendar_day_mon">Mon</string>
+    <string name="calendar_day_tue">Tue</string>
+    <string name="calendar_day_wed">Wed</string>
+    <string name="calendar_day_thu">Thu</string>
+    <string name="calendar_day_fri">Fri</string>
+    <string name="calendar_day_sat">Sat</string>
+
+    <string name="calendar_detail_drunk_level_0">I never drank at all!</string>
+    <string name="calendar_detail_drunk_level_1">I drank so lightly.</string>
+    <string name="calendar_detail_drunk_level_2">I got pretty tipsy.</string>
+    <string name="calendar_detail_drunk_level_3">I was so drunk.</string>
+    <string name="calendar_detail_drunk_level_max">I had a blackout.</string>
     <string name="calendar_detail_drunk_level_title">How much did you drink?</string>
     <string name="calendar_detail_friends_title">Company</string>
     <string name="calendar_detail_drink_title">Drinks</string>
     <string name="calendar_detail_foods_title">Food</string>
     <string name="calendar_detail_memo_title">Memo</string>
+    <string name="calendar_detail_hint_click_to_save">Click to edit</string>
+
 
 
     <!-- Daily -->
@@ -34,9 +50,12 @@
     <string name="drink_state_nowadays_3">Dangerous</string>
     <string name="drink_state_nowadays_4">Never drink</string>
     <string name="tap_today_drink_times">The number of drunken days for last 7 days : %s</string>
-    <string name="tap_today_drink_level">The average amount of alcohol for last 7 days : %s%</string>
+    <string name="tap_today_drink_level">The average amount of alcohol for last 7 days : %s<![CDATA[%]]></string>
 
 
+
+    <!-- Calendar -->
+    <string name="calendar_today">Today</string>
     <string name="default_friend_list">Alone</string>
     <string name="default_food_list">Only alcohol</string>
 
@@ -116,6 +135,8 @@
     <string name="warning_duplicate_name">Already existing name.</string>
     <string name="prefix_time_AM">A.M.</string>
     <string name="prefix_time_PM">P.M.</string>
+    <string name="prefix_agree">agreed</string>
+    <string name="prefix_disagree">disagreed</string>
 
 
     <!-- 버튼 -->

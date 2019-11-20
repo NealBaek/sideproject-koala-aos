@@ -1,8 +1,8 @@
 package com.ksdigtalnomad.koala.ui.customView.calendarView.day;
 
-import com.ksdigtalnomad.koala.data.models.Drink;
-import com.ksdigtalnomad.koala.data.models.Food;
-import com.ksdigtalnomad.koala.data.models.Friend;
+import com.ksdigtalnomad.koala.data.models.calendar.Drink;
+import com.ksdigtalnomad.koala.data.models.calendar.Food;
+import com.ksdigtalnomad.koala.data.models.calendar.Friend;
 
 import java.util.ArrayList;
 import java.util.Date;

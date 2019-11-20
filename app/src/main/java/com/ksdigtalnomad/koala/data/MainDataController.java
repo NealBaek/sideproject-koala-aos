@@ -3,18 +3,16 @@ package com.ksdigtalnomad.koala.data;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ksdigtalnomad.koala.R;
-import com.ksdigtalnomad.koala.data.models.Drink;
-import com.ksdigtalnomad.koala.data.models.Food;
-import com.ksdigtalnomad.koala.data.models.Friend;
+import com.ksdigtalnomad.koala.data.models.calendar.Drink;
+import com.ksdigtalnomad.koala.data.models.calendar.Food;
+import com.ksdigtalnomad.koala.data.models.calendar.Friend;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainDataController {
     private static final String PREF_FILE_NAME = "CALENDAR_DATA";

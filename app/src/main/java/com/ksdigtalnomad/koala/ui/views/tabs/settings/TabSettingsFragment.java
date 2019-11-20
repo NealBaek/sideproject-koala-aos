@@ -6,7 +6,10 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.ksdigtalnomad.koala.R;
+import com.ksdigtalnomad.koala.data.models.shareMessage.ShareMessage;
 import com.ksdigtalnomad.koala.databinding.FragmentTabSettingsBinding;
 
 import android.net.Uri;
@@ -22,11 +25,15 @@ import com.ksdigtalnomad.koala.ui.base.BaseFragment;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.utils.DateHelper;
 import com.ksdigtalnomad.koala.ui.views.dialogs.CustomTimePickerDialog;
 import com.ksdigtalnomad.koala.util.FBEventLogHelper;
+import com.ksdigtalnomad.koala.util.LanguageHelper;
 import com.ksdigtalnomad.koala.util.PlayStoreHelper;
 import com.ksdigtalnomad.koala.util.FBRemoteControlHelper;
 import com.ksdigtalnomad.koala.util.PreferenceHelper;
 import com.ksdigtalnomad.koala.util.ShareHelper;
 import com.ksdigtalnomad.koala.util.ToastHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TabSettingsFragment extends BaseFragment {
 
@@ -66,7 +73,7 @@ public class TabSettingsFragment extends BaseFragment {
 
             String todayStr = DateHelper.getInstance().getTodayStr("yyyy.MM.dd.");
 
-            ToastHelper.writeBottomLongToast(getResources().getString(R.string.warning_push_agree, todayStr, (isChecked ? "동의" : "거부")));
+            ToastHelper.writeBottomLongToast(getResources().getString(R.string.warning_push_agree, todayStr, getResources().getString(isChecked ? R.string.prefix_agree : R.string.prefix_disagree)));
 
             // 동의 설정
             PreferenceHelper.setAlarmDailyEnabled(isChecked);
@@ -124,7 +131,20 @@ public class TabSettingsFragment extends BaseFragment {
         FBEventLogHelper.onPlayStoreComplement();
     }
     public void onShareClick(){
-        ShareHelper.startShareIntent(getContext(), FBRemoteControlHelper.getInstance().getShareMessage());
+        ArrayList<ShareMessage> shareMessageList = new Gson().fromJson(FBRemoteControlHelper.getInstance().getShareMessage(), new TypeToken<ArrayList<ShareMessage>>(){}.getType());
+
+        ShareMessage shareMessage = ShareMessage.builder().build();
+
+        if(shareMessageList != null && shareMessageList.size() > 0) {
+            for(ShareMessage item: shareMessageList){
+                if(LanguageHelper.isSameLanguage(item.getLangCode())){
+                    shareMessage = item;
+                    break;
+                }
+            }
+        }
+
+        ShareHelper.startShareIntent(getContext(), shareMessage.getContent());
         FBEventLogHelper.onAppShare();
 
     }

@@ -3,7 +3,6 @@ package com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.detailListEdit;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ksdigtalnomad.koala.R;
-import com.ksdigtalnomad.koala.data.models.BaseData;
-import com.ksdigtalnomad.koala.data.models.Drink;
-import com.ksdigtalnomad.koala.data.models.Food;
-import com.ksdigtalnomad.koala.data.models.Friend;
+import com.ksdigtalnomad.koala.data.models.calendar.BaseData;
+import com.ksdigtalnomad.koala.data.models.calendar.Drink;
+import com.ksdigtalnomad.koala.data.models.calendar.Food;
+import com.ksdigtalnomad.koala.data.models.calendar.Friend;
 import com.ksdigtalnomad.koala.ui.base.BaseRecyclerViewAdapter;
 
 import java.util.ArrayList;

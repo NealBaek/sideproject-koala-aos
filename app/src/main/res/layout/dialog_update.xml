@@ -52,14 +52,15 @@
             <!-- Body -->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp">
+                android:layout_height="70dp">
 
                 <EditText
                     android:id="@+id/textTF"
                     android:focusedByDefault="false"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:hint="@string/dialog_add_info_enter"
@@ -76,28 +77,31 @@
             <!-- Footer -->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="50dp"
+                android:paddingBottom="10dp">
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:layout_alignParentRight="true">
                     <TextView
                         android:id="@+id/btnCancel"
-                        android:layout_width="50dp"
-                        android:layout_height="40dp"
-                        android:text="@string/btn_exit_short"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:text="@string/btn_cancel_short"
                         android:textSize="16dp"
                         android:textStyle="bold"
-                        android:textColor="@color/colorDarkGray"/>
+                        android:textColor="@color/colorDarkGray"
+                        android:gravity="center"/>
                     <TextView
                         android:id="@+id/btnUpdate"
-                        android:layout_width="50dp"
-                        android:layout_height="40dp"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
                         android:text="@string/btn_update_short"
                         android:textSize="16dp"
                         android:textStyle="bold"
-                        android:textColor="@color/colorMain" />
+                        android:textColor="@color/colorMain"
+                        android:gravity="center"/>
                 </LinearLayout>
 
 

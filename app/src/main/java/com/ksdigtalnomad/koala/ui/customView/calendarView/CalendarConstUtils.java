@@ -4,9 +4,9 @@ import android.graphics.Color;
 import android.support.v4.graphics.ColorUtils;
 
 import com.ksdigtalnomad.koala.R;
-import com.ksdigtalnomad.koala.data.models.Drink;
-import com.ksdigtalnomad.koala.data.models.Food;
-import com.ksdigtalnomad.koala.data.models.Friend;
+import com.ksdigtalnomad.koala.data.models.calendar.Drink;
+import com.ksdigtalnomad.koala.data.models.calendar.Food;
+import com.ksdigtalnomad.koala.data.models.calendar.Friend;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 
 import java.util.ArrayList;
@@ -17,7 +17,15 @@ import java.util.ArrayList;
 
 public class CalendarConstUtils {
 
-    public static final String[] DAYS_OF_THE_WEEK = {"일", "월", "화", "수", "목", "금", "토"};
+    public static final String[] DAYS_OF_THE_WEEK = {
+            BaseApplication.getInstance().getResources().getString(R.string.calendar_day_sun),
+            BaseApplication.getInstance().getResources().getString(R.string.calendar_day_mon),
+            BaseApplication.getInstance().getResources().getString(R.string.calendar_day_tue),
+            BaseApplication.getInstance().getResources().getString(R.string.calendar_day_wed),
+            BaseApplication.getInstance().getResources().getString(R.string.calendar_day_thu),
+            BaseApplication.getInstance().getResources().getString(R.string.calendar_day_fri),
+            BaseApplication.getInstance().getResources().getString(R.string.calendar_day_sat)
+    };
 
     public static final int[] NUM_DAYS_IN_MONTH = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
@@ -27,6 +35,12 @@ public class CalendarConstUtils {
     public static final int ID_CNT_MONTH = 100;
     public static final int ID_CNT_ISOUTMONTH = 50;
 
+    public static final String DRUNK_LV_0_STR = BaseApplication.getInstance().getResources().getString(R.string.calendar_detail_drunk_level_0);
+    public static final String DRUNK_LV_1_STR = BaseApplication.getInstance().getResources().getString(R.string.calendar_detail_drunk_level_1);
+    public static final String DRUNK_LV_2_STR = BaseApplication.getInstance().getResources().getString(R.string.calendar_detail_drunk_level_2);
+    public static final String DRUNK_LV_3_STR = BaseApplication.getInstance().getResources().getString(R.string.calendar_detail_drunk_level_3);
+    public static final String DRUNK_LV_MAX_STR = BaseApplication.getInstance().getResources().getString(R.string.calendar_detail_drunk_level_max);
+
 
     // Color
     public static final int COLOR_SUNDAY = Color.RED;
@@ -34,8 +48,6 @@ public class CalendarConstUtils {
     public static final int COLOR_WEEKDAY = Color.BLACK;
     public static final int COLOL_MAIN = BaseApplication.getInstance().getResources().getColor(R.color.colorMain);
     public static int getDayColor(int daySeq){
-
-        final int NUM_DAYS_IN_WEEK = 7;
 
         switch (daySeq) {
             case DAY_SEQ_SUNDAY:
@@ -71,15 +83,15 @@ public class CalendarConstUtils {
     public static String getDrunkLvComment(int drunkLv){
         switch (drunkLv){
             case DRUNK_LV_0:
-                return "'단 한잔도 하지 않았어요'";
+                return DRUNK_LV_0_STR;
             case DRUNK_LV_1:
-                return "'그냥 가볍게 마셨어요'";
+                return DRUNK_LV_1_STR;
             case DRUNK_LV_2:
-                return "'나름 취할 정도로 마셨어요'";
+                return DRUNK_LV_2_STR;
             case DRUNK_LV_3:
-                return "'많이 취할 정도로 마셨어요'";
+                return DRUNK_LV_3_STR;
             case DRUNK_LV_MAX:
-                return "'필름 끊길 정도로 폭음했어요'";
+                return DRUNK_LV_MAX_STR;
             default:
                 return "";
         }
@@ -87,15 +99,6 @@ public class CalendarConstUtils {
 
 
     // DayView Texts
-//    public static String getShortStr(ArrayList<String> strList){
-//
-//        if(strList == null || strList.isEmpty()) return "";
-//
-//        if(strList.size() == 1) return strList.get(0);
-//
-//        return strList.get(0) + " 외 1";
-//    }
-
     public static String getLongStrFromFriendList(ArrayList<Friend> list){
         return getLongStr(getFullStrFromFriendList(list));
     }

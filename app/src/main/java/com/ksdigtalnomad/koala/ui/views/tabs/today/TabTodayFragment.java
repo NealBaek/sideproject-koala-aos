@@ -23,10 +23,6 @@ public class TabTodayFragment extends BaseFragment {
 
     private Context mContext;
 
-    private static final String PREFIX_1 = "최근 7일간 음주 ";
-    private static final String PREFIX_2 = "최근 7일간 음주량 평균 ";
-
-
     public static TabTodayFragment newInstance(){
         TabTodayFragment fragment = new TabTodayFragment();
         return fragment;
@@ -119,20 +115,20 @@ public class TabTodayFragment extends BaseFragment {
         String drinkState = "";
 
         if(avgDrinkLevel >= 0 && avgDrinkLevel <= 100){
-            drinkState = "안전";
+            drinkState = getResources().getString(R.string.drink_state_nowadays_0);
         }else if(avgDrinkLevel > 100 && avgDrinkLevel <= 200 ){
-            drinkState = "양호";
+            drinkState = getResources().getString(R.string.drink_state_nowadays_1);
         }else if(avgDrinkLevel > 200 && avgDrinkLevel <= 300 ) {
-            drinkState = "자제";
+            drinkState = getResources().getString(R.string.drink_state_nowadays_2);
         }else if(avgDrinkLevel > 300 && avgDrinkLevel <= 400 ) {
-            drinkState = "위험";
+            drinkState = getResources().getString(R.string.drink_state_nowadays_3);
         }else if(avgDrinkLevel > 400 && avgDrinkLevel <= 500 ) {
-            drinkState = "금지";
+            drinkState = getResources().getString(R.string.drink_state_nowadays_4);
         }
 
         mBinding.avgDrinkState.setText(drinkState);
-        mBinding.avgDrinkTimes.setText(PREFIX_1 + drinkCnt + "회");
-        mBinding.avgDrinkLevel.setText(PREFIX_2 + Math.round(avgDrinkLevel/drinkCnt) + "%");
+        mBinding.avgDrinkTimes.setText(getResources().getString(R.string.tap_today_drink_times, String.valueOf(drinkCnt)));
+        mBinding.avgDrinkLevel.setText(getResources().getString(R.string.tap_today_drink_level, String.valueOf(Math.round(avgDrinkLevel/drinkCnt))));
 
         showEmptyLayout(false);
     }

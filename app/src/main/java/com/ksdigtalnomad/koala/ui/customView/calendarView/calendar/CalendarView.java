@@ -115,7 +115,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         final int MARGIN_R_MOVE_TO_TODAY = (int) (18 * Resources.getSystem().getDisplayMetrics().density);
         final int MARGIN_ARROW = (int) (5 * Resources.getSystem().getDisplayMetrics().density);
 
-        final String TODAY_TEXT = "오늘";
+        final String TODAY_TEXT = getResources().getString(R.string.calendar_today);
 
 
 

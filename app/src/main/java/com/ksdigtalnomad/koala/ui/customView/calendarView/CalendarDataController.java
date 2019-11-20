@@ -3,11 +3,9 @@ package com.ksdigtalnomad.koala.ui.customView.calendarView;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.ksdigtalnomad.koala.data.models.Drink;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendar.CalendarView;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendarBody.CalendarModel;
