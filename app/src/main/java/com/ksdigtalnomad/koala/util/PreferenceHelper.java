@@ -41,7 +41,7 @@ public class PreferenceHelper {
 
 
 
-    // DailyAlarm
+    // AlarmDaily
     public static String getAlarmDailySettingTimeStr(){
         int hour = getAlarmDailyHour();
         int minute = getAlarmDailyMinute();

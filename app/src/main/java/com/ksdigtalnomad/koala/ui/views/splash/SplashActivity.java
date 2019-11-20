@@ -6,10 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 import com.ksdigtalnomad.koala.R;
-import com.ksdigtalnomad.koala.service.alarm.DailyAlarmReceiver;
+import com.ksdigtalnomad.koala.service.alarm.AlarmDailyReceiver;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
 import com.ksdigtalnomad.koala.ui.views.guide.GuideActivity;
 import com.ksdigtalnomad.koala.ui.views.home.HomeActivity;
@@ -65,7 +64,7 @@ public class SplashActivity extends BaseActivity {
             super.handleMessage(msg);
 
             if(PreferenceHelper.isFirstOpen()){
-                DailyAlarmReceiver.setAlarm();
+                AlarmDailyReceiver.setAlarm();
 
                 activity.startActivity(GuideActivity.intent(activity));
                 activity.finish();

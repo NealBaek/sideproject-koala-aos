@@ -38,7 +38,7 @@
     <string name="calendar_detail_drink_title">Drinks</string>
     <string name="calendar_detail_foods_title">Food</string>
     <string name="calendar_detail_memo_title">Memo</string>
-    <string name="calendar_detail_hint_click_to_save">Click to edit</string>
+    <string name="calendar_detail_hint_click_to_save">Click to input</string>
 
 
 
@@ -139,7 +139,7 @@
     <string name="prefix_disagree">disagreed</string>
 
 
-    <!-- 버튼 -->
+    <!-- 버튼 -->ㅈ
     <string name="btn_next_short">Next</string>
 
     <string name="btn_save_long">Save</string>

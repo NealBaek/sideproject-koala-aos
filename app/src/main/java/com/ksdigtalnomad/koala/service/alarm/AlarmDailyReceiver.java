@@ -11,6 +11,7 @@ import android.os.Build;
 
 import com.ksdigtalnomad.koala.service.PackageReceiver;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
+import com.ksdigtalnomad.koala.util.PreferenceHelper;
 
 import java.util.Calendar;
 
@@ -18,7 +19,7 @@ import java.util.Calendar;
  * Created by ooddy on 14/11/2019.
  */
 
-public class DailyAlarmReceiver extends BroadcastReceiver {
+public class AlarmDailyReceiver extends BroadcastReceiver {
 
     public static final String CUSTOM_INTENT = "com.test.intent.action.ALARM";
 
@@ -27,7 +28,7 @@ public class DailyAlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         /* enqueue the job */
-        DailyAlarmJobIntentService.enqueueWork(context, intent);
+        AlarmDailyJobIntentService.enqueueWork(context, intent);
     }
     public static void cancelAlarm() {
         Context context = BaseApplication.getInstance();
@@ -35,7 +36,7 @@ public class DailyAlarmReceiver extends BroadcastReceiver {
         AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         /* cancel any pending alarm */
-        Intent alarmIntent = new Intent(context, DailyAlarmReceiver.class);
+        Intent alarmIntent = new Intent(context, AlarmDailyReceiver.class);
         alarmIntent.setAction(CUSTOM_INTENT);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, alarmIntent, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -48,19 +49,24 @@ public class DailyAlarmReceiver extends BroadcastReceiver {
 
         cancelAlarm();
 
+        int alarmDailyHour = PreferenceHelper.getAlarmDailyHour();
+        int alarmDailyMinute = PreferenceHelper.getAlarmDailyMinute();
 
         Calendar when = Calendar.getInstance();
-//        when.set(Calendar.HOUR, PreferenceHelper.getAlarmDailyHour());
-//        when.set(Calendar.MINUTE, PreferenceHelper.getAlarmDailyMinute());
-//        when.add(Calendar.DATE, 1);
-        when.add(Calendar.MINUTE, 1); // Test Code
 
+
+        // 시간 비교.. 저장한 시간이랑 현재 시간이랑 비교 if 지났으면 -> DATE + 1 else 아직 안지났으면 -> DATE 그대로
+        boolean isAlreadyOver =  when.get(Calendar.HOUR_OF_DAY) > alarmDailyHour || (when.get(Calendar.HOUR_OF_DAY) == alarmDailyHour && when.get(Calendar.MINUTE) >= alarmDailyMinute);
+        if(isAlreadyOver) when.add(Calendar.DATE, 1);
+
+        when.set(Calendar.HOUR_OF_DAY, alarmDailyHour);
+        when.set(Calendar.MINUTE, alarmDailyMinute);
 
 
         PackageManager pm = context.getPackageManager();
         ComponentName receiver = new ComponentName(context, PackageReceiver.class);
 
-        Intent alarmIntent = new Intent(context, DailyAlarmReceiver.class);
+        Intent alarmIntent = new Intent(context, AlarmDailyReceiver.class);
         alarmIntent.setAction(CUSTOM_INTENT);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 

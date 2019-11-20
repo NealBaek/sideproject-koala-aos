@@ -5,15 +5,11 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.util.Log;
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.MobileAds;
-import com.google.gson.Gson;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.databinding.ActivityHomeBinding;
-import com.ksdigtalnomad.koala.service.alarm.DailyAlarmReceiver;
+import com.ksdigtalnomad.koala.service.alarm.AlarmDailyReceiver;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
 import com.ksdigtalnomad.koala.ui.views.dialogs.ExitDialog;
 import com.ksdigtalnomad.koala.util.FBEventLogHelper;
@@ -73,7 +69,7 @@ public class HomeActivity extends BaseActivity {
             PreferenceHelper.setFirstOpen(false);
         }
 
-        DailyAlarmReceiver.setAlarm();
+        AlarmDailyReceiver.setAlarm();
 
         // From AlarmDaily Noti
         if(getIntent().getBooleanExtra(KEY_NOTI_ALARM_DAILY, false)){

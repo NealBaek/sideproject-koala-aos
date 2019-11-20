@@ -60,15 +60,15 @@
 
 
 
-        <!-- DailyAlarm -->
-        <receiver android:name=".service.alarm.DailyAlarmReceiver">
+        <!-- AlarmDaily -->
+        <receiver android:name=".service.alarm.AlarmDailyReceiver">
             <intent-filter>
                 <action android:name="com.test.intent.action.ALARM" />
             </intent-filter>
         </receiver>
 
         <service
-            android:name=".service.alarm.DailyAlarmJobIntentService"
+            android:name=".service.alarm.AlarmDailyJobIntentService"
             android:enabled="true"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE"/>

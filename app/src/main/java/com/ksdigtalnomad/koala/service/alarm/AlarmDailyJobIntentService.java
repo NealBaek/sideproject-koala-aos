@@ -22,12 +22,12 @@ import java.util.ArrayList;
  * Created by ooddy on 14/11/2019.
  */
 
-public class DailyAlarmJobIntentService extends JobIntentService {
+public class AlarmDailyJobIntentService extends JobIntentService {
 
     /* Give the Job a Unique Id */
     private static final int JOB_ID = 1000;
     public static void enqueueWork(Context ctx, Intent intent) {
-        enqueueWork(ctx, DailyAlarmJobIntentService.class, JOB_ID, intent);
+        enqueueWork(ctx, AlarmDailyJobIntentService.class, JOB_ID, intent);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class DailyAlarmJobIntentService extends JobIntentService {
 
 
         // 2. 알람 리셋
-        DailyAlarmReceiver.setAlarm();
+        AlarmDailyReceiver.setAlarm();
         stopSelf();
     }
 

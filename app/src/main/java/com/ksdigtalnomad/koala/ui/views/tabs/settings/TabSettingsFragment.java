@@ -14,13 +14,12 @@ import com.ksdigtalnomad.koala.databinding.FragmentTabSettingsBinding;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
-import com.ksdigtalnomad.koala.service.alarm.DailyAlarmReceiver;
+import com.ksdigtalnomad.koala.service.alarm.AlarmDailyReceiver;
 import com.ksdigtalnomad.koala.ui.base.BaseFragment;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.utils.DateHelper;
 import com.ksdigtalnomad.koala.ui.views.dialogs.CustomTimePickerDialog;
@@ -33,7 +32,6 @@ import com.ksdigtalnomad.koala.util.ShareHelper;
 import com.ksdigtalnomad.koala.util.ToastHelper;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TabSettingsFragment extends BaseFragment {
 
@@ -116,7 +114,7 @@ public class TabSettingsFragment extends BaseFragment {
             PreferenceHelper.setAlarmDailyHour(hour);
             PreferenceHelper.setAlarmDailyMinute(minute);
 
-            DailyAlarmReceiver.setAlarm();
+            AlarmDailyReceiver.setAlarm();
 
             String settingTime = PreferenceHelper.getAlarmDailySettingTimeStr();
             FBEventLogHelper.onAlarmDailyTime(settingTime);
