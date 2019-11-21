@@ -42,10 +42,10 @@ public class FBEventLogHelper {
             bundle.putString("food_list", CalendarConstUtils.getFullStrFromFoodList(dayModel.foodList));
             bundle.putString("drink_list", CalendarConstUtils.getFullStrFromDrinkList(dayModel.drinkList));
             bundle.putString("memo", dayModel.memo);
-            bundle.putString("date", DateHelper.getInstance().getDateStr("yyyy.MM.dd HH:mm:ss", dayModel.date));
+            bundle.putString("date", DateHelper.getInstance().getDateStr(DateHelper.FORMAT_FULL, dayModel.date));
             bundle.putString("place", Locale.getDefault().toString());
             bundle.putBoolean("isToday", DateHelper.getInstance().isToday(dayModel.date));
-            bundle.putString("createdAt", DateHelper.getInstance().getTodayStr("yyyy.MM.dd HH:mm:ss"));
+            bundle.putString("createdAt", DateHelper.getInstance().getTodayStr(DateHelper.FORMAT_FULL));
 
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
@@ -187,7 +187,7 @@ public class FBEventLogHelper {
         Runnable task = ()->{
             Bundle bundle = new Bundle();
             bundle.putString("settingTime", settingTime); // hh시mm분
-            bundle.putString("createdAt", DateHelper.getInstance().getTodayStr("yyyy.MM.dd HH:mm:ss"));
+            bundle.putString("createdAt", DateHelper.getInstance().getTodayStr(DateHelper.FORMAT_FULL));
 
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
@@ -199,7 +199,7 @@ public class FBEventLogHelper {
         Runnable task = ()->{
             Bundle bundle = new Bundle();
             bundle.putString("settingTime", settingTime); // hh시mm분
-            bundle.putString("createdAt", DateHelper.getInstance().getTodayStr("yyyy.MM.dd HH:mm:ss"));
+            bundle.putString("createdAt", DateHelper.getInstance().getTodayStr(DateHelper.FORMAT_FULL));
 
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
@@ -211,7 +211,7 @@ public class FBEventLogHelper {
         Runnable task = ()->{
             Bundle bundle = new Bundle();
             bundle.putString("settingTime", settingTime); // hh시mm분
-            bundle.putString("createdAt", DateHelper.getInstance().getTodayStr("yyyy.MM.dd HH:mm:ss"));
+            bundle.putString("createdAt", DateHelper.getInstance().getTodayStr(DateHelper.FORMAT_FULL));
 
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())

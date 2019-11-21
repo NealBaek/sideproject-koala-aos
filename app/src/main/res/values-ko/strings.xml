@@ -18,7 +18,7 @@
 
     <string name="app_name">코알라</string>
     <string name="tap1_title">요즘</string>
-    <string name="tap2_title">달력</string>
+    <string name="tap2_title">월간</string>
     <string name="tap3_title">통계</string>
     <string name="tap4_title">설정</string>
 
@@ -53,10 +53,11 @@
     <string name="drink_state_nowadays_3">위험</string>
     <string name="drink_state_nowadays_4">금지</string>
     <string name="tap_today_drink_times" formatted="true">최근 7일간 음주 %s회</string>
-    <string name="tap_today_drink_level" formatted="true">최근 7일간 음주량 평균 %s<![CDATA[%]]></string>
+    <string name="tap_today_drink_level" formatted="true">최근 7일간 음주량 평균 %s</string>
 
 
 
+    <string name="calendar_today">오늘</string>
     <string name="default_friend_list">혼술</string>
     <string name="default_food_list">깡술</string>
 
@@ -162,8 +163,13 @@
 
     <!-- 가이드 -->
     <string name="guide_start">시작하기</string>
-    <string name="guide_first">가이드 1 내용</string>
-    <string name="guide_second">가이드 2 내용</string>
-    <string name="guide_third">가이드 3 내용</string>
+    <string name="guide_title_1">기록</string>
+    <string name="guide_title_2">알림</string>
+    <string name="guide_title_3">확인</string>
+    <string name="guide_title_4">조절</string>
+    <string name="guide_contents_1">누구와 술을 마셨나요?\n어떤 안주에 술을 마셨나요?\n무슨 술을 마셨나요?\n얼마나 마셨나요?</string>
+    <string name="guide_contents_2">꾸준히 기록하는 것이 중요해요.\n매일 정해진 시간마다 알림을 받아보세요.\n기억을 더듬어가며 어제를 기록해보세요.</string>
+    <string name="guide_contents_3">요즘 음주 상태는 어떨까요?\n이번 달에는 얼마나 많이 마셨을까요?</string>
+    <string name="guide_contents_4">당신이 얼마나 많이 마시는지 일단 보세요.\n당신 스스로를 발견하세요.\n그게 첫 걸음입니다.</string>
 
 </resources>

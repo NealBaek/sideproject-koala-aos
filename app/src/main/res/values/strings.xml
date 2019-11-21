@@ -14,7 +14,7 @@
 
     <string name="app_name">Koala</string>
     <string name="tap1_title">Daily</string>
-    <string name="tap2_title">Montly</string>
+    <string name="tap2_title">Monthly</string>
     <string name="tap3_title">Report</string>
     <string name="tap4_title">Setting</string>
 
@@ -50,7 +50,7 @@
     <string name="drink_state_nowadays_3">Dangerous</string>
     <string name="drink_state_nowadays_4">Never drink</string>
     <string name="tap_today_drink_times">The number of drunken days for last 7 days : %s</string>
-    <string name="tap_today_drink_level">The average amount of alcohol for last 7 days : %s<![CDATA[%]]></string>
+    <string name="tap_today_drink_level">The average amount of alcohol for last 7 days : %s</string>
 
 
 
@@ -161,9 +161,14 @@
 
     <!-- 가이드 -->
     <string name="guide_start">I am ready!</string>
-    <string name="guide_first">가이드 1 내용</string>
-    <string name="guide_second">가이드 2 내용</string>
-    <string name="guide_third">가이드 3 내용</string>
+    <string name="guide_title_1">Record</string>
+    <string name="guide_title_2">Alarm</string>
+    <string name="guide_title_3">Check</string>
+    <string name="guide_title_4">Control</string>
+    <string name="guide_contents_1">How much did you drink?\nWhom did you drink with?\n What did you eat?\nWhat did you drink?</string>
+    <string name="guide_contents_2">Daily recording is important.\nReceive alarms on the set time daily.\nExplore memory and record last night.</string>
+    <string name="guide_contents_3">How about your recent life?\nHow many did you drink this month?</string>
+    <string name="guide_contents_4">Just see how much you drink.\nJust see yourself.\nThis is the first step.</string>
 
 
 

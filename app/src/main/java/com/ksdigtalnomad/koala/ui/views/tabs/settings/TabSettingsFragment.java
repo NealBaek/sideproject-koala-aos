@@ -9,6 +9,7 @@ import android.databinding.DataBindingUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ksdigtalnomad.koala.R;
+import com.ksdigtalnomad.koala.data.AlarmDailyController;
 import com.ksdigtalnomad.koala.data.models.shareMessage.ShareMessage;
 import com.ksdigtalnomad.koala.databinding.FragmentTabSettingsBinding;
 
@@ -114,7 +115,7 @@ public class TabSettingsFragment extends BaseFragment {
             PreferenceHelper.setAlarmDailyHour(hour);
             PreferenceHelper.setAlarmDailyMinute(minute);
 
-            AlarmDailyReceiver.setAlarm();
+            AlarmDailyController.setAndStartAlarm();
 
             String settingTime = PreferenceHelper.getAlarmDailySettingTimeStr();
             FBEventLogHelper.onAlarmDailyTime(settingTime);

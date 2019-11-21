@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.ksdigtalnomad.koala.R;
+import com.ksdigtalnomad.koala.data.AlarmDailyController;
 import com.ksdigtalnomad.koala.service.alarm.AlarmDailyReceiver;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
 import com.ksdigtalnomad.koala.ui.views.guide.GuideActivity;
@@ -64,7 +65,7 @@ public class SplashActivity extends BaseActivity {
             super.handleMessage(msg);
 
             if(PreferenceHelper.isFirstOpen()){
-                AlarmDailyReceiver.setAlarm();
+                AlarmDailyController.setAndStartAlarm();
 
                 activity.startActivity(GuideActivity.intent(activity));
                 activity.finish();

@@ -8,6 +8,7 @@ import android.support.design.widget.TabLayout;
 
 import com.google.android.gms.ads.AdRequest;
 import com.ksdigtalnomad.koala.R;
+import com.ksdigtalnomad.koala.data.AlarmDailyController;
 import com.ksdigtalnomad.koala.databinding.ActivityHomeBinding;
 import com.ksdigtalnomad.koala.service.alarm.AlarmDailyReceiver;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
@@ -69,7 +70,8 @@ public class HomeActivity extends BaseActivity {
             PreferenceHelper.setFirstOpen(false);
         }
 
-        AlarmDailyReceiver.setAlarm();
+        // startAlarmDaily
+        AlarmDailyController.setAndStartAlarm();
 
         // From AlarmDaily Noti
         if(getIntent().getBooleanExtra(KEY_NOTI_ALARM_DAILY, false)){

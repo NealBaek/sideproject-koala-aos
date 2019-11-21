@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import com.ksdigtalnomad.koala.data.AlarmDailyController;
 import com.ksdigtalnomad.koala.service.alarm.AlarmDailyReceiver;
 
 /**
@@ -16,7 +17,7 @@ public class PackageReceiver extends BroadcastReceiver {
         String action = intent.getAction();
 
         if(action.equals(Intent.ACTION_BOOT_COMPLETED)){
-            AlarmDailyReceiver.setAlarm();
+            AlarmDailyController.setAndStartAlarm();
         }
     }
 }

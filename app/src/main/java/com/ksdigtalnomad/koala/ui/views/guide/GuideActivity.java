@@ -17,9 +17,10 @@ import com.ksdigtalnomad.koala.util.PreferenceHelper;
 
 public class GuideActivity extends BaseActivity {
 
-    public static final String GUIDE_FIRST = "FIRST";
-    public static final String GUIDE_SECOND = "SECOND";
-    public static final String GUIDE_THIRD = "THIRD";
+    public static final String GUIDE_1 = "GUIDE_1";
+    public static final String GUIDE_2 = "GUIDE_2";
+    public static final String GUIDE_3 = "GUIDE_3";
+    public static final String GUIDE_4 = "GUIDE_4";
 
     private ActivityGuideBinding mBinding;
 
@@ -42,7 +43,7 @@ public class GuideActivity extends BaseActivity {
     }
 
     private void initViewPager() {
-        mBinding.pageIndicatorView.setCount(3);
+        mBinding.pageIndicatorView.setCount(4);
         mBinding.pageIndicatorView.setSelected(0);
         mBinding.viewPager.setAdapter(viewPagerAdapter);
         mBinding.viewPager.addOnPageChangeListener(new onPageChangeListenerClass());
@@ -67,7 +68,7 @@ public class GuideActivity extends BaseActivity {
         }
 
         @Override public void onPageSelected(int position) {
-            if (position >= 2) {
+            if (position >= 3) {
                 mBinding.nextBtn.setVisibility(View.GONE);
                 mBinding.startBtn.setVisibility(View.VISIBLE);
             } else {

@@ -37,7 +37,8 @@
             app:tabSelectedTextColor="@color/colorMain"
             app:tabIndicatorColor="@color/colorMain"
             app:tabIndicatorGravity="top"
-            app:tabIndicatorHeight="1dp" />
+            app:tabIndicatorHeight="1dp"
+            app:tabTextAppearance="@style/CustomTextAppearanceTab"/>
 
         <!-- Banner Ads -->
         <LinearLayout

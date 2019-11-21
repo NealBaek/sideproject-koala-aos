@@ -47,7 +47,7 @@ public class PreferenceHelper {
         int minute = getAlarmDailyMinute();
 
 //        String hourStr = (hour < 10 ? ( "0" + hour ) : ( "" + hour));
-        String hourStr = (hour > 12 ? ("0" + (hour - 12)) : (hour < 10 ? ( "0" + hour ) : ( "" + hour)));
+        String hourStr = (hour > 12 ? ((hour - 12) < 10 ? ("0" + (hour - 12)) : ("" + (hour - 12))) : (hour < 10 ? ( "0" + hour ) : ( "" + hour)));
         String minuteStr = (minute < 10 ? ( "0" + minute ) : ( "" + minute));
         String hourPrefix = BaseApplication.getInstance().getApplicationContext().getResources().getString((hour > 12 ? R.string.prefix_time_PM : R.string.prefix_time_AM));
 

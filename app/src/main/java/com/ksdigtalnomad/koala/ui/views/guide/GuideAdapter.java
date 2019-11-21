@@ -16,9 +16,10 @@ public class GuideAdapter extends FragmentPagerAdapter {
         super(activity.getSupportFragmentManager());
 
         this.fragmentList = new ArrayList<>();
-        this.fragmentList.add(GuideFragment.newInstance(GuideActivity.GUIDE_FIRST));
-        this.fragmentList.add(GuideFragment.newInstance(GuideActivity.GUIDE_SECOND));
-        this.fragmentList.add(GuideFragment.newInstance(GuideActivity.GUIDE_THIRD));
+        this.fragmentList.add(GuideFragment.newInstance(GuideActivity.GUIDE_1));
+        this.fragmentList.add(GuideFragment.newInstance(GuideActivity.GUIDE_2));
+        this.fragmentList.add(GuideFragment.newInstance(GuideActivity.GUIDE_3));
+        this.fragmentList.add(GuideFragment.newInstance(GuideActivity.GUIDE_4));
     }
 
     @Override public Fragment getItem(int position) {

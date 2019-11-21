@@ -8,61 +8,76 @@
             name="activity"
             type="com.ksdigtalnomad.koala.ui.views.guide.GuideActivity"/>
     </data>
-    <LinearLayout
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:orientation="vertical"
         android:background="@color/colorPureWhite">
-
-        <RelativeLayout
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="match_parent"
+            android:src="@drawable/bg_splash"
+            android:scaleType="fitXY"
+            android:layout_centerInParent="true"
+            android:alpha="0.5"/>
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/viewPager"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            android:orientation="vertical"
+            android:background="@color/colorTransparent">
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-            <com.rd.PageIndicatorView
-                android:id="@+id/pageIndicatorView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="56dp"
-                app:piv_unselectedColor="@color/colorLightGray"
-                app:piv_selectedColor="@color/colorMain"
-                app:piv_radius="3dp"
-                app:piv_viewPager="@id/viewPager"/>
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
 
-        </RelativeLayout>
+                <com.rd.PageIndicatorView
+                    android:id="@+id/pageIndicatorView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="56dp"
+                    app:piv_unselectedColor="@color/colorDarkGray"
+                    app:piv_selectedColor="@color/colorMain"
+                    app:piv_radius="3dp"
+                    app:piv_viewPager="@id/viewPager"/>
 
-        <TextView
-            android:id="@+id/nextBtn"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center"
-            android:background="@color/colorMain"
-            android:textColor="@color/colorPureWhite"
-            android:textSize="19dp"
-            android:textStyle="bold"
-            android:text="@string/btn_next_short"
-            android:onClick="@{()->activity.onNextBtnClick()}"/>
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/startBtn"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center"
-            android:background="@color/colorMain"
-            android:textColor="@color/colorPureWhite"
-            android:textSize="19dp"
-            android:textStyle="bold"
-            android:text="@string/guide_start"
-            android:onClick="@{()->activity.onStartBtnClick()}"/>
+            <TextView
+                android:id="@+id/nextBtn"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:background="@color/colorMain"
+                android:textColor="@color/colorPureWhite"
+                android:textSize="19dp"
+                android:textStyle="bold"
+                android:text="@string/btn_next_short"
+                android:onClick="@{()->activity.onNextBtnClick()}"/>
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/startBtn"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:background="@color/colorMain"
+                android:textColor="@color/colorPureWhite"
+                android:textSize="19dp"
+                android:textStyle="bold"
+                android:text="@string/guide_start"
+                android:onClick="@{()->activity.onStartBtnClick()}"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
 </layout>

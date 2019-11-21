@@ -49,27 +49,33 @@ public class GuideFragment extends BaseFragment {
 
         this.sequence = getArguments().getString(KEY_SEQUENCE);
 
+        String title = "";
+        String contents = "";
+
         switch (sequence) {
-            case GuideActivity.GUIDE_FIRST:
-//                Glide.with(mContext)
-//                        .load(R.drawable.ic_guide_1)
-//                        .into(mBinding.guideImage);
-                mBinding.guideText.setText(getContext().getResources().getString(R.string.guide_first));
+            case GuideActivity.GUIDE_1:
+                title = getContext().getResources().getString(R.string.guide_title_1);
+                contents = getContext().getResources().getString(R.string.guide_contents_1);
                 break;
 
-            case GuideActivity.GUIDE_SECOND:
-//                Glide.with(mContext)
-//                        .load(R.drawable.ic_guide_2)
-//                        .into(mBinding.guideImage);
-                mBinding.guideText.setText(getContext().getResources().getString(R.string.guide_second));
+            case GuideActivity.GUIDE_2:
+                title = getContext().getResources().getString(R.string.guide_title_2);
+                contents = getContext().getResources().getString(R.string.guide_contents_2);
                 break;
 
-            case GuideActivity.GUIDE_THIRD:
-//                Glide.with(mContext)
-//                        .load(R.drawable.ic_guide_3)
-//                        .into(mBinding.guideImage);
-                mBinding.guideText.setText(getContext().getResources().getString(R.string.guide_third));
+            case GuideActivity.GUIDE_3:
+                title = getContext().getResources().getString(R.string.guide_title_3);
+                contents = getContext().getResources().getString(R.string.guide_contents_3);
+                break;
+
+            case GuideActivity.GUIDE_4:
+                title = getContext().getResources().getString(R.string.guide_title_4);
+                contents = getContext().getResources().getString(R.string.guide_contents_4);
                 break;
         }
+
+
+        mBinding.title.setText(title);
+        mBinding.contents.setText(contents);
     }
 }

@@ -91,4 +91,43 @@ public class AlarmDailyReceiver extends BroadcastReceiver {
                 PackageManager.DONT_KILL_APP);
 
     }
+//    public static void setAlarm() {
+//
+//        Context context = BaseApplication.getInstance();
+//
+//        cancelAlarm();
+//
+//        Calendar when = Calendar.getInstance();
+//
+//        when.add(Calendar.SECOND, 15 /* 15초 단위로 체크 */);
+//
+//
+//        PackageManager pm = context.getPackageManager();
+//        ComponentName receiver = new ComponentName(context, PackageReceiver.class);
+//
+//        Intent alarmIntent = new Intent(context, AlarmDailyReceiver.class);
+//        alarmIntent.setAction(CUSTOM_INTENT);
+//        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+//
+//
+//
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, alarmIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+//
+//            /* fire the broadcast */
+//        int SDK_INT = Build.VERSION.SDK_INT;
+//        if (SDK_INT < Build.VERSION_CODES.KITKAT)
+//            alarmManager.set(AlarmManager.RTC_WAKEUP, when.getTimeInMillis(), pendingIntent);
+//        else if (Build.VERSION_CODES.KITKAT <= SDK_INT && SDK_INT < Build.VERSION_CODES.M)
+//            alarmManager.setExact(AlarmManager.RTC_WAKEUP, when.getTimeInMillis(), pendingIntent);
+//        else if (SDK_INT >= Build.VERSION_CODES.M) {
+//            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, when.getTimeInMillis(), pendingIntent);
+//        }
+//
+//
+//        // 부팅 후 실행되는 리시버 사용가능하게 설정
+//        pm.setComponentEnabledSetting(receiver,
+//                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+//                PackageManager.DONT_KILL_APP);
+//
+//    }
 }
