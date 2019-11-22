@@ -65,11 +65,15 @@ public class DayView extends RelativeLayout {
 
         // 2. 클릭 이벤트 설정
         setOnClickListener(view -> {
-            if(!dayModel.isOutMonth && !DateHelper.getInstance().isAfterToday(dayModel.date)){
+            if(dayModel.isOutMonth) return;
+
+            if(!DateHelper.getInstance().isAfterToday(dayModel.date)){
                 eventInterface.onDayViewTouch(dayModel);
+                return;
             }else{
                 ToastHelper.writeBottomShortToast(getResources().getString(R.string.warning_cannot_edit_after_day));
             }
+
         });
 
     }
