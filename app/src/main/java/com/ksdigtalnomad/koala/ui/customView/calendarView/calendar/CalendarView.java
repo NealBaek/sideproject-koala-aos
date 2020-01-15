@@ -47,6 +47,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
     final int COLOR_MAIN = getContext().getResources().getColor(R.color.colorMain);
     final int COLOR_PURE_WHITE = getContext().getResources().getColor(R.color.colorPureWhite);
 
+    final float DENSITY = Resources.getSystem().getDisplayMetrics().density;
 
     public CalendarView(Context context, CalendarModel calendarModel, EventInterface eventInterface){
         super(context);
@@ -106,14 +107,15 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
     private RelativeLayout createCalendarHeaderLayout(){
 
 
-        final float MONTH_TITLE_TEXT_SIZE = 16;
-        final float TODAY_TEXT_SIZE = 16;
 
-        final int WIDTH_MONTH_TITLE_LAYOUT = (int) (150 * Resources.getSystem().getDisplayMetrics().density);
-        final int WIDTH_MONTH_TITLE_TOUCH_LISTENER = (int) (160 * Resources.getSystem().getDisplayMetrics().density);
-        final int HEIGHT_MONTH_TITLE_LAYOUT = (int) (24 * Resources.getSystem().getDisplayMetrics().density);
-        final int MARGIN_R_MOVE_TO_TODAY = (int) (18 * Resources.getSystem().getDisplayMetrics().density);
-        final int MARGIN_ARROW = (int) (5 * Resources.getSystem().getDisplayMetrics().density);
+        final float MONTH_TITLE_TEXT_SIZE = 16;
+        final float TODAY_TEXT_SIZE = (int) (16 * DENSITY);
+
+        final int WIDTH_MONTH_TITLE_LAYOUT = (int) (150 * DENSITY);
+        final int WIDTH_MONTH_TITLE_TOUCH_LISTENER = (int) (160 * DENSITY);
+        final int HEIGHT_MONTH_TITLE_LAYOUT = (int) (24 * DENSITY);
+        final int MARGIN_R_MOVE_TO_TODAY = (int) (18 * DENSITY);
+        final int MARGIN_ARROW = (int) (5 * DENSITY);
 
         final String TODAY_TEXT = getResources().getString(R.string.calendar_today);
 
@@ -288,8 +290,8 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         // 1. Measure 자식 Layouts
         final int parentHeightSize = MeasureSpec.getSize(heightMeasureSpec);
 
-        final int D_HEADER_H_SIZE = (int) (20 * Resources.getSystem().getDisplayMetrics().density);
-        final int C_HEADER_H_SIZE = (int) (45 * Resources.getSystem().getDisplayMetrics().density);
+        final int D_HEADER_H_SIZE = (int) (20 * DENSITY);
+        final int C_HEADER_H_SIZE = (int) (45 * DENSITY);
 
         int rvHeightSize = parentHeightSize - (D_HEADER_H_SIZE + C_HEADER_H_SIZE);
 

@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/tap_today_drink_state"
-                android:textColor="@color/colorMain"
+                android:textColor="@color/colorDarkGray"
                 android:textStyle="bold"
                 android:textSize="20dp"
                 android:layout_marginTop="30dp"
@@ -112,11 +112,63 @@
 
             </LinearLayout>
 
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                layout="@layout/view_line"/>
+
+            <LinearLayout
+                android:id="@+id/noDrinkLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:layout_marginTop="30dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/tap_today_no_drink_info_1"
+                        android:textColor="@color/colorGray"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:gravity="left"
+                        android:layout_marginBottom="3dp"/>
+                    <TextView
+                        android:id="@+id/noDrinkInfo2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/tap_today_no_drink_info_2"
+                        android:textColor="@color/colorGray"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:gravity="right"
+                        android:layout_marginBottom="3dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/noDrinkInfo3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tap_today_no_drink_info_3"
+                    android:textColor="@color/colorGray"
+                    android:textSize="12dp"
+                    android:gravity="right"
+                    android:layout_marginBottom="1dp"/>
+
+            </LinearLayout>
+
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                layout="@layout/view_line"/>
         </LinearLayout>
 
-        <include
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            layout="@layout/view_line"/>
     </LinearLayout>
 </layout>

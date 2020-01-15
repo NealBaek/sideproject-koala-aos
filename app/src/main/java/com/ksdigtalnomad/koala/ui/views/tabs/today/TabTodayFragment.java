@@ -15,6 +15,7 @@ import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.utils.DateHelper;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TabTodayFragment extends BaseFragment {
@@ -53,7 +54,12 @@ public class TabTodayFragment extends BaseFragment {
     public void refreshData(){
         Runnable task = ()->setData();
         task.run();
+
+        // @TODO: calculate noDrink
+        mBinding.noDrinkInfo2.setText(getResources().getString(R.string.tap_today_no_drink_info_2, String.valueOf(3)));
+        mBinding.noDrinkInfo3.setText(getResources().getString(R.string.tap_today_no_drink_info_3, DateHelper.getInstance().getDateStr("yyyy.MM.dd.", new Date())));
     }
+
 
     private void setData(){
 
