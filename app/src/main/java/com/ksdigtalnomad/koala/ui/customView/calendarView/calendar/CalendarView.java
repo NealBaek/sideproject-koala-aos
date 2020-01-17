@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatTextView;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,10 +107,8 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
     }
     private RelativeLayout createCalendarHeaderLayout(){
 
-
-
         final float MONTH_TITLE_TEXT_SIZE = 16;
-        final float TODAY_TEXT_SIZE = (int) (16 * DENSITY);
+        final float TODAY_TEXT_SIZE = 16;
 
         final int WIDTH_MONTH_TITLE_LAYOUT = (int) (150 * DENSITY);
         final int WIDTH_MONTH_TITLE_TOUCH_LISTENER = (int) (160 * DENSITY);
@@ -141,7 +140,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
         monthTitleLp.addRule(RelativeLayout.CENTER_HORIZONTAL);
 
         monthTitleTv = new TextView(getContext());
-        monthTitleTv.setTextSize(MONTH_TITLE_TEXT_SIZE);
+        monthTitleTv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, MONTH_TITLE_TEXT_SIZE);
         monthTitleTv.setTypeface(TypeKitHelper.getNotoBold());
         monthTitleTv.setGravity(Gravity.CENTER);
         monthTitleTv.setTextColor(COLOR_PURE_WHITE);
@@ -212,7 +211,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
 
         TextView moveToTodayTv = new TextView(getContext());
         moveToTodayTv.setText(TODAY_TEXT);
-        moveToTodayTv.setTextSize(TODAY_TEXT_SIZE);
+        moveToTodayTv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, TODAY_TEXT_SIZE);
         moveToTodayTv.setTypeface(TypeKitHelper.getNotoBold());
         moveToTodayTv.setGravity(Gravity.CENTER);
         moveToTodayTv.setLayoutParams(moveToTodayLp);
