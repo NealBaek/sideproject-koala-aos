@@ -3,6 +3,7 @@ package com.ksdigtalnomad.koala.ui.views.tabs.today;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,16 +53,40 @@ public class TabTodayFragment extends BaseFragment {
     }
 
     public void refreshData(){
-        Runnable task = ()->setData();
-        task.run();
+        Runnable task = ()->checkRecent7Days();
+        Runnable task1 = ()->calNoDrinkDays();
 
-        // @TODO: calculate noDrink
-        mBinding.noDrinkInfo2.setText(getResources().getString(R.string.tap_today_no_drink_info_2, String.valueOf(3)));
-        mBinding.noDrinkInfo3.setText(getResources().getString(R.string.tap_today_no_drink_info_3, DateHelper.getInstance().getDateStr("yyyy.MM.dd.", new Date())));
+
+        task.run();
+        task1.run();
     }
 
 
-    private void setData(){
+    // NoDrinkCounts
+    private void calNoDrinkDays(){
+        if(CalendarDataController.isNoDataYet()){
+            mBinding.noDrinkLayout.setVisibility(View.VISIBLE);
+            mBinding.noDrinkInfo2.setText(getResources().getString(R.string.tap_today_no_drink_info_2, String.valueOf(0)));
+            mBinding.noDrinkInfo3.setVisibility(View.GONE);
+        }else{
+            ArrayList<DayModel> noDrinkDayList = CalendarDataController.getNoDrinkDayList(DateHelper.getInstance().getTodayDate());
+            int noDrinkDayCount = noDrinkDayList.size();
+
+            mBinding.noDrinkLayout.setVisibility(View.VISIBLE);
+            mBinding.noDrinkInfo2.setText(getResources().getString(R.string.tap_today_no_drink_info_2, String.valueOf(noDrinkDayCount)));
+            mBinding.noDrinkInfo3.setVisibility(noDrinkDayCount>0 ? View.VISIBLE : View.GONE );
+            if(noDrinkDayCount>0) {
+                mBinding.noDrinkInfo3.setText(getResources().getString(R.string.tap_today_no_drink_info_3, DateHelper.getInstance().getDateStr("yyyy.MM.dd.", noDrinkDayList.get(noDrinkDayCount - 1).date)));
+            }
+        }
+    }
+
+
+
+
+    // RecentDrinks
+    private void checkRecent7Days(){
+        if(CalendarDataController.isNoDataYet()) return;
 
         int fromDayIdx = 0;
         int toDayIdx = 0;
@@ -72,7 +97,6 @@ public class TabTodayFragment extends BaseFragment {
         int dayListCnt =  totalDayList.size();
         for(int i = 0; i < dayListCnt; ++i){
             DayModel day = totalDayList.get(i);
-
             if (DateHelper.getInstance().isToday(day.date)){
                 fromDayIdx = (i - 7 <= 0 ? 0 : i - 7);
                 toDayIdx = i;
@@ -107,8 +131,6 @@ public class TabTodayFragment extends BaseFragment {
         }
 
 
-
-
 //        음주량별 가중치를 음주횟수에 곱해서 계산하여 나온 지표를 근거로 상태를 표시
 //        Ex) 7일간 3일은 2단계, 4일은 4단계면 3*0.25 + 4*0.75
 //
@@ -138,7 +160,6 @@ public class TabTodayFragment extends BaseFragment {
 
         showEmptyLayout(false);
     }
-
     private void showEmptyLayout(boolean shouldShow){
 //        "데이터 부족"
 //        최근 7일간 하루라도 데이터가 없으면 표시

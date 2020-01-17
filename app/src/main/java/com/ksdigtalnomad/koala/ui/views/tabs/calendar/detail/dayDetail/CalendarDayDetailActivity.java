@@ -141,6 +141,8 @@ public class CalendarDayDetailActivity extends BaseActivity {
         dayModel.memo = mBinding.memo.getText().toString();
         dayModel.isSaved = true;
 
+        if(CalendarDataController.isNoDataYet()) CalendarDataController.setNoDataYet(false);
+
         Runnable task = () -> CalendarDataController.updateDayModel(dayModel);
         task.run();
 

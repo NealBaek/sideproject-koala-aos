@@ -107,7 +107,7 @@ public class CalendarView extends LinearLayout implements CalendarContract.Calen
     }
     private RelativeLayout createCalendarHeaderLayout(){
 
-        final float MONTH_TITLE_TEXT_SIZE = 16;
+        final float MONTH_TITLE_TEXT_SIZE = 17;
         final float TODAY_TEXT_SIZE = 16;
 
         final int WIDTH_MONTH_TITLE_LAYOUT = (int) (150 * DENSITY);

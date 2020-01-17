@@ -17,6 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 /**
@@ -28,6 +29,7 @@ public class CalendarDataController {
     private static final String PREF_FILE_NAME = "CALENDAR_DATA";
     private static final String KEY_CALENDAR_MODEL = "CALENDAR_MODEL";
     private static final String KEY_TOTAL_DAY_LIST = "TOTAL_DAY_LIST";
+    private static final String KEY_NO_DATA_YET = "NO_DATA_YET";
 
     private static DayModel todayModelFromDayView = new DayModel();
     private static DayModel yesterdayModelFromDayView = new DayModel();
@@ -306,6 +308,11 @@ public class CalendarDataController {
 
 
 
+    public static void setNoDataYet(boolean flag){ getEditPreference().putBoolean(KEY_NO_DATA_YET, flag).apply(); }
+    public static boolean isNoDataYet(){ return getReadPreference().getBoolean(KEY_NO_DATA_YET, true); }
+
+
+
 
 
     // Today Model
@@ -407,6 +414,40 @@ public class CalendarDataController {
         ArrayList<DayModel> dump = new Gson().fromJson(getReadPreference().getString(KEY_TOTAL_DAY_LIST, null), new TypeToken<ArrayList<DayModel>>(){}.getType());
         if(dump == null){ return  new ArrayList<>(); }
         return dump;
+    }
+
+
+
+
+    // Recent Day List - 통계를 위한 임의 갯수 DayModel 리스트
+//    public static ArrayList<DayModel> getRecentDayFromToday(){
+//
+//    }
+    public static ArrayList<DayModel> getNoDrinkDayList(Date from){
+        int fromDayIdx = 0;
+        ArrayList<DayModel> totalDayList = CalendarDataController.getTotalDayList();
+
+
+        // 1. 목적 모델 값 구하기
+        int dayListCnt =  totalDayList.size();
+        for(int i = 0; i < dayListCnt; ++i){
+            DayModel day = totalDayList.get(i);
+
+            // 같은 일인지 확인
+            if (DateHelper.getInstance().isSameDay(from, day.date)){
+                fromDayIdx = i;
+                break;
+            }
+        }
+
+        ArrayList<DayModel> noDrinkDayList = new ArrayList<>();
+        for (int i = fromDayIdx; i > 0; --i){
+            DayModel day = totalDayList.get(i);
+            if(day.drunkLevel > 0) break;
+            if(day.isSaved) noDrinkDayList.add(day);
+        }
+
+        return noDrinkDayList;
     }
 
 }

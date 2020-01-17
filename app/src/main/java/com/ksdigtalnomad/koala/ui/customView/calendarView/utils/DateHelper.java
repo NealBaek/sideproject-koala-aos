@@ -40,6 +40,9 @@ public class DateHelper {
     private String yesterdayStr;
 
 
+    public boolean isSameDay(Date from, Date to){
+        return df.format(to).equals(df.format(from));
+    }
     public boolean isToday(Date toCompare){
         return todayStr.equals(df.format(toCompare));
     }
@@ -68,5 +71,11 @@ public class DateHelper {
     }
     public String getTodayStr(String pattern){
         return new SimpleDateFormat(pattern).format(today);
+    }
+    public Date getYesterdayDate(){
+        return yesterday;
+    }
+    public String getYesterdayStr(String pattern){
+        return new SimpleDateFormat(pattern).format(yesterday);
     }
 }
