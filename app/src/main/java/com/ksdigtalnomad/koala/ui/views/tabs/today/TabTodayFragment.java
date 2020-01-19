@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.databinding.FragmentTabTodayBinding;
+import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.base.BaseFragment;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
@@ -24,6 +25,8 @@ public class TabTodayFragment extends BaseFragment {
     private FragmentTabTodayBinding mBinding;
 
     private Context mContext;
+    private int COLOR_MAIN = BaseApplication.getInstance().getResources().getColor(R.color.colorMain);
+    private int COLOR_RED = BaseApplication.getInstance().getResources().getColor(R.color.colorRed);
 
     public static TabTodayFragment newInstance(){
         TabTodayFragment fragment = new TabTodayFragment();
@@ -72,12 +75,14 @@ public class TabTodayFragment extends BaseFragment {
             ArrayList<DayModel> noDrinkDayList = CalendarDataController.getNoDrinkDayList(DateHelper.getInstance().getTodayDate());
             int noDrinkDayCount = noDrinkDayList.size();
 
+            if(noDrinkDayCount<2) {
+                mBinding.noDrinkLayout.setVisibility(View.GONE);
+                return;
+            }
+
             mBinding.noDrinkLayout.setVisibility(View.VISIBLE);
             mBinding.noDrinkInfo2.setText(getResources().getString(R.string.tap_today_no_drink_info_2, String.valueOf(noDrinkDayCount)));
-            mBinding.noDrinkInfo3.setVisibility(noDrinkDayCount>0 ? View.VISIBLE : View.GONE );
-            if(noDrinkDayCount>0) {
-                mBinding.noDrinkInfo3.setText(getResources().getString(R.string.tap_today_no_drink_info_3, DateHelper.getInstance().getDateStr("yyyy.MM.dd.", noDrinkDayList.get(noDrinkDayCount - 1).date)));
-            }
+            mBinding.noDrinkInfo3.setText(getResources().getString(R.string.tap_today_no_drink_info_3, DateHelper.getInstance().getDateStr("yyyy.MM.dd.", noDrinkDayList.get(noDrinkDayCount - 1).date)));
         }
     }
 
@@ -141,20 +146,27 @@ public class TabTodayFragment extends BaseFragment {
 //        4.01 ~ 5.00 : "금지"
 
         String drinkState = "";
+        int drinkStateColor = COLOR_MAIN;
 
         if(avgDrinkLevel >= 0 && avgDrinkLevel <= 100){
             drinkState = getResources().getString(R.string.drink_state_nowadays_0);
+            drinkStateColor = COLOR_MAIN;
         }else if(avgDrinkLevel > 100 && avgDrinkLevel <= 200 ){
             drinkState = getResources().getString(R.string.drink_state_nowadays_1);
+            drinkStateColor = COLOR_MAIN;
         }else if(avgDrinkLevel > 200 && avgDrinkLevel <= 300 ) {
             drinkState = getResources().getString(R.string.drink_state_nowadays_2);
+            drinkStateColor = COLOR_RED;
         }else if(avgDrinkLevel > 300 && avgDrinkLevel <= 400 ) {
             drinkState = getResources().getString(R.string.drink_state_nowadays_3);
+            drinkStateColor = COLOR_RED;
         }else if(avgDrinkLevel > 400 && avgDrinkLevel <= 500 ) {
             drinkState = getResources().getString(R.string.drink_state_nowadays_4);
+            drinkStateColor = COLOR_RED;
         }
 
         mBinding.avgDrinkState.setText(drinkState);
+        mBinding.avgDrinkState.setTextColor(drinkStateColor);
         mBinding.avgDrinkTimes.setText(getResources().getString(R.string.tap_today_drink_times, String.valueOf(drinkCnt)));
         mBinding.avgDrinkLevel.setText(getResources().getString(R.string.tap_today_drink_level, String.valueOf(Math.round(avgDrinkLevel/drinkCnt)) + "%"));
 

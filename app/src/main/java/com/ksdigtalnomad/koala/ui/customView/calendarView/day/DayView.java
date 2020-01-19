@@ -104,7 +104,7 @@ public class DayView extends RelativeLayout {
 
         // 2. drunkLevel Paint 만들기
         //  2-1. Rect
-        drunkLvRectPt = createRectPaint(CalendarConstUtils.getDrunkLvColor(dayModel.drunkLevel));
+        drunkLvRectPt = createRectPaint(CalendarConstUtils.getDrunkLvColorRedByStep(dayModel.drunkLevel));
         //  2-2. MAX
         drunkLvTvPt = createTxPaint(Color.WHITE, Paint.Align.RIGHT, Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 

@@ -109,7 +109,6 @@
                     android:textSize="12dp"
                     android:gravity="right"
                     android:layout_marginBottom="15dp"/>
-
             </LinearLayout>
 
             <include
@@ -161,13 +160,12 @@
                     android:textSize="12dp"
                     android:gravity="right" />
 
+                <include
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    layout="@layout/view_line"
+                    android:layout_marginTop="15dp"/>
             </LinearLayout>
-
-            <include
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                layout="@layout/view_line"
-                android:layout_marginTop="15dp"/>
         </LinearLayout>
 
     </LinearLayout>

@@ -47,6 +47,9 @@ public class CalendarConstUtils {
     public static final int COLOR_SATURDAY = Color.BLUE;
     public static final int COLOR_WEEKDAY = Color.BLACK;
     public static final int COLOL_MAIN = BaseApplication.getInstance().getResources().getColor(R.color.colorMain);
+    public static final int COLOL_RED = BaseApplication.getInstance().getResources().getColor(R.color.colorRed);
+    public static final int COLOL_DARKGRAY = BaseApplication.getInstance().getResources().getColor(R.color.colorDarkGray);
+    public static final int COLOL_LIGHTGRAY = BaseApplication.getInstance().getResources().getColor(R.color.colorLightGray);
     public static int getDayColor(int daySeq){
 
         switch (daySeq) {
@@ -64,19 +67,26 @@ public class CalendarConstUtils {
     public static final int DRUNK_LV_2 = 2;
     public static final int DRUNK_LV_3 = 3;
     public static final int DRUNK_LV_MAX = 4;
-    public static int getDrunkLvColor(int drunkLv){
-
+    public static int getDrunkLvColorRedByStep(int drunkLv){
         switch (drunkLv){
             case DRUNK_LV_1:
-                return ColorUtils.setAlphaComponent(COLOL_MAIN, /** 0~ 255 */ 255 * 1/5);
+                return ColorUtils.setAlphaComponent(COLOL_RED, /** 0~ 255 */ 255 * 1/5);
             case DRUNK_LV_2:
-                return ColorUtils.setAlphaComponent(COLOL_MAIN, /** 0~ 255 */ 255 * 2/5);
+                return ColorUtils.setAlphaComponent(COLOL_RED, /** 0~ 255 */ 255 * 2/5);
             case DRUNK_LV_3:
-                return ColorUtils.setAlphaComponent(COLOL_MAIN, /** 0~ 255 */ 255 * 3/5);
+                return ColorUtils.setAlphaComponent(COLOL_RED, /** 0~ 255 */ 255 * 3/5);
             case DRUNK_LV_MAX:
-                return ColorUtils.setAlphaComponent(COLOL_MAIN, /** 0~ 255 */ 255 * 4/4);
+                return ColorUtils.setAlphaComponent(COLOL_RED, /** 0~ 255 */ 255 * 4/4);
             default:
-                return ColorUtils.setAlphaComponent(Color.LTGRAY, 100);
+                return ColorUtils.setAlphaComponent(COLOL_LIGHTGRAY, 100);
+        }
+    }
+    public static int getDrunkLvColorRed(int drunkLv){
+        switch (drunkLv){
+            case DRUNK_LV_0:
+                return COLOL_DARKGRAY;
+            default:
+                return COLOL_RED;
         }
 
     }

@@ -3,10 +3,12 @@ package com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.dayDetail;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -18,6 +20,7 @@ import com.google.gson.Gson;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.databinding.ActivityCalendarDayDetailBinding;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
+import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
@@ -36,6 +39,11 @@ public class CalendarDayDetailActivity extends BaseActivity {
     private int MEMO_LEN_LIMIT = 0;
 
     private DayModel dayModel;
+
+    private final Drawable THUMB_DARKGRAY = BaseApplication.getInstance().getResources().getDrawable(R.drawable.shape_seekbar_darkgray);
+    private final Drawable THUMB_RED = BaseApplication.getInstance().getResources().getDrawable(R.drawable.shape_seekbar_red);
+    private final Drawable PROGRESS_DARKGRAY = BaseApplication.getInstance().getResources().getDrawable(R.drawable.bg_seekbar_drakgray);
+    private final Drawable PROGRESS_RED = BaseApplication.getInstance().getResources().getDrawable(R.drawable.bg_seekbar_red);
 
     private static Intent intent(Context context) {  return new Intent(context, CalendarDayDetailActivity.class);  }
     public static Intent intent(Context context, DayModel dayModel) {
@@ -62,6 +70,7 @@ public class CalendarDayDetailActivity extends BaseActivity {
         mBinding.setLifecycleOwner(this);
         mBinding.setActivity(this);
         mBinding.setDayModel(dayModel);
+        setSeekbar(dayModel.drunkLevel);
 
         mBinding.adView.loadAd(new AdRequest.Builder().build());
 
@@ -114,8 +123,16 @@ public class CalendarDayDetailActivity extends BaseActivity {
     }
 
     public void onDrunkLevelChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
+        setSeekbar(progresValue);
+    }
+    private void setSeekbar(int progresValue){
         dayModel.drunkLevel = progresValue;
         mBinding.drunkLevelComment.setText(CalendarConstUtils.getDrunkLvComment(dayModel.drunkLevel));
+        runOnUiThread(()->{
+            mBinding.drunkLevelComment.setTextColor(CalendarConstUtils.getDrunkLvColorRed(dayModel.drunkLevel));
+            mBinding.drunkLevel.setThumb(dayModel.drunkLevel == CalendarConstUtils.DRUNK_LV_0 ? THUMB_DARKGRAY : THUMB_RED);
+            mBinding.drunkLevel.setProgressDrawable(dayModel.drunkLevel == CalendarConstUtils.DRUNK_LV_0 ? PROGRESS_DARKGRAY: PROGRESS_RED);
+        });
     }
 
     public void moveToDetailListEditActivity(String viewType){
