@@ -24,9 +24,9 @@ import com.ksdigtalnomad.koala.ui.base.BaseRecyclerViewAdapter;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.views.dialogs.AddDialog;
 import com.ksdigtalnomad.koala.ui.views.dialogs.UpdateDialog;
-import com.ksdigtalnomad.koala.util.FBEventLogHelper;
-import com.ksdigtalnomad.koala.util.KeyboardHelper;
-import com.ksdigtalnomad.koala.util.ToastHelper;
+import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
+import com.ksdigtalnomad.koala.helpers.ui.KeyboardHelper;
+import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
 
 import java.util.ArrayList;
 

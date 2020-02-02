@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.util;
+package com.ksdigtalnomad.koala.helpers.util;
 
 import android.content.Context;
 import android.content.Intent;

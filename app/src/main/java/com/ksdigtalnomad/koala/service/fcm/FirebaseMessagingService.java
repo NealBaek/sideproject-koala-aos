@@ -7,7 +7,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.views.splash.SplashActivity;
-import com.ksdigtalnomad.koala.util.NotificationHelper;
+import com.ksdigtalnomad.koala.helpers.ui.NotificationHelper;
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
 

@@ -1,13 +1,8 @@
 package com.ksdigtalnomad.koala.ui.views.dialogs;
 
-import android.app.Activity;
-import android.app.Dialog;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +11,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.ui.base.BaseDialogFragment;
-import com.ksdigtalnomad.koala.util.FBEventLogHelper;
+import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
 
 public class ExitDialog extends BaseDialogFragment {
 

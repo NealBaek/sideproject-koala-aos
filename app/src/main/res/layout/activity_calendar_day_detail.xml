@@ -109,7 +109,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_alignParentBottom="true"
-                            layout="@layout/view_line"/>
+                            layout="@layout/view_line_ltgray"/>
 
                     </RelativeLayout>
 
@@ -150,7 +150,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_alignParentBottom="true"
-                            layout="@layout/view_line"/>
+                            layout="@layout/view_line_ltgray"/>
                     </RelativeLayout>
                     <!-- 주류 -->
                     <RelativeLayout
@@ -189,7 +189,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_alignParentBottom="true"
-                            layout="@layout/view_line"/>
+                            layout="@layout/view_line_ltgray"/>
                     </RelativeLayout>
                     <!-- 안주 -->
                     <RelativeLayout
@@ -228,7 +228,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_alignParentBottom="true"
-                            layout="@layout/view_line"/>
+                            layout="@layout/view_line_ltgray"/>
                     </RelativeLayout>
                     <!-- 메모 -->
                     <RelativeLayout
@@ -271,7 +271,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_alignParentBottom="true"
-                            layout="@layout/view_line"/>
+                            layout="@layout/view_line_ltgray"/>
                     </RelativeLayout>
 
                 </LinearLayout>

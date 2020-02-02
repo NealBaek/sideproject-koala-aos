@@ -9,15 +9,14 @@ import android.os.Message;
 
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.data.AlarmDailyController;
-import com.ksdigtalnomad.koala.service.alarm.AlarmDailyReceiver;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
 import com.ksdigtalnomad.koala.ui.views.guide.GuideActivity;
 import com.ksdigtalnomad.koala.ui.views.home.HomeActivity;
-import com.ksdigtalnomad.koala.util.FBRemoteControlHelper;
-import com.ksdigtalnomad.koala.util.LanguageHelper;
-import com.ksdigtalnomad.koala.util.PreferenceHelper;
-import com.ksdigtalnomad.koala.util.ToastHelper;
-import com.ksdigtalnomad.koala.util.VersionCheckHelper;
+import com.ksdigtalnomad.koala.helpers.data.FBRemoteControlHelper;
+import com.ksdigtalnomad.koala.helpers.data.LanguageHelper;
+import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
+import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
+import com.ksdigtalnomad.koala.helpers.data.VersionCheckHelper;
 
 
 public class SplashActivity extends BaseActivity {
@@ -32,6 +31,8 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
 
         LanguageHelper.initLanguage(this);
+
+        PreferenceHelper.setOpenCount(PreferenceHelper.getOpenCunt() + 1);
     }
 
     @Override
@@ -65,6 +66,7 @@ public class SplashActivity extends BaseActivity {
             super.handleMessage(msg);
 
             if(PreferenceHelper.isFirstOpen()){
+                PreferenceHelper.setFirstOpen(false);
                 AlarmDailyController.setAndStartAlarm();
 
                 activity.startActivity(GuideActivity.intent(activity));

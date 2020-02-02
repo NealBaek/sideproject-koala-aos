@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.util;
+package com.ksdigtalnomad.koala.helpers.ui;
 
 import android.content.Context;
 import android.view.Gravity;

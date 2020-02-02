@@ -97,7 +97,7 @@
                 <include
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    layout="@layout/view_line"/>
+                    layout="@layout/view_line_ltgray"/>
 
                 <!-- 개발자에게 문의 -->
                 <LinearLayout
@@ -124,7 +124,7 @@
                 <include
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    layout="@layout/view_line"/>
+                    layout="@layout/view_line_ltgray"/>
 
                 <!-- 푸시 동의 -->
                 <RelativeLayout
@@ -168,7 +168,7 @@
                     android:layout_height="1dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    layout="@layout/view_line"/>
+                    layout="@layout/view_line_ltgray"/>
 
                 <!-- 푸시 시간 -->
                 <RelativeLayout
@@ -202,7 +202,7 @@
                 <include
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    layout="@layout/view_line"/>
+                    layout="@layout/view_line_ltgray"/>
 
 
                 <!-- 앱 칭찬하기 -->
@@ -223,7 +223,7 @@
                 <include
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    layout="@layout/view_line"/>
+                    layout="@layout/view_line_ltgray"/>
 
 
                 <!-- 공유하기 -->
@@ -244,7 +244,7 @@
                 <include
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    layout="@layout/view_line"/>
+                    layout="@layout/view_line_ltgray"/>
 
                 <!-- 버전 정보 -->
                 <RelativeLayout

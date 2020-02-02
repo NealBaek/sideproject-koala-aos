@@ -3,9 +3,7 @@ package com.ksdigtalnomad.koala.ui.customView.calendarView.calendar;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.AppCompatTextView;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -21,8 +19,7 @@ import com.ksdigtalnomad.koala.ui.customView.calendarView.calendarBody.CalendarB
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendarBody.CalendarModel;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.month.MonthModel;
-import com.ksdigtalnomad.koala.util.TypeKitHelper;
-import com.tsengvn.typekit.Typekit;
+import com.ksdigtalnomad.koala.helpers.ui.TypeKitHelper;
 
 public class CalendarView extends LinearLayout implements CalendarContract.CalendarView{
 

@@ -1,7 +1,6 @@
-package com.ksdigtalnomad.koala.util;
+package com.ksdigtalnomad.koala.helpers.data;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
@@ -9,9 +8,6 @@ import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.utils.DateHelper;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 
 public class FBEventLogHelper {

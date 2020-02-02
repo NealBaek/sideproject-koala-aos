@@ -114,7 +114,7 @@
             <include
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                layout="@layout/view_line"/>
+                layout="@layout/view_line_ltgray"/>
 
             <LinearLayout
                 android:id="@+id/noDrinkLayout"
@@ -163,7 +163,7 @@
                 <include
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    layout="@layout/view_line"
+                    layout="@layout/view_line_ltgray"
                     android:layout_marginTop="15dp"/>
             </LinearLayout>
         </LinearLayout>

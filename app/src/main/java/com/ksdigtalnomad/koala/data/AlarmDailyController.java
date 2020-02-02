@@ -5,9 +5,9 @@ import com.ksdigtalnomad.koala.data.models.alarmDaily.AlarmDaily;
 import com.ksdigtalnomad.koala.data.models.alarmDaily.AlarmDailyBody;
 import com.ksdigtalnomad.koala.service.alarm.AlarmDailyReceiver;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
-import com.ksdigtalnomad.koala.util.FBRemoteControlHelper;
-import com.ksdigtalnomad.koala.util.LanguageHelper;
-import com.ksdigtalnomad.koala.util.PreferenceHelper;
+import com.ksdigtalnomad.koala.helpers.data.FBRemoteControlHelper;
+import com.ksdigtalnomad.koala.helpers.data.LanguageHelper;
+import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 
 import java.util.ArrayList;
 

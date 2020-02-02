@@ -11,8 +11,8 @@ import android.util.Log;
 
 import com.google.android.gms.ads.MobileAds;
 import com.ksdigtalnomad.koala.R;
-import com.ksdigtalnomad.koala.util.FBRemoteControlHelper;
-import com.ksdigtalnomad.koala.util.TypeKitHelper;
+import com.ksdigtalnomad.koala.helpers.data.FBRemoteControlHelper;
+import com.ksdigtalnomad.koala.helpers.ui.TypeKitHelper;
 import com.tsengvn.typekit.Typekit;
 
 import java.security.MessageDigest;

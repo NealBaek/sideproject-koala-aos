@@ -10,11 +10,11 @@ import com.google.android.gms.ads.AdRequest;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.data.AlarmDailyController;
 import com.ksdigtalnomad.koala.databinding.ActivityHomeBinding;
-import com.ksdigtalnomad.koala.service.alarm.AlarmDailyReceiver;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
 import com.ksdigtalnomad.koala.ui.views.dialogs.ExitDialog;
-import com.ksdigtalnomad.koala.util.FBEventLogHelper;
-import com.ksdigtalnomad.koala.util.PreferenceHelper;
+import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
+import com.ksdigtalnomad.koala.helpers.ui.InterviewHelper;
+import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 
 public class HomeActivity extends BaseActivity {
     private ActivityHomeBinding mBinding;
@@ -45,6 +45,7 @@ public class HomeActivity extends BaseActivity {
 
         mBinding.homeTabViewPager.setAdapter(tapAdapter);
         mBinding.homeTabViewPager.setOffscreenPageLimit(4);
+        mBinding.homeTabViewPager.setCurrentItem(1);
         mBinding.homeTabViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mBinding.tabLayout));
         mBinding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
@@ -65,20 +66,17 @@ public class HomeActivity extends BaseActivity {
             }
         });
 
-        if(PreferenceHelper.isFirstOpen()){
-            mBinding.homeTabViewPager.setCurrentItem(1);
-            PreferenceHelper.setFirstOpen(false);
-        }
 
         // startAlarmDaily
         AlarmDailyController.setAndStartAlarm();
 
         // From AlarmDaily Noti
         if(getIntent().getBooleanExtra(KEY_NOTI_ALARM_DAILY, false)){
-            mBinding.homeTabViewPager.setCurrentItem(1);
             mBinding.homeTabViewPager.postDelayed(()->tapAdapter.moveToTodayDetail(), 1000);
             FBEventLogHelper.onAlarmDailyPushClick(PreferenceHelper.getAlarmDailySettingTimeStr());
         }
+
+        InterviewHelper.showWhythisappIfPossible(getFragmentManager());
     }
 
     @Override

@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.graphics.drawable.GradientDrawable;
 import android.support.v4.graphics.ColorUtils;
 import android.util.TypedValue;
 import android.widget.RelativeLayout;
@@ -17,7 +16,7 @@ import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendar.CalendarView;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.utils.DateHelper;
-import com.ksdigtalnomad.koala.util.ToastHelper;
+import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
 
 import java.util.ArrayList;
 

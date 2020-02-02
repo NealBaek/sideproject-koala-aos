@@ -82,6 +82,12 @@
     <string name="dialog_exit_info_exit">Do you really want to exit?</string>
 
 
+    <!-- dialog_interview_whythisapp -->
+    <string name="dialog_interview_whythisapp_info_1">코알라가 갑자기 궁금하대요.</string>
+    <string name="dialog_interview_whythisapp_info_2">이 앱을 사용하시는 목표</string>
+    <string name="dialog_interview_whythisapp_info_3">가 무엇인가요?</string>
+    <string name="dialog_interview_whythisapp_info_4">그리고 그 목표를 이루길 응원한대요!</string>
+
     <!-- fragment_tab_settings -->=
     <string name="fragment_tab_settings_info_team_1">Let’s&#160;</string>
     <string name="fragment_tab_settings_info_team_2">record and check</string>
@@ -159,6 +165,9 @@
     <string name="btn_update_short">OK</string>
     <string name="btn_update_long">Rename</string>
 
+    <string name="btn_confirm_short">OK</string>
+
+    <string name="btn_dontbother">알거없어!</string>
 
 
     <!-- 가이드 -->

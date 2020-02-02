@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.util;
+package com.ksdigtalnomad.koala.helpers.data;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,6 +15,7 @@ public class PreferenceHelper {
     private static final String PREF_FILE_NAME = "BUDDY_COIN";
     private static final String KEY_ACCESS_TOKEN = "ACCESS_TOKEN";
     private static final String KEY_FIRST_OPEN = "FIRST_OPEN";
+    private static final String KEY_OPEN_COUNT = "OPEN_COUNT";
     private static final String KEY_USER = "USER";
     private static final String KEY_PUSH_TOKEN = "PUSH_TOKEN";
     private static final String KEY_LANGUAGE_CODE = "LANGUAGE_CODE";
@@ -23,6 +24,8 @@ public class PreferenceHelper {
     private static final String KEY_ALARM_DAILY_ENABLE = "ALARM_DAILY_ENABLE";
 
 
+
+    private static final String KEY_INTERVIEW_WHYTHISAPP_FIRST = "INTERVIEW_WHYTHISAPP_FIRST";
 
 
     public static void clear() {
@@ -105,6 +108,14 @@ public class PreferenceHelper {
     }
 
 
+    // Open count
+    public static void setOpenCount(int cnt) {
+        getEditPreference().putInt(KEY_OPEN_COUNT, cnt).apply();
+    }
+    public static int getOpenCunt() {
+        return getReadPreference().getInt(KEY_OPEN_COUNT, 0);
+    }
+
 
     public static void setLoginInfo(User user) {
         setUser(user);
@@ -150,4 +161,15 @@ public class PreferenceHelper {
 
 
 
+
+
+
+
+    // Interview Whythisapp first
+    public static void setInterviewWhythisappFirst(boolean flag) {
+        getEditPreference().putBoolean(KEY_INTERVIEW_WHYTHISAPP_FIRST, flag).apply();
+    }
+    public static boolean isInterviewWhythisappFirst() {
+        return getReadPreference().getBoolean(KEY_INTERVIEW_WHYTHISAPP_FIRST, true);
+    }
 }

@@ -24,7 +24,7 @@
         <include
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            layout="@layout/view_line"/>
+            layout="@layout/view_line_ltgray"/>
 
         <!-- Tap Layout -->
         <android.support.design.widget.TabLayout

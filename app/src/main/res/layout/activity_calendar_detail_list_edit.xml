@@ -93,7 +93,7 @@
             <include
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
-                layout="@layout/view_line"/>
+                layout="@layout/view_line_ltgray"/>
 
             <!-- 데이터 리스트 -->
             <RelativeLayout

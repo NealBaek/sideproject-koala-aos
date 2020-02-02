@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.util;
+package com.ksdigtalnomad.koala.helpers;
 
 public class Constants {
     public static final String TOKEN_HEADER = "Authorization";

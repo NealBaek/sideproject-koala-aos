@@ -11,7 +11,7 @@ import android.os.Build;
 
 import com.ksdigtalnomad.koala.service.PackageReceiver;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
-import com.ksdigtalnomad.koala.util.PreferenceHelper;
+import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 
 import java.util.Calendar;
 

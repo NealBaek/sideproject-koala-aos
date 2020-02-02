@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.ui.base.BaseDialogFragment;
-import com.ksdigtalnomad.koala.util.ToastHelper;
+import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
 
 public class UpdateDialog extends BaseDialogFragment {
     private static final String KEY_POSITION = "KEY_POSITION";

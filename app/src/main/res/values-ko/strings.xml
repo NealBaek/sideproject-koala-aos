@@ -14,8 +14,6 @@
 
 
 
-
-
     <string name="app_name">코알라</string>
     <string name="tap1_title">요즘</string>
     <string name="tap2_title">월간</string>
@@ -81,6 +79,12 @@
 
     <!-- dialog_exit -->
     <string name="dialog_exit_info_exit">종료하시겠습니까?</string>
+
+    <!-- dialog_interview_whythisapp -->
+    <string name="dialog_interview_whythisapp_info_1">코알라가 갑자기 궁금하대요.</string>
+    <string name="dialog_interview_whythisapp_info_2">이 앱을 사용하시는 목표</string>
+    <string name="dialog_interview_whythisapp_info_3">가 무엇인가요?</string>
+    <string name="dialog_interview_whythisapp_info_4">그리고 그 목표를 이루길 응원한대요!</string>
 
 
     <!-- fragment_tab_settings -->
@@ -160,7 +164,9 @@
     <string name="btn_update_short">수정</string>
     <string name="btn_update_long">수정하기</string>
 
+    <string name="btn_confirm_short">확인</string>
 
+    <string name="btn_dontbother">알거없어!</string>
 
     <!-- 가이드 -->
     <string name="guide_start">시작하기</string>

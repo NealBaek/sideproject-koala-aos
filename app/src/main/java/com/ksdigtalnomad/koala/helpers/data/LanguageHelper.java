@@ -1,9 +1,7 @@
-package com.ksdigtalnomad.koala.util;
+package com.ksdigtalnomad.koala.helpers.data;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
-import android.util.Log;
 
 import java.util.Locale;
 

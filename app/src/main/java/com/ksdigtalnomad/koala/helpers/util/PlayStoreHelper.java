@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.util;
+package com.ksdigtalnomad.koala.helpers.util;
 
 import android.app.Activity;
 import android.app.AlertDialog;
