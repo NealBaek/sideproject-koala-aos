@@ -1,5 +1,7 @@
 package com.ksdigtalnomad.koala.ui.customView.calendarView.utils;
 
+import android.util.Log;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -44,6 +46,7 @@ public class DateHelper {
         return df.format(to).equals(df.format(from));
     }
     public boolean isToday(Date toCompare){
+        Log.d("ABC", "todayStr: " + todayStr + " vs " + df.format(toCompare));
         return todayStr.equals(df.format(toCompare));
     }
     public boolean isYesterday(Date toCompare){

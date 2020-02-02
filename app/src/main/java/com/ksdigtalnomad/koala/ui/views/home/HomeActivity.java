@@ -10,6 +10,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.data.AlarmDailyController;
 import com.ksdigtalnomad.koala.databinding.ActivityHomeBinding;
+import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
 import com.ksdigtalnomad.koala.ui.views.dialogs.ExitDialog;
 import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
@@ -17,7 +18,7 @@ import com.ksdigtalnomad.koala.helpers.ui.InterviewHelper;
 import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 
 public class HomeActivity extends BaseActivity {
-    private ActivityHomeBinding mBinding;
+    public ActivityHomeBinding mBinding;
     private HomeTapAdapter tapAdapter;
     private static final String KEY_NOTI_ALARM_DAILY = "NOTI_ALARM_DAILY";
 
@@ -45,7 +46,6 @@ public class HomeActivity extends BaseActivity {
 
         mBinding.homeTabViewPager.setAdapter(tapAdapter);
         mBinding.homeTabViewPager.setOffscreenPageLimit(4);
-        mBinding.homeTabViewPager.setCurrentItem(1);
         mBinding.homeTabViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mBinding.tabLayout));
         mBinding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
@@ -64,6 +64,9 @@ public class HomeActivity extends BaseActivity {
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
+        });
+        runOnUiThread(()->{
+            mBinding.homeTabViewPager.setCurrentItem(1);
         });
 
 

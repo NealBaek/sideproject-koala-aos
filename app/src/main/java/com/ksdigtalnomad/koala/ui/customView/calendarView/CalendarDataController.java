@@ -3,6 +3,7 @@ package com.ksdigtalnomad.koala.ui.customView.calendarView;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -30,6 +31,8 @@ public class CalendarDataController {
     private static final String KEY_CALENDAR_MODEL = "CALENDAR_MODEL";
     private static final String KEY_TOTAL_DAY_LIST = "TOTAL_DAY_LIST";
     private static final String KEY_NO_DATA_YET = "NO_DATA_YET";
+
+    public static SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd");
 
     private static DayModel todayModelFromDayView = new DayModel();
     private static DayModel yesterdayModelFromDayView = new DayModel();
@@ -60,7 +63,7 @@ public class CalendarDataController {
         int monthIdx = 0;
         int yearIdx = 0;
         boolean isLeapYear = false;
-        SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd");
+
         df.setTimeZone(TimeZone.getDefault());
 
 
@@ -149,9 +152,9 @@ public class CalendarDataController {
                     dayModel.yearIdx = yearIdx;
 
                     try{
-                        dayModel.date = df.parse("" + dayModel.year + "." + (dayModel.month < 10 ? ("0" + dayModel.month) : dayModel.month) + "." + (dayModel.day < 10 ? ("0" + dayModel.day) : dayModel.day));
+                        dayModel.setDate(df.parse("" + dayModel.year + "." + (dayModel.month < 10 ? ("0" + dayModel.month) : dayModel.month) + "." + (dayModel.day < 10 ? ("0" + dayModel.day) : dayModel.day)));
                     }catch (ParseException e){
-                        dayModel.date = new Date();
+                        Log.d("ABC", "ParseException: " + e.getMessage());
                     }
 
                     dayModelList.add(dayModel);
@@ -179,9 +182,9 @@ public class CalendarDataController {
                         nDayModel.monthIdx = monthIdx;
                         nDayModel.yearIdx = yearIdx;
                         try{
-                            nDayModel.date = df.parse("" + nDayModel.year + "." + (nDayModel.month < 10 ? ("0" + nDayModel.month) : nDayModel.month) + "." + (nDayModel.day < 10 ? ("0" + nDayModel.day) : nDayModel.day));
+                            nDayModel.setDate(df.parse("" + nDayModel.year + "." + (nDayModel.month < 10 ? ("0" + nDayModel.month) : nDayModel.month) + "." + (nDayModel.day < 10 ? ("0" + nDayModel.day) : nDayModel.day)));
                         }catch (ParseException e){
-                            nDayModel.date = new Date();
+                            nDayModel.setDate(new Date());
                         }
                         nDayModel.isOutMonth = true;
 
@@ -214,7 +217,6 @@ public class CalendarDataController {
     public static CalendarModel getCalendarModel(){ return dumpCalendarModel(); }
     public static CalendarModel updateDayModel(DayModel dayModel){
 
-        // @TODO: 느려짐 포인트 1-1
         CalendarModel calendarModel = CalendarDataController.dumpCalendarModel();
         ArrayList<MonthModel> mModelList = calendarModel.monthList;
         int mModelCnt = mModelList.size();
@@ -288,13 +290,11 @@ public class CalendarDataController {
         }
 
         // preference 에 저장
-        // @TODO: 느려짐 포인트 1-2
         storeCalendarModel(calendarModel);
 
 
-        // Total Day List 비동기 저장
-        Runnable task = () -> updateTotalDayList(dayModel);
-        task.run();
+        // Total Day List
+        updateTotalDayList(dayModel);
 
         return calendarModel;
     }
@@ -360,7 +360,7 @@ public class CalendarDataController {
         }
     }
     public static DayModel getYesterdayModel(){
-        if(yesterdayModelFromDayView.date == null){
+        if(yesterdayModelFromDayView.getDate() == null){
             ArrayList<DayModel> totalDayList = CalendarDataController.getTotalDayList();
 
             // 1. 오늘 모델 값 구하기
@@ -368,7 +368,7 @@ public class CalendarDataController {
             for(int i = 0; i < dayListCnt; ++i){
                 DayModel day = totalDayList.get(i);
 
-                if (DateHelper.getInstance().isYesterday(day.date) && !day.isOutMonth){
+                if (DateHelper.getInstance().isYesterday(day.getDate()) && !day.isOutMonth){
                     setYesterdayModel(day);
                     break;
                 }
@@ -434,7 +434,7 @@ public class CalendarDataController {
             DayModel day = totalDayList.get(i);
 
             // 같은 일인지 확인
-            if (DateHelper.getInstance().isSameDay(from, day.date)){
+            if (DateHelper.getInstance().isSameDay(from, day.getDate())){
                 fromDayIdx = i;
                 break;
             }

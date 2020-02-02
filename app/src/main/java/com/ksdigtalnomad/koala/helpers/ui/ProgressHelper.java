@@ -8,9 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
+
 public class ProgressHelper {
 
-    private static final String PROGRESS_COLOR = "#000000";
+    private static final int PROGRESS_COLOR = CalendarConstUtils.COLOL_MAIN;
     private static final int BLINDER_ID = 123456789;
 //    private static final int PROGRESS_ID = 987654321;
 
@@ -38,7 +40,7 @@ public class ProgressHelper {
 
         // run progress
         progressBar.post(()->{
-            progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor(PROGRESS_COLOR), PorterDuff.Mode.MULTIPLY);
+            progressBar.getIndeterminateDrawable().setColorFilter(PROGRESS_COLOR, PorterDuff.Mode.MULTIPLY);
         });
     }
 

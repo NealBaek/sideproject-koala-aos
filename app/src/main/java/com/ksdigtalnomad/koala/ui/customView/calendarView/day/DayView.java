@@ -66,7 +66,7 @@ public class DayView extends RelativeLayout {
         setOnClickListener(view -> {
             if(dayModel.isOutMonth) return;
 
-            if(!DateHelper.getInstance().isAfterToday(dayModel.date)){
+            if(!DateHelper.getInstance().isAfterToday(dayModel.getDate())){
                 eventInterface.onDayViewTouch(dayModel);
                 return;
             }else{
@@ -180,7 +180,7 @@ public class DayView extends RelativeLayout {
         int dayTvTopMargin = txHeightForHeader/2;
 
         //   1-2. 오늘이면 Border 추가
-        if(DateHelper.getInstance().isToday(dayModel.date)){
+        if(DateHelper.getInstance().isToday(dayModel.getDate())){
             canvas.drawRect(1, 1, parentWidth - 1, parentHeight - 1, borderRectPt);
         }
 

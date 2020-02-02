@@ -9,6 +9,8 @@ import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.utils.DateHelper;
 
 import java.util.Locale;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class FBEventLogHelper {
 
@@ -30,130 +32,114 @@ public class FBEventLogHelper {
 
 
     public static void onInputDoneClick(DayModel dayModel){
-        Runnable task = ()->{
-
+        Executors.newScheduledThreadPool(1).execute(()->{
             Bundle bundle = new Bundle();
             bundle.putInt("drunk_level", dayModel.drunkLevel);
             bundle.putString("friend_list", CalendarConstUtils.getFullStrFromFriendList(dayModel.friendList));
             bundle.putString("food_list", CalendarConstUtils.getFullStrFromFoodList(dayModel.foodList));
             bundle.putString("drink_list", CalendarConstUtils.getFullStrFromDrinkList(dayModel.drinkList));
             bundle.putString("memo", dayModel.memo);
-            bundle.putString("date", DateHelper.getInstance().getDateStr(DateHelper.FORMAT_FULL, dayModel.date));
+            bundle.putString("date", DateHelper.getInstance().getDateStr(DateHelper.FORMAT_FULL, dayModel.getDate()));
             bundle.putString("place", Locale.getDefault().toString());
-            bundle.putBoolean("isToday", DateHelper.getInstance().isToday(dayModel.date));
+            bundle.putBoolean("isToday", DateHelper.getInstance().isToday(dayModel.getDate()));
             bundle.putString("createdAt", DateHelper.getInstance().getTodayStr(DateHelper.FORMAT_FULL));
 
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
                     .logEvent(INPUT_DONE, bundle);
-        };
-
-        task.run();
+        });
     }
 
     public static void onFriendsAdd(){
-        Runnable task = ()->{
+        Executors.newScheduledThreadPool(1).execute(()->{
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
                     .logEvent(FRIENDS_ADD, new Bundle());
-        };
-        task.run();
+        });
     }
     public static void onFriendsAddDone(){
-        Runnable task = ()->{
+        Executors.newScheduledThreadPool(1).execute(()->{
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
                     .logEvent(FRIENDS_ADD_DONE, new Bundle());
-        };
-        task.run();
+        });
     }
     public static void onFriendsInputDone(){
-        Runnable task = ()->{
+        Executors.newScheduledThreadPool(1).execute(()->{
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
                     .logEvent(FRIENDS_INPUT_DONE, new Bundle());
-        };
-        task.run();
+        });
     }
     public static void onDrinkAdd(){
-        Runnable task = ()->{
+        Executors.newScheduledThreadPool(1).execute(()->{
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
                     .logEvent(DRINK_ADD, new Bundle());
-        };
-        task.run();
+        });
     }
     public static void onDrinkAddDone(){
-        Runnable task = ()->{
+        Executors.newScheduledThreadPool(1).execute(()->{
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
                     .logEvent(DRINK_ADD_DONE, new Bundle());
-        };
-        task.run();
+        });
     }
     public static void onDrinkInputDone(){
-        Runnable task = ()->{
+        Executors.newScheduledThreadPool(1).execute(()->{
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
                     .logEvent(DRINK_INPUT_DONE, new Bundle());
-        };
-        task.run();
+        });
     }
     public static void onFoodAdd(){
-        Runnable task = ()->{
+        Executors.newScheduledThreadPool(1).execute(()->{
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
                     .logEvent(FOOD_ADD, new Bundle());
-        };
-        task.run();
+        });
     }
     public static void onFoodAddDone(){
-        Runnable task = ()->{
+        Executors.newScheduledThreadPool(1).execute(()->{
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
                     .logEvent(FOOD_ADD_DONE, new Bundle());
-        };
-        task.run();
+        });
     }
     public static void onFoodInputDone(){
-        Runnable task = ()->{
+        Executors.newScheduledThreadPool(1).execute(()->{
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
                     .logEvent(FOOD_INPUT_DONE, new Bundle());
-        };
-        task.run();
+        });
     }
     public static void onKakaoOpenChatRoom(){
-        Runnable task = ()->{
+        Executors.newScheduledThreadPool(1).execute(()->{
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
                     .logEvent(KAKAO_OPEN_CHAT_ROON, new Bundle());
-        };
-        task.run();
+        });
     }
     public static void onPlayStoreComplement(){
-        Runnable task = ()->{
+        Executors.newScheduledThreadPool(1).execute(()->{
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
                     .logEvent(PLAY_STORE_COMPLEMENT, new Bundle());
-        };
-        task.run();
+        });
     }
     public static void onAppShare(){
-        Runnable task = ()->{
+        Executors.newScheduledThreadPool(1).execute(()->{
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
                     .logEvent(APP_SHARE, new Bundle());
-        };
-        task.run();
+        });
     }
     public static void onExit(){
-        Runnable task = ()->{
+        Executors.newScheduledThreadPool(1).execute(()->{
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
                     .logEvent(EXIT, new Bundle());
-        };
-        task.run();
+        });
     }
 
 
@@ -168,7 +154,7 @@ public class FBEventLogHelper {
 
 
     public static void onAlarmDailyAgree(boolean isAgree, String createdAt){
-        Runnable task = ()->{
+        Executors.newScheduledThreadPool(1).execute(()->{
             Bundle bundle = new Bundle();
             bundle.putBoolean("isAgree", isAgree);
             bundle.putString("createdAt", createdAt);
@@ -176,11 +162,10 @@ public class FBEventLogHelper {
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
                     .logEvent(ALARM_DAILY_AGREE, bundle);
-        };
-        task.run();
+        });
     }
     public static void onAlarmDailyTime(String settingTime){
-        Runnable task = ()->{
+        Executors.newScheduledThreadPool(1).execute(()->{
             Bundle bundle = new Bundle();
             bundle.putString("settingTime", settingTime); // hh시mm분
             bundle.putString("createdAt", DateHelper.getInstance().getTodayStr(DateHelper.FORMAT_FULL));
@@ -188,11 +173,10 @@ public class FBEventLogHelper {
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
                     .logEvent(ALARM_DAILY_TIME, bundle);
-        };
-        task.run();
+        });
     }
     public static void onAlarmDailyPushClick(String settingTime){
-        Runnable task = ()->{
+        Executors.newScheduledThreadPool(1).execute(()->{
             Bundle bundle = new Bundle();
             bundle.putString("settingTime", settingTime); // hh시mm분
             bundle.putString("createdAt", DateHelper.getInstance().getTodayStr(DateHelper.FORMAT_FULL));
@@ -200,11 +184,10 @@ public class FBEventLogHelper {
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
                     .logEvent(ALARM_DAILY_PUSH_CLICK, new Bundle());
-        };
-        task.run();
+        });
     }
     public static void onAlarmDailyInputDone(String settingTime){
-        Runnable task = ()->{
+        Executors.newScheduledThreadPool(1).execute(()->{
             Bundle bundle = new Bundle();
             bundle.putString("settingTime", settingTime); // hh시mm분
             bundle.putString("createdAt", DateHelper.getInstance().getTodayStr(DateHelper.FORMAT_FULL));
@@ -212,7 +195,6 @@ public class FBEventLogHelper {
             FirebaseAnalytics
                     .getInstance(BaseApplication.getInstance().getApplicationContext())
                     .logEvent(ALARM_DAILY_PUSH_INPUT_DONE, bundle);
-        };
-        task.run();
+        });
     }
 }

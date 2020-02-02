@@ -1,9 +1,13 @@
 package com.ksdigtalnomad.koala.ui.customView.calendarView.day;
 
+import android.util.Log;
+
 import com.ksdigtalnomad.koala.data.models.calendar.Drink;
 import com.ksdigtalnomad.koala.data.models.calendar.Food;
 import com.ksdigtalnomad.koala.data.models.calendar.Friend;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -16,7 +20,18 @@ public class DayModel implements Cloneable{
     public int year;
     public int month;
     public int day;
-    public Date date;
+    private Date date;
+    public void setDate(Date date){
+        if (date == null) return;
+        this.date = date;
+    }
+    public Date getDate(){
+        if(date == null){
+            Log.d("ABC", "getDate == null");
+            Log.d("ABC", "date: " + ("" + year + "." + (month < 10 ? ("0" + month) : month) + "." + (day < 10 ? ("0" + day) : day)));
+        }
+        return date;
+    }
 
     public String dayOfTheWeek;
 

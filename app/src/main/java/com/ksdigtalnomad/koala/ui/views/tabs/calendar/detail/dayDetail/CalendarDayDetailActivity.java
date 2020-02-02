@@ -18,6 +18,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.gson.Gson;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.databinding.ActivityCalendarDayDetailBinding;
+import com.ksdigtalnomad.koala.helpers.ui.ProgressHelper;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
@@ -28,6 +29,9 @@ import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
 import com.ksdigtalnomad.koala.helpers.ui.KeyboardHelper;
 import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class CalendarDayDetailActivity extends BaseActivity {
 
@@ -157,25 +161,24 @@ public class CalendarDayDetailActivity extends BaseActivity {
         dayModel.memo = mBinding.memo.getText().toString();
         dayModel.isSaved = true;
 
-        if(CalendarDataController.isNoDataYet()) CalendarDataController.setNoDataYet(false);
+        ProgressHelper.showProgress(mBinding.bodyLayout);
+        Executors.newSingleThreadExecutor().execute(()->{
+            if(CalendarDataController.isNoDataYet()) CalendarDataController.setNoDataYet(false);
+            CalendarDataController.updateDayModel(dayModel);
+            FBEventLogHelper.onInputDoneClick(dayModel);
 
-        Runnable task = () -> CalendarDataController.updateDayModel(dayModel);
-        task.run();
+            if(getIntent().getBooleanExtra(KEY_NOTI_ALARM_DAILY, false)){
+                Executors.newScheduledThreadPool(1).execute(() -> FBEventLogHelper.onAlarmDailyInputDone(PreferenceHelper.getAlarmDailySettingTimeStr()));
+            }
 
-        Runnable task1 = () -> FBEventLogHelper.onInputDoneClick(dayModel);
-        task1.run();
-
-        if(getIntent().getBooleanExtra(KEY_NOTI_ALARM_DAILY, false)){
-            Runnable task2 = () -> FBEventLogHelper.onAlarmDailyInputDone(PreferenceHelper.getAlarmDailySettingTimeStr());
-            task2.run();
-        }
-
-
-        Intent resultIntent = new Intent();
-        resultIntent.putExtra(KEY_DAY_MODEL, new Gson().toJson(dayModel));
-        setResult(RESULT_OK, resultIntent);
-
-        finish();
+            runOnUiThread(()->{
+                ProgressHelper.dismissProgress(mBinding.bodyLayout);
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra(KEY_DAY_MODEL, new Gson().toJson(dayModel));
+                setResult(RESULT_OK, resultIntent);
+                finish();
+            });
+        });
     }
 
     public void onBackClick(View v){
