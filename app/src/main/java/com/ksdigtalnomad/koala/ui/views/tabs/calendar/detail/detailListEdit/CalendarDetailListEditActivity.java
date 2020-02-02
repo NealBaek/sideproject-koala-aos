@@ -281,8 +281,10 @@ public class CalendarDetailListEditActivity extends BaseActivity {
                 }
             }
         }
-        mBinding.saveBtn.setEnabled(false);
-        mBinding.saveBtn.setBackgroundColor(COLOR_OFF);
+        if(!dayModel.isSaved){
+            mBinding.saveBtn.setEnabled(false);
+            mBinding.saveBtn.setBackgroundColor(COLOR_OFF);
+        }
     }
     private void setDataListVisible(){
         boolean shouldShow = dataList.size() > 0;

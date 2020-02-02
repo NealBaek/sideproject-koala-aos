@@ -27,8 +27,13 @@ public class DayModel implements Cloneable{
     }
     public Date getDate(){
         if(date == null){
-            Log.d("ABC", "getDate == null");
-            Log.d("ABC", "date: " + ("" + year + "." + (month < 10 ? ("0" + month) : month) + "." + (day < 10 ? ("0" + day) : day)));
+            try{
+                if(year > 0 && month > 0 && day > 0){
+                    date = CalendarDataController.df.parse("" + year + "." + (month < 10 ? ("0" + month) : month) + "." + (day < 10 ? ("0" + day) : day));
+                }
+            }catch (ParseException e){
+                Log.d("ABC", "ParseException: " + e.getMessage());
+            }
         }
         return date;
     }

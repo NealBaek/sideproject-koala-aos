@@ -98,18 +98,13 @@ public class TabTodayFragment extends BaseFragment {
         int toDayIdx = 0;
         ArrayList<DayModel> totalDayList = CalendarDataController.getTotalDayList();
 
-        Log.d("ABC", "firstDay: " + totalDayList.get(0).getDate());
-
         // 1. 오늘 모델 값 구하기
         int dayListCnt =  totalDayList.size();
         for(int i = 0; i < dayListCnt; ++i){
             DayModel day = totalDayList.get(i);
             if (DateHelper.getInstance().isToday(day.getDate())){
-                Log.d("ABC", "today: " + day.getDate());
                 fromDayIdx = (i - 7 <= 0 ? 0 : i - 7);
                 toDayIdx = i;
-
-                Log.d("ABC", "fromDayIdx: " + fromDayIdx + ", toDayIdx: " + toDayIdx);
                 break;
             }
         }
