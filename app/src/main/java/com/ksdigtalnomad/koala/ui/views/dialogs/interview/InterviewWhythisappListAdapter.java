@@ -55,6 +55,7 @@ public class InterviewWhythisappListAdapter extends BaseRecyclerViewAdapter<Inte
         holder.itemView.setOnClickListener(v -> {
             holder.itemView.post(()->{
                 itemClickListener.onItemClick(holder.getAdapterPosition()); // change save btn enable
+
             });
         });
     }
