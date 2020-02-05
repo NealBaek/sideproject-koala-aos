@@ -3,20 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingRight="20dp"
-    android:paddingLeft="20dp"
-    android:paddingTop="5dp"
-    android:paddingBottom="5dp">
+    android:paddingBottom="8dp">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_weight="1"
-        android:textSize="20dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="43dp"
+        android:layout_marginRight="43dp"
+        android:textSize="16dp"
         android:textColor="@color/colorDarkGray"
         android:gravity="center"
-        android:text="금주"
-        android:background="@drawable/bg_cell_round_maincolor_on"/>
+        android:textStyle="bold"/>
 
 </LinearLayout>

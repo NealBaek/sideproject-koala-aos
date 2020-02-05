@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ksdigtalnomad.koala.R;
+import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 import com.ksdigtalnomad.koala.ui.base.BaseDialogFragment;
 import com.ksdigtalnomad.koala.ui.base.BaseRecyclerViewAdapter;
 import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
@@ -33,6 +34,7 @@ public class InterviewWhythisappDialog extends BaseDialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setCancelable(false);
 
         view.findViewById(R.id.btnCancel).setOnClickListener((v) -> callPostInterviewWhythisapp());
         view.findViewById(R.id.btnConfirm).setOnClickListener((v) -> callPostInterviewWhythisapp());
@@ -52,6 +54,14 @@ public class InterviewWhythisappDialog extends BaseDialogFragment {
                     view.findViewById(R.id.btnCancel).setVisibility(View.GONE);
                     view.findViewById(R.id.btnConfirm).setVisibility(View.VISIBLE);
                 }
+
+                for(int i = 0; i < itemList.size(); ++i){
+                    itemList.get(i).setSelected((position == i) ? true : false);
+                    if(position == i){
+                        reason = itemList.get(i).title;
+                    }
+                }
+                adapter.notifyDataSetChanged();
             }
             @Override
             public void onItemLongClick(int position) {
@@ -65,7 +75,12 @@ public class InterviewWhythisappDialog extends BaseDialogFragment {
     }
 
     private void callPostInterviewWhythisapp(){
+        PreferenceHelper.setInterviewWhythisappFirst(false);
+
         ToastHelper.writeBottomLongToast(reason);
+        recyclerView.postDelayed(()->dismiss(), 300);
     }
+
+
 
 }

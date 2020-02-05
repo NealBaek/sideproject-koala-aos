@@ -8,7 +8,6 @@ import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 public class InterviewHelper {
     public static void showWhythisappIfPossible(FragmentManager fragmentManager){
         if(PreferenceHelper.getOpenCunt() >= 5 && PreferenceHelper.isInterviewWhythisappFirst()){
-            PreferenceHelper.setInterviewWhythisappFirst(false);
 
             // @TODO: call Interview whythisapp api
             String reason = "";

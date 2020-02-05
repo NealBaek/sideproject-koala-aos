@@ -12,7 +12,7 @@
 
         <LinearLayout
             android:layout_width="320dp"
-            android:layout_height="wrap_content"
+            android:layout_height="362dp"
             android:orientation="vertical"
             android:layout_centerInParent="true"
             android:clickable="true"
@@ -25,10 +25,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="15dp">
+                android:paddingTop="12dp">
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="62dp"
+                    android:layout_height="62dp"
                     android:src="@drawable/ic_push_small"
                     android:layout_gravity="center_horizontal"/>
 
@@ -41,7 +41,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/dialog_interview_whythisapp_info_1"/>
+                        android:text="@string/dialog_interview_whythisapp_info_1"
+                        android:textSize="16dp"
+                        android:textColor="@color/colorDarkGray"
+                        android:textStyle="bold"/>
 
                     <LinearLayout
                         android:id="@+id/infoLayout1"
@@ -52,12 +55,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/dialog_interview_whythisapp_info_2"
+                            android:textSize="16dp"
                             android:textColor="@color/colorMain"
                             android:textStyle="bold"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/dialog_interview_whythisapp_info_3"/>
+                            android:text="@string/dialog_interview_whythisapp_info_3"
+                            android:textSize="16dp"
+                            android:textColor="@color/colorDarkGray"
+                            android:textStyle="bold"/>
                     </LinearLayout>
 
                     <TextView
@@ -65,7 +72,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/dialog_interview_whythisapp_info_4"
-                        android:visibility="gone"/>
+                        android:visibility="gone"
+                        android:textSize="16dp"
+                        android:textColor="@color/colorDarkGray"
+                        android:textStyle="bold"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -74,28 +84,26 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
+                android:layout_marginTop="23dp">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"/>
+                    android:layout_height="144dp"/>
 
             </LinearLayout>
 
             <!-- Footer -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="55dp"
+                android:orientation="vertical"
+                android:layout_marginTop="22dp">
 
                 <LinearLayout
                     android:id="@+id/btnCancel"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
                     <!-- Line View -->
                     <include
@@ -105,15 +113,18 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="match_parent"
                         android:text="@string/btn_dontbother"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:textColor="@color/colorGray"
+                        android:textStyle="bold"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/btnConfirm"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:visibility="gone">
                     <!-- Line View -->
@@ -124,10 +135,13 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="match_parent"
                         android:text="@string/btn_confirm_short"
                         android:textColor="@color/colorMain"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:textStyle="bold"/>
+
                 </LinearLayout>
 
             </LinearLayout>
