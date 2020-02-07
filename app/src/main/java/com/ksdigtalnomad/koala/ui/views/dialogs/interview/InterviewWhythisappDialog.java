@@ -76,9 +76,7 @@ public class InterviewWhythisappDialog extends BaseDialogFragment {
 
     private void callPostInterviewWhythisapp(){
         PreferenceHelper.setInterviewWhythisappFirst(false);
-
-        ToastHelper.writeBottomLongToast(reason);
-        recyclerView.postDelayed(()->dismiss(), 300);
+        dismiss();
     }
 
 
