@@ -158,7 +158,7 @@ public class TabTodayFragment extends BaseFragment {
             }else if(avgDrinkLevel > 300 && avgDrinkLevel <= 400 ) {
                 drinkState = getResources().getString(R.string.drink_state_nowadays_3);
                 drinkStateColor = COLOR_RED;
-            }else if(avgDrinkLevel > 400 && avgDrinkLevel <= 500 ) {
+            }else if(avgDrinkLevel > 400) {
                 drinkState = getResources().getString(R.string.drink_state_nowadays_4);
                 drinkStateColor = COLOR_RED;
             }
