@@ -78,8 +78,9 @@
                     android:layout_alignParentRight="true">
                     <TextView
                         android:id="@+id/btnCancel"
-                        android:layout_width="60dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginRight="24dp"
                         android:text="@string/btn_cancel_short"
                         android:textSize="16dp"
                         android:textStyle="bold"
@@ -87,8 +88,9 @@
                         android:gravity="center"/>
                     <TextView
                         android:id="@+id/btnAdd"
-                        android:layout_width="60dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginRight="22dp"
                         android:text="@string/btn_add_short"
                         android:textSize="16dp"
                         android:textStyle="bold"
