@@ -1,79 +1,44 @@
 package com.ksdigtalnomad.koala.data.net;
 
 
+import com.ksdigtalnomad.koala.data.net.services.AlarmService;
+import com.ksdigtalnomad.koala.data.net.services.AppCSService;
+import com.ksdigtalnomad.koala.data.net.services.AppVersionService;
+import com.ksdigtalnomad.koala.data.net.services.CalendarService;
+import com.ksdigtalnomad.koala.data.net.services.DefaultDataService;
+import com.ksdigtalnomad.koala.data.net.services.InterviewService;
+import com.ksdigtalnomad.koala.data.net.services.UserService;
+
 public enum  ServiceManager {
     INSTANCE;
-//    private UserService userService;
-//    private BalanceService balanceService;
-//    private ReceiptService receiptService;
-//    private TransactionService transactionService;
-//    private PartnerService partnerService;
-//    private FAQService faqService;
-//    private NoticeService noticeService;
-//    private ExchangeService exchangeService;
-//    private QuestionService questionService;
-//    private TermsService termsService;
-//    private M12Service m12Service;
+    private UserService userService;
+    private AlarmService alarmService;
+    private AppCSService appCSService;
+    private AppVersionService appVersionService;
+    private CalendarService calendarService;
+    private DefaultDataService defaultDataService;
+    private InterviewService interviewService;
 
     ServiceManager() {
-//        userService = RetrofitServiceGenericFactory.createService(UserService.class);
-//        balanceService = RetrofitServiceGenericFactory.createService(BalanceService.class);
-//        receiptService = RetrofitServiceGenericFactory.createService(ReceiptService.class);
-//        transactionService = RetrofitServiceGenericFactory.createService(TransactionService.class);
-//        partnerService = RetrofitServiceGenericFactory.createService(PartnerService.class);
-//        faqService = RetrofitServiceGenericFactory.createService(FAQService.class);
-//        noticeService = RetrofitServiceGenericFactory.createService(NoticeService.class);
-//        exchangeService = RetrofitServiceGenericFactory.createService(ExchangeService.class);
-//        questionService = RetrofitServiceGenericFactory.createService(QuestionService.class);
-//        termsService = RetrofitServiceGenericFactory.createService(TermsService.class);
-//        m12Service = RetrofitServiceGenericFactory.createService(M12Service.class);
+        userService = RetrofitServiceGenericFactory.createService(UserService.class);
+        alarmService = RetrofitServiceGenericFactory.createService(AlarmService.class);
+        appCSService = RetrofitServiceGenericFactory.createService(AppCSService.class);
+        appVersionService = RetrofitServiceGenericFactory.createService(AppVersionService.class);
+        calendarService = RetrofitServiceGenericFactory.createService(CalendarService.class);
+        defaultDataService = RetrofitServiceGenericFactory.createService(DefaultDataService.class);
+        interviewService = RetrofitServiceGenericFactory.createService(InterviewService.class);
     }
 
     public static ServiceManager getInstance() {
         return INSTANCE;
     }
 
-//    public UserService getUserService() {
-//        return userService;
-//    }
-//
-//    public BalanceService getBalanceService() {
-//        return balanceService;
-//    }
-//
-//    public ReceiptService getReceiptService() {
-//        return receiptService;
-//    }
-//
-//    public TransactionService getTransactionService() {
-//        return transactionService;
-//    }
-//
-//    public PartnerService getPartnerService() {
-//        return partnerService;
-//    }
-//
-//    public FAQService getFaqService() {
-//        return faqService;
-//    }
-//
-//    public NoticeService getNoticeService() {
-//        return noticeService;
-//    }
-//
-//    public ExchangeService getExchangeService() {
-//        return exchangeService;
-//    }
-//
-//    public QuestionService getQuestionService() {
-//        return questionService;
-//    }
-//
-//    public TermsService getTermsService() {
-//        return termsService;
-//    }
-//
-//    public M12Service getM12Service() {
-//        return m12Service;
-//    }
+    public UserService getUserService() { return userService; }
+    public AlarmService getAlarmService() { return alarmService; }
+    public AppCSService getAppCSService() { return appCSService; }
+    public AppVersionService getAppVersionService() { return appVersionService; }
+    public CalendarService getCalendarService() { return calendarService; }
+    public DefaultDataService getDefaultDataService() { return defaultDataService; }
+    public InterviewService getInterviewService() { return interviewService; }
+
 }

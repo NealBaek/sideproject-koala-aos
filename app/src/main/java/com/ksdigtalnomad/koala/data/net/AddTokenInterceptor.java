@@ -12,10 +12,10 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static com.ksdigtalnomad.koala.helpers.Constants.TOKEN_HEADER;
 
 public class AddTokenInterceptor implements Interceptor {
     private static final String TAG = AddTokenInterceptor.class.getSimpleName();
+    public static final String TOKEN_HEADER = "Authorization";
 
     @Override public Response intercept(@NonNull Chain chain) throws IOException {
         Request.Builder builder = chain.request().newBuilder();
@@ -41,23 +41,13 @@ public class AddTokenInterceptor implements Interceptor {
     }
 
     private static String tokenRefresh() {
-        User user = null;
+        User savedUser = PreferenceHelper.getUser();
+        User newUser = ServiceManager.getInstance().getUserService()
+                .loginSocial(savedUser)
+                .blockingSingle();
+        newUser.setPassword(savedUser.getPassword());
 
-        User loginUser = PreferenceHelper.getUser();
-//        if (loginUser.getSocialId() != null) {
-//            user = ServiceManager.getInstance().getUserService()
-//                    .socialLogin(loginUser)
-//                    .blockingSingle();
-//            user.setSocialType(loginUser.getSocialType());
-//            user.setSocialId(loginUser.getSocialId());
-//        } else {
-//            user = ServiceManager.getInstance().getUserService()
-//                    .emailLogin(loginUser)
-//                    .blockingSingle();
-//            user.setPassword(loginUser.getPassword());
-//        }
-
-        PreferenceHelper.setLoginInfo(user);
-        return user.getAccessToken();
+        PreferenceHelper.setLoginInfo(newUser);
+        return newUser.getAccessToken();
     }
 }

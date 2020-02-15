@@ -28,21 +28,21 @@ android {
     }
     buildTypes {
         release {
-            buildConfigField "String", "SERVER_URL", '""'
-            buildConfigField "String", "SERVER_PORT", '""'
-            buildConfigField "String", "API_PREFIX", '"/api/"'
+            buildConfigField "String", "SERVER_URL", '"http://192.168.0.6"' // 이디아 wifi
+            buildConfigField "String", "SERVER_PORT", '":3000"'
+            buildConfigField "String", "API_PREFIX", '""'
 //            debuggable false
 //            minifyEnabled true
 //            useProguard true
 //            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            buildConfigField "String", "SERVER_URL", '""'
-            buildConfigField "String", "SERVER_PORT", '""'
-            buildConfigField "String", "API_PREFIX", '"/api/v1/"'
-//            buildConfigField "String", "SERVER_URL", '"http://192.168.0.76"'
-//            buildConfigField "String", "SERVER_PORT", '":3000"'
-//            buildConfigField "String", "API_PREFIX", '""'
+//            buildConfigField "String", "SERVER_URL", '""'
+//            buildConfigField "String", "SERVER_PORT", '""'
+//            buildConfigField "String", "API_PREFIX", '"/api/v1/"'
+            buildConfigField "String", "SERVER_URL", '"http://192.168.0.6"' // 이디아 wifi
+            buildConfigField "String", "SERVER_PORT", '":3000"'
+            buildConfigField "String", "API_PREFIX", '""'
 //            debuggable true
 //            minifyEnabled false
 //            useProguard true

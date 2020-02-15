@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.data.AlarmDailyController;
+import com.ksdigtalnomad.koala.data.net.ServiceManager;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
 import com.ksdigtalnomad.koala.ui.views.guide.GuideActivity;
 import com.ksdigtalnomad.koala.ui.views.home.HomeActivity;
@@ -17,6 +19,9 @@ import com.ksdigtalnomad.koala.helpers.data.LanguageHelper;
 import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
 import com.ksdigtalnomad.koala.helpers.data.VersionCheckHelper;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class SplashActivity extends BaseActivity {
@@ -33,6 +38,20 @@ public class SplashActivity extends BaseActivity {
         LanguageHelper.initLanguage(this);
 
         PreferenceHelper.setOpenCount(PreferenceHelper.getOpenCunt() + 1);
+
+        ServiceManager.getInstance().getDefaultDataService()
+                .getCategoryList("drink")
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        (result) -> {
+                            Log.d("ABC", "Success");
+                            Log.d("ABC", result.get(0).toString());
+                        },
+                        (error) -> {
+                            Log.d("ABC", "Failed");
+                            Log.d("ABC", error.getLocalizedMessage());
+                        }
+                );
     }
 
     @Override

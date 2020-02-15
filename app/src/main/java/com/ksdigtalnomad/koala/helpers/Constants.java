@@ -1,7 +1,7 @@
 package com.ksdigtalnomad.koala.helpers;
 
 public class Constants {
-    public static final String TOKEN_HEADER = "Authorization";
+
     public static final String PLATFORM = "android";
 
     public static final String SNS_KAKAO = "kakao";

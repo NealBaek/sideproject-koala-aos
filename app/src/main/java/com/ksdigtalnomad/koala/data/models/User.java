@@ -7,26 +7,22 @@ import lombok.ToString;
 
 @Builder @Setter @Getter @ToString
 public class User {
-    String _id;
-    String email;
-    String password;
-    String firstName;
-    String lastName;
-    String phone;
-    String birthday;
-    String gender;
-    String platform;    // android
-    String role;
-    String state;
-//    List<Social> social;
-    String pushToken;
-    String createdAt;
-    String updatedAt;
+    private String id;
+    private String versionId;
+    private String adId;
+    private String socialId;
+    private String socialType;
+    private String email;
+    private String password;
+    private String name;
+    private String gender;
+    private String birthday;
+    private String platform;    // android
+    private String pushToken;
+    private String accessToken;
+    private String state;
+    private String role;
+    private String createdAt;
+    private String updatedAt;
 
-    String accessToken;
-    String authNum;     // phone auth
-
-    // social
-    String socialType;
-    String socialId;
 }
