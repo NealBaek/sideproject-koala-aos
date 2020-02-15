@@ -7,9 +7,10 @@ import lombok.ToString;
 
 @Builder @Setter @Getter @ToString
 public class Food extends BaseData implements Cloneable {
-    String name = "";
-    int selectedCnt = 0;
-    boolean isSelected = false;
+
+    String name ;
+    int selectedCnt;
+    boolean isSelected;
 
     public Food clone(){
         //내 객체 생성

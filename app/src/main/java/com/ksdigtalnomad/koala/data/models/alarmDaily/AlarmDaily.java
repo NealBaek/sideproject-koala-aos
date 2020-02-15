@@ -11,9 +11,9 @@ import lombok.ToString;
 
 @Builder @Setter @Getter @ToString
 public class AlarmDaily extends BaseData implements Cloneable{
-    ArrayList<AlarmDailyBody> bodyList = new ArrayList();
-    int defaultAlarmHour = 0;
-    int defaultAlarmMinute = 0;
+    ArrayList<AlarmDailyBody> bodyList;
+    int defaultAlarmHour;
+    int defaultAlarmMinute;
 
     public AlarmDaily clone(){
         //내 객체 생성

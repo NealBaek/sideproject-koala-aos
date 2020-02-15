@@ -13,7 +13,7 @@ import lombok.ToString;
 
 @Builder @Setter @Getter @ToString
 public class AlarmDailyBody extends BaseData implements Cloneable{
-    String langCode = "";
-    String title = "";
-    String content = "";
+    String langCode;
+    String title;
+    String content;
 }

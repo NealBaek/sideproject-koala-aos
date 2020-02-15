@@ -11,8 +11,8 @@ import lombok.ToString;
 
 @Builder @Setter @Getter @ToString
 public class ShareMessage extends BaseData implements Cloneable{
-    String langCode = "";
-    String content = "";
+    String langCode;
+    String content;
 
     public ShareMessage clone(){
         //내 객체 생성

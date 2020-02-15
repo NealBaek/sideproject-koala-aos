@@ -48,6 +48,7 @@ public class DayModel implements Cloneable{
     public ArrayList<Friend> friendList = new ArrayList<>();
     public ArrayList<Food> foodList = new ArrayList<>();
     public ArrayList<Drink> drinkList = new ArrayList<>();
+    public double expense = 0;
     public String memo = "";
 
     public boolean isSaved; // 한번이라도 저장되었는지 확인.

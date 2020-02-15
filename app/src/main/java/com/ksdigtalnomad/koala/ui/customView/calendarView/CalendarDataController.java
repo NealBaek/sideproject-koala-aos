@@ -240,6 +240,7 @@ public class CalendarDataController {
                         pDay.drinkList.clear();
                         pDay.drinkList.addAll(dayModel.drinkList);
                         pDay.memo = dayModel.memo;
+                        pDay.expense = dayModel.expense;
                         pDay.isSaved = dayModel.isSaved;
                         pDayList.set(j, pDay);
                         break;
@@ -274,6 +275,7 @@ public class CalendarDataController {
                         nDay.foodList.addAll(dayModel.foodList);
                         nDay.drinkList.clear();
                         nDay.drinkList.addAll(dayModel.drinkList);
+                        nDay.expense = dayModel.expense;
                         nDay.memo = dayModel.memo;
                         nDay.isSaved = dayModel.isSaved;
                         nDayList.set(j, nDay);

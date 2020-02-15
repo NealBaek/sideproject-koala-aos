@@ -18,12 +18,14 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.gson.Gson;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.databinding.ActivityCalendarDayDetailBinding;
+import com.ksdigtalnomad.koala.helpers.data.ParseHelper;
 import com.ksdigtalnomad.koala.helpers.ui.ProgressHelper;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
+import com.ksdigtalnomad.koala.ui.views.dialogs.ExpenseDialog;
 import com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity;
 import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
 import com.ksdigtalnomad.koala.helpers.ui.KeyboardHelper;
@@ -140,6 +142,18 @@ public class CalendarDayDetailActivity extends BaseActivity {
 
     public void moveToDetailListEditActivity(String viewType){
         startActivityForResult(CalendarDetailListEditActivity.intent(this, viewType, dayModel), 0);
+    }
+
+    public void moveToExpenseDialog(){
+        ExpenseDialog dialog = ExpenseDialog.newInstance(dayModel.expense);
+        dialog.setDialogListener((newValue)->{
+            Runnable runnable = ()->{
+                dayModel.expense = newValue;
+                CalendarDayDetailActivity.this.runOnUiThread(()->mBinding.expense.setText(ParseHelper.parseMoney(dayModel.expense)));
+            };
+            runnable.run();
+        });
+        dialog.show(getFragmentManager(), "Add Dialog");
     }
 
     @Override

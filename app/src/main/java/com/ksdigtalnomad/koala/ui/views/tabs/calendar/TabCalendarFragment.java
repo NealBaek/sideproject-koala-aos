@@ -96,6 +96,7 @@ public class TabCalendarFragment extends BaseFragment {
                         pDayModel.foodList.addAll(dayModel.foodList);
                         pDayModel.drinkList.clear();
                         pDayModel.drinkList.addAll(dayModel.drinkList);
+                        pDayModel.expense = dayModel.expense;
                         pDayModel.memo = dayModel.memo;
                         pDayModel.isSaved = dayModel.isSaved;
                         pDayView.setDayModel(pDayModel);
@@ -116,6 +117,7 @@ public class TabCalendarFragment extends BaseFragment {
                     cDayModel.drinkList.clear();
                     cDayModel.drinkList.addAll(dayModel.drinkList);
                     cDayModel.memo = dayModel.memo;
+                    cDayModel.expense = dayModel.expense;
                     cDayModel.isSaved = dayModel.isSaved;
                     cDayView.setDayModel(cDayModel);
                     getActivity().runOnUiThread(()->cDayView.invalidate());
@@ -134,6 +136,7 @@ public class TabCalendarFragment extends BaseFragment {
                         nDayModel.foodList.addAll(dayModel.foodList);
                         nDayModel.drinkList.clear();
                         nDayModel.drinkList.addAll(dayModel.drinkList);
+                        nDayModel.expense = dayModel.expense;
                         nDayModel.memo = dayModel.memo;
                         nDayModel.isSaved = dayModel.isSaved;
                         nDayView.setDayModel(nDayModel);

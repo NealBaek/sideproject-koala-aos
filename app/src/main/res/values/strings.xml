@@ -37,10 +37,11 @@
     <string name="calendar_detail_friends_title">Company</string>
     <string name="calendar_detail_drink_title">Drinks</string>
     <string name="calendar_detail_foods_title">Food</string>
+    <string name="calendar_detail_expense_title">Expense</string>
     <string name="calendar_detail_memo_title">Memo</string>
     <string name="calendar_detail_hint_click_to_save">Click to input</string>
 
-
+    <string name="calendar_expense_currency">$ %s</string>
 
     <!-- Daily -->
     <string name="tap_today_drink_state">My recent alcohol life</string>

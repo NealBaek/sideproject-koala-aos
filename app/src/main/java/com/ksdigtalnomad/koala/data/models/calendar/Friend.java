@@ -7,9 +7,9 @@ import lombok.ToString;
 
 @Builder @Setter @Getter @ToString
 public class Friend extends BaseData implements Cloneable{
-    String name = "";
-    int selectedCnt = 0;
-    boolean isSelected = false;
+    String name;
+    int selectedCnt;
+    boolean isSelected;
 
     public Friend clone(){
         //내 객체 생성
