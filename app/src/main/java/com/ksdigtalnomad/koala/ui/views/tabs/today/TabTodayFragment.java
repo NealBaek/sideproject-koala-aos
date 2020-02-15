@@ -165,7 +165,7 @@ public class TabTodayFragment extends BaseFragment {
             mBinding.avgDrinkState.setText(drinkState);
             mBinding.avgDrinkState.setTextColor(drinkStateColor);
             mBinding.avgDrinkTimes.setText(getResources().getString(R.string.tap_today_drink_times, String.valueOf(drinkCnt)));
-            mBinding.avgDrinkLevel.setText(getResources().getString(R.string.tap_today_drink_level, String.valueOf(Math.round(avgDrinkLevel/drinkCnt)) + "%"));
+            mBinding.avgDrinkLevel.setText(getResources().getString(R.string.tap_today_drink_level, String.valueOf(Math.round(avgDrinkLevel/recent7Days.size())) + "%"));
 
             showEmptyLayout(false);
         });
