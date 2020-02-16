@@ -14,6 +14,30 @@ import java.util.concurrent.ScheduledExecutorService;
 
 public class FBEventLogHelper {
 
+    // v 0.3.1
+    private static final String STATISTICS_MONTH_MOVE = "STATISTICS_month_move";
+
+    //-몇년몇월
+    //-최장음주기간
+    //-최장금주기간
+    //-총 지출액
+    public static void onStatisticsMonthMoved(String monthDate, int cQuitCnt, int cDrinkCnt, int totalExpense){
+        Executors.newScheduledThreadPool(1).execute(()->{
+            Bundle bundle = new Bundle();
+            bundle.putString("monthDate", monthDate);
+            bundle.putInt("cQuitCnt", cQuitCnt);
+            bundle.putInt("cDrinkCnt", cDrinkCnt);
+            bundle.putInt("totalExpense", totalExpense);
+            bundle.putString("place", Locale.getDefault().toString());
+            bundle.putString("createdAt", DateHelper.getInstance().getTodayStr(DateHelper.FORMAT_FULL));
+
+            FirebaseAnalytics
+                    .getInstance(BaseApplication.getInstance().getApplicationContext())
+                    .logEvent(STATISTICS_MONTH_MOVE, bundle);
+        });
+    }
+
+
     // v 0.1.0
     private static final String INPUT_DONE = "DAY_DETAIL_input_done";
     private static final String FRIENDS_ADD = "DAY_DETAIL_LIST_EDIT_FRIEND_add";

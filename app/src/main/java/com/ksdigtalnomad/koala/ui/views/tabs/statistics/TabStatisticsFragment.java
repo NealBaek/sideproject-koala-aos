@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ksdigtalnomad.koala.R;
+import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
 import com.ksdigtalnomad.koala.helpers.data.HashMapHelper;
 import com.ksdigtalnomad.koala.helpers.data.ParseHelper;
 import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
@@ -63,13 +64,15 @@ public class TabStatisticsFragment extends BaseFragment {
     private int targetMonthIdx = DEFAULT_MONTH_IDX;
     private MonthModel targetMonthModel;
     private CalendarModel calendarModel;
+    private int cDrinkDayCnt = 0;
+    private int cQuitDayCnt = 0;
+    private int totalExpense = 0;
 
     private StatisticsTextChartRvAdapter textChartRvAdapter;
     private ArrayList<TextChartItem> textChartItemArrayList = new ArrayList<>();
 
     private StatisticsHorizontalBarChartRvAdapter horizontalBarChartRvAdapter;
     private ArrayList<HorizontalBarChartItem> horizontalBarChartItemArrayList= new ArrayList<>();
-
 
     public static TabStatisticsFragment newInstance(){ return new TabStatisticsFragment(); }
 
@@ -152,9 +155,7 @@ public class TabStatisticsFragment extends BaseFragment {
             int drinkDayCnt = 0;
             final int CONTINUE_ATLEAST = 2;
             final int CONTINUE_SAVE_ATLEAST = 7;
-            int cDrinkDayCnt = 0;
-            int cQuitDayCnt = 0;
-            int totalExpense = 0;
+
 
             ArrayList<DayModel> cDrinkTemps = new ArrayList<>();
             ArrayList<DayModel> cDrinkDayList= new ArrayList<>();
@@ -406,7 +407,6 @@ public class TabStatisticsFragment extends BaseFragment {
             getActivity().runOnUiThread(()->horizontalBarChartRvAdapter.notifyDataSetChanged());
         }
     }
-
     private HorizontalBarChartItem createBarItem(String title, int totalCnt, HashMap<String, Integer> hashMap, ArrayList<HashMap<String, Integer>> hashMapList){
 
         ArrayList<BarEntry> values = new ArrayList<>();
@@ -475,6 +475,11 @@ public class TabStatisticsFragment extends BaseFragment {
     // click events
     public void onBtnPreviousMonthClick(){
         if(targetMonthIdx <= 0) return;
+
+        FBEventLogHelper.onStatisticsMonthMoved(
+                mBinding.headerText.getText().toString(),
+                cQuitDayCnt, cDrinkDayCnt, totalExpense);
+
         targetMonthIdx -= 1;
         getActivity().runOnUiThread(()->{
             mBinding.btnPreviousMonth.setVisibility(targetMonthIdx > 0 ? View.VISIBLE : View.GONE);
