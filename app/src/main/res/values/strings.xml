@@ -33,6 +33,11 @@
     <string name="calendar_detail_drunk_level_2">I got pretty tipsy.</string>
     <string name="calendar_detail_drunk_level_3">I was so drunk.</string>
     <string name="calendar_detail_drunk_level_max">I had a blackout.</string>
+    <string name="calendar_detail_drunk_level_0_short"></string>
+    <string name="calendar_detail_drunk_level_1_short">lightly</string>
+    <string name="calendar_detail_drunk_level_2_short">tipsy</string>
+    <string name="calendar_detail_drunk_level_3_short">so drunk</string>
+    <string name="calendar_detail_drunk_level_max_short">blackout</string>
     <string name="calendar_detail_drunk_level_title">How much did you drink?</string>
     <string name="calendar_detail_friends_title">Company</string>
     <string name="calendar_detail_drink_title">Drinks</string>
@@ -42,6 +47,7 @@
     <string name="calendar_detail_hint_click_to_save">Click to input</string>
 
     <string name="calendar_expense_currency">$ %s</string>
+    <string name="calendar_day_date">%s days</string>
 
     <!-- Daily -->
     <string name="tap_today_drink_state">My recent alcohol life</string>
@@ -52,9 +58,10 @@
     <string name="drink_state_nowadays_4">Never drink</string>
     <string name="tap_today_drink_times">The number of drunken days for last 7 days : %s</string>
     <string name="tap_today_drink_level">The average amount of alcohol for last 7 days : %s</string>
-    <string name="tap_today_no_drink_info_1">금주한 지</string>
-    <string name="tap_today_no_drink_info_2" formatted="true">%s일째!</string>
-    <string name="tap_today_no_drink_info_3" formatted="true">금주 시작 %s</string>
+    <string name="tap_today_no_drink_info_1">Not drinking for</string>
+    <string name="tap_today_no_drink_info_2" formatted="true">%s days!</string>
+    <string name="tap_today_no_drink_info_3" formatted="true">Since %s</string>
+
 
 
     <!-- Calendar -->
@@ -107,25 +114,29 @@
 
 
     <!-- fragment_tab_statistics -->
-    <string name="fragment_tab_statistics_title_count_drink_day">술 마신 날</string>
-    <string name="fragment_tab_statistics_title_count_longest_quit">최장 연속 금주</string>
-    <string name="fragment_tab_statistics_title_count_longest_drink">최장 연속 음주</string>
-    <string name="fragment_tab_statistics_title_total_expense">총 지출액</string>
+    <string name="fragment_tab_statistics_title_count_drink_day">Total alcohol days</string>
+    <string name="fragment_tab_statistics_title_count_longest_quit">Alcohol-free period for</string>
+    <string name="fragment_tab_statistics_title_count_longest_drink">Alcohol period for</string>
+    <string name="fragment_tab_statistics_title_total_expense">Total expense</string>
 
-    <string name="fragment_tab_statistics_info_count_drink_day">이 정도면.. %s일에 한 번 꼴로 마신겁니다.</string>
-    <string name="fragment_tab_statistics_info_count_longest_quit">%s 까지 안 드셨네요.&#160;</string>
-    <string name="fragment_tab_statistics_info_count_longest_quit_2">최고 기록은 %s일입니다.</string>
-    <string name="fragment_tab_statistics_info_count_longest_drink">%s 까지 드셨네요.&#160;</string>
-    <string name="fragment_tab_statistics_info_count_longest_drink_2">최고 기록은 %s일입니다.</string>
-    <string name="fragment_tab_statistics_info_total_expense">이 정도면.. 매일 %s원쯤 쓴겁니다.</string>
+    <string name="fragment_tab_statistics_info_count_drink_day">I’d say.. you drank once in %s days.</string>
+    <string name="fragment_tab_statistics_info_count_longest_quit">Alcohol-free %s in a row.&#160;</string>
+    <string name="fragment_tab_statistics_info_count_longest_quit_2">The best record is for %s days. </string>
+    <string name="fragment_tab_statistics_info_count_longest_drink"> Alcohol %s in a row.&#160;</string>
+    <string name="fragment_tab_statistics_info_count_longest_drink_2">The best record is for %s days.</string>
+    <string name="fragment_tab_statistics_info_total_expense">I’d say.. you spent %s everyday. </string>
 
-    <string name="fragment_tab_statistics_notenough_data">기록 부족</string>
-    <string name="fragment_tab_statistics_notenough_info">최소 7일치가 입력이 되어야 합니다.</string>
+    <string name="fragment_tab_statistics_notenough_data">Not enough data</string>
+    <string name="fragment_tab_statistics_notenough_info">Required for 7 days data and 2 continuous days data at least.</string>
+    <string name="fragment_tab_statistics_no_drinkday">Required for 1 day data at least.</string>
+    <string name="fragment_tab_statistics_no_expense">No expense data.</string>
 
-    <string name="fragment_tab_statistics_title_frequency_drunk_level">내 음주 정도</string>
-    <string name="fragment_tab_statistics_title_frequency_drink">내가 자주 마신 술</string>
-    <string name="fragment_tab_statistics_title_frequency_food">내가 자주 먹은 안주</string>
-    <string name="fragment_tab_statistics_title_frequency_friend">나와 같이 마신 사람</string>
+    <string name="fragment_tab_statistics_title_frequency_drunk_level">My drunk level</string>
+    <string name="fragment_tab_statistics_title_frequency_drink">What I drank the most</string>
+    <string name="fragment_tab_statistics_title_frequency_food">What I ate the most</string>
+    <string name="fragment_tab_statistics_title_frequency_friend">Whom I was with the most</string>
+
+
 
 
     <!-- fragment_tab_today -->
@@ -179,7 +190,7 @@
 
     <string name="btn_dontbother">알 거 없어!</string>
 
-    <string name="btn_see_total">전체 보기 ></string>
+    <string name="btn_see_total">Details ></string>
 
 
 

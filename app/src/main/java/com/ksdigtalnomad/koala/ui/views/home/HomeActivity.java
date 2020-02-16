@@ -80,7 +80,9 @@ public class HomeActivity extends BaseActivity {
             FBEventLogHelper.onAlarmDailyPushClick(PreferenceHelper.getAlarmDailySettingTimeStr());
         }
 
-        InterviewHelper.showWhythisappIfPossible(getFragmentManager());
+
+        // @TODO: 설문 추가
+//        InterviewHelper.showWhythisappIfPossible(getFragmentManager());
     }
 
     @Override

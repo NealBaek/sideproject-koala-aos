@@ -24,15 +24,15 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorDarkGray"/>
-            <TextView
-                android:id="@+id/totalBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingLeft="20dp"
-                android:text="@string/btn_see_total"
-                android:textSize="12sp"
-                android:textColor="@color/colorDarkGray"
-                android:gravity="center_vertical"/>
+<!--            <TextView-->
+<!--                android:id="@+id/totalBtn"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:paddingLeft="20dp"-->
+<!--                android:text="@string/btn_see_total"-->
+<!--                android:textSize="12sp"-->
+<!--                android:textColor="@color/colorDarkGray"-->
+<!--                android:gravity="center_vertical" />-->
         </LinearLayout>
         <com.github.mikephil.charting.charts.HorizontalBarChart
             android:id="@+id/chart"
@@ -40,6 +40,7 @@
             android:layout_height="90dp"/>
     </LinearLayout>
     <include
+        android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="20dp"

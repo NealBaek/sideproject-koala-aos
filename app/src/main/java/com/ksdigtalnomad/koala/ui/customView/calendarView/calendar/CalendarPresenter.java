@@ -36,8 +36,6 @@ class CalendarPresenter implements CalendarContract.CalendarPresenter{
         int thisMonth = Integer.parseInt(dfMonth.format(today));
         int thisYear = Integer.parseInt(dfYear.format(today));
 
-
-
         // 2. 이번 달 모델 값 구하기
         int monthListCnt =  calendarModel.monthList.size();
         for(int i = 0; i < monthListCnt; ++i){

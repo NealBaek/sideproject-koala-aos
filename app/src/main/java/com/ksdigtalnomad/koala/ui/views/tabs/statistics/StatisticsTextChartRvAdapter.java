@@ -39,7 +39,7 @@ public class StatisticsTextChartRvAdapter extends BaseRecyclerViewAdapter<Statis
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.setItem(itemList.get(position));
+        holder.setItem(itemList.get(position), position);
     }
 
     @Override
@@ -61,10 +61,14 @@ public class StatisticsTextChartRvAdapter extends BaseRecyclerViewAdapter<Statis
         TextView info;
         public TextChartItem item;
         private final int COLOR_MAIN = BaseApplication.getInstance().getResources().getColor(R.color.colorMain);
+        private final int COLOR_RED = BaseApplication.getInstance().getResources().getColor(R.color.colorRed);
         private final int COLOR_GRAY = BaseApplication.getInstance().getResources().getColor(R.color.colorGray);
         private final int COLOR_DKGRAY = BaseApplication.getInstance().getResources().getColor(R.color.colorDarkGray);
         private final String NOTENOUGTH_DATA = BaseApplication.getInstance().getResources().getString(R.string.fragment_tab_statistics_notenough_data);
         private final String NOTENOUGTH_INFO = BaseApplication.getInstance().getResources().getString(R.string.fragment_tab_statistics_notenough_info);
+        private final String NO_DRINKCNT = BaseApplication.getInstance().getResources().getString(R.string.fragment_tab_statistics_no_drinkday);
+        private final String NO_EXPENSE = BaseApplication.getInstance().getResources().getString(R.string.fragment_tab_statistics_notenough_info);
+
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -73,20 +77,31 @@ public class StatisticsTextChartRvAdapter extends BaseRecyclerViewAdapter<Statis
             info = itemView.findViewById(R.id.info);
         }
 
-        public void setItem(TextChartItem item){
+        public void setItem(TextChartItem item, int pos){
             this.item = item;
             title.setText(item.getTitle());
 
             if(item.enoughData){
                 data.setText(item.getData());
                 info.setText(item.getInfo());
-                data.setTextColor(COLOR_MAIN);
+                data.setTextColor(pos == 0 ? COLOR_RED : COLOR_MAIN);
                 info.setTextColor(COLOR_DKGRAY);
             }else{
                 data.setText(NOTENOUGTH_DATA);
-                info.setText(NOTENOUGTH_INFO);
                 data.setTextColor(COLOR_GRAY);
                 info.setTextColor(COLOR_GRAY);
+
+                switch (pos){
+                    case 0: // 술 마신 날
+                        info.setText(NO_DRINKCNT);
+                        break;
+                    case 3: // 지출
+                        info.setText(NO_EXPENSE);
+                        break;
+                    default:
+                        info.setText(NOTENOUGTH_INFO);
+                        break;
+                }
             }
 
         }

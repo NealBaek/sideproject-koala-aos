@@ -39,19 +39,6 @@ public class SplashActivity extends BaseActivity {
 
         PreferenceHelper.setOpenCount(PreferenceHelper.getOpenCunt() + 1);
 
-        ServiceManager.getInstance().getDefaultDataService()
-                .getCategoryList("drink")
-                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        (result) -> {
-                            Log.d("ABC", "Success");
-                            Log.d("ABC", result.get(0).toString());
-                        },
-                        (error) -> {
-                            Log.d("ABC", "Failed");
-                            Log.d("ABC", error.getLocalizedMessage());
-                        }
-                );
     }
 
     @Override

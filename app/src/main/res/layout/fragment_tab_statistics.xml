@@ -2,6 +2,11 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="fragment"
+            type="com.ksdigtalnomad.koala.ui.views.tabs.statistics.TabStatisticsFragment"/>
+    </data>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -9,21 +14,41 @@
         android:id="@+id/bodyLayout">
 
         <!-- Header -->
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:orientation="vertical"
             android:background="@color/colorMain">
+            <ImageView
+                android:id="@+id/btnPreviousMonth"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:padding="7dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/headerText"
+                android:src="@drawable/ic_arrow_left"
+                android:onClick="@{()->fragment.onBtnPreviousMonthClick()}"/>
             <TextView
                 android:id="@+id/headerText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textSize="18dp"
+                android:layout_centerInParent="true"
+                android:textSize="17sp"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:textColor="@color/colorPureWhite"
-                android:text="@string/tap3_title"/>
-        </LinearLayout>
+                android:textColor="@color/colorPureWhite"/>
+
+            <ImageView
+                android:id="@+id/btnNextMonth"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:padding="7dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/headerText"
+                android:src="@drawable/ic_arrow_right"
+                android:onClick="@{()->fragment.onBtnNextMonthClick()}"/>
+        </RelativeLayout>
 
 
 

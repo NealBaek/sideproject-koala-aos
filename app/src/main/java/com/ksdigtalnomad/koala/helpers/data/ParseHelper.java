@@ -17,9 +17,4 @@ public class ParseHelper {
                 R.string.calendar_expense_currency,
                 nf.format(money));
     }
-
-//    public static String exchangeRateFormat(double rate) {
-//        DecimalFormat nf = new DecimalFormat("#,###.##");
-//        return "( 1: " + nf.format(rate) + ")";
-//    }
 }

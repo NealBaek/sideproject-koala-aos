@@ -13,4 +13,13 @@ public class MonthModel{
     public int index;
 //    statistics? (구체화 필요)
 
+    public MonthModel clone(){
+        //내 객체 생성
+        Object toReturn;
+        try {
+            toReturn = super.clone();
+            return ((MonthModel)toReturn);
+        }
+        catch (CloneNotSupportedException e) { return this; }
+    }
 }

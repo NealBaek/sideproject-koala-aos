@@ -35,6 +35,11 @@
     <string name="calendar_detail_drunk_level_2">나름 취할 정도로 마셨어요</string>
     <string name="calendar_detail_drunk_level_3">많이 취할 정도로 마셨어요</string>
     <string name="calendar_detail_drunk_level_max">필름 끊길 정도로 폭음했어요</string>
+    <string name="calendar_detail_drunk_level_0_short"></string>
+    <string name="calendar_detail_drunk_level_1_short">그냥 가볍게</string>
+    <string name="calendar_detail_drunk_level_2_short">나름 취할 정도로</string>
+    <string name="calendar_detail_drunk_level_3_short">많이 취할 정도로</string>
+    <string name="calendar_detail_drunk_level_max_short">필름 끊길 정도로</string>
     <string name="calendar_detail_drunk_level_title">얼마나 마셨나요?</string>
     <string name="calendar_detail_friends_title">누구와</string>
     <string name="calendar_detail_drink_title">어떤 술을</string>
@@ -44,6 +49,7 @@
     <string name="calendar_detail_hint_click_to_save">여기를 눌러 입력</string>
 
     <string name="calendar_expense_currency">%s원</string>
+    <string name="calendar_day_date">%s일</string>
 
     <!-- 오늘 -->
     <string name="tap_today_drink_state">요즘의 음주 상태</string>
@@ -107,7 +113,28 @@
 
 
     <!-- fragment_tab_statistics -->
+    <string name="fragment_tab_statistics_title_count_drink_day">술 마신 날</string>
+    <string name="fragment_tab_statistics_title_count_longest_quit">최장 연속 금주</string>
+    <string name="fragment_tab_statistics_title_count_longest_drink">최장 연속 음주</string>
+    <string name="fragment_tab_statistics_title_total_expense">총 지출액</string>
 
+    <string name="fragment_tab_statistics_info_count_drink_day">이 정도면.. %s일에 한 번 꼴로 마신겁니다.</string>
+    <string name="fragment_tab_statistics_info_count_longest_quit">%s 까지 안 드셨네요.&#160;</string>
+    <string name="fragment_tab_statistics_info_count_longest_quit_2">최고 기록은 %s일입니다.</string>
+    <string name="fragment_tab_statistics_info_count_longest_drink">%s 까지 드셨네요.&#160;</string>
+    <string name="fragment_tab_statistics_info_count_longest_drink_2">최고 기록은 %s일입니다.</string>
+    <string name="fragment_tab_statistics_info_total_expense">이 정도면.. 매일 %s쯤 쓴겁니다.</string>
+
+    <string name="fragment_tab_statistics_notenough_data">기록 부족</string>
+    <string name="fragment_tab_statistics_notenough_info">최소 7일치의 기록 및 2일 연속의 값이 입력되어야 합니다.</string>
+    <string name="fragment_tab_statistics_no_drinkday">지출 금액을 기록하지 않았습니다.</string>
+    <string name="fragment_tab_statistics_no_expense">지출 금액을 기록하지 않았습니다.</string>
+
+
+    <string name="fragment_tab_statistics_title_frequency_drunk_level">내 음주 정도</string>
+    <string name="fragment_tab_statistics_title_frequency_drink">내가 자주 마신 술</string>
+    <string name="fragment_tab_statistics_title_frequency_food">내가 자주 먹은 안주</string>
+    <string name="fragment_tab_statistics_title_frequency_friend">나와 같이 마신 사람</string>
 
 
     <!-- fragment_tab_today -->
@@ -160,6 +187,8 @@
     <string name="btn_confirm_short">확인</string>
 
     <string name="btn_dontbother">알거없어!</string>
+
+    <string name="btn_see_total">전체 보기 ></string>
 
     <!-- 가이드 -->
     <string name="guide_start">시작하기</string>

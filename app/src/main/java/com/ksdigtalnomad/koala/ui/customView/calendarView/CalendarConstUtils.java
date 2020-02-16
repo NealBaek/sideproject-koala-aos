@@ -40,6 +40,11 @@ public class CalendarConstUtils {
     public static final String DRUNK_LV_2_STR = BaseApplication.getInstance().getResources().getString(R.string.calendar_detail_drunk_level_2);
     public static final String DRUNK_LV_3_STR = BaseApplication.getInstance().getResources().getString(R.string.calendar_detail_drunk_level_3);
     public static final String DRUNK_LV_MAX_STR = BaseApplication.getInstance().getResources().getString(R.string.calendar_detail_drunk_level_max);
+    public static final String DRUNK_LV_0_STR_SHORT = BaseApplication.getInstance().getResources().getString(R.string.calendar_detail_drunk_level_0_short);
+    public static final String DRUNK_LV_1_STR_SHORT = BaseApplication.getInstance().getResources().getString(R.string.calendar_detail_drunk_level_1_short);
+    public static final String DRUNK_LV_2_STR_SHORT = BaseApplication.getInstance().getResources().getString(R.string.calendar_detail_drunk_level_2_short);
+    public static final String DRUNK_LV_3_STR_SHORT = BaseApplication.getInstance().getResources().getString(R.string.calendar_detail_drunk_level_3_short);
+    public static final String DRUNK_LV_MAX_STR_SHORT = BaseApplication.getInstance().getResources().getString(R.string.calendar_detail_drunk_level_max_short);
 
 
     // Color
@@ -118,6 +123,22 @@ public class CalendarConstUtils {
                 return DRUNK_LV_3_STR;
             case DRUNK_LV_MAX:
                 return DRUNK_LV_MAX_STR;
+            default:
+                return "";
+        }
+    }
+    public static String getDrunkLvCommentShort(int drunkLv){
+        switch (drunkLv){
+            case DRUNK_LV_0:
+                return DRUNK_LV_0_STR_SHORT;
+            case DRUNK_LV_1:
+                return DRUNK_LV_1_STR_SHORT;
+            case DRUNK_LV_2:
+                return DRUNK_LV_2_STR_SHORT;
+            case DRUNK_LV_3:
+                return DRUNK_LV_3_STR_SHORT;
+            case DRUNK_LV_MAX:
+                return DRUNK_LV_MAX_STR_SHORT;
             default:
                 return "";
         }
