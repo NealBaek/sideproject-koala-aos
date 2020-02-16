@@ -52,6 +52,7 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if(tab.getPosition() == 0){ tapAdapter.refreshTodayTab(); }
+                else if(tab.getPosition() == 2){ tapAdapter.refreshStatisticsTab(); }
                 mBinding.homeTabViewPager.setCurrentItem(tab.getPosition(), true);
             }
 

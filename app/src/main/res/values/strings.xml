@@ -107,17 +107,25 @@
 
 
     <!-- fragment_tab_statistics -->
-    <string name="fragment_tab_statistics_info_1">Still working on it.</string>
-    <string name="fragment_tab_statistics_info_2">If you want it faster, complain to the developer at</string>
-    <string name="fragment_tab_statistics_info_3">Setting</string>
-    <string name="fragment_tab_statistics_info_4">&#160;tab >&#160;</string>
-    <string name="fragment_tab_statistics_info_5">1:1 Chat with Koala team</string>
-    <string name="fragment_tab_statistics_info_6">&#160;please.</string>
-    <string name="fragment_tab_statistics_info_7">- Koala team for your challenge -</string>
+    <string name="fragment_tab_statistics_title_count_drink_day">술 마신 날</string>
+    <string name="fragment_tab_statistics_title_count_longest_quit">최장 연속 금주</string>
+    <string name="fragment_tab_statistics_title_count_longest_drink">최장 연속 음주</string>
+    <string name="fragment_tab_statistics_title_total_expense">총 지출액</string>
 
+    <string name="fragment_tab_statistics_info_count_drink_day">이 정도면.. %s일에 한 번 꼴로 마신겁니다.</string>
+    <string name="fragment_tab_statistics_info_count_longest_quit">%s 까지 안 드셨네요.&#160;</string>
+    <string name="fragment_tab_statistics_info_count_longest_quit_2">최고 기록은 %s일입니다.</string>
+    <string name="fragment_tab_statistics_info_count_longest_drink">%s 까지 드셨네요.&#160;</string>
+    <string name="fragment_tab_statistics_info_count_longest_drink_2">최고 기록은 %s일입니다.</string>
+    <string name="fragment_tab_statistics_info_total_expense">이 정도면.. 매일 %s원쯤 쓴겁니다.</string>
 
+    <string name="fragment_tab_statistics_notenough_data">기록 부족</string>
+    <string name="fragment_tab_statistics_notenough_info">최소 7일치가 입력이 되어야 합니다.</string>
 
-
+    <string name="fragment_tab_statistics_title_frequency_drunk_level">내 음주 정도</string>
+    <string name="fragment_tab_statistics_title_frequency_drink">내가 자주 마신 술</string>
+    <string name="fragment_tab_statistics_title_frequency_food">내가 자주 먹은 안주</string>
+    <string name="fragment_tab_statistics_title_frequency_friend">나와 같이 마신 사람</string>
 
 
     <!-- fragment_tab_today -->
@@ -149,7 +157,7 @@
     <string name="prefix_disagree">disagreed</string>
 
 
-    <!-- 버튼 -->ㅈ
+    <!-- 버튼 -->
     <string name="btn_next_short">Next</string>
 
     <string name="btn_save_long">Save</string>
@@ -170,6 +178,10 @@
     <string name="btn_confirm_short">OK</string>
 
     <string name="btn_dontbother">알 거 없어!</string>
+
+    <string name="btn_see_total">전체 보기 ></string>
+
+
 
 
     <!-- 가이드 -->

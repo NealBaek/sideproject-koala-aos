@@ -25,83 +25,31 @@
                 android:text="@string/tap3_title"/>
         </LinearLayout>
 
+
+
         <!-- Body -->
-        <LinearLayout
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="top">
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/fragment_tab_statistics_info_1"-->
-<!--                android:textSize="30dp"-->
-<!--                android:textStyle="bold"-->
-<!--                android:textColor="@color/colorDarkGray"-->
-<!--                android:gravity="center"-->
-<!--                android:layout_marginBottom="15dp"/>-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/fragment_tab_statistics_info_2"-->
-<!--                android:textSize="13dp"-->
-<!--                android:textColor="@color/colorGray"-->
-<!--                android:gravity="center"-->
-<!--                android:layout_marginBottom="3dp"/>-->
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:gravity="center"-->
-<!--                android:layout_marginBottom="15dp">-->
-
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="@string/fragment_tab_statistics_info_3"-->
-<!--                    android:textSize="13dp"-->
-<!--                    android:textColor="@color/colorMain"/>-->
-
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="@string/fragment_tab_statistics_info_4"-->
-<!--                    android:textSize="13dp"-->
-<!--                    android:textColor="@color/colorGray"/>-->
-
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="@string/fragment_tab_statistics_info_5"-->
-<!--                    android:textSize="13dp"-->
-<!--                    android:textColor="@color/colorMain"/>-->
-
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="@string/fragment_tab_statistics_info_6"-->
-<!--                    android:textSize="13dp"-->
-<!--                    android:textColor="@color/colorGray"/>-->
-
-<!--            </LinearLayout>-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/fragment_tab_statistics_info_7"-->
-<!--                android:textSize="13dp"-->
-<!--                android:textColor="@color/colorGray"-->
-<!--                android:gravity="center"/>-->
-
-            <com.github.mikephil.charting.charts.HorizontalBarChart
-                android:id="@+id/testChart"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/colorPureWhite">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/white"/>
-        </LinearLayout>
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/textChartRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/horizontalBarChartRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
 
     </LinearLayout>
 </layout>

@@ -67,8 +67,25 @@ public class CalendarConstUtils {
     public static final int DRUNK_LV_2 = 2;
     public static final int DRUNK_LV_3 = 3;
     public static final int DRUNK_LV_MAX = 4;
+    public static int getDrunkLvColorMainByStep(int drunkLv){
+        switch (drunkLv){
+            case DRUNK_LV_0:
+                return ColorUtils.setAlphaComponent(COLOL_LIGHTGRAY, 100);
+            case DRUNK_LV_1:
+                return ColorUtils.setAlphaComponent(COLOL_MAIN, /** 0~ 255 */ 255 * 1/5);
+            case DRUNK_LV_2:
+                return ColorUtils.setAlphaComponent(COLOL_MAIN, /** 0~ 255 */ 255 * 2/5);
+            case DRUNK_LV_3:
+                return ColorUtils.setAlphaComponent(COLOL_MAIN, /** 0~ 255 */ 255 * 3/5);
+            case DRUNK_LV_MAX:
+            default:
+                return ColorUtils.setAlphaComponent(COLOL_MAIN, /** 0~ 255 */ 255 * 4/4);
+        }
+    }
     public static int getDrunkLvColorRedByStep(int drunkLv){
         switch (drunkLv){
+            case DRUNK_LV_0:
+                return ColorUtils.setAlphaComponent(COLOL_LIGHTGRAY, 100);
             case DRUNK_LV_1:
                 return ColorUtils.setAlphaComponent(COLOL_RED, /** 0~ 255 */ 255 * 1/5);
             case DRUNK_LV_2:
@@ -76,9 +93,8 @@ public class CalendarConstUtils {
             case DRUNK_LV_3:
                 return ColorUtils.setAlphaComponent(COLOL_RED, /** 0~ 255 */ 255 * 3/5);
             case DRUNK_LV_MAX:
-                return ColorUtils.setAlphaComponent(COLOL_RED, /** 0~ 255 */ 255 * 4/4);
             default:
-                return ColorUtils.setAlphaComponent(COLOL_LIGHTGRAY, 100);
+                return ColorUtils.setAlphaComponent(COLOL_RED, /** 0~ 255 */ 255 * 4/4);
         }
     }
     public static int getDrunkLvColorRed(int drunkLv){

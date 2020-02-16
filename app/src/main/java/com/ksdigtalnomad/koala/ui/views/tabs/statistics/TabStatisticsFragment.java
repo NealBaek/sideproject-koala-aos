@@ -1,9 +1,18 @@
 package com.ksdigtalnomad.koala.ui.views.tabs.statistics;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
+
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.ksdigtalnomad.koala.databinding.FragmentTabStatisticsBinding;
+
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +20,27 @@ import android.view.ViewGroup;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 import com.ksdigtalnomad.koala.ui.base.BaseFragment;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
 
+import com.ksdigtalnomad.koala.ui.views.tabs.statistics.StatisticsTextChartRvAdapter.TextChartItem;
+import com.ksdigtalnomad.koala.ui.views.tabs.statistics.StatisticsHorizontalBarChartRvAdapter.HorizontalBarChartItem;
+
+import java.util.ArrayList;
 import java.util.concurrent.Executors;
 
 public class TabStatisticsFragment extends BaseFragment {
 
     private FragmentTabStatisticsBinding mBinding;
     private Context mContext;
+
+    private StatisticsTextChartRvAdapter textChartRvAdapter;
+    private ArrayList<TextChartItem> textChartItemArrayList = new ArrayList<>();
+
+    private StatisticsHorizontalBarChartRvAdapter horizontalBarChartRvAdapter;
+    private ArrayList<HorizontalBarChartItem> horizontalBarChartItemArrayList= new ArrayList<>();
+
+    private final float DENSITY = Resources.getSystem().getDisplayMetrics().density;
 
     public static TabStatisticsFragment newInstance(){ return new TabStatisticsFragment(); }
 
@@ -32,6 +54,15 @@ public class TabStatisticsFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_tab_statistics, container, false);
+
+        textChartRvAdapter = new StatisticsTextChartRvAdapter(getActivity(), textChartItemArrayList);
+        mBinding.textChartRv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        mBinding.textChartRv.setAdapter(textChartRvAdapter);
+
+        horizontalBarChartRvAdapter = new StatisticsHorizontalBarChartRvAdapter(getActivity(), horizontalBarChartItemArrayList);
+        mBinding.horizontalBarChartRv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        mBinding.horizontalBarChartRv.setAdapter(horizontalBarChartRvAdapter);
+
         return mBinding.getRoot();
     }
 
@@ -43,26 +74,36 @@ public class TabStatisticsFragment extends BaseFragment {
 
     public void refreshData(){
         Executors.newSingleThreadExecutor().execute(()->{
-            if(PreferenceHelper.isLogin()){
-                // show chart
-                refreshTextChartRc();
-                refreshBarChartRc();
-            }else{
-                // show Login
-                // @TODO:
-            }
-
+            refreshTextChartRc();
+            refreshBarChartRc();
         });
     }
 
-    // 텍스트 차트
+    // 차트
     private void refreshTextChartRc(){
         if(CalendarDataController.isNoDataYet()){
-            // no data
-            getActivity().runOnUiThread(()->{
+            if(textChartItemArrayList.size() > 0) return;
 
-            });
+            textChartItemArrayList.set(0, TextChartItem.builder().
+                    title(getResources().getString(R.string.fragment_tab_statistics_title_count_drink_day))
+                    .enoughData(false)
+                    .build());
+            textChartItemArrayList.set(1, TextChartItem.builder().
+                    title(getResources().getString(R.string.fragment_tab_statistics_title_count_longest_quit))
+                    .enoughData(false)
+                    .build());
+            textChartItemArrayList.set(2, TextChartItem.builder().
+                    title(getResources().getString(R.string.fragment_tab_statistics_title_count_longest_drink))
+                    .enoughData(false)
+                    .build());
+            textChartItemArrayList.set(3, TextChartItem.builder().
+                    title(getResources().getString(R.string.fragment_tab_statistics_title_total_expense))
+                    .enoughData(false)
+                    .build());
+            // no data
+            getActivity().runOnUiThread(()->textChartRvAdapter.notifyDataSetChanged());
         }else {
+            // @TODO:
             // data cal
 //            ArrayList<DayModel> noDrinkDayList = CalendarDataController.getNoDrinkDayList(DateHelper.getInstance().getTodayDate());
 //            int noDrinkDayCount = noDrinkDayList.size();
@@ -71,20 +112,38 @@ public class TabStatisticsFragment extends BaseFragment {
 //                getActivity().runOnUiThread(()->mBinding.noDrinkLayout.setVisibility(View.GONE));
 //                return;
 //            }
-//
-//            getActivity().runOnUiThread(()->{
-//                mBinding.noDrinkLayout.setVisibility(View.VISIBLE);
-//                mBinding.noDrinkInfo2.setText(getResources().getString(R.string.tap_today_no_drink_info_2, String.valueOf(noDrinkDayCount)));
-//                mBinding.noDrinkInfo3.setText(getResources().getString(R.string.tap_today_no_drink_info_3, DateHelper.getInstance().getDateStr("yyyy.MM.dd.", noDrinkDayList.get(noDrinkDayCount - 1).getDate())));
-//            });
-            // show data
-            getActivity().runOnUiThread(()->{
+            textChartItemArrayList.clear();
+            textChartItemArrayList.add(TextChartItem.builder().
+                    title(getResources().getString(R.string.fragment_tab_statistics_title_count_drink_day))
+                    .data("12일")
+                    .info(getResources().getString(R.string.fragment_tab_statistics_info_count_drink_day, "10"))
+                    .enoughData(true)
+                    .build());
+            textChartItemArrayList.add(TextChartItem.builder().
+                    title(getResources().getString(R.string.fragment_tab_statistics_title_count_longest_quit))
+                    .data("12일")
+                    .info(getResources().getString(R.string.fragment_tab_statistics_info_count_longest_quit, "01.10 ~ 01.21")
+                            + getResources().getString(R.string.fragment_tab_statistics_info_count_longest_quit_2, "12"))
+                    .enoughData(true)
+                    .build());
+            textChartItemArrayList.add(TextChartItem.builder().
+                    title(getResources().getString(R.string.fragment_tab_statistics_title_count_longest_drink))
+                    .data("10일")
+                    .info(getResources().getString(R.string.fragment_tab_statistics_info_count_longest_drink, "01.01 ~ 01.09")
+                            + getResources().getString(R.string.fragment_tab_statistics_info_count_longest_drink_2, "10"))
+                    .enoughData(false)
+                    .build());
+            textChartItemArrayList.add(TextChartItem.builder().
+                    title(getResources().getString(R.string.fragment_tab_statistics_title_total_expense))
+                    .data(getResources().getString(R.string.calendar_expense_currency, "410,000"))
+                    .info(getResources().getString(R.string.fragment_tab_statistics_info_total_expense, "100,123"))
+                    .enoughData(true)
+                    .build());
 
-            });
+            // show data
+            getActivity().runOnUiThread(()->textChartRvAdapter.notifyDataSetChanged());
         }
     }
-
-    // 바 차트
     private void refreshBarChartRc(){
         if(CalendarDataController.isNoDataYet()){
             // no data
@@ -92,84 +151,81 @@ public class TabStatisticsFragment extends BaseFragment {
 
             });
         }else {
-            // data cal
-//            ArrayList<DayModel> noDrinkDayList = CalendarDataController.getNoDrinkDayList(DateHelper.getInstance().getTodayDate());
-//            int noDrinkDayCount = noDrinkDayList.size();
-//
-//            if(noDrinkDayCount<2) {
-//                getActivity().runOnUiThread(()->mBinding.noDrinkLayout.setVisibility(View.GONE));
-//                return;
-//            }
-//
-//            getActivity().runOnUiThread(()->{
-//                mBinding.noDrinkLayout.setVisibility(View.VISIBLE);
-//                mBinding.noDrinkInfo2.setText(getResources().getString(R.string.tap_today_no_drink_info_2, String.valueOf(noDrinkDayCount)));
-//                mBinding.noDrinkInfo3.setText(getResources().getString(R.string.tap_today_no_drink_info_3, DateHelper.getInstance().getDateStr("yyyy.MM.dd.", noDrinkDayList.get(noDrinkDayCount - 1).getDate())));
-//            });
 
+            float barWidth = 8f;
+            float spaceForBar = 10f;
 
-            // show data
-            getActivity().runOnUiThread(()->{
+            ArrayList<BarEntry> values = new ArrayList<>();
+//            values.add(new BarEntry(1 * spaceForBar, 0.3f, Math.round((Math.random() * 10)) + "일"));
+            values.add(new BarEntry(2 * spaceForBar, 0.4f, Math.round((Math.random() * 10)) + "일"));
+            values.add(new BarEntry(3 * spaceForBar, 0.6f, Math.round((Math.random() * 10)) + "일"));
+            values.add(new BarEntry(4 * spaceForBar, 0.8f, Math.round((Math.random() * 10)) + "일"));
+            values.add(new BarEntry(5 * spaceForBar, 1.0f, Math.round((Math.random() * 10)) + "일"));
 
+            BarDataSet barDataSet;
+            barDataSet = new BarDataSet(values, "");
+            barDataSet.setColors(
+                    CalendarConstUtils.getDrunkLvColorMainByStep(0),
+                    CalendarConstUtils.getDrunkLvColorMainByStep(1),
+                    CalendarConstUtils.getDrunkLvColorMainByStep(2),
+                    CalendarConstUtils.getDrunkLvColorMainByStep(3),
+                    CalendarConstUtils.getDrunkLvColorMainByStep(4)
+            );
+
+            // 최댓값 최솟값을 위한 야매 변수..
+            ArrayList<BarEntry> hiddenValues = new ArrayList<>();
+            hiddenValues.add(new BarEntry(0, 0.0f, "")); // 최댓값
+            hiddenValues.add(new BarEntry(0, 1.1f, "")); // 최솟값
+            BarDataSet hiddenBarDataSet;
+            hiddenBarDataSet = new BarDataSet(hiddenValues, "hidden");
+            hiddenBarDataSet.setVisible(false);
+
+            ArrayList<IBarDataSet> dataSets = new ArrayList<>();
+            dataSets.add(barDataSet);
+            dataSets.add(hiddenBarDataSet);
+
+            BarData barData = new BarData(dataSets);
+            barData.setHighlightEnabled(false);
+            barData.setValueTextSize(8);
+            barData.setBarWidth(barWidth);
+            barData.setValueFormatter(new ValueFormatter() {
+                @Override
+                public String getBarLabel(BarEntry barEntry) {
+                    return "" + barEntry.getY() + "% " + barEntry.getData();
+                }
             });
+
+            ArrayList<String> xAxisLabelList = new ArrayList<>();
+            xAxisLabelList.add("");
+            xAxisLabelList.add("나름 취할 정도로");
+            xAxisLabelList.add("그냥 가볍게");
+            xAxisLabelList.add("필름 끊길 정도로");
+            xAxisLabelList.add("많이 취할 정도로");
+
+
+            horizontalBarChartItemArrayList.clear();
+            horizontalBarChartItemArrayList.add(HorizontalBarChartItem.builder()
+                    .title(getResources().getString(R.string.fragment_tab_statistics_title_frequency_drunk_level))
+                    .xAxisLabelList(xAxisLabelList)
+                    .barData(barData)
+                    .build());
+            horizontalBarChartItemArrayList.add(HorizontalBarChartItem.builder()
+                    .title(getResources().getString(R.string.fragment_tab_statistics_title_frequency_drunk_level))
+                    .xAxisLabelList(xAxisLabelList)
+                    .barData(barData)
+                    .build());
+            horizontalBarChartItemArrayList.add(HorizontalBarChartItem.builder()
+                    .title(getResources().getString(R.string.fragment_tab_statistics_title_frequency_drunk_level))
+                    .xAxisLabelList(xAxisLabelList)
+                    .barData(barData)
+                    .build());
+            horizontalBarChartItemArrayList.add(HorizontalBarChartItem.builder()
+                    .title(getResources().getString(R.string.fragment_tab_statistics_title_frequency_drunk_level))
+                    .xAxisLabelList(xAxisLabelList)
+                    .barData(barData)
+                    .build());
+
+            getActivity().runOnUiThread(()->horizontalBarChartRvAdapter.notifyDataSetChanged());
         }
-    }
-
-    private void a(){
-        // chart.setHighlightEnabled(false);
-
-        mBinding.testChart.setDrawBarShadow(false);
-
-        mBinding.testChart.setDrawValueAboveBar(true);
-
-        mBinding.testChart.getDescription().setEnabled(false);
-
-        // if more than 60 entries are displayed in the chart, no values will be
-        // drawn
-        mBinding.testChart.setMaxVisibleValueCount(60);
-
-        // scaling can now only be done on x- and y-axis separately
-        mBinding.testChart.setPinchZoom(false);
-
-        // draw shadows for each bar that show the maximum value
-        // chart.setDrawBarShadow(true);
-
-//        chart.setDrawGridBackground(false);
-//
-//        XAxis xl = chart.getXAxis();
-//        xl.setPosition(XAxisPosition.BOTTOM);
-//        xl.setTypeface(tfLight);
-//        xl.setDrawAxisLine(true);
-//        xl.setDrawGridLines(false);
-//        xl.setGranularity(10f);
-//
-//        YAxis yl = chart.getAxisLeft();
-//        yl.setTypeface(tfLight);
-//        yl.setDrawAxisLine(true);
-//        yl.setDrawGridLines(true);
-//        yl.setAxisMinimum(0f); // this replaces setStartAtZero(true)
-////        yl.setInverted(true);
-//
-//        YAxis yr = chart.getAxisRight();
-//        yr.setTypeface(tfLight);
-//        yr.setDrawAxisLine(true);
-//        yr.setDrawGridLines(false);
-//        yr.setAxisMinimum(0f); // this replaces setStartAtZero(true)
-////        yr.setInverted(true);
-//
-//        chart.setFitBars(true);
-//        chart.animateY(2500);
-//
-//        // setting data
-//        seekBarY.setProgress(50);
-//        seekBarX.setProgress(12);
-//
-//        Legend l = chart.getLegend();
-//        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-//        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
-//        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-//        l.setDrawInside(false);
-//        l.setFormSize(8f);
-//        l.setXEntrySpace(4f);
     }
 }

@@ -45,9 +45,8 @@ public class HomeTapAdapter extends FragmentStatePagerAdapter {
     @Override
     public int getCount() { return FRAGMENT_CNT; }
 
-    public void refreshTodayTab(){
-        fragment1.refreshData();
-    }
+    public void refreshTodayTab(){ fragment1.refreshData(); }
+    public void refreshStatisticsTab(){ fragment3.refreshData(); }
     public void moveToTodayDetail(){
         fragment2.moveToTodayDetail();
     }
