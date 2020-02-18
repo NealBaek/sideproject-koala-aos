@@ -64,9 +64,9 @@ public class TabStatisticsFragment extends BaseFragment {
     private int targetMonthIdx = DEFAULT_MONTH_IDX;
     private MonthModel targetMonthModel;
     private CalendarModel calendarModel;
-    private int cDrinkDayCnt = 0;
-    private int cQuitDayCnt = 0;
-    private int totalExpense = 0;
+    private int cDrinkDayCnt;
+    private int cQuitDayCnt;
+    private int totalExpense;
 
     private StatisticsTextChartRvAdapter textChartRvAdapter;
     private ArrayList<TextChartItem> textChartItemArrayList = new ArrayList<>();
@@ -162,6 +162,9 @@ public class TabStatisticsFragment extends BaseFragment {
             ArrayList<DayModel> cQuitTemps = new ArrayList<>();
             ArrayList<DayModel> cQuitDayList = new ArrayList<>();
 
+            cDrinkDayCnt = 0;
+            cQuitDayCnt = 0;
+            totalExpense = 0;
 
             int dayCnt = monthModel.dayList.size();
             for(int i = 0; i <dayCnt; ++ i){
