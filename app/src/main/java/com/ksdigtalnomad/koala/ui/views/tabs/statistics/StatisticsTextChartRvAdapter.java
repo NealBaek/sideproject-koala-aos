@@ -67,7 +67,7 @@ public class StatisticsTextChartRvAdapter extends BaseRecyclerViewAdapter<Statis
         private final String NOTENOUGTH_DATA = BaseApplication.getInstance().getResources().getString(R.string.fragment_tab_statistics_notenough_data);
         private final String NOTENOUGTH_INFO = BaseApplication.getInstance().getResources().getString(R.string.fragment_tab_statistics_notenough_info);
         private final String NO_DRINKCNT = BaseApplication.getInstance().getResources().getString(R.string.fragment_tab_statistics_no_drinkday);
-        private final String NO_EXPENSE = BaseApplication.getInstance().getResources().getString(R.string.fragment_tab_statistics_notenough_info);
+        private final String NO_EXPENSE = BaseApplication.getInstance().getResources().getString(R.string.fragment_tab_statistics_no_expense);
 
 
         ViewHolder(View itemView) {
