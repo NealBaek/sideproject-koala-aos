@@ -12,6 +12,7 @@ import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.data.AlarmDailyController;
 import com.ksdigtalnomad.koala.data.net.ServiceManager;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
 import com.ksdigtalnomad.koala.ui.views.guide.GuideActivity;
 import com.ksdigtalnomad.koala.ui.views.home.HomeActivity;
 import com.ksdigtalnomad.koala.helpers.data.FBRemoteControlHelper;
@@ -19,6 +20,8 @@ import com.ksdigtalnomad.koala.helpers.data.LanguageHelper;
 import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
 import com.ksdigtalnomad.koala.helpers.data.VersionCheckHelper;
+
+import java.util.concurrent.Executors;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -34,6 +37,14 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        // 첫 오픈 시 캘린더 데이터 생성
+        if(PreferenceHelper.isFirstOpen()){
+            Executors.newScheduledThreadPool(1).execute(()->{
+                CalendarDataController.getCalendarModel();
+            });
+        }
+
 
         LanguageHelper.initLanguage(this);
 
