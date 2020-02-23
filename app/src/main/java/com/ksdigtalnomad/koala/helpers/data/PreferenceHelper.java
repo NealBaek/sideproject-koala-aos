@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 //import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.data.models.alarmDaily.AlarmDaily;
@@ -22,6 +23,7 @@ public class PreferenceHelper {
     private static final String KEY_ALARM_DAILY_HOUR = "ALARM_DAILY_HOUR";
     private static final String KEY_ALARM_DAILY_MINUTE = "ALARM_DAILY_MINUTE";
     private static final String KEY_ALARM_DAILY_ENABLE = "ALARM_DAILY_ENABLE";
+    private static final String KEY_ADID = "ADID";
 
 
 
@@ -153,12 +155,19 @@ public class PreferenceHelper {
         String pushToken = getReadPreference().getString(KEY_PUSH_TOKEN, null);
         if (pushToken == null) {
             // todo: getToken() is deprecated
-//            pushToken = FirebaseInstanceId.getInstance().getToken();
-            setPushToken(pushToken);
+//            pushToken = FirebaseInstanceId.getInstance().tok
+//            setPushToken(pushToken);
         }
         return pushToken;
     }
 
+    // AdId
+    public static void setAdid(String adId){
+        if(adId != null) getEditPreference().putString(KEY_ADID, adId).apply();
+    }
+    public static String getAdid() {
+        return getReadPreference().getString(KEY_ADID, "");
+    }
 
 
 

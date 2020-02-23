@@ -175,7 +175,7 @@ public class CalendarDayDetailActivity extends BaseActivity {
         dayModel.memo = mBinding.memo.getText().toString();
         dayModel.isSaved = true;
 
-        ProgressHelper.showProgress(mBinding.bodyLayout);
+        ProgressHelper.showProgress(mBinding.bodyLayout, false);
         Executors.newSingleThreadExecutor().execute(()->{
             if(CalendarDataController.isNoDataYet()) CalendarDataController.setNoDataYet(false);
             CalendarDataController.updateDayModel(dayModel);

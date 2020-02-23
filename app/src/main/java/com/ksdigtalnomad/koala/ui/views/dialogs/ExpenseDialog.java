@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ksdigtalnomad.koala.R;
+import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
 import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
 import com.ksdigtalnomad.koala.ui.base.BaseDialogFragment;
 
@@ -61,6 +62,7 @@ public class ExpenseDialog extends BaseDialogFragment {
                     completeClickListener.onClick((result.isEmpty())? 0 : Double.valueOf(result)); dismiss();
                 }catch (Exception e){
                     completeClickListener.onClick((0)); dismiss();
+                    FBEventLogHelper.onError(e);
                 }
             }
             return false;
@@ -72,6 +74,7 @@ public class ExpenseDialog extends BaseDialogFragment {
                 completeClickListener.onClick((result.isEmpty())? 0 : Double.valueOf(result)); dismiss();
             }catch (Exception e){
                 completeClickListener.onClick((0)); dismiss();
+                FBEventLogHelper.onError(e);
             }
         });
         view.findViewById(R.id.btnCancel).setOnClickListener((v)->{

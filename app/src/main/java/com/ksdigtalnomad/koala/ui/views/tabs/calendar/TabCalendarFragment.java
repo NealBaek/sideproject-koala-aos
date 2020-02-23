@@ -4,11 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 
+import com.google.android.gms.ads.identifier.AdvertisingIdClient;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.gson.Gson;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.databinding.FragmentTabCalendarBinding;
 
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +20,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 import com.ksdigtalnomad.koala.helpers.ui.ProgressHelper;
+import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.base.BaseFragment;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
@@ -27,6 +33,7 @@ import com.ksdigtalnomad.koala.ui.views.home.HomeActivity;
 import com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.dayDetail.CalendarDayDetailActivity;
 
 
+import java.io.IOException;
 import java.util.concurrent.Executors;
 
 import static android.app.Activity.RESULT_OK;
@@ -61,7 +68,7 @@ public class TabCalendarFragment extends BaseFragment {
     }
 
     private void addCalendar(ViewGroup parent){
-        ProgressHelper.showProgress(((HomeActivity)getActivity()).mBinding.bodyLayout);
+        ProgressHelper.showProgress(((HomeActivity)getActivity()).mBinding.bodyLayout, true);
         Executors.newScheduledThreadPool(1).execute(()->{
             calendarView = new CalendarView(
                     mContext,
@@ -71,7 +78,8 @@ public class TabCalendarFragment extends BaseFragment {
             getActivity().runOnUiThread(()->{
                 parent.addView(calendarView, 0, new LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT));
                 parent.setBackgroundColor(Color.LTGRAY);
-                ProgressHelper.dismissProgress(((HomeActivity)getActivity()).mBinding.bodyLayout);
+
+                if(getActivity() != null && getActivity() instanceof  HomeActivity) ProgressHelper.dismissProgress(((HomeActivity)getActivity()).mBinding.bodyLayout);
             });
         });
     }

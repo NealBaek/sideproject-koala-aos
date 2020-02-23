@@ -125,7 +125,7 @@ public class TabStatisticsFragment extends BaseFragment {
     }
 
     // 차트
-    private void refreshTextChartRc(MonthModel monthModel){
+    private synchronized void refreshTextChartRc(MonthModel monthModel){
         if(CalendarDataController.isNoDataYet()){
             if(textChartItemArrayList.size() > 0) return;
 
@@ -283,7 +283,7 @@ public class TabStatisticsFragment extends BaseFragment {
             getActivity().runOnUiThread(()->textChartRvAdapter.notifyDataSetChanged());
         }
     }
-    private void refreshBarChartRc(MonthModel monthModel){
+    private synchronized void refreshBarChartRc(MonthModel monthModel){
         if(CalendarDataController.isNoDataYet()){
             // no data
             getActivity().runOnUiThread(()->{

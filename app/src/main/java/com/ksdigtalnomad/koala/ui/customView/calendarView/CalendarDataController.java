@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendar.CalendarView;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendarBody.CalendarModel;
@@ -32,10 +33,10 @@ public class CalendarDataController {
     private static final String KEY_TOTAL_DAY_LIST = "TOTAL_DAY_LIST";
     private static final String KEY_NO_DATA_YET = "NO_DATA_YET";
 
-    public static SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd");
-
     private static DayModel todayModelFromDayView = new DayModel();
     private static DayModel yesterdayModelFromDayView = new DayModel();
+
+
 
     private CalendarDataController(){}
     private static SharedPreferences.Editor getEditPreference() {
@@ -63,8 +64,6 @@ public class CalendarDataController {
         int monthIdx = 0;
         int yearIdx = 0;
         boolean isLeapYear = false;
-
-        df.setTimeZone(TimeZone.getDefault());
 
 
         // 오늘 날짜 구하기
@@ -152,9 +151,15 @@ public class CalendarDataController {
                     dayModel.yearIdx = yearIdx;
 
                     try{
-                        dayModel.setDate(df.parse("" + dayModel.year + "." + (dayModel.month < 10 ? ("0" + dayModel.month) : dayModel.month) + "." + (dayModel.day < 10 ? ("0" + dayModel.day) : dayModel.day)));
+                        dayModel.setDate((new SimpleDateFormat(DateHelper.FORMAT_DATE)).parse("" + dayModel.year + "." + (dayModel.month < 10 ? ("0" + dayModel.month) : dayModel.month) + "." + (dayModel.day < 10 ? ("0" + dayModel.day) : dayModel.day)));
                     }catch (ParseException e){
                         Log.d("ABC", "ParseException: " + e.getMessage());
+                        FBEventLogHelper.onError(e);
+                        return null;
+                    }catch (NumberFormatException e1){
+                        Log.d("ABC", "NumberFormatException: " + e1.getMessage());
+                        FBEventLogHelper.onError(e1);
+                        return null;
                     }
 
                     dayModelList.add(dayModel);
@@ -182,9 +187,15 @@ public class CalendarDataController {
                         nDayModel.monthIdx = monthIdx;
                         nDayModel.yearIdx = yearIdx;
                         try{
-                            nDayModel.setDate(df.parse("" + nDayModel.year + "." + (nDayModel.month < 10 ? ("0" + nDayModel.month) : nDayModel.month) + "." + (nDayModel.day < 10 ? ("0" + nDayModel.day) : nDayModel.day)));
+                            nDayModel.setDate((new SimpleDateFormat(DateHelper.FORMAT_DATE)).parse("" + nDayModel.year + "." + (nDayModel.month < 10 ? ("0" + nDayModel.month) : nDayModel.month) + "." + (nDayModel.day < 10 ? ("0" + nDayModel.day) : nDayModel.day)));
                         }catch (ParseException e){
-                            nDayModel.setDate(new Date());
+                            Log.d("ABC", "ParseException: " + e.getMessage());
+                            FBEventLogHelper.onError(e);
+                            return null;
+                        }catch (NumberFormatException e1){
+                            Log.d("ABC", "NumberFormatException: " + e1.getMessage());
+                            FBEventLogHelper.onError(e1);
+                            return null;
                         }
                         nDayModel.isOutMonth = true;
 
@@ -304,7 +315,11 @@ public class CalendarDataController {
     private static void storeCalendarModel(CalendarModel model){ getEditPreference().putString(KEY_CALENDAR_MODEL, new Gson().toJson(model)).apply(); }
     private static CalendarModel dumpCalendarModel(){
         CalendarModel dumpModel = new Gson().fromJson(getReadPreference().getString(KEY_CALENDAR_MODEL, null), CalendarModel.class);
+        // Calendar 데이터 생성시 에러가 발생할 수 있다. 에러 발생 시 return null. 3번까지 Null 체크를 해서 생성한다.
         if(dumpModel == null) dumpModel = createCalendarModel();
+        if(dumpModel == null) dumpModel = createCalendarModel();
+        if(dumpModel == null) dumpModel = createCalendarModel();
+
         return dumpModel;
     }
 

@@ -6,8 +6,10 @@ import com.ksdigtalnomad.koala.data.models.calendar.Drink;
 import com.ksdigtalnomad.koala.data.models.calendar.Food;
 import com.ksdigtalnomad.koala.data.models.calendar.Friend;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.utils.DateHelper;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -29,7 +31,7 @@ public class DayModel implements Cloneable{
         if(date == null){
             try{
                 if(year > 0 && month > 0 && day > 0){
-                    date = CalendarDataController.df.parse("" + year + "." + (month < 10 ? ("0" + month) : month) + "." + (day < 10 ? ("0" + day) : day));
+                    date = (new SimpleDateFormat(DateHelper.FORMAT_DATE)).parse("" + year + "." + (month < 10 ? ("0" + month) : month) + "." + (day < 10 ? ("0" + day) : day));
                 }
             }catch (ParseException e){
                 Log.d("ABC", "ParseException: " + e.getMessage());

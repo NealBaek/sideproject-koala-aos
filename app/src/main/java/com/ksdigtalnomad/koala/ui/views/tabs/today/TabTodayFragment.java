@@ -67,7 +67,7 @@ public class TabTodayFragment extends BaseFragment {
 
 
     // NoDrinkCounts
-    private void calNoDrinkDays(){
+    private synchronized void calNoDrinkDays(){
         if(CalendarDataController.isNoDataYet()){
             getActivity().runOnUiThread(()->mBinding.noDrinkLayout.setVisibility(View.GONE));
         }else{
@@ -91,7 +91,7 @@ public class TabTodayFragment extends BaseFragment {
 
 
     // RecentDrinks
-    private void checkRecent7Days(){
+    private synchronized void checkRecent7Days(){
         if(CalendarDataController.isNoDataYet()) return;
 
         int fromDayIdx = 0;

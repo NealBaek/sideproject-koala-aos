@@ -1,8 +1,12 @@
 package com.ksdigtalnomad.koala.helpers.ui;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.v4.graphics.ColorUtils;
+import android.support.v4.view.MotionEventCompat;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -14,9 +18,9 @@ public class ProgressHelper {
 
     private static final int PROGRESS_COLOR = CalendarConstUtils.COLOL_MAIN;
     private static final int BLINDER_ID = 123456789;
-//    private static final int PROGRESS_ID = 987654321;
+    private static final int TILE_AUTO_CLOSE = 7000;
 
-    public static void showProgress(ViewGroup parent){
+    public static void showProgress(ViewGroup parent, Boolean isAutoClose){
         if(parent == null) return;
 
         // 프로그래스 생성
@@ -25,13 +29,13 @@ public class ProgressHelper {
 
         ProgressBar progressBar = new ProgressBar(parent.getContext());
         progressBar.setLayoutParams(progressLp);
-//        progressBar.setId(PROGRESS_ID);
 
         // 블라인더 생성
-        RelativeLayout blinder = new RelativeLayout(parent.getContext());
+        BlinderLayout blinder = new BlinderLayout(parent.getContext());
         blinder.setBackgroundColor(ColorUtils.setAlphaComponent(Color.BLACK, 100));
         blinder.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         blinder.setId(BLINDER_ID);
+        blinder.setEnabled(false);
 
 
         // 뷰 추가
@@ -39,9 +43,10 @@ public class ProgressHelper {
         parent.addView(blinder);
 
         // run progress
-        progressBar.post(()->{
-            progressBar.getIndeterminateDrawable().setColorFilter(PROGRESS_COLOR, PorterDuff.Mode.MULTIPLY);
-        });
+        progressBar.post(()->progressBar.getIndeterminateDrawable().setColorFilter(PROGRESS_COLOR, PorterDuff.Mode.MULTIPLY));
+
+        // 자동 종료
+        if(isAutoClose) progressBar.postDelayed(()->dismissProgress(parent), TILE_AUTO_CLOSE);
     }
 
 
@@ -56,14 +61,18 @@ public class ProgressHelper {
             blinder.setVisibility(View.GONE);
             parent.removeView(blinder);
         });
+    }
 
-//        ProgressBar progressBar = parent.findViewById(PROGRESS_ID);
-
-//        int childCnt = parent.getChildCount();
-//        for(int i = 0; i < childCnt; ++i){
-//            View child = parent.getChildAt(i);
-//            int childId = child.getId();
-//            if(childId == BLINDER_ID){ parent.removeView(child); }
-//        }
+    private static class BlinderLayout extends RelativeLayout{
+        public BlinderLayout(Context context) {
+            super(context);
+        }
+        public BlinderLayout(Context context, AttributeSet attrs) {
+            super(context, attrs);
+        }
+        @Override
+        public boolean dispatchTouchEvent(MotionEvent ev){
+            return true;//consume
+        }
     }
 }

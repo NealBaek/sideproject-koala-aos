@@ -50,11 +50,6 @@ public class StatisticsHorizontalBarChartRvAdapter extends BaseRecyclerViewAdapt
         this.itemList = itemList;
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        return super.getItemViewType(position);
-    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

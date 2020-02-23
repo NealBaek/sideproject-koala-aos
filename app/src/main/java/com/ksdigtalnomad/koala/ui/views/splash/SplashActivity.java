@@ -8,10 +8,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.data.AlarmDailyController;
 import com.ksdigtalnomad.koala.data.net.ServiceManager;
+import com.ksdigtalnomad.koala.helpers.data.ADIDHelper;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
+import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
 import com.ksdigtalnomad.koala.ui.views.guide.GuideActivity;
 import com.ksdigtalnomad.koala.ui.views.home.HomeActivity;
@@ -37,6 +40,15 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        // Adid 저장
+        ADIDHelper.saveAdid((adId)->{
+            if(adId != null && !adId.isEmpty()){
+                PreferenceHelper.setAdid(adId);
+                FirebaseAnalytics.getInstance(BaseApplication.getInstance()).setUserId(adId);
+            }
+        });
+
 
         // 첫 오픈 시 캘린더 데이터 생성
         if(PreferenceHelper.isFirstOpen()){

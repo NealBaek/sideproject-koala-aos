@@ -2,25 +2,26 @@ package com.ksdigtalnomad.koala.ui.customView.calendarView.utils;
 
 import android.util.Log;
 
+import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
 public class DateHelper {
 
     private DateHelper(){
-        df = new SimpleDateFormat("yyyy.MM.dd");
-
 
         today = new Date();
-        todayStr = df.format(today);
+        todayStr = (new SimpleDateFormat(DateHelper.FORMAT_DATE)).format(today);
 
 
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, -1);
         yesterday = calendar.getTime();
-        yesterdayStr = df.format(yesterday);
+        yesterdayStr = (new SimpleDateFormat(DateHelper.FORMAT_DATE)).format(yesterday);
 
     }
     private static DateHelper instance = null;
@@ -36,20 +37,20 @@ public class DateHelper {
     public static final String FORMAT_DATE = "yyyy.MM.dd";
 
     private Date today;
-    private SimpleDateFormat df;
+    private DateTimeFormatter df;
     private String todayStr;
     private Date yesterday;
     private String yesterdayStr;
 
 
     public boolean isSameDay(Date from, Date to){
-        return df.format(to).equals(df.format(from));
+        return (new SimpleDateFormat(DateHelper.FORMAT_DATE)).format(to).equals((new SimpleDateFormat(DateHelper.FORMAT_DATE)).format(from));
     }
     public boolean isToday(Date toCompare){
-        return todayStr.equals(df.format(toCompare));
+        return todayStr.equals((new SimpleDateFormat(DateHelper.FORMAT_DATE)).format(toCompare));
     }
     public boolean isYesterday(Date toCompare){
-        return yesterdayStr.equals(df.format(toCompare));
+        return yesterdayStr.equals((new SimpleDateFormat(DateHelper.FORMAT_DATE)).format(toCompare));
     }
 
     public boolean isAfterToday(Date toCompare){
@@ -64,7 +65,8 @@ public class DateHelper {
         try{
             return new SimpleDateFormat(pattern).parse(dateStr);
         }catch (ParseException e){
-            return new Date();
+            FBEventLogHelper.onError(e);
+            return null;
         }
     }
 
