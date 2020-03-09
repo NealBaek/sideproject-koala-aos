@@ -17,6 +17,10 @@ import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
 import com.ksdigtalnomad.koala.helpers.ui.InterviewHelper;
 import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 
+import static com.ksdigtalnomad.koala.ui.views.home.HomeTapAdapter.FRAGMENT_CNT;
+import static com.ksdigtalnomad.koala.ui.views.home.HomeTapAdapter.POS_STATISTICS;
+import static com.ksdigtalnomad.koala.ui.views.home.HomeTapAdapter.POS_TODAY;
+
 public class HomeActivity extends BaseActivity {
     public ActivityHomeBinding mBinding;
     private HomeTapAdapter tapAdapter;
@@ -45,14 +49,14 @@ public class HomeActivity extends BaseActivity {
         mBinding.tabLayout.addTab(mBinding.tabLayout.newTab().setText(getResources().getString(R.string.tap4_title)));
 
         mBinding.homeTabViewPager.setAdapter(tapAdapter);
-        mBinding.homeTabViewPager.setOffscreenPageLimit(4);
+        mBinding.homeTabViewPager.setOffscreenPageLimit(FRAGMENT_CNT);
         mBinding.homeTabViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mBinding.tabLayout));
         mBinding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if(tab.getPosition() == 0){ tapAdapter.refreshTodayTab(); }
-                else if(tab.getPosition() == 2){ tapAdapter.refreshStatisticsTab(); }
+                if(tab.getPosition() == POS_TODAY){ tapAdapter.refreshTodayTab(); }
+                else if(tab.getPosition() == POS_STATISTICS){ tapAdapter.refreshStatisticsTab(); }
                 mBinding.homeTabViewPager.setCurrentItem(tab.getPosition(), true);
             }
 
@@ -65,9 +69,6 @@ public class HomeActivity extends BaseActivity {
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
-        });
-        runOnUiThread(()->{
-            mBinding.homeTabViewPager.setCurrentItem(1);
         });
 
 

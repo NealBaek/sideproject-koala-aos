@@ -50,6 +50,8 @@ public class FBEventLogHelper {
             bundle.putString("friend_list", CalendarConstUtils.getFullStrFromFriendList(dayModel.friendList));
             bundle.putString("food_list", CalendarConstUtils.getFullStrFromFoodList(dayModel.foodList));
             bundle.putString("drink_list", CalendarConstUtils.getFullStrFromDrinkList(dayModel.drinkList));
+            bundle.putString("expense_str", String.valueOf(dayModel.expense));
+            bundle.putDouble("expense", dayModel.expense);
             bundle.putString("memo", dayModel.memo);
             bundle.putString("date", DateHelper.getInstance().getDateStr(DateHelper.FORMAT_FULL, dayModel.getDate()));
             bundle.putString("place", Locale.getDefault().toString());

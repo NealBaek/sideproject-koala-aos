@@ -15,8 +15,8 @@
 
 
     <string name="app_name">코알라</string>
-    <string name="tap1_title">요즘</string>
-    <string name="tap2_title">월간</string>
+    <string name="tap1_title">기록</string>
+    <string name="tap2_title">요즘</string>
     <string name="tap3_title">통계</string>
     <string name="tap4_title">설정</string>
 

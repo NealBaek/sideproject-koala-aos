@@ -11,11 +11,18 @@ import com.ksdigtalnomad.koala.ui.views.tabs.today.TabTodayFragment;
 
 public class HomeTapAdapter extends FragmentStatePagerAdapter {
 
-    private final int FRAGMENT_CNT = 4;
-    private TabTodayFragment fragment1;
-    private TabCalendarFragment fragment2;
-    private TabStatisticsFragment fragment3;
-    private TabSettingsFragment fragment4;
+    public static final int FRAGMENT_CNT = 4;
+    public static final int POS_CALENDAR = 0;
+    public static final int POS_TODAY = 1;
+    public static final int POS_STATISTICS = 2;
+    public static final int POS_SETTINGS = 3;
+
+
+    private TabCalendarFragment tabCalendarFragment;
+    private TabTodayFragment tabTodayFragment;
+    private TabStatisticsFragment tabStatisticsFragment;
+    private TabSettingsFragment tabSettingsFragment;
+
 
 
     public HomeTapAdapter(FragmentManager fm ){
@@ -26,17 +33,17 @@ public class HomeTapAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch(position){
             case 0:
-                if(fragment1 == null){  fragment1 = TabTodayFragment.newInstance(); }
-                return fragment1;
+                if(tabCalendarFragment == null){  tabCalendarFragment = TabCalendarFragment.newInstance(); }
+                return tabCalendarFragment;
             case 1:
-                if(fragment2 == null){  fragment2 = TabCalendarFragment.newInstance(); }
-                return fragment2;
+                if(tabTodayFragment == null){  tabTodayFragment = TabTodayFragment.newInstance(); }
+                return tabTodayFragment;
             case 2:
-                if(fragment3 == null){  fragment3 = TabStatisticsFragment.newInstance(); }
-                return fragment3;
+                if(tabStatisticsFragment == null){  tabStatisticsFragment = TabStatisticsFragment.newInstance(); }
+                return tabStatisticsFragment;
             case 3:
-                if(fragment4 == null){  fragment4 = TabSettingsFragment.newInstance(); }
-                return fragment4;
+                if(tabSettingsFragment == null){  tabSettingsFragment = TabSettingsFragment.newInstance(); }
+                return tabSettingsFragment;
             default:
                 return null;
         }
@@ -45,7 +52,8 @@ public class HomeTapAdapter extends FragmentStatePagerAdapter {
     @Override
     public int getCount() { return FRAGMENT_CNT; }
 
-    public void refreshTodayTab(){ if(fragment1 != null) fragment1.refreshData(); }
-    public void refreshStatisticsTab(){ if(fragment3 != null) fragment3.refreshData(); }
-    public void moveToTodayDetail(){ if(fragment2 != null) fragment2.moveToTodayDetail(); }
+    public void moveToTodayDetail(){ if(tabCalendarFragment != null) tabCalendarFragment.moveToTodayDetail(); }
+    public void refreshTodayTab(){ if(tabTodayFragment != null) tabTodayFragment.refreshData(); }
+    public void refreshStatisticsTab(){ if(tabStatisticsFragment != null) tabStatisticsFragment.refreshData(); }
+
 }

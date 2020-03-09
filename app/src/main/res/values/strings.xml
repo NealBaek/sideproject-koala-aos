@@ -13,8 +13,8 @@
 
 
     <string name="app_name">Koala</string>
-    <string name="tap1_title">Daily</string>
-    <string name="tap2_title">Monthly</string>
+    <string name="tap1_title">Record</string>
+    <string name="tap2_title">Daily</string>
     <string name="tap3_title">Report</string>
     <string name="tap4_title">Setting</string>
 
