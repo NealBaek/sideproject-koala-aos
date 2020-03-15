@@ -47,8 +47,10 @@ public class CalendarDayDetailActivity extends BaseActivity {
 
     private final Drawable THUMB_DARKGRAY = BaseApplication.getInstance().getResources().getDrawable(R.drawable.shape_seekbar_darkgray);
     private final Drawable THUMB_RED = BaseApplication.getInstance().getResources().getDrawable(R.drawable.shape_seekbar_red);
+    private final Drawable THUMB_LIGHT_RED = BaseApplication.getInstance().getResources().getDrawable(R.drawable.shape_seekbar_lightred);
     private final Drawable PROGRESS_DARKGRAY = BaseApplication.getInstance().getResources().getDrawable(R.drawable.bg_seekbar_drakgray);
     private final Drawable PROGRESS_RED = BaseApplication.getInstance().getResources().getDrawable(R.drawable.bg_seekbar_red);
+    private final Drawable PROGRESS_LIGHTRED = BaseApplication.getInstance().getResources().getDrawable(R.drawable.bg_seekbar_lightred);
 
     private static Intent intent(Context context) {  return new Intent(context, CalendarDayDetailActivity.class);  }
     public static Intent intent(Context context, DayModel dayModel) {
@@ -135,8 +137,22 @@ public class CalendarDayDetailActivity extends BaseActivity {
         mBinding.drunkLevelComment.setText(CalendarConstUtils.getDrunkLvComment(dayModel.drunkLevel));
         runOnUiThread(()->{
             mBinding.drunkLevelComment.setTextColor(CalendarConstUtils.getDrunkLvColorRed(dayModel.drunkLevel));
-            mBinding.drunkLevel.setThumb(dayModel.drunkLevel == CalendarConstUtils.DRUNK_LV_0 ? THUMB_DARKGRAY : THUMB_RED);
-            mBinding.drunkLevel.setProgressDrawable(dayModel.drunkLevel == CalendarConstUtils.DRUNK_LV_0 ? PROGRESS_DARKGRAY: PROGRESS_RED);
+            switch (dayModel.drunkLevel) {
+                case CalendarConstUtils.DRUNK_LV_1:
+                case CalendarConstUtils.DRUNK_LV_2:
+                    mBinding.drunkLevel.setThumb(THUMB_LIGHT_RED);
+                    mBinding.drunkLevel.setProgressDrawable(PROGRESS_LIGHTRED);
+                    break;
+                case CalendarConstUtils.DRUNK_LV_3:
+                case CalendarConstUtils.DRUNK_LV_MAX:
+                    mBinding.drunkLevel.setThumb(THUMB_RED);
+                    mBinding.drunkLevel.setProgressDrawable(PROGRESS_LIGHTRED);
+                    break;
+                default:
+                    mBinding.drunkLevel.setThumb(THUMB_DARKGRAY);
+                    mBinding.drunkLevel.setProgressDrawable(PROGRESS_DARKGRAY);
+                    break;
+            }
         });
     }
 

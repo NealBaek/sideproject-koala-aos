@@ -14,8 +14,7 @@
     <color name="colorHalfTransparent">#50000000</color>
     <color name="colorYellow">#fae100</color>
     <color name="colorRed">#FF6363</color>
-
-
-
+    <color name="colorRedAlpha">#25FF6363</color>
+    <color name="colorLightRed">#FF8A8A</color>
 
 </resources>
