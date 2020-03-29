@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.detailListEdit;
+package com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.detailListEdit;
 
 import android.content.Context;
 import android.content.Intent;

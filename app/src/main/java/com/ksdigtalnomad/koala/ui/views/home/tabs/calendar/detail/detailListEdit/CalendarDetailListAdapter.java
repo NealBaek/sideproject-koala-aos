@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.detailListEdit;
+package com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.detailListEdit;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.ksdigtalnomad.koala.ui.base.BaseRecyclerViewAdapter;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import static com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity.TYPE_DRINKS;
-import static com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity.TYPE_FOODS;
-import static com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity.TYPE_FRIENDS;
+import static com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity.TYPE_DRINKS;
+import static com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity.TYPE_FOODS;
+import static com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity.TYPE_FRIENDS;
 
 
 public class CalendarDetailListAdapter extends BaseRecyclerViewAdapter<CalendarDetailListAdapter.ViewHolder> {

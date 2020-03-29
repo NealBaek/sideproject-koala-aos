@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.dayDetail;
+package com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.dayDetail;
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,14 +26,13 @@ import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.views.dialogs.ExpenseDialog;
-import com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity;
+import com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity;
 import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
 import com.ksdigtalnomad.koala.helpers.ui.KeyboardHelper;
 import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
 
 import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 public class CalendarDayDetailActivity extends BaseActivity {
 

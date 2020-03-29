@@ -15,6 +15,41 @@ import java.util.concurrent.ScheduledExecutorService;
 
 public class FBEventLogHelper {
 
+    // v 0.3.6
+    private static final String CUSTOM_ADS_CLICK= "CUSTOM_ADS_click";
+    public enum Partner{
+        sookDak("숙취닥터");
+
+        private String name;
+        Partner(String name){
+            this.name = name;
+        }
+    }
+    public enum Screen{
+        mainBanner("메인 배너");
+
+        private String name;
+        Screen(String name){
+            this.name = name;
+        }
+    }
+
+    public static void onCustomAdsClick(Partner partner, Screen screen){
+        Executors.newScheduledThreadPool(1).execute(()->{
+            Bundle bundle = new Bundle();
+
+            bundle.putString("adId", PreferenceHelper.getAdid());
+            bundle.putString("partner", partner.name);
+            bundle.putString("screenName", screen.name);
+            bundle.putString("place", Locale.getDefault().toString());
+            bundle.putString("createdAt", DateHelper.getInstance().getTodayStr(DateHelper.FORMAT_FULL));
+
+            FirebaseAnalytics
+                    .getInstance(BaseApplication.getInstance())
+                    .logEvent(CUSTOM_ADS_CLICK, bundle);
+        });
+    }
+
     // v 0.3.2
     private static final String FRIENDS_ADD = "DAY_DETAIL_LIST_EDIT_FRIEND_add";
     private static final String FRIENDS_ADD_DONE = "DAY_DETAIL_LIST_EDIT_FRIEND_add_done";

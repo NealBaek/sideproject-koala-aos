@@ -5,7 +5,7 @@
     <data>
         <variable
             name="fragment"
-            type="com.ksdigtalnomad.koala.ui.views.tabs.statistics.TabStatisticsFragment"/>
+            type="com.ksdigtalnomad.koala.ui.views.home.tabs.statistics.TabStatisticsFragment"/>
     </data>
     <LinearLayout
         android:layout_width="match_parent"

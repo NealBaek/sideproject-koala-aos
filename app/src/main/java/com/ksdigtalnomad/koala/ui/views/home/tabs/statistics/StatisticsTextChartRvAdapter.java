@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.ui.views.tabs.statistics;
+package com.ksdigtalnomad.koala.ui.views.home.tabs.statistics;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

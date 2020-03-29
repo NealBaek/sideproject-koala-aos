@@ -4,10 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.ksdigtalnomad.koala.ui.views.tabs.calendar.TabCalendarFragment;
-import com.ksdigtalnomad.koala.ui.views.tabs.settings.TabSettingsFragment;
-import com.ksdigtalnomad.koala.ui.views.tabs.statistics.TabStatisticsFragment;
-import com.ksdigtalnomad.koala.ui.views.tabs.today.TabTodayFragment;
+import com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.TabCalendarFragment;
+import com.ksdigtalnomad.koala.ui.views.home.tabs.settings.TabSettingsFragment;
+import com.ksdigtalnomad.koala.ui.views.home.tabs.statistics.TabStatisticsFragment;
+import com.ksdigtalnomad.koala.ui.views.home.tabs.today.TabTodayFragment;
 
 public class HomeTapAdapter extends FragmentStatePagerAdapter {
 

@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.ui.views.tabs.settings;
+package com.ksdigtalnomad.koala.ui.views.home.tabs.settings;
 
 import android.content.Context;
 import android.content.Intent;

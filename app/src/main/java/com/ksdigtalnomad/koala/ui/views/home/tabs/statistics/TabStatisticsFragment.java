@@ -1,8 +1,5 @@
-package com.ksdigtalnomad.koala.ui.views.tabs.statistics;
+package com.ksdigtalnomad.koala.ui.views.home.tabs.statistics;
 
-import android.accessibilityservice.GestureDescription;
-import android.content.Context;
-import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 
 import com.github.mikephil.charting.data.BarData;
@@ -10,7 +7,6 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.google.android.gms.common.util.CollectionUtils;
 import com.ksdigtalnomad.koala.data.models.calendar.Drink;
 import com.ksdigtalnomad.koala.data.models.calendar.Food;
 import com.ksdigtalnomad.koala.data.models.calendar.Friend;
@@ -18,18 +14,14 @@ import com.ksdigtalnomad.koala.databinding.FragmentTabStatisticsBinding;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
 import com.ksdigtalnomad.koala.helpers.data.HashMapHelper;
 import com.ksdigtalnomad.koala.helpers.data.ParseHelper;
-import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
-import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
 import com.ksdigtalnomad.koala.ui.base.BaseFragment;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
@@ -38,19 +30,19 @@ import com.ksdigtalnomad.koala.ui.customView.calendarView.calendarBody.CalendarM
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.month.MonthModel;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.utils.DateHelper;
-import com.ksdigtalnomad.koala.ui.views.tabs.statistics.StatisticsTextChartRvAdapter.TextChartItem;
-import com.ksdigtalnomad.koala.ui.views.tabs.statistics.StatisticsHorizontalBarChartRvAdapter.HorizontalBarChartItem;
+import com.ksdigtalnomad.koala.ui.views.home.tabs.statistics.StatisticsTextChartRvAdapter.TextChartItem;
+import com.ksdigtalnomad.koala.ui.views.home.tabs.statistics.StatisticsHorizontalBarChartRvAdapter.HorizontalBarChartItem;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.Executors;
 
-import static com.ksdigtalnomad.koala.ui.views.tabs.statistics.StatisticsHorizontalBarChartRvAdapter.LABEL_CNT;
-import static com.ksdigtalnomad.koala.ui.views.tabs.statistics.StatisticsHorizontalBarChartRvAdapter.MAX_DATA_CNT;
-import static com.ksdigtalnomad.koala.ui.views.tabs.statistics.StatisticsHorizontalBarChartRvAdapter.BAR_WIDTH;
-import static com.ksdigtalnomad.koala.ui.views.tabs.statistics.StatisticsHorizontalBarChartRvAdapter.COLOR_ARRAY_MAIN;
-import static com.ksdigtalnomad.koala.ui.views.tabs.statistics.StatisticsHorizontalBarChartRvAdapter.BAR_SPACE;
+import static com.ksdigtalnomad.koala.ui.views.home.tabs.statistics.StatisticsHorizontalBarChartRvAdapter.LABEL_CNT;
+import static com.ksdigtalnomad.koala.ui.views.home.tabs.statistics.StatisticsHorizontalBarChartRvAdapter.MAX_DATA_CNT;
+import static com.ksdigtalnomad.koala.ui.views.home.tabs.statistics.StatisticsHorizontalBarChartRvAdapter.BAR_WIDTH;
+import static com.ksdigtalnomad.koala.ui.views.home.tabs.statistics.StatisticsHorizontalBarChartRvAdapter.COLOR_ARRAY_MAIN;
+import static com.ksdigtalnomad.koala.ui.views.home.tabs.statistics.StatisticsHorizontalBarChartRvAdapter.BAR_SPACE;
 
 public class TabStatisticsFragment extends BaseFragment {
 

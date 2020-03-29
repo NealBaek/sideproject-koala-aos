@@ -7,13 +7,13 @@ import android.content.SharedPreferences;
 //import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
+import com.ksdigtalnomad.koala.BuildConfig;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.data.models.alarmDaily.AlarmDaily;
 import com.ksdigtalnomad.koala.data.models.User;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 
 public class PreferenceHelper {
-    private static final String PREF_FILE_NAME = "BUDDY_COIN";
     private static final String KEY_ACCESS_TOKEN = "ACCESS_TOKEN";
     private static final String KEY_FIRST_OPEN = "FIRST_OPEN";
     private static final String KEY_OPEN_COUNT = "OPEN_COUNT";
@@ -35,12 +35,12 @@ public class PreferenceHelper {
     }
     private static SharedPreferences.Editor getEditPreference() {
         Context context = BaseApplication.getInstance().getApplicationContext();
-        SharedPreferences pref = context.getSharedPreferences(PREF_FILE_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences(BuildConfig.PREF_FILE_NAME, Activity.MODE_PRIVATE);
         return pref.edit();
     }
     private static SharedPreferences getReadPreference() {
         Context context = BaseApplication.getInstance().getApplicationContext();
-        return context.getSharedPreferences(PREF_FILE_NAME, Activity.MODE_PRIVATE);
+        return context.getSharedPreferences(BuildConfig.PREF_FILE_NAME, Activity.MODE_PRIVATE);
     }
 
 

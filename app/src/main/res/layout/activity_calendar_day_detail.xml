@@ -2,17 +2,17 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.views.tabs.calendar.detail.dayDetail.CalendarDayDetailActivity">
+    tools:context=".ui.views.home.tabs.calendar.detail.dayDetail.CalendarDayDetailActivity">
     <data>
         <variable
             name="activity"
-            type="com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.dayDetail.CalendarDayDetailActivity"/>
+            type="com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.dayDetail.CalendarDayDetailActivity"/>
         <variable
             name="dayModel"
             type="com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel"/>
         <import type="com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils"/>
         <import type="com.ksdigtalnomad.koala.helpers.data.ParseHelper"/>
-        <import type="com.ksdigtalnomad.koala.ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity"/>
+        <import type="com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity"/>
         <!--<import type=""/>-->
     </data>
     <RelativeLayout

@@ -32,8 +32,8 @@
 
         <activity android:name=".ui.views.guide.GuideActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.views.home.HomeActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.views.tabs.calendar.detail.dayDetail.CalendarDayDetailActivity" android:screenOrientation="portrait" />
-        <activity android:name=".ui.views.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".ui.views.home.tabs.calendar.detail.dayDetail.CalendarDayDetailActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ui.views.home.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
 
 
         <!-- FCM -->

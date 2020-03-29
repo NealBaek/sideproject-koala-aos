@@ -1,23 +1,18 @@
-package com.ksdigtalnomad.koala.ui.views.tabs.statistics;
+package com.ksdigtalnomad.koala.ui.views.home.tabs.statistics;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.ksdigtalnomad.koala.R;
-import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
-import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.base.BaseRecyclerViewAdapter;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 

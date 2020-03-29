@@ -15,8 +15,8 @@ android {
         applicationId "com.ksdigtalnomad.koala"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 7
-        versionName "0.3.5"
+        versionCode 8
+        versionName "0.3.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
@@ -31,6 +31,8 @@ android {
     }
     buildTypes {
         release {
+            buildConfigField "String", "PREF_FILE_NAME", '"BUDDY_COIN"' // 절대 변경하지 말것.
+            buildConfigField "String", "BADGE_VERSION", '"0.3.6"'
             buildConfigField "String", "SERVER_URL", '"http://192.168.0.6"' // 이디아 wifi
             buildConfigField "String", "SERVER_PORT", '":3000"'
             buildConfigField "String", "API_PREFIX", '""'
@@ -40,6 +42,8 @@ android {
 //            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
+            buildConfigField "String", "PREF_FILE_NAME", '"BUDDY_COIN"' // 절대 변경하지 말것.
+            buildConfigField "String", "BADGE_VERSION", '"0.3.6"'
 //            buildConfigField "String", "SERVER_URL", '""'
 //            buildConfigField "String", "SERVER_PORT", '""'
 //            buildConfigField "String", "API_PREFIX", '"/api/v1/"'
