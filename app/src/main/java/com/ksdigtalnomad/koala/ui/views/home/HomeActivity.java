@@ -20,6 +20,8 @@ import com.ksdigtalnomad.koala.databinding.ActivityHomeBinding;
 import com.ksdigtalnomad.koala.helpers.ui.BadgeHelper;
 import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
+import com.ksdigtalnomad.koala.ui.base.BaseApplication;
+import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.views.dialogs.ExitDialog;
 import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
 import com.ksdigtalnomad.koala.helpers.ui.InterviewHelper;
@@ -33,6 +35,8 @@ public class HomeActivity extends BaseActivity {
     public ActivityHomeBinding mBinding;
     private HomeTapAdapter tapAdapter;
     private static final String KEY_NOTI_ALARM_DAILY = "NOTI_ALARM_DAILY";
+    private int colorGray = BaseApplication.getInstance().getResources().getColor(R.color.colorGray);
+    private int colorMain = BaseApplication.getInstance().getResources().getColor(R.color.colorMain);
 
     public static Intent intent(Context context) {  return new Intent(context, HomeActivity.class);  }
     public static Intent intentFromNotiAlarmDaily(Context context) {
@@ -58,9 +62,12 @@ public class HomeActivity extends BaseActivity {
             tabView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             TextView tabTitle = new TextView(mBinding.tabLayout.getContext());
             tabTitle.setText(getResources().getString(tabTitleList[i]));
+            tabTitle.setTextColor( i == 0 ? colorMain : colorGray);
             tabTitle.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             tabTitle.setGravity(Gravity.CENTER);
+            tabTitle.setId(i);
             tabView.addView(tabTitle);
+            Log.d("ABC", "tabTitle id: " + tabTitle.getId() + " // i: " + i);
 
             TabLayout.Tab tab = mBinding.tabLayout.newTab();
             tab.setCustomView(tabView);
@@ -82,7 +89,20 @@ public class HomeActivity extends BaseActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 if(tab.getPosition() == POS_TODAY){ tapAdapter.refreshTodayTab(); }
                 else if(tab.getPosition() == POS_STATISTICS){ tapAdapter.refreshStatisticsTab(); }
+
                 mBinding.homeTabViewPager.setCurrentItem(tab.getPosition(), true);
+                try{
+                    int cnt = mBinding.tabLayout.getTabCount();
+                    for(int i = 0; i < cnt; ++i){
+                        Log.d("ABC", "i: " + i + ", cnt: " + cnt);
+                        TextView tv = mBinding.tabLayout.getTabAt(i).getCustomView().findViewById(i);
+                        Log.d("ABC", "tv: " + tv.getId());
+                        tv.setTextColor( i == tab.getPosition() ? colorMain : colorGray);
+                    }
+                }catch (Exception e){
+                    FBEventLogHelper.onError(e);
+                    Log.d("ABC", "E: " + e.getLocalizedMessage());
+                }
             }
 
             @Override
