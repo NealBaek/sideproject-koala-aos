@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="fragment"
             type="com.ksdigtalnomad.koala.ui.views.home.tabs.settings.TabSettingsFragment"/>
+        <import type="com.ksdigtalnomad.koala.ui.customView.BadgeView.Key"/>
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -100,17 +101,20 @@
                     layout="@layout/view_line_ltgray"/>
 
                 <!-- 개발자에게 문의 -->
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_height="62dp"
                     android:gravity="center_vertical"
                     android:padding="20dp"
                     android:onClick="@{()->fragment.onKakaoOpenChatRoomClick()}">
 
                     <TextView
+                        android:id="@+id/tv_info_kakao"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
                         android:text="@string/fragment_tab_settings_info_kakao"
                         android:textColor="@color/colorDarkGray"/>
 
@@ -118,9 +122,10 @@
                         android:layout_width="53dp"
                         android:layout_height="25dp"
                         android:layout_marginLeft="12dp"
+                        android:layout_toRightOf="@id/tv_info_kakao"
                         android:src="@drawable/ic_kakao"/>
 
-                </LinearLayout>
+                </RelativeLayout>
                 <include
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -205,10 +210,44 @@
                     layout="@layout/view_line_ltgray"/>
 
 
-                <!-- 앱 칭찬하기 -->
-                <LinearLayout
+                <!-- 달력 디자인 -->
+                <RelativeLayout
+                    android:id="@+id/layout_calendar_design"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="62dp"
+                    android:orientation="horizontal"
+                    android:padding="20dp"
+                    android:onClick="@{()->fragment.onCalendarDesignClick()}">
+
+                    <TextView
+                        android:id="@+id/tv_info_calendar_design"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:text="@string/fragment_tab_settings_info_calendar_design"
+                        android:textColor="@color/colorDarkGray"/>
+
+                    <com.ksdigtalnomad.koala.ui.customView.BadgeView
+                        android:id="@+id/view_badge"
+                        android:layout_width="7dp"
+                        android:layout_height="7dp"
+                        android:layout_alignTop="@id/tv_info_calendar_design"
+                        android:layout_toRightOf="@id/tv_info_calendar_design"
+                        android:background="@drawable/shape_badge"
+                        app:badgeName="@{Key.v036_settingTapCalendarDesign}"/>
+
+                </RelativeLayout>
+                <include
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    layout="@layout/view_line_ltgray"/>
+
+                <!-- 앱 칭찬하기 -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="62dp"
                     android:orientation="horizontal"
                     android:padding="20dp"
                     android:onClick="@{()->fragment.onOpenPlayStoreComplementClick()}">
@@ -216,10 +255,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
                         android:text="@string/fragment_tab_settings_info_play_store"
                         android:textColor="@color/colorDarkGray"/>
 
-                </LinearLayout>
+                </RelativeLayout>
                 <include
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -227,20 +269,22 @@
 
 
                 <!-- 공유하기 -->
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_height="62dp"
                     android:padding="20dp"
                     android:onClick="@{()->fragment.onShareClick()}">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
                         android:text="@string/fragment_tab_settings_info_share"
                         android:textColor="@color/colorDarkGray"/>
 
-                </LinearLayout>
+                </RelativeLayout>
                 <include
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -249,7 +293,7 @@
                 <!-- 버전 정보 -->
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="62dp"
                     android:padding="20dp"
                     android:onClick="@{()->fragment.onVersionClick()}">
 

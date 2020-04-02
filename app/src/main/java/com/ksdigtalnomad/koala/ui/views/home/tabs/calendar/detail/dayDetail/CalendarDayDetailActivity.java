@@ -56,7 +56,8 @@ public class CalendarDayDetailActivity extends BaseActivity {
         Intent intent = intent(context);
         intent.putExtra(KEY_DAY_MODEL, new Gson().toJson(dayModel));
         return intent;
-    }public static Intent intentFromNotiAlarmDaily(Context context, DayModel dayModel) {
+    }
+    public static Intent intentFromNotiAlarmDaily(Context context, DayModel dayModel) {
         Intent intent = intent(context);
         intent.putExtra(KEY_NOTI_ALARM_DAILY, true);
         intent.putExtra(KEY_DAY_MODEL, new Gson().toJson(dayModel));

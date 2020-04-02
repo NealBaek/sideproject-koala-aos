@@ -11,7 +11,6 @@
     <string name="admob_id_banner_exit">ca-app-pub-9300115819443880/3926214052</string>
 
 
-
     <string name="app_name">Koala</string>
     <string name="tap1_title">Record</string>
     <string name="tap2_title">Daily</string>
@@ -63,13 +62,10 @@
     <string name="tap_today_no_drink_info_3" formatted="true">Since %s</string>
 
 
-
     <!-- Calendar -->
     <string name="calendar_today">Today</string>
     <string name="default_friend_list">Alone</string>
     <string name="default_food_list">Only alcohol</string>
-
-
 
 
     <!-- acitivity_calendar_detail_list_edit -->
@@ -103,6 +99,7 @@
     <string name="fragment_tab_settings_info_team_3">&#160;ourselves.</string>
     <string name="fragment_tab_settings_info_team_4">This is the first step.</string>
     <string name="fragment_tab_settings_info_team_5">- Koala team for your challenge</string>
+    <string name="fragment_tab_settings_info_calendar_design">Calendar Design</string>
     <string name="fragment_tab_settings_info_kakao">1:1 Chat with Koala team</string>
     <string name="fragment_tab_settings_info_play_store">Give reviews for Koala</string>
     <string name="fragment_tab_settings_info_share">Share Koala</string>
@@ -111,6 +108,10 @@
     <string name="fragment_tab_settings_info_push_title_2">Push alarm time set</string>
     <string name="fragment_tab_settings_info_push_1">Push messages are delivered for recording daily.</string>
     <string name="fragment_tab_settings_info_push_2">Set the time to receive push messages daily.</string>
+    <string name="settings_calendar_desgin_defaults_title">술 마신 날을 강조 표시</string>
+    <string name="settings_calendar_desgin_defaults_subtitle">붉은 색으로 따끔한 경고의 느낌을 줍니다.</string>
+    <string name="settings_calendar_desgin_stamp_1_title">술 없는 날을 강조 표시</string>
+    <string name="settings_calendar_desgin_stamp_1_subtitle">귀여운 코알라가 잘했다고 칭찬해 줍니다.</string>
 
 
     <!-- fragment_tab_statistics -->
@@ -137,23 +138,10 @@
     <string name="fragment_tab_statistics_title_frequency_friend">Whom I was with the most</string>
 
 
-
-
     <!-- fragment_tab_today -->
     <string name="fragment_tab_today_info_not_enough_data_1">No data</string>
     <string name="fragment_tab_today_info_not_enough_data_2">Not all recent 7 days are recorded.</string>
     <string name="fragment_tab_today_info_not_enough_data_3">Please finish recording at Monthly tab.</string>
-
-
-
-
-
-
-
-
-
-
-
 
 
     <!-- 토스트 문구 -->
@@ -193,8 +181,6 @@
     <string name="btn_see_total">Details ></string>
 
 
-
-
     <!-- 가이드 -->
     <string name="guide_start">I am ready!</string>
     <string name="guide_title_1">Record</string>
@@ -205,8 +191,6 @@
     <string name="guide_contents_2">Daily recording is important.\nReceive alarms on the set time daily.\nExplore memory and record last night.</string>
     <string name="guide_contents_3">How about your recent life?\nHow many did you drink this month?</string>
     <string name="guide_contents_4">Just see how much you drink.\nJust see yourself.\nThis is the first step.</string>
-
-
 
 
 </resources>

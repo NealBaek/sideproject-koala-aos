@@ -124,6 +124,10 @@ public class TabSettingsFragment extends BaseFragment {
         customTimePickerDialog.show(getActivity().getFragmentManager(), "CustomTimePickerDialog");
 
     }
+    public void onCalendarDesignClick(){
+        mBinding.viewBadge.onClick();
+        startActivity(SettingCalendarDesignActivity.intent(getActivity()));
+    }
     public void onOpenPlayStoreComplementClick(){
         PlayStoreHelper.openMyAppInPlayStore(getActivity());
         FBEventLogHelper.onPlayStoreComplement();
@@ -147,5 +151,7 @@ public class TabSettingsFragment extends BaseFragment {
 
     }
     public void onVersionClick(){  }
+
+
 
 }

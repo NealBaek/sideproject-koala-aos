@@ -6,21 +6,20 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-
     <application
         android:name=".ui.base.BaseApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:networkSecurityConfig="@xml/network_security_config">
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.views.home.tabs.settings.SettingCalendarDesignActivity"></activity>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admob_id_app" />
-
 
         <activity android:name=".ui.views.splash.SplashActivity">
             <intent-filter>
@@ -29,14 +28,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.views.guide.GuideActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.views.home.HomeActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.views.home.tabs.calendar.detail.dayDetail.CalendarDayDetailActivity" android:screenOrientation="portrait" />
-        <activity android:name=".ui.views.home.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
-
-
-        <!-- FCM -->
+        <activity
+            android:name=".ui.views.guide.GuideActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.views.home.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.views.home.tabs.calendar.detail.dayDetail.CalendarDayDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.views.home.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" /> <!-- FCM -->
         <service
             android:name=".service.fcm.FirebaseMessagingService"
             android:stopWithTask="false">
@@ -44,10 +48,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
-        </service>
-
-
-        <!-- Package Receiver -->
+        </service> <!-- Package Receiver -->
         <receiver
             android:name=".service.PackageReceiver"
             android:enabled="true"
@@ -55,13 +56,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-        </receiver>
-
-
-
-
-
-        <!-- AlarmDaily -->
+        </receiver> <!-- AlarmDaily -->
         <receiver android:name=".service.alarm.AlarmDailyReceiver">
             <intent-filter>
                 <action android:name="com.test.intent.action.ALARM" />
@@ -72,10 +67,7 @@
             android:name=".service.alarm.AlarmDailyJobIntentService"
             android:enabled="true"
             android:exported="false"
-            android:permission="android.permission.BIND_JOB_SERVICE"/>
-
-
-
+            android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
 
 </manifest>

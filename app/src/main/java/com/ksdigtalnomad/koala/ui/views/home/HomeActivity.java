@@ -7,24 +7,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.util.Log;
-import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdRequest;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.data.AlarmDailyController;
 import com.ksdigtalnomad.koala.databinding.ActivityHomeBinding;
-import com.ksdigtalnomad.koala.helpers.ui.BadgeHelper;
-import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
-import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
+import com.ksdigtalnomad.koala.ui.customView.BadgeView;
 import com.ksdigtalnomad.koala.ui.views.dialogs.ExitDialog;
 import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
-import com.ksdigtalnomad.koala.helpers.ui.InterviewHelper;
 import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 
 import static com.ksdigtalnomad.koala.ui.views.home.HomeTapAdapter.FRAGMENT_CNT;
@@ -54,31 +48,10 @@ public class HomeActivity extends BaseActivity {
         mBinding.setActivity(this);
 
         tapAdapter = new HomeTapAdapter(getSupportFragmentManager());
-
-        int[] tabTitleList = new int[] { R.string.tap1_title, R.string.tap2_title, R.string.tap3_title, R.string.tap4_title };
-
-        for(int i = 0; i < tabTitleList.length; ++i){
-            RelativeLayout tabView = new RelativeLayout(mBinding.tabLayout.getContext());
-            tabView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            TextView tabTitle = new TextView(mBinding.tabLayout.getContext());
-            tabTitle.setText(getResources().getString(tabTitleList[i]));
-            tabTitle.setTextColor( i == 0 ? colorMain : colorGray);
-            tabTitle.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            tabTitle.setGravity(Gravity.CENTER);
-            tabTitle.setId(i);
-            tabView.addView(tabTitle);
-            Log.d("ABC", "tabTitle id: " + tabTitle.getId() + " // i: " + i);
-
-            TabLayout.Tab tab = mBinding.tabLayout.newTab();
-            tab.setCustomView(tabView);
-            mBinding.tabLayout.addTab(tab);
-
-            // TODO: 다음 업데이트
-//            if(i == tabTitleList.length-1){
-//                BadgeHelper.showBadge(BadgeHelper.Key.v036_settingTapName, tabView, 20, 2, 2f);
-//            }
-
-        }
+        mBinding.tabLayout.addTab(mBinding.tabLayout.newTab().setCustomView(createTabView(getResources().getString(R.string.tap1_title), null)));
+        mBinding.tabLayout.addTab(mBinding.tabLayout.newTab().setCustomView(createTabView(getResources().getString(R.string.tap2_title), null)));
+        mBinding.tabLayout.addTab(mBinding.tabLayout.newTab().setCustomView(createTabView(getResources().getString(R.string.tap3_title), null)));
+        mBinding.tabLayout.addTab(mBinding.tabLayout.newTab().setCustomView(createTabView(getResources().getString(R.string.tap4_title), BadgeView.Key.v036_settingTapName)));
 
         mBinding.homeTabViewPager.setAdapter(tapAdapter);
         mBinding.homeTabViewPager.setOffscreenPageLimit(FRAGMENT_CNT);
@@ -87,17 +60,20 @@ public class HomeActivity extends BaseActivity {
 
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if(tab.getPosition() == POS_TODAY){ tapAdapter.refreshTodayTab(); }
-                else if(tab.getPosition() == POS_STATISTICS){ tapAdapter.refreshStatisticsTab(); }
+                int pos = tab.getPosition();
+                if(pos == POS_TODAY){ tapAdapter.refreshTodayTab(); }
+                else if(pos == POS_STATISTICS){ tapAdapter.refreshStatisticsTab(); }
 
-                mBinding.homeTabViewPager.setCurrentItem(tab.getPosition(), true);
+                mBinding.homeTabViewPager.setCurrentItem(pos, true);
                 try{
                     int cnt = mBinding.tabLayout.getTabCount();
                     for(int i = 0; i < cnt; ++i){
-                        Log.d("ABC", "i: " + i + ", cnt: " + cnt);
-                        TextView tv = mBinding.tabLayout.getTabAt(i).getCustomView().findViewById(i);
-                        Log.d("ABC", "tv: " + tv.getId());
+                        View customTabView = mBinding.tabLayout.getTabAt(i).getCustomView();
+                        TextView tv = customTabView.findViewById(R.id.tv_title);
                         tv.setTextColor( i == tab.getPosition() ? colorMain : colorGray);
+                        if(i == pos){
+                            ((BadgeView)customTabView.findViewById(R.id.view_badge)).onClick();
+                        }
                     }
                 }catch (Exception e){
                     FBEventLogHelper.onError(e);
@@ -129,6 +105,16 @@ public class HomeActivity extends BaseActivity {
 
         // @TODO: 설문 추가
 //        InterviewHelper.showWhythisappIfPossible(getFragmentManager());
+    }
+
+
+    private View createTabView(String tabName, BadgeView.Key key) {
+        View tabView = LayoutInflater.from(this).inflate(R.layout.view_tab, null);
+        TextView txt_name = tabView.findViewById(R.id.tv_title);
+        txt_name.setText(tabName);
+        BadgeView badgeView = tabView.findViewById(R.id.view_badge);
+        if(key != null) badgeView.setKey(key);
+        return tabView;
     }
 
     @Override

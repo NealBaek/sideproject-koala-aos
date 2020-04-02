@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.views.home.tabs.settings.SettingCalendarDesignActivity">
+    <data>
+        <variable
+            name="activity"
+            type="com.ksdigtalnomad.koala.ui.views.home.tabs.settings.SettingCalendarDesignActivity"/>
+        <import type="com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils.Design"/>
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/bodyLayout"
+        android:background="@color/colorPureWhite">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:focusableInTouchMode="true">
+
+            <!--Header -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/colorMain">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_back"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="14dp"
+                    android:layout_centerVertical="true"
+                    android:onClick="onBackClick"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:textSize="18dp"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:text="@string/fragment_tab_settings_info_calendar_design"/>
+
+            </RelativeLayout>
+
+            <!-- Body -->
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- 술 마신 날을 강조 표시 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:onClick="@{()->activity.setCalendarDesign(Design.defaults)}">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="87dp"
+                            android:gravity="center_vertical"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerInParent="true">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/settings_calendar_desgin_defaults_title"
+                                    android:textColor="@color/colorDarkGray"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/settings_calendar_desgin_defaults_subtitle"
+                                    android:textColor="@color/colorGray"
+                                    android:textSize="10dp"/>
+                            </LinearLayout>
+
+                            <RadioButton
+                                android:id="@+id/rb_defaults"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerInParent="true"/>
+
+                        </RelativeLayout>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="164dp"
+                            android:src="@drawable/calenadar_design_defautls"/>
+                    </LinearLayout>
+
+                    <!-- 술 없는 날을 강조 표시 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:onClick="@{()->activity.setCalendarDesign(Design.stamp_1)}">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="87dp"
+                            android:gravity="center_vertical"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerInParent="true">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/settings_calendar_desgin_stamp_1_title"
+                                    android:textColor="@color/colorDarkGray"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/settings_calendar_desgin_stamp_1_subtitle"
+                                    android:textColor="@color/colorGray"
+                                    android:textSize="10dp"/>
+                            </LinearLayout>
+
+                            <RadioButton
+                                android:id="@+id/rb_stamp_1"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerInParent="true"/>
+
+                        </RelativeLayout>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="164dp"
+                            android:src="@drawable/calenadar_design_stamp_1"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

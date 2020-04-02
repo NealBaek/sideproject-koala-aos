@@ -10,6 +10,7 @@ import com.ksdigtalnomad.koala.data.models.calendar.Friend;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by ooddy on 10/05/2019.
@@ -213,5 +214,40 @@ public class CalendarConstUtils {
         if(string.length() < 7) return string;
 
         return string.substring(0, 6) + " ..";
+    }
+
+
+
+
+
+
+
+
+    public enum Design{
+        defaults("기본 값", 0),
+        stamp_1("코알라 도장_1", 1);
+
+        public String name;
+        public int id;
+        Design(String name, int id){
+            this.name = name;
+            this.id = id;
+        }
+
+
+        public static Design findById(int id){
+            Design[] desings = Design.values();
+            int length = desings.length;
+
+            for(int i = 0; i < length; ++i){
+                if(desings[i].id == id) return desings[i];
+            }
+
+            return defaults;
+        }
+
+        public boolean isEqual(Design toCompare){
+            return id == toCompare.id;
+        }
     }
 }

@@ -37,7 +37,7 @@ public class PreferenceGenericHelper<T extends Serializable> {
 
 
     public enum Key {
-        a
+        design_calendar
     }
 
     /** SetValue */

@@ -15,6 +15,27 @@ import java.util.concurrent.ScheduledExecutorService;
 
 public class FBEventLogHelper {
 
+    // v 0.3.7
+    private static final String CALENDAR_DESIGN = "TAB_SETTINGS_calendar_design";
+
+    public static void onCalendarDesign(CalendarConstUtils.Design type){
+        Executors.newScheduledThreadPool(1).execute(()->{
+            Bundle bundle = new Bundle();
+
+            bundle.putString("adId", PreferenceHelper.getAdid());
+            bundle.putString("type", type.name);
+            bundle.putString("place", Locale.getDefault().toString());
+            bundle.putString("createdAt", DateHelper.getInstance().getTodayStr(DateHelper.FORMAT_FULL));
+
+            FirebaseAnalytics
+                    .getInstance(BaseApplication.getInstance())
+                    .logEvent(CALENDAR_DESIGN, bundle);
+            }
+        );
+    }
+
+
+
     // v 0.3.6
     private static final String CUSTOM_ADS_CLICK= "CUSTOM_ADS_click";
     public enum Partner{
