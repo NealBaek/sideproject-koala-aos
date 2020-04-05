@@ -6,10 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.ViewGroup;
 
+import com.ksdigtalnomad.koala.helpers.data.PreferenceGenericHelper;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.calendar.CalendarView;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayView;
+
+import static com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils.Design;
 
 /**
  * Created by ooddy on 08/05/2019.
@@ -21,6 +24,7 @@ public class MonthRvAdapter extends RecyclerView.Adapter{
     private MonthModel monthModel;
     private CalendarView.EventInterface eventInterface;
     private int randomId;
+    private Design calendarDesign;
 
 
     public MonthRvAdapter(Context context, MonthModel monthModel, CalendarView.EventInterface eventInterface, int randomId){
@@ -28,6 +32,8 @@ public class MonthRvAdapter extends RecyclerView.Adapter{
         this.monthModel = monthModel;
         this.eventInterface = eventInterface;
         this.randomId = randomId;
+
+        calendarDesign = CalendarConstUtils.Design.findById((int) PreferenceGenericHelper.getInstance().getValue(PreferenceGenericHelper.Key.design_calendar, CalendarConstUtils.Design.defaults.id));
     }
 
     public void notifyDataChange(MonthModel monthModel){
@@ -42,7 +48,7 @@ public class MonthRvAdapter extends RecyclerView.Adapter{
         int targetWidth = viewGroup.getMeasuredWidth()/7;
         int targetHeight = viewGroup.getMeasuredHeight()/6;
 
-        DayView dayView = new DayView(context, eventInterface);
+        DayView dayView = new DayView(context, eventInterface, calendarDesign);
         dayView.setMinimumWidth(targetWidth);
         dayView.setMinimumHeight(targetHeight);
 
@@ -60,7 +66,6 @@ public class MonthRvAdapter extends RecyclerView.Adapter{
         dayModel.dayViewId = dayView.getId();
 
         dayView.setDayModel(monthModel.dayList.get(i));
-
 
     }
 

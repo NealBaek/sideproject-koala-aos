@@ -110,10 +110,11 @@ public class HomeActivity extends BaseActivity {
 
     private View createTabView(String tabName, BadgeView.Key key) {
         View tabView = LayoutInflater.from(this).inflate(R.layout.view_tab, null);
-        TextView txt_name = tabView.findViewById(R.id.tv_title);
-        txt_name.setText(tabName);
-        BadgeView badgeView = tabView.findViewById(R.id.view_badge);
-        if(key != null) badgeView.setKey(key);
+
+        ((TextView)tabView.findViewById(R.id.tv_title)).setText(tabName);
+
+        if(key != null){  ((BadgeView)tabView.findViewById(R.id.view_badge)).setKey(key);  }
+
         return tabView;
     }
 

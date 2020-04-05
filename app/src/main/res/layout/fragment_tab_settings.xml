@@ -231,10 +231,11 @@
 
                     <com.ksdigtalnomad.koala.ui.customView.BadgeView
                         android:id="@+id/view_badge"
-                        android:layout_width="7dp"
-                        android:layout_height="7dp"
+                        android:layout_width="4dp"
+                        android:layout_height="4dp"
                         android:layout_alignTop="@id/tv_info_calendar_design"
                         android:layout_toRightOf="@id/tv_info_calendar_design"
+                        android:layout_marginLeft="4dp"
                         android:background="@drawable/shape_badge"
                         app:badgeName="@{Key.v036_settingTapCalendarDesign}"/>
 

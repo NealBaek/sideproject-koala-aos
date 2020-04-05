@@ -13,10 +13,10 @@ import com.ksdigtalnomad.koala.helpers.data.PreferenceGenericHelper;
 
 public class BadgeView extends ViewPager {
     public enum Key { // Notice: version set must be 0.x.x (see BuildConfig.VERSION_NAME)\
-        none(BuildConfig.BADGE_VERSION),
+        none(BuildConfig.VERSION_NAME),
 
-        v036_settingTapName(BuildConfig.BADGE_VERSION),
-        v036_settingTapCalendarDesign(BuildConfig.BADGE_VERSION);
+        v036_settingTapName("0.3.7"),
+        v036_settingTapCalendarDesign("0.3.7");
 
         private String version;
 
@@ -52,12 +52,12 @@ public class BadgeView extends ViewPager {
 
     @BindingAdapter("badgeName")
     public static void setKey (BadgeView view, Key key) {
-        view.key = key;
-        Log.d("ABC", "" + (Boolean) PreferenceGenericHelper.getInstance().getValue(key.name(), false));
         if(key == null || !key.version.equals(BuildConfig.VERSION_NAME) ||
                 (Boolean) PreferenceGenericHelper.getInstance().getValue(key.name(), false)){
             view.setVisibility(View.GONE);
         }else{
+            Log.d("ABC", "" + (Boolean) PreferenceGenericHelper.getInstance().getValue(key.name(), false));
+            view.key = key;
             view.setVisibility(View.VISIBLE);
         }
     }
@@ -67,6 +67,8 @@ public class BadgeView extends ViewPager {
 
 
     public void onClick(){
+        if(key == null) return;
+
         Log.d("ABC", "key: " + key.name());
         PreferenceGenericHelper.getInstance().setValue(key.name(), true);
         setVisibility(View.GONE);

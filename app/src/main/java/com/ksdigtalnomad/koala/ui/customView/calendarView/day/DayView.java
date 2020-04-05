@@ -1,11 +1,14 @@
 package com.ksdigtalnomad.koala.ui.customView.calendarView.day;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.support.v4.graphics.ColorUtils;
 import android.util.TypedValue;
 import android.widget.RelativeLayout;
@@ -19,6 +22,8 @@ import com.ksdigtalnomad.koala.ui.customView.calendarView.utils.DateHelper;
 import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
 
 import java.util.ArrayList;
+
+import static com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils.Design;
 
 public class DayView extends RelativeLayout {
 
@@ -34,8 +39,11 @@ public class DayView extends RelativeLayout {
     private Paint dayTvPt = null;
     private Paint drunkLvRectPt = null;
     private Paint drunkLvTvPt = null;
-    private Paint listTvPt = null;
+    private Paint listTvPtDefaults = null;
     private Paint blinderRectPt = null;
+
+//    private Bitmap imageStamp_1 = BitmapFactory.decodeResource(getResources(), R.drawable.img_stamp_1);
+    private Drawable imageStamp_1 = getResources().getDrawable(R.drawable.img_stamp_1);
 
 
     // Text attributes
@@ -48,14 +56,15 @@ public class DayView extends RelativeLayout {
 
     private int txHeightForHeader = 0;
     private int txHeightForBody = 0;
+    private Design design;
 
 
 
-    public DayView(Context context, final CalendarView.EventInterface eventInterface){
+    public DayView(Context context, final CalendarView.EventInterface eventInterface, Design design){
         super(context);
 
         this.eventInterface = eventInterface;
-
+        this.design = design;
 
         // 1. DayView 설정
         setBackgroundColor(Color.WHITE);
@@ -103,13 +112,24 @@ public class DayView extends RelativeLayout {
 
         // 2. drunkLevel Paint 만들기
         //  2-1. Rect
-        drunkLvRectPt = createRectPaint(CalendarConstUtils.getDrunkLvColorRedByStep(dayModel.drunkLevel));
+        switch (design){
+            case defaults:
+                drunkLvRectPt = createRectPaint(CalendarConstUtils.getDrunkLvColorRedByStep(dayModel.drunkLevel));
+                break;
+            case stamp_1:
+                if(dayModel.drunkLevel == CalendarConstUtils.DRUNK_LV_0){
+                    drunkLvRectPt = createRectPaint(CalendarConstUtils.COLOL_MAIN);
+                }else{
+                    drunkLvRectPt = createRectPaint(CalendarConstUtils.getDrunkLvColorRedByStep(CalendarConstUtils.DRUNK_LV_0));
+                }
+                break;
+        }
+
         //  2-2. MAX
         drunkLvTvPt = createTxPaint(Color.WHITE, Paint.Align.RIGHT, Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 
-        // 3. 리스트 텍스트 Pain 만들기 (역순으로 리스트 형식은 어떨까?)
-        listTvPt = createTxPaint(Color.BLACK, Paint.Align.LEFT, null);
-
+        // 3. 리스트 텍스트 Paint 만들기 (역순으로 리스트 형식은 어떨까?)
+        listTvPtDefaults = createTxPaint(Color.BLACK, Paint.Align.LEFT, null);
 
         // 4. 텍스트 기준 높이 계산
 
@@ -117,7 +137,7 @@ public class DayView extends RelativeLayout {
         dayTvPt.getTextBounds(DRUNK_LV_STR, 0, DRUNK_LV_STR.length(), headerTvBound);
 
         Rect bodyTvBound = new Rect();
-        listTvPt.getTextBounds(DRUNK_LV_STR, 0, DRUNK_LV_STR.length(), bodyTvBound);
+        listTvPtDefaults.getTextBounds(DRUNK_LV_STR, 0, DRUNK_LV_STR.length(), bodyTvBound);
 
 
         txHeightForHeader = headerTvBound.height();
@@ -137,7 +157,9 @@ public class DayView extends RelativeLayout {
         textp.setTextAlign(align);
         textp.setAntiAlias(true);
 
-        if(typeface != null){ textp.setTypeface(typeface); }
+        if(typeface != null){
+            textp.setTypeface(typeface);
+        }
 
         return textp;
     }
@@ -169,7 +191,6 @@ public class DayView extends RelativeLayout {
 
         if(dayModel == null) return;
 
-
         int parentWidth  = getMeasuredWidth();
         int parentHeight = getMeasuredHeight();
 
@@ -179,28 +200,49 @@ public class DayView extends RelativeLayout {
         int dayTvHeight = txHeightForHeader * 2;
         int dayTvTopMargin = txHeightForHeader/2;
 
-        //   1-2. 오늘이면 Border 추가
-        if(DateHelper.getInstance().isToday(dayModel.getDate())){
-            canvas.drawRect(1, 1, parentWidth - 1, parentHeight - 1, borderRectPt);
-        }
-
-        //  1-3. 텍스트 그리기
+        //  1-2. 텍스트 그리기
         drawDayTv(canvas, txHeightForHeader, TEXT_PADDING_LEFT, dayTvTopMargin, dayTvHeight, dayTvPt, dayModel);
 
 
         // 2. DayModel 내용 그리기
         if(dayModel.isSaved){
+
             //  2-1. DrinkLv Rect Bottom 계산
             int drunkLvRectBottom = dayTvTopMargin + (dayTvHeight * 2);
             //  2-2. DrinkLv Rect & Text 그리기
             drawDrunkLv(canvas, txHeightForHeader, dayTvTopMargin, dayTvHeight, drunkLvRectBottom, parentWidth, drunkLvRectPt, drunkLvTvPt, DRUNK_LV_STR, dayModel.drunkLevel);
 
-            // 2-3. 리스트 텍스트 그리기
-            drawListTvs(canvas, txHeightForBody ,drunkLvRectBottom, listTvPt, dayModel);
+            switch (design){
+                case defaults:
+
+                    // 2-3-1. 리스트 텍스트 그리기
+                    drawListTvs(canvas, txHeightForBody ,drunkLvRectBottom, listTvPtDefaults, dayModel);
+
+                    break;
+                case stamp_1:
+
+
+                    if (dayModel.drunkLevel == CalendarConstUtils.DRUNK_LV_0){
+                        // 2-3-2. 금주 -> 스탬프 그리기
+                        drawStamp_1(canvas, ((int) Math.round(parentWidth * 0.125)), (txHeightForBody + ((int) Math.round(drunkLvRectBottom * 0.9))), ((int) Math.round(parentWidth * 0.875)), parentHeight - txHeightForBody);
+                    }else{
+                        // 2-3-1. 음주 -> 리스트 텍스트 그리기
+                        drawListTvs(canvas, txHeightForBody ,drunkLvRectBottom, listTvPtDefaults, dayModel);
+                    }
+
+                    break;
+            }
+
+
+        }
+
+        // 3. 오늘이면 Border 추가
+        if(DateHelper.getInstance().isToday(dayModel.getDate())){
+            canvas.drawRect(1, 1, parentWidth - 1, parentHeight - 1, borderRectPt);
         }
 
 
-        // 3. OutMonth 블라인더 그리기
+        // 4. OutMonth 블라인더 그리기
         if(dayModel.isOutMonth) drawBlinderRect(canvas, parentWidth, parentHeight, blinderRectPt);
     }
 
@@ -228,13 +270,18 @@ public class DayView extends RelativeLayout {
 
         canvas.drawRect(RECT_L, RECT_T, RECT_R, RECT_B, rPaint);
 
+        switch (design){
+            case defaults:
+                if(drunkLv != CalendarConstUtils.DRUNK_LV_MAX){ return; }
 
-        if(drunkLv != CalendarConstUtils.DRUNK_LV_MAX){ return; }
+                //  2. MAX Text 그리기
+                int PADDING_TOP = (RECT_B - RECT_T - TEXT_HEIGHT)/2;
 
-        //  2. MAX Text 그리기
-        int PADDING_TOP = (RECT_B - RECT_T - TEXT_HEIGHT)/2;
-
-        canvas.drawText(text, PARENT_WIDTH - TEXT_PADDING_RIGHT, RECT_B - PADDING_TOP, txPaint);
+                canvas.drawText(text, PARENT_WIDTH - TEXT_PADDING_RIGHT, RECT_B - PADDING_TOP, txPaint);
+                break;
+            case stamp_1:
+                break;
+        }
     }
     private void drawListTvs(Canvas canvas, int TEXT_HEIGHT, int TARGET_Y, Paint txPaint, DayModel dayModel){
 
@@ -269,5 +316,9 @@ public class DayView extends RelativeLayout {
     }
     private void drawBlinderRect(Canvas canvas, int parentWidth, int parentHeight, Paint rPaint){
         canvas.drawRect(0, 0, parentWidth, parentHeight, rPaint);
+    }
+    private void drawStamp_1(Canvas canvas, int x, int y, int width, int height){
+        imageStamp_1.setBounds(new Rect(x, y, width, height));
+        imageStamp_1.draw(canvas);
     }
 }

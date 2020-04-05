@@ -17,7 +17,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="통계"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/colorGray"
@@ -25,10 +24,11 @@
 
         <com.ksdigtalnomad.koala.ui.customView.BadgeView
             android:id="@+id/view_badge"
-            android:layout_width="7dp"
-            android:layout_height="7dp"
+            android:layout_width="4dp"
+            android:layout_height="4dp"
             android:layout_alignTop="@id/tv_title"
             android:layout_toRightOf="@id/tv_title"
+            android:layout_marginLeft="4dp"
             android:background="@drawable/shape_badge"
             android:visibility="gone"/>
 

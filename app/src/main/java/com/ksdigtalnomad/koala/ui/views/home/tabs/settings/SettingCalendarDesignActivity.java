@@ -21,6 +21,7 @@ public class SettingCalendarDesignActivity extends BaseActivity {
 
     private ActivitySettingCalendarDesignBinding mBinding;
     private Design calendarDesign;
+    public static String RESULT_KEY = "design";
 
     public static Intent intent(Context context) {  return new Intent(context, SettingCalendarDesignActivity.class);  }
 
@@ -44,7 +45,14 @@ public class SettingCalendarDesignActivity extends BaseActivity {
 
     }
     public void onBackClick(View v){
+        onBackPressed();
+    }
+
+
+    @Override
+    public void onBackPressed() {
         FBEventLogHelper.onCalendarDesign(calendarDesign);
+        setResult(RESULT_OK, new Intent());
         finish();
     }
 }

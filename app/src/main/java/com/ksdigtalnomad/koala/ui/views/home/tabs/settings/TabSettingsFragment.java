@@ -15,6 +15,7 @@ import com.ksdigtalnomad.koala.databinding.FragmentTabSettingsBinding;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +31,11 @@ import com.ksdigtalnomad.koala.helpers.data.FBRemoteControlHelper;
 import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 import com.ksdigtalnomad.koala.helpers.util.ShareHelper;
 import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
+import com.ksdigtalnomad.koala.ui.views.home.HomeActivity;
 
 import java.util.ArrayList;
+
+import static android.app.Activity.RESULT_OK;
 
 public class TabSettingsFragment extends BaseFragment {
 
@@ -126,7 +130,7 @@ public class TabSettingsFragment extends BaseFragment {
     }
     public void onCalendarDesignClick(){
         mBinding.viewBadge.onClick();
-        startActivity(SettingCalendarDesignActivity.intent(getActivity()));
+        startActivityForResult(SettingCalendarDesignActivity.intent(getActivity()), 0);
     }
     public void onOpenPlayStoreComplementClick(){
         PlayStoreHelper.openMyAppInPlayStore(getActivity());
@@ -153,5 +157,15 @@ public class TabSettingsFragment extends BaseFragment {
     public void onVersionClick(){  }
 
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (resultCode == RESULT_OK) {
+            Intent i = mContext.getPackageManager().getLaunchIntentForPackage(mContext.getPackageName());
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(i);
+        }
+    }
 }
