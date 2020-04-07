@@ -46,7 +46,7 @@
     <string name="calendar_detail_hint_click_to_save">Click to input</string>
 
     <string name="calendar_expense_currency">$ %s</string>
-    <string name="calendar_day_date">%s days</string>
+    <string name="calendar_day_date">%s day(s)</string>
 
     <!-- Daily -->
     <string name="tap_today_drink_state">My recent alcohol life</string>
@@ -58,7 +58,7 @@
     <string name="tap_today_drink_times">The number of drunken days for last 7 days : %s</string>
     <string name="tap_today_drink_level">The average amount of alcohol for last 7 days : %s</string>
     <string name="tap_today_no_drink_info_1">Not drinking for</string>
-    <string name="tap_today_no_drink_info_2" formatted="true">%s days!</string>
+    <string name="tap_today_no_drink_info_2" formatted="true">%s day(s)!</string>
     <string name="tap_today_no_drink_info_3" formatted="true">Since %s</string>
 
 
@@ -120,11 +120,11 @@
     <string name="fragment_tab_statistics_title_count_longest_drink">Alcohol period for</string>
     <string name="fragment_tab_statistics_title_total_expense">Total expense</string>
 
-    <string name="fragment_tab_statistics_info_count_drink_day">I’d say.. you drank once in %s days.</string>
+    <string name="fragment_tab_statistics_info_count_drink_day">I’d say.. you drank once in %s day(s).</string>
     <string name="fragment_tab_statistics_info_count_longest_quit">Alcohol-free %s in a row.&#160;</string>
-    <string name="fragment_tab_statistics_info_count_longest_quit_2">The best record is for %s days. </string>
+    <string name="fragment_tab_statistics_info_count_longest_quit_2">The best record is for %s day(s). </string>
     <string name="fragment_tab_statistics_info_count_longest_drink"> Alcohol %s in a row.&#160;</string>
-    <string name="fragment_tab_statistics_info_count_longest_drink_2">The best record is for %s days.</string>
+    <string name="fragment_tab_statistics_info_count_longest_drink_2">The best record is for %s day(s).</string>
     <string name="fragment_tab_statistics_info_total_expense">I’d say.. you spent %s everyday. </string>
 
     <string name="fragment_tab_statistics_notenough_data">Not enough data</string>

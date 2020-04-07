@@ -1,16 +1,15 @@
 package com.ksdigtalnomad.koala.ui.customView.calendarView.day;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.support.v4.graphics.ColorUtils;
 import android.util.TypedValue;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.ksdigtalnomad.koala.R;
@@ -42,8 +41,10 @@ public class DayView extends RelativeLayout {
     private Paint listTvPtDefaults = null;
     private Paint blinderRectPt = null;
 
-//    private Bitmap imageStamp_1 = BitmapFactory.decodeResource(getResources(), R.drawable.img_stamp_1);
+    // Image
     private Drawable imageStamp_1 = getResources().getDrawable(R.drawable.img_stamp_1);
+    private int ivStampId = 77777777;
+    private int vBlindId = 8888888;
 
 
     // Text attributes
@@ -143,9 +144,6 @@ public class DayView extends RelativeLayout {
         txHeightForHeader = headerTvBound.height();
         txHeightForBody = bodyTvBound.height();
 
-        // 5. Blinder Rect Paint 만들기
-        blinderRectPt = createRectPaint(ColorUtils.setAlphaComponent(BaseApplication.getInstance().getResources().getColor(R.color.colorLightGray), 200));
-
     }
 
     // Create Paints
@@ -221,12 +219,17 @@ public class DayView extends RelativeLayout {
                     break;
                 case stamp_1:
 
-
                     if (dayModel.drunkLevel == CalendarConstUtils.DRUNK_LV_0){
                         // 2-3-2. 금주 -> 스탬프 그리기
-                        drawStamp_1(canvas, ((int) Math.round(parentWidth * 0.125)), (txHeightForBody + ((int) Math.round(drunkLvRectBottom * 0.9))), ((int) Math.round(parentWidth * 0.875)), parentHeight - txHeightForBody);
+                        addStamp1(
+                            /* x */ ((int) Math.round(parentWidth * 0.125)),
+                            /* y */ (txHeightForBody + drunkLvRectBottom),
+                            /* width */ ((int) Math.round(parentWidth * 0.875)),
+                            parentHeight/2
+                        );
                     }else{
-                        // 2-3-1. 음주 -> 리스트 텍스트 그리기
+                        // 2-3-2. 음주 -> 스탬프 이미지 삭제, 리스트 텍스트 그리기
+                        hideStamp1();
                         drawListTvs(canvas, txHeightForBody ,drunkLvRectBottom, listTvPtDefaults, dayModel);
                     }
 
@@ -243,7 +246,8 @@ public class DayView extends RelativeLayout {
 
 
         // 4. OutMonth 블라인더 그리기
-        if(dayModel.isOutMonth) drawBlinderRect(canvas, parentWidth, parentHeight, blinderRectPt);
+        if(dayModel.isOutMonth) addBlinder(parentWidth, parentHeight);
+        else hideBlinder();
     }
 
 
@@ -314,11 +318,49 @@ public class DayView extends RelativeLayout {
 
 
     }
-    private void drawBlinderRect(Canvas canvas, int parentWidth, int parentHeight, Paint rPaint){
-        canvas.drawRect(0, 0, parentWidth, parentHeight, rPaint);
+    private void addBlinder(int parentWidth, int parentHeight){
+//        canvas.drawRect(0, 0, parentWidth, parentHeight, rPaint);
+
+        View vBlind = findViewById(vBlindId);
+        if(vBlind == null){
+            vBlind = new View(getContext());
+            vBlind.setBackgroundColor(BaseApplication.getInstance().getResources().getColor(R.color.colorLightGray));
+            vBlind.setLayoutParams(new RelativeLayout.LayoutParams(parentWidth, parentHeight));
+            vBlind.setId(vBlindId);
+            vBlind.setAlpha(0.6f);
+            addView(vBlind);
+        }else{
+            vBlind.setVisibility(VISIBLE);
+        }
     }
-    private void drawStamp_1(Canvas canvas, int x, int y, int width, int height){
-        imageStamp_1.setBounds(new Rect(x, y, width, height));
-        imageStamp_1.draw(canvas);
+    private void hideBlinder(){
+        View vBlind = findViewById(vBlindId);
+        if(vBlind != null) {
+            vBlind.setVisibility(GONE);
+        }
+    }
+    private void addStamp1(int x, int y, int width, int height){
+
+        ImageView ivStamp1 = findViewById(ivStampId);
+
+        if(ivStamp1 == null){
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(width, height);
+            lp.setMargins(x, y, x, 0);
+
+            ivStamp1 = new ImageView(getContext());
+            ivStamp1.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            ivStamp1.setImageDrawable(imageStamp_1);
+            ivStamp1.setLayoutParams(lp);
+            ivStamp1.setId(ivStampId);
+            addView(ivStamp1);
+        }else{
+            ivStamp1.setVisibility(VISIBLE);
+        }
+    }
+    private void hideStamp1(){
+        ImageView ivStamp1 = findViewById(ivStampId);
+        if(ivStamp1 != null){
+            ivStamp1.setVisibility(INVISIBLE);
+        }
     }
 }

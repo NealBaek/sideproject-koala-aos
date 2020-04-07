@@ -224,7 +224,7 @@ public class TabStatisticsFragment extends BaseFragment {
             textChartItemArrayList.add(TextChartItem.builder().
                     title(getResources().getString(R.string.fragment_tab_statistics_title_count_drink_day))
                     .data(getResources().getString(R.string.calendar_day_date, String.valueOf(drinkDayCnt)))
-                    .info(getResources().getString(R.string.fragment_tab_statistics_info_count_drink_day, String.valueOf(drinkDayCnt == 0 ? drinkDayCnt : dayOfMonthCnt/drinkDayCnt)))
+                    .info(getResources().getString(R.string.fragment_tab_statistics_info_count_drink_day, String.valueOf(drinkDayCnt == 0 ? dayOfMonthCnt : dayOfMonthCnt/drinkDayCnt)))
                     .enoughData(savedDayCnt >= 1)
                     .build());
 

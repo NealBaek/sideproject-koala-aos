@@ -38,11 +38,9 @@ public class SettingCalendarDesignActivity extends BaseActivity {
     }
     public void setCalendarDesign(Design calendarDesign){
         this.calendarDesign = calendarDesign;
-        PreferenceGenericHelper.getInstance().setValue(Key.design_calendar, calendarDesign.id);
 
         mBinding.rbDefaults.setChecked(calendarDesign.isEqual(Design.defaults));
         mBinding.rbStamp1.setChecked(calendarDesign.isEqual(Design.stamp_1));
-
     }
     public void onBackClick(View v){
         onBackPressed();
@@ -51,6 +49,7 @@ public class SettingCalendarDesignActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
+        PreferenceGenericHelper.getInstance().setValue(Key.design_calendar, calendarDesign.id);
         FBEventLogHelper.onCalendarDesign(calendarDesign);
         setResult(RESULT_OK, new Intent());
         finish();
