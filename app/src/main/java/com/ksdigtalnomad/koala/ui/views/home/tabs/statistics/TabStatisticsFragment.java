@@ -35,6 +35,7 @@ import com.ksdigtalnomad.koala.ui.views.home.tabs.statistics.StatisticsHorizonta
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.Executors;
 
@@ -56,6 +57,7 @@ public class TabStatisticsFragment extends BaseFragment {
     private int targetMonthIdx = DEFAULT_MONTH_IDX;
     private MonthModel targetMonthModel;
     private CalendarModel calendarModel;
+    private Date today;
     private int cDrinkDayCnt;
     private int cQuitDayCnt;
     private int totalExpense;
@@ -95,6 +97,7 @@ public class TabStatisticsFragment extends BaseFragment {
         Executors.newSingleThreadExecutor().execute(()->{
 
             calendarModel = CalendarDataController.getCalendarModel();
+            today = DateHelper.getInstance().getTodayDate();
 
             if(targetMonthIdx == DEFAULT_MONTH_IDX){
                 int monthListCnt =  calendarModel.monthList.size();
@@ -158,12 +161,27 @@ public class TabStatisticsFragment extends BaseFragment {
             cQuitDayCnt = 0;
             totalExpense = 0;
 
+
+
+
             int dayCnt = monthModel.dayList.size();
             for(int i = 0; i <dayCnt; ++ i){
                 DayModel item = monthModel.dayList.get(i);
 
-                if(item.isOutMonth) continue; // 해당 월이 아닌 경우
-                else dayOfMonthCnt += 1; // 해당 월인 경우
+                // 해당 월이 아닌 경우
+                if(item.isOutMonth) continue;
+
+
+                // 월 평균 통계 분모 계산
+                if(DateHelper.getInstance().isSameYearMonth(today, item.getDate())){ // 해당 월이 이번 달일 경우
+                    if(!DateHelper.getInstance().isAfterToday(item.getDate())){ // 오늘 이후 일만 계산
+                        dayOfMonthCnt += 1;
+                    }
+                }else{
+                    dayOfMonthCnt += 1; // 해당 월인 경우
+                }
+
+
 
                 if(!item.isSaved) continue; // 미저장
                 else savedDayCnt += 1; // 저장

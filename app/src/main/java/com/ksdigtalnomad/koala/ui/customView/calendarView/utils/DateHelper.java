@@ -35,6 +35,8 @@ public class DateHelper {
 
     public static final String FORMAT_FULL = "yyyy.MM.dd HH:mm:ss";
     public static final String FORMAT_DATE = "yyyy.MM.dd";
+    public static final String FORMAT_YEAR_MONTH = "yyyy.MM";
+
 
     private Date today;
     private DateTimeFormatter df;
@@ -43,17 +45,29 @@ public class DateHelper {
     private String yesterdayStr;
 
 
+    public boolean isSameYearMonth(Date from, Date to){
+        if (from == null || to == null) return false;
+
+        return (new SimpleDateFormat(DateHelper.FORMAT_YEAR_MONTH)).format(to).equals((new SimpleDateFormat(DateHelper.FORMAT_YEAR_MONTH)).format(from));
+    }
     public boolean isSameDay(Date from, Date to){
+        if (from == null || to == null) return false;
+
         return (new SimpleDateFormat(DateHelper.FORMAT_DATE)).format(to).equals((new SimpleDateFormat(DateHelper.FORMAT_DATE)).format(from));
     }
     public boolean isToday(Date toCompare){
+        if (toCompare == null) return false;
+
         return todayStr.equals((new SimpleDateFormat(DateHelper.FORMAT_DATE)).format(toCompare));
     }
     public boolean isYesterday(Date toCompare){
+        if (toCompare == null) return false;
+
         return yesterdayStr.equals((new SimpleDateFormat(DateHelper.FORMAT_DATE)).format(toCompare));
     }
 
     public boolean isAfterToday(Date toCompare){
+        if (toCompare == null) return false;
         return toCompare.after(today);
     }
 
