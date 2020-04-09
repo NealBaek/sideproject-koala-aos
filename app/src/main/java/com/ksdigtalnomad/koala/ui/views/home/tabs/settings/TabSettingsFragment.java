@@ -31,7 +31,6 @@ import com.ksdigtalnomad.koala.helpers.data.FBRemoteControlHelper;
 import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 import com.ksdigtalnomad.koala.helpers.util.ShareHelper;
 import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
-import com.ksdigtalnomad.koala.ui.views.home.HomeActivity;
 
 import java.util.ArrayList;
 
@@ -101,6 +100,12 @@ public class TabSettingsFragment extends BaseFragment {
 
 
     // OnClick
+    public void onLoginInfoClick(){
+        // login check
+        // 1. 만약 비회원이면 가입 창으로
+        // 2. 회원이면 계정 설정 창으로
+
+    }
     public void onKakaoOpenChatRoomClick(){
         String chatRoomUrl = FBRemoteControlHelper.getInstance().getKakaoOpenChatRoomUrl();
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(chatRoomUrl)));

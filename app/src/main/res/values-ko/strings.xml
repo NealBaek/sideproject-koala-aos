@@ -128,7 +128,7 @@
 
     <string name="fragment_tab_statistics_notenough_data">기록 부족</string>
     <string name="fragment_tab_statistics_notenough_info">최소 7일치의 기록 및 2일 연속의 값이 입력되어야 합니다.</string>
-    <string name="fragment_tab_statistics_no_drinkday">지출 금액을 기록하지 않았습니다.</string>
+    <string name="fragment_tab_statistics_no_drinkday">최소 1일치의 기록 입력되어야 합니다.</string>
     <string name="fragment_tab_statistics_no_expense">지출 금액을 기록하지 않았습니다.</string>
 
 

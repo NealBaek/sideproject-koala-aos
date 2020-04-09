@@ -93,7 +93,10 @@
     <string name="dialog_interview_whythisapp_info_4">코알라가 알려줘서 고맙대.</string>
     <string name="dialog_interview_whythisapp_info_5">그리고 그 목표를 이루길 응원한대요!</string>
 
-    <!-- fragment_tab_settings -->=
+    <!-- fragment_tab_settings -->
+    <string name="fragment_tab_settings_info_user_guest">비회원</string>
+    <string name="fragment_tab_settings_info_user_login">회원가입/로그인하기</string>
+    <string name="fragment_tab_settings_info_user_account">내 계정 설정</string>
     <string name="fragment_tab_settings_info_team_1">Let’s&#160;</string>
     <string name="fragment_tab_settings_info_team_2">record and check</string>
     <string name="fragment_tab_settings_info_team_3">&#160;ourselves.</string>
