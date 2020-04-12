@@ -127,7 +127,7 @@ public class StatisticsHorizontalBarChartRvAdapter extends BaseRecyclerViewAdapt
 
 
 //            itemView.findViewById(R.id.totalBtn).setOnClickListener((view)->{
-//                // @TODO:
+//                // @TODO: 전체보기 기능 추가
 //                ToastHelper.writeBottomLongToast("메롱~");
 //            });
         }

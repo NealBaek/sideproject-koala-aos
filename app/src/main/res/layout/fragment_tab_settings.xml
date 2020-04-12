@@ -40,62 +40,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <!-- 팀 문구 -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingTop="26dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="26dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/fragment_tab_settings_info_team_1"
-                            android:textSize="16dp"
-                            android:textStyle="bold"
-                            android:textColor="@color/colorDarkGray"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/fragment_tab_settings_info_team_2"
-                            android:textSize="16dp"
-                            android:textStyle="bold"
-                            android:textColor="@color/colorMain"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/fragment_tab_settings_info_team_3"
-                            android:textSize="16dp"
-                            android:textStyle="bold"
-                            android:textColor="@color/colorDarkGray"/>
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/fragment_tab_settings_info_team_4"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorDarkGray"
-                        android:layout_marginBottom="15dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/fragment_tab_settings_info_team_5"
-                        android:textSize="12dp"
-                        android:textColor="@color/colorDarkGray"
-                        android:layout_gravity="right"/>
-
-                </LinearLayout>
-<!--                &lt;!&ndash; 회원 설정 &ndash;&gt;-->
+<!--                &lt;!&ndash; 팀 문구 &ndash;&gt;-->
 <!--                <LinearLayout-->
 <!--                    android:layout_width="match_parent"-->
 <!--                    android:layout_height="wrap_content"-->
@@ -105,49 +50,104 @@
 <!--                    android:paddingRight="20dp"-->
 <!--                    android:paddingBottom="26dp">-->
 
-<!--                    <RelativeLayout-->
+<!--                    <LinearLayout-->
 <!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="80dp">-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="horizontal">-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="@string/fragment_tab_settings_info_team_1"-->
+<!--                            android:textSize="16dp"-->
+<!--                            android:textStyle="bold"-->
+<!--                            android:textColor="@color/colorDarkGray"/>-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="@string/fragment_tab_settings_info_team_2"-->
+<!--                            android:textSize="16dp"-->
+<!--                            android:textStyle="bold"-->
+<!--                            android:textColor="@color/colorMain"/>-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="@string/fragment_tab_settings_info_team_3"-->
+<!--                            android:textSize="16dp"-->
+<!--                            android:textStyle="bold"-->
+<!--                            android:textColor="@color/colorDarkGray"/>-->
+<!--                    </LinearLayout>-->
 
-<!--                        <ImageView-->
-<!--                            android:id="@+id/iv_koala"-->
-<!--                            android:layout_width="80dp"-->
-<!--                            android:layout_height="80dp"-->
-<!--                            android:layout_alignParentLeft="true"-->
-<!--                            android:layout_centerVertical="true"-->
-<!--                            android:src="@drawable/ic_koala"/>-->
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/fragment_tab_settings_info_team_4"-->
+<!--                        android:textSize="16dp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:textColor="@color/colorDarkGray"-->
+<!--                        android:layout_marginBottom="15dp"/>-->
 
-<!--                        <LinearLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="80dp"-->
-<!--                            android:layout_toRightOf="@id/iv_koala"-->
-<!--                            android:layout_marginLeft="20dp"-->
-<!--                            android:orientation="vertical"-->
-<!--                            android:gravity="center_vertical">-->
-
-<!--                            <TextView-->
-<!--                                android:id="@+id/tv_user_email"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:text="@string/fragment_tab_settings_info_user_guest"-->
-<!--                                android:textSize="16sp"-->
-<!--                                android:textColor="@color/colorDarkGray"-->
-<!--                                android:textStyle="bold"/>-->
-
-<!--                            <TextView-->
-<!--                                android:id="@+id/tv_user_login_info"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:text="@string/fragment_tab_settings_info_user_login"-->
-<!--                                android:textSize="16sp"-->
-<!--                                android:textColor="@color/colorMain"-->
-<!--                                android:onClick="@{()->fragment.onLoginInfoClick()}"/>-->
-
-<!--                        </LinearLayout>-->
-
-<!--                    </RelativeLayout>-->
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/fragment_tab_settings_info_team_5"-->
+<!--                        android:textSize="12dp"-->
+<!--                        android:textColor="@color/colorDarkGray"-->
+<!--                        android:layout_gravity="right"/>-->
 
 <!--                </LinearLayout>-->
+                <!-- 회원 설정 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="26dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="26dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp">
+
+                        <ImageView
+                            android:id="@+id/iv_koala"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_koala"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:layout_toRightOf="@id/iv_koala"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="vertical"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/tv_user_email"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/fragment_tab_settings_info_user_guest"
+                                android:textSize="16sp"
+                                android:textColor="@color/colorDarkGray"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:id="@+id/tv_user_login_info"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/fragment_tab_settings_info_user_login"
+                                android:textSize="16sp"
+                                android:textColor="@color/colorMain"
+                                android:onClick="@{()->fragment.onLoginInfoClick()}"/>
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
                 <include
                     android:layout_width="match_parent"
                     android:layout_height="1dp"

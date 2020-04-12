@@ -15,6 +15,30 @@
       },
       "oauth_client": [
         {
+          "client_id": "395855009566-mjhom524t0skjo4hj0cntio11c7cfb4s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ksdigtalnomad.koala",
+            "certificate_hash": "779367e2b7cf53bfd02392a29f6dcc359a77428e"
+          }
+        },
+        {
+          "client_id": "395855009566-r01qhfncb46oap1h90shjps886eebn5v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ksdigtalnomad.koala",
+            "certificate_hash": "b168a7f5b7dfc67089428d2f45ff6335aa2f9c6b"
+          }
+        },
+        {
+          "client_id": "395855009566-11rrp9kckk738cpribldgesn2obh77er.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ksdigtalnomad.koala",
+            "certificate_hash": "4ecd1e4add91d9512db96e45ef6f5aab4c47ad56"
+          }
+        },
+        {
           "client_id": "395855009566-vqn8uoi759t3b1v5tqrb1ac3n9k74rk1.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -28,12 +52,13 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "395855009566-vqn8uoi759t3b1v5tqrb1ac3n9k74rk1.apps.googleusercontent.com",
+              "client_id": "395855009566-kdcvh7of09pe6rr9vncb7har3fi1fm05.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-9300115819443880~2843172061"
     }
   ],
   "configuration_version": "1"

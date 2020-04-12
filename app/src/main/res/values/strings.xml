@@ -159,6 +159,9 @@
     <string name="prefix_disagree">disagreed</string>
 
 
+    <!--  타이틀  -->
+    <string name="title_login">로그인</string>
+
     <!-- 버튼 -->
     <string name="btn_next_short">Next</string>
 
@@ -182,6 +185,8 @@
     <string name="btn_dontbother">알 거 없어!</string>
 
     <string name="btn_see_total">Details ></string>
+
+    <string name="btn_login_google">Google 계정으로 로그인</string>
 
 
     <!-- 가이드 -->

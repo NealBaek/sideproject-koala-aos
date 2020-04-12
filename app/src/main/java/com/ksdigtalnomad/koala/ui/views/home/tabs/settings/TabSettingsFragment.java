@@ -13,6 +13,7 @@ import com.ksdigtalnomad.koala.data.AlarmDailyController;
 import com.ksdigtalnomad.koala.data.models.shareMessage.ShareMessage;
 import com.ksdigtalnomad.koala.databinding.FragmentTabSettingsBinding;
 
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,6 +32,7 @@ import com.ksdigtalnomad.koala.helpers.data.FBRemoteControlHelper;
 import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 import com.ksdigtalnomad.koala.helpers.util.ShareHelper;
 import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
+import com.ksdigtalnomad.koala.ui.views.user.LoginActivity;
 
 import java.util.ArrayList;
 
@@ -60,6 +62,8 @@ public class TabSettingsFragment extends BaseFragment {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_tab_settings, container, false);
         mBinding.setFragment(this);
 
+        mBinding.tvUserLoginInfo.setPaintFlags(mBinding.tvUserLoginInfo.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
         try {
             PackageInfo info = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
             mBinding.version.setText("ver " + info.versionName);
@@ -88,6 +92,11 @@ public class TabSettingsFragment extends BaseFragment {
         setPushTimeLayoutEnabled(isPushEnabled);
 
 
+        // TODO:
+//        mBinding.tvUserEmail.setText();
+//        mBinding.tvUserLoginInfo.setText();
+
+
         return mBinding.getRoot();
     }
 
@@ -101,9 +110,11 @@ public class TabSettingsFragment extends BaseFragment {
 
     // OnClick
     public void onLoginInfoClick(){
+        // @TODO:
         // login check
         // 1. 만약 비회원이면 가입 창으로
         // 2. 회원이면 계정 설정 창으로
+        startActivity(LoginActivity.intent(getContext()));
 
     }
     public void onKakaoOpenChatRoomClick(){
