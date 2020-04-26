@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.data.AlarmDailyController;
+import com.ksdigtalnomad.koala.data.models.User;
 import com.ksdigtalnomad.koala.data.models.shareMessage.ShareMessage;
 import com.ksdigtalnomad.koala.databinding.FragmentTabSettingsBinding;
 
@@ -32,6 +33,7 @@ import com.ksdigtalnomad.koala.helpers.data.FBRemoteControlHelper;
 import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 import com.ksdigtalnomad.koala.helpers.util.ShareHelper;
 import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
+import com.ksdigtalnomad.koala.ui.views.user.AccountActivity;
 import com.ksdigtalnomad.koala.ui.views.user.LoginActivity;
 
 import java.util.ArrayList;
@@ -91,16 +93,22 @@ public class TabSettingsFragment extends BaseFragment {
         });
         setPushTimeLayoutEnabled(isPushEnabled);
 
-
-        // TODO:
-//        mBinding.tvUserEmail.setText();
-//        mBinding.tvUserLoginInfo.setText();
-
-
         return mBinding.getRoot();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
+        if(PreferenceHelper.isLogin()){
+            User user = PreferenceHelper.getUser();
+            mBinding.tvUserEmail.setText(user.getEmail());
+            mBinding.tvUserLoginInfo.setText(getResources().getString(R.string.title_account));
+        }else{
+            mBinding.tvUserEmail.setText(getResources().getString(R.string.fragment_tab_settings_info_user_guest));
+            mBinding.tvUserLoginInfo.setText(getResources().getString(R.string.fragment_tab_settings_info_user_login));
+        }
+    }
 
     private void setPushTimeLayoutEnabled(boolean isChecked){
         mBinding.pushTimeLayout.setEnabled(isChecked);
@@ -110,11 +118,12 @@ public class TabSettingsFragment extends BaseFragment {
 
     // OnClick
     public void onLoginInfoClick(){
-        // @TODO:
-        // login check
-        // 1. 만약 비회원이면 가입 창으로
-        // 2. 회원이면 계정 설정 창으로
-        startActivity(LoginActivity.intent(getContext()));
+        if(PreferenceHelper.isLogin()){
+            // @TODO:
+            startActivity(AccountActivity.intent(getContext()));
+        }else{
+            startActivity(LoginActivity.intent(getContext()));
+        }
 
     }
     public void onKakaoOpenChatRoomClick(){
@@ -178,6 +187,7 @@ public class TabSettingsFragment extends BaseFragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
+            /** 앱 재시작 */
             Intent i = mContext.getPackageManager().getLaunchIntentForPackage(mContext.getPackageName());
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

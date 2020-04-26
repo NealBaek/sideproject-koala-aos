@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.views.user.JoinActivity">
+    <data>
+        <variable
+            name="activity"
+            type="com.ksdigtalnomad.koala.ui.views.user.JoinActivity"/>
+        <variable
+            name="user"
+            type="com.ksdigtalnomad.koala.data.models.User"/>
+        <import type="com.ksdigtalnomad.koala.ui.views.user.JoinActivity.Gender"/>
+        <import type="com.ksdigtalnomad.koala.ui.views.user.JoinActivity.TermsType"/>
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/bodyLayout"
+        android:background="@color/colorPureWhite">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:focusableInTouchMode="true">
+
+            <!--Header -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@color/colorMain">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_back"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="14dp"
+                    android:layout_centerVertical="true"
+                    android:onClick="@{()->activity.onBackClick()}"/>
+
+                <TextView
+                    android:id="@+id/headerText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="@string/title_login"
+                    android:textSize="18dp"
+                    android:textColor="#fff"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
+
+            <!-- Body -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <!-- 코알라 배경 이미지 -->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/bg_splash"
+                    android:scaleType="fitXY"
+                    android:alpha="0.5"/>
+
+                <!-- 정보 입력 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/activity_join_info_1"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorDarkGray"/>
+
+                    <!-- 성별 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="24dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/activity_join_info_2"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorDarkGray"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_male"
+                                android:layout_width="120dp"
+                                android:layout_height="40dp"
+                                android:text="@string/activity_join_male"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/colorGray"
+                                android:gravity="center"
+                                android:background="@drawable/bg_btn_rect_off"
+                                android:onClick="@{()->activity.onGenderClick(Gender.male)}"/>
+
+                            <TextView
+                                android:id="@+id/tv_female"
+                                android:layout_width="120dp"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="4dp"
+                                android:text="@string/activity_join_female"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/colorGray"
+                                android:gravity="center"
+                                android:background="@drawable/bg_btn_rect_off"
+                                android:onClick="@{()->activity.onGenderClick(Gender.female)}"/>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- 생년월일 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="24dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/activity_join_info_3"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorDarkGray"/>
+
+                        <LinearLayout
+                            android:layout_width="120dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/bg_btn_rect_off">
+
+                            <EditText
+                                android:id="@+id/tv_birth"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:focusedByDefault="false"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/colorGray"
+                                android:gravity="center"
+                                android:hint="@string/activity_join_birth_placeholder"
+                                android:inputType="number"
+                                android:textCursorDrawable="@null"
+                                android:singleLine="true"
+                                android:imeOptions="actionDone"
+                                android:maxLength="@integer/limit_year_length"
+                                android:background="@null"
+/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- 약관 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="126dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/activity_join_info_terms_1"
+                                android:textSize="10sp"
+                                android:textColor="@color/colorDarkGray"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/activity_join_info_terms_2"
+                                android:textSize="10sp"
+                                android:textColor="@color/colorMain"
+                                android:onClick="@{()->activity.onTermsClick(TermsType.service)}"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/activity_join_info_terms_3"
+                                android:textSize="10sp"
+                                android:textColor="@color/colorDarkGray"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/activity_join_info_terms_4"
+                                android:textSize="10sp"
+                                android:textColor="@color/colorMain"
+                                android:onClick="@{()->activity.onTermsClick(TermsType.privacy)}"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/activity_join_info_terms_5"
+                                android:textSize="10sp"
+                                android:textColor="@color/colorDarkGray"/>
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/activity_join_info_terms_6"
+                            android:textSize="10sp"
+                            android:textColor="@color/colorDarkGray" />
+                    </LinearLayout>
+
+
+
+
+                    <TextView
+                        android:id="@+id/tv_join"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:text="@string/btn_complete_join"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorGray"
+                        android:gravity="center"
+                        android:background="@drawable/bg_btn_round_off"
+                        android:onClick="@{()->activity.onJoinClick()}"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <!-- Banner Ads -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:background="@color/colorPureBlack">
+            <com.google.android.gms.ads.AdView
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/admob_id_banner_day_detail_edit"/>
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

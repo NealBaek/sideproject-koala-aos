@@ -11,7 +11,10 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.gson.Gson;
 import com.ksdigtalnomad.koala.R;
+import com.ksdigtalnomad.koala.data.models.User;
 import com.ksdigtalnomad.koala.databinding.ActivityLoginBinding;
+import com.ksdigtalnomad.koala.helpers.data.PreferenceGenericHelper;
+import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 import com.ksdigtalnomad.koala.helpers.ui.ProgressHelper;
 import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
@@ -27,7 +30,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.ksdigtalnomad.koala.ui.views.home.HomeActivity;
 
 import lombok.NonNull;
 
@@ -82,20 +84,17 @@ public class LoginActivity extends BaseActivity {
 
     public void onBackClick(){ finish(); }
     public void onGoogleLoginClick(){
-        // @TODO: 구글 로그인
-
-        // 1. 구글 로그인 호출
-        // 2-1. 아이디가 있으면 -> 로그인 처리
-        // 2-2. 아이디가 없으면 -> 회원가입
-
-
-//        showLoading();
-
         ProgressHelper.showProgress(mBinding.bodyLayout, true);
 
+        // 1. 구글 로그인 호출
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
 
+        // 2-1. 아이디가 있으면 -> 로그인 처리
+        // 2-2. 아이디가 없으면 -> 회원가입
+
+        // @TODO: 로그인 API
+        // @TODO: 백업?
     }
 
     @Override
@@ -116,12 +115,16 @@ public class LoginActivity extends BaseActivity {
     }
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d("ABC", "firebaseAuthWithGoogle:" + acct.getId());
+        Log.d("ABC", "id:" + acct.getId());
+        Log.d("ABC", "idToken:" + acct.getIdToken());
+        Log.d("ABC", "email:" + acct.getEmail());
+        Log.d("ABC", "name:" + acct.getDisplayName());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, (@NonNull Task<AuthResult> task)->{
             if (task.isSuccessful()) {
                 // Sign in, update UI with the signed-in user's information
-                Log.d("ABC", "signInWithCredential:success");
+                Log.d("ABC", "signInWithCredential: success");
                 onLoginGoogle(mAuth.getCurrentUser());
             } else {
                 ProgressHelper.dismissProgress(mBinding.bodyLayout);
@@ -132,8 +135,13 @@ public class LoginActivity extends BaseActivity {
         });
     }
     private void onLoginGoogle(FirebaseUser account) {
-        Log.d("ABC", account.toString());
-        ToastHelper.writeBottomLongToast(account.getEmail());
+        Log.d("ABC", new Gson().toJson(account));
+        Log.d("ABC", "uid" + account.getUid());
+
+
+        ProgressHelper.dismissProgress(mBinding.bodyLayout);
+
+        // @TODO: Add 회원가임 프로세스
 //        User social = User.builder()
 //                .socialType(Constants.SNS_GOOGLE)
 //                .socialId(account.getUid())
@@ -151,6 +159,21 @@ public class LoginActivity extends BaseActivity {
 //        \"locale\":\"ko\",
 
 //        ProgressHelper.dismissProgress(mBinding.bodyLayout);
+
+        User user = User.builder()
+                .email(account.getEmail())
+                .socialId(account.getUid())
+                .socialType("google")
+                .platform("aOS")
+                .adId(PreferenceHelper.getAdid())
+                .role("user")
+                .pushToken(PreferenceHelper.getPushToken())
+//                .versionId(PreferenceHelper.) // TODO
+                .name(account.getDisplayName())
+//                .picture(account.getPhotoUrl()) // TODO
+                .build();
+
+        startActivity(JoinActivity.intent(this, user));
     }
 
 

@@ -96,7 +96,6 @@
     <!-- fragment_tab_settings -->
     <string name="fragment_tab_settings_info_user_guest">비회원</string>
     <string name="fragment_tab_settings_info_user_login">회원가입/로그인하기</string>
-    <string name="fragment_tab_settings_info_user_account">내 계정 설정</string>
     <string name="fragment_tab_settings_info_team_1">Let’s&#160;</string>
     <string name="fragment_tab_settings_info_team_2">record and check</string>
     <string name="fragment_tab_settings_info_team_3">&#160;ourselves.</string>
@@ -115,6 +114,13 @@
     <string name="settings_calendar_desgin_defaults_subtitle">붉은 색으로 따끔한 경고의 느낌을 줍니다.</string>
     <string name="settings_calendar_desgin_stamp_1_title">술 없는 날을 강조 표시</string>
     <string name="settings_calendar_desgin_stamp_1_subtitle">귀여운 코알라가 잘했다고 칭찬해 줍니다.</string>
+
+    <!--  activity_account  -->
+    <string name="activity_account_myaccount">내 계정</string>
+    <string name="activity_account_gender">성별</string>
+    <string name="activity_account_birthday">출생년도</string>
+    <string name="activity_account_logout">로그아웃</string>
+    <string name="activity_account_info">계정 정보 수정, 삭제 문의는\n<font fgcolor='#2b8a32'><u>개발자에게 실시간 문의하기</u></font>를 이용해 주세요.</string>
 
 
     <!-- fragment_tab_statistics -->
@@ -146,6 +152,19 @@
     <string name="fragment_tab_today_info_not_enough_data_2">Not all recent 7 days are recorded.</string>
     <string name="fragment_tab_today_info_not_enough_data_3">Please finish recording at Monthly tab.</string>
 
+    <string name="activity_join_info_1">요것들만 입력해 주시면 가입 끝!</string>
+    <string name="activity_join_info_2">성별</string>
+    <string name="activity_join_male">남</string>
+    <string name="activity_join_female">여</string>
+    <string name="activity_join_birth_placeholder">(예) 1992</string>
+    <string name="activity_join_info_3">출생년도</string>
+    <string name="activity_join_info_terms_1">계속 진행 시, 코알라&#160;</string>
+    <string name="activity_join_info_terms_2"><u>이용 약관</u></string>
+    <string name="activity_join_info_terms_3">&#160;및&#160;</string>
+    <string name="activity_join_info_terms_4"><u>개인정보 처리방침</u></string>
+    <string name="activity_join_info_terms_5">&#160;내용을&#160;</string>
+    <string name="activity_join_info_terms_6">확인하고 동의하는 것으로 간주합니다.</string>
+
 
     <!-- 토스트 문구 -->
     <string name="warning_cannot_edit_after_day">You cannot record days after today.</string>
@@ -157,10 +176,14 @@
     <string name="prefix_time_PM">P.M.</string>
     <string name="prefix_agree">agreed</string>
     <string name="prefix_disagree">disagreed</string>
-
+    <string name="warning_invalid_birthday_year">입력한 연도가 올바른지 확인해 주세요</string>
+    <string name="warning_require_data">모든 정보를 입력해주세요</string>
 
     <!--  타이틀  -->
     <string name="title_login">로그인</string>
+    <string name="title_terms_service">이용 약관</string>
+    <string name="title_terms_privacy">개인정보 처리방침</string>
+    <string name="title_account">내 계정 설정</string>
 
     <!-- 버튼 -->
     <string name="btn_next_short">Next</string>
@@ -187,6 +210,7 @@
     <string name="btn_see_total">Details ></string>
 
     <string name="btn_login_google">Google 계정으로 로그인</string>
+    <string name="btn_complete_join">동의하고 가입완료!</string>
 
 
     <!-- 가이드 -->

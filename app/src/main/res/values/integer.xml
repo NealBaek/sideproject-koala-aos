@@ -2,4 +2,5 @@
 <resources>
     <integer name="limit_memo_length">100</integer>
     <integer name="limit_name_length">10</integer>
+    <integer name="limit_year_length">4</integer>
 </resources>

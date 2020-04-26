@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.views.user.AccountActivity">
+    <data>
+        <variable
+            name="activity"
+            type="com.ksdigtalnomad.koala.ui.views.user.AccountActivity"/>
+        <import type="com.ksdigtalnomad.koala.ui.views.user.JoinActivity.TermsType"/>
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPureWhite">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:focusableInTouchMode="true">
+
+            <!--Header -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/colorMain">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_back"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="14dp"
+                    android:layout_centerVertical="true"
+                    android:onClick="@{()->activity.onBackClick()}"/>
+
+                <TextView
+                    android:id="@+id/headerText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="@string/title_account"
+                    android:textSize="18dp"
+                    android:textColor="#fff"
+                    android:textStyle="bold"/>
+
+            </RelativeLayout>
+
+            <!-- Body -->
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <!-- 내 계정 -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="62dp"
+                        android:orientation="horizontal"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentBottom="true"
+                            android:text="@string/activity_account_myaccount"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorDarkGray" />
+
+                        <TextView
+                            android:id="@+id/tv_user_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentBottom="true"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorGray"/>
+
+                    </RelativeLayout>
+                    <include
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        layout="@layout/view_line_ltgray"/>
+
+                    <!-- 성별 -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="62dp"
+                        android:orientation="horizontal"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentBottom="true"
+                            android:text="@string/activity_account_gender"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorDarkGray" />
+
+                        <TextView
+                            android:id="@+id/tv_user_gender"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentBottom="true"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorGray"/>
+
+                    </RelativeLayout>
+                    <include
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        layout="@layout/view_line_ltgray"/>
+
+                    <!-- 출생년도 -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="62dp"
+                        android:orientation="horizontal"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentBottom="true"
+                            android:text="@string/activity_account_birthday"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorDarkGray" />
+
+                        <TextView
+                            android:id="@+id/tv_user_birthday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentBottom="true"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorGray"/>
+
+                    </RelativeLayout>
+                    <include
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        layout="@layout/view_line_ltgray"/>
+
+                    <!-- 이용 약관 -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="62dp"
+                        android:orientation="horizontal"
+                        android:padding="20dp"
+                        android:onClick="@{()->activity.onTermsClick(TermsType.service)}">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentBottom="true"
+                            android:text="@string/title_terms_service"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorDarkGray" />
+
+                    </RelativeLayout>
+                    <include
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        layout="@layout/view_line_ltgray"/>
+
+                    <!-- 개인정보 처리방침 -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="62dp"
+                        android:orientation="horizontal"
+                        android:padding="20dp"
+                        android:onClick="@{()->activity.onTermsClick(TermsType.privacy)}">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentBottom="true"
+                            android:text="@string/title_terms_privacy"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorDarkGray" />
+
+                    </RelativeLayout>
+                    <include
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        layout="@layout/view_line_ltgray"/>
+
+                    <!-- 약관 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="44dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/activity_account_info"
+                            android:textSize="10sp"
+                            android:textColor="@color/colorDarkGray"
+                            android:gravity="center"
+                            android:onClick="@{()->activity.onKakaoOpenChatRoomClick()}"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
+                            android:text="@string/activity_account_logout"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPureWhite"
+                            android:gravity="center"
+                            android:background="@drawable/bg_btn_round_on"
+                            android:onClick="@{()->activity.onLogoutClick()}"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+
+            <!-- Banner Ads -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:background="@color/colorPureBlack">
+                <com.google.android.gms.ads.AdView
+                    xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/adView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    ads:adSize="BANNER"
+                    ads:adUnitId="@string/admob_id_banner_day_detail_edit"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

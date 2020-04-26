@@ -30,9 +30,9 @@ public class PreferenceHelper {
     private static final String KEY_INTERVIEW_WHYTHISAPP_FIRST = "INTERVIEW_WHYTHISAPP_FIRST";
 
 
-    public static void clear() {
-        getEditPreference().clear().commit();
-    }
+//    public static void clear() {
+//        getEditPreference().clear().commit();
+//    }
     private static SharedPreferences.Editor getEditPreference() {
         Context context = BaseApplication.getInstance().getApplicationContext();
         SharedPreferences pref = context.getSharedPreferences(BuildConfig.PREF_FILE_NAME, Activity.MODE_PRIVATE);
@@ -145,6 +145,9 @@ public class PreferenceHelper {
         User user = new Gson().fromJson(getReadPreference().getString(KEY_USER, null), User.class);
         if (user != null) user.setPushToken(getPushToken());
         return user;
+    }
+    public static void clearUser() {
+        getEditPreference().remove(KEY_USER).apply();
     }
 
     // Push Token
