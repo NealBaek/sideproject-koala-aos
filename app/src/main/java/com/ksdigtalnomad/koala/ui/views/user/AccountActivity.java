@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.ads.AdRequest;
 import com.ksdigtalnomad.koala.R;
@@ -32,11 +33,11 @@ public class AccountActivity extends BaseActivity {
 
         user = PreferenceHelper.getUser();
 
+        Log.d("ABC", "user: " + user.toString());
+
 //        tv_user_birthday
         mBinding.tvUserEmail.setText(user.getEmail());
-        mBinding.tvUserGender.setText(user.getGender() == "0" ?
-                getResources().getString(R.string.activity_join_male) :
-                getResources().getString(R.string.activity_join_female));
+        mBinding.tvUserGender.setText(user.getGender().equals("0") ?  getResources().getString(R.string.activity_join_male) : getResources().getString(R.string.activity_join_female));
         mBinding.tvUserBirthday.setText(user.getBirthday());
     }
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -130,6 +131,7 @@ public class JoinActivity extends BaseActivity {
         super.onBackPressed();
     }
     public void onGenderClick(Gender gender){
+        ToastHelper.writeBottomShortToast("" + gender);
         this.gender = gender;
 
         switch (gender){
@@ -158,6 +160,10 @@ public class JoinActivity extends BaseActivity {
 
         user.setGender(gender == Gender.male ? "0" : "1");
         user.setBirthday(mBinding.tvBirth.getText().toString());
+
+        Log.d("ABC", "gender: " + gender);
+        Log.d("ABC", "gender isMale?: " + (gender == Gender.male));
+        Log.d("ABC", "user: " + user.toString());
 
         // @TODO: do Join
         PreferenceHelper.setUser(user);
