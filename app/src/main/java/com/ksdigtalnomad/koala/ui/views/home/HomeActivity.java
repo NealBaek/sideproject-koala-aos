@@ -20,6 +20,10 @@ import com.ksdigtalnomad.koala.ui.customView.BadgeView;
 import com.ksdigtalnomad.koala.ui.views.dialogs.ExitDialog;
 import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
 import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
+import com.ksdigtalnomad.koala.ui.views.dialogs.LoginDialog;
+import com.ksdigtalnomad.koala.ui.views.user.LoginActivity;
+
+import java.util.concurrent.Executors;
 
 import static com.ksdigtalnomad.koala.ui.views.home.HomeTapAdapter.FRAGMENT_CNT;
 import static com.ksdigtalnomad.koala.ui.views.home.HomeTapAdapter.POS_STATISTICS;
@@ -31,6 +35,8 @@ public class HomeActivity extends BaseActivity {
     private static final String KEY_NOTI_ALARM_DAILY = "NOTI_ALARM_DAILY";
     private int colorGray = BaseApplication.getInstance().getResources().getColor(R.color.colorGray);
     private int colorMain = BaseApplication.getInstance().getResources().getColor(R.color.colorMain);
+    private int lastPos;
+
 
     public static Intent intent(Context context) {  return new Intent(context, HomeActivity.class);  }
     public static Intent intentFromNotiAlarmDaily(Context context) {
@@ -61,8 +67,11 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int pos = tab.getPosition();
-                if(pos == POS_TODAY){ tapAdapter.refreshTodayTab(); }
-                else if(pos == POS_STATISTICS){ tapAdapter.refreshStatisticsTab(); }
+                if(pos == POS_TODAY) tapAdapter.refreshTodayTab();
+                else if(pos == POS_STATISTICS) {
+                    if (!PreferenceHelper.isLogin()) showLoginDialog(lastPos);
+                    tapAdapter.refreshStatisticsTab();
+                }
 
                 mBinding.homeTabViewPager.setCurrentItem(pos, true);
                 try{
@@ -71,14 +80,14 @@ public class HomeActivity extends BaseActivity {
                         View customTabView = mBinding.tabLayout.getTabAt(i).getCustomView();
                         TextView tv = customTabView.findViewById(R.id.tv_title);
                         tv.setTextColor( i == tab.getPosition() ? colorMain : colorGray);
-                        if(i == pos){
-                            ((BadgeView)customTabView.findViewById(R.id.view_badge)).onClick();
-                        }
+                        if(i == pos) ((BadgeView)customTabView.findViewById(R.id.view_badge)).onClick();
                     }
                 }catch (Exception e){
                     FBEventLogHelper.onError(e);
                     Log.d("ABC", "E: " + e.getLocalizedMessage());
                 }
+
+                lastPos = pos;
             }
 
             @Override
@@ -124,6 +133,26 @@ public class HomeActivity extends BaseActivity {
 //        mBinding.adView.loadAd(new AdRequest.Builder().build());
     }
 
+
+
+    private void showLoginDialog(int pos){
+        Executors.newSingleThreadExecutor().execute(()->{
+            LoginDialog dialog = LoginDialog.newInstance();
+            dialog.setCompletion(new LoginDialog.Completion(){
+                @Override
+                public void onComplete() {
+                    Executors.newSingleThreadExecutor().execute(()->
+                        startActivity(LoginActivity.intent(HomeActivity.this))
+                    );
+                }
+                @Override
+                public void onCancel() {
+                    runOnUiThread(()-> mBinding.homeTabViewPager.setCurrentItem(pos, true));
+                }
+            });
+            dialog.show(getFragmentManager(), "Login Dialog");
+        });
+    }
 
     @Override
     public void onBackPressed() {

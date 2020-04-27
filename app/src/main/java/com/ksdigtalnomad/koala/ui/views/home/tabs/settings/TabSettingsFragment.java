@@ -33,6 +33,7 @@ import com.ksdigtalnomad.koala.helpers.data.FBRemoteControlHelper;
 import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 import com.ksdigtalnomad.koala.helpers.util.ShareHelper;
 import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
+import com.ksdigtalnomad.koala.ui.views.dialogs.LoginDialog;
 import com.ksdigtalnomad.koala.ui.views.user.AccountActivity;
 import com.ksdigtalnomad.koala.ui.views.user.LoginActivity;
 
@@ -118,11 +119,12 @@ public class TabSettingsFragment extends BaseFragment {
 
     // OnClick
     public void onLoginInfoClick(){
+
         if(PreferenceHelper.isLogin()){
             // @TODO:
             startActivity(AccountActivity.intent(getContext()));
         }else{
-            startActivity(LoginActivity.intent(getContext()));
+            LoginActivity.intent(getContext());
         }
 
     }

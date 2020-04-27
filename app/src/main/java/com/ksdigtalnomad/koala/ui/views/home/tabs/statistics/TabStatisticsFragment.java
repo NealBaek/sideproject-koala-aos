@@ -22,6 +22,7 @@ import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
 import com.ksdigtalnomad.koala.helpers.data.HashMapHelper;
 import com.ksdigtalnomad.koala.helpers.data.ParseHelper;
+import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 import com.ksdigtalnomad.koala.ui.base.BaseFragment;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
@@ -91,6 +92,10 @@ public class TabStatisticsFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         refreshData();
+
+        if (PreferenceHelper.isLogin()){
+            // TODO:
+        }
     }
 
     public void refreshData(){

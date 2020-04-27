@@ -7,74 +7,83 @@
             name="fragment"
             type="com.ksdigtalnomad.koala.ui.views.home.tabs.statistics.TabStatisticsFragment"/>
     </data>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/bodyLayout">
-
-        <!-- Header -->
-        <RelativeLayout
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@color/colorMain">
-            <ImageView
-                android:id="@+id/btnPreviousMonth"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:padding="7dp"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/headerText"
-                android:src="@drawable/ic_arrow_left"
-                android:onClick="@{()->fragment.onBtnPreviousMonthClick()}"/>
-            <TextView
-                android:id="@+id/headerText"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:textSize="17sp"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:textColor="@color/colorPureWhite"/>
+            android:id="@+id/bodyLayout">
 
-            <ImageView
-                android:id="@+id/btnNextMonth"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:visibility="gone"
-                android:padding="7dp"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/headerText"
-                android:src="@drawable/ic_arrow_right"
-                android:onClick="@{()->fragment.onBtnNextMonthClick()}"/>
-        </RelativeLayout>
-
-
-
-        <!-- Body -->
-        <android.support.v4.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/colorPureWhite">
-            <LinearLayout
+            <!-- Header -->
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="45dp"
+                android:orientation="vertical"
+                android:background="@color/colorMain">
+                <ImageView
+                    android:id="@+id/btnPreviousMonth"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:padding="7dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/headerText"
+                    android:src="@drawable/ic_arrow_left"
+                    android:onClick="@{()->fragment.onBtnPreviousMonthClick()}"/>
+                <TextView
+                    android:id="@+id/headerText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:textSize="17sp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPureWhite"/>
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/textChartRv"
+                <ImageView
+                    android:id="@+id/btnNextMonth"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    android:padding="7dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/headerText"
+                    android:src="@drawable/ic_arrow_right"
+                    android:onClick="@{()->fragment.onBtnNextMonthClick()}"/>
+            </RelativeLayout>
+
+            <!-- Body -->
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/colorPureWhite">
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/horizontalBarChartRv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/textChartRv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
-            </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/horizontalBarChartRv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
-    </LinearLayout>
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorGray"/>
+
+    </RelativeLayout>
+
 </layout>
