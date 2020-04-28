@@ -12,6 +12,7 @@
     <color name="colorDarkGray">#484848</color>
     <color name="colorTransparent">#00000000</color>
     <color name="colorHalfTransparent">#50000000</color>
+    <color name="colorHalfTransparentWhite">#50ffffff</color>
     <color name="colorYellow">#fae100</color>
     <color name="colorRed">#FF6363</color>
     <color name="colorRedAlpha">#25FF6363</color>

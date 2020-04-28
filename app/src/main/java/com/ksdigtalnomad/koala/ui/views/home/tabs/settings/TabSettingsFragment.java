@@ -124,7 +124,7 @@ public class TabSettingsFragment extends BaseFragment {
             // @TODO:
             startActivity(AccountActivity.intent(getContext()));
         }else{
-            LoginActivity.intent(getContext());
+            startActivity(LoginActivity.intent(getContext()));
         }
 
     }

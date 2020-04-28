@@ -79,10 +79,11 @@
 
         </LinearLayout>
 
-        <View
+        <FrameLayout
+            android:id="@+id/view_blur_blinder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorGray"/>
+            android:background="@color/colorHalfTransparentWhite"/>
 
     </RelativeLayout>
 

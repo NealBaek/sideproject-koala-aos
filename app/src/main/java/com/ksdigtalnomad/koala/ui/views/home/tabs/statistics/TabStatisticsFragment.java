@@ -12,6 +12,7 @@ import com.ksdigtalnomad.koala.data.models.calendar.Food;
 import com.ksdigtalnomad.koala.data.models.calendar.Friend;
 import com.ksdigtalnomad.koala.databinding.FragmentTabStatisticsBinding;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -93,9 +94,8 @@ public class TabStatisticsFragment extends BaseFragment {
         super.onResume();
         refreshData();
 
-        if (PreferenceHelper.isLogin()){
-            // TODO:
-        }
+        // TODO:
+        mBinding.viewBlurBlinder.setVisibility(PreferenceHelper.isLogin() ? View.GONE : View.VISIBLE);
     }
 
     public void refreshData(){
