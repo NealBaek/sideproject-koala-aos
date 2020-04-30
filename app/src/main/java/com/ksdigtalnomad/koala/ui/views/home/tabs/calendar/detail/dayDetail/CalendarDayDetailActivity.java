@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -26,11 +27,13 @@ import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.views.dialogs.ExpenseDialog;
+import com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.EditType;
 import com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity;
 import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
 import com.ksdigtalnomad.koala.helpers.ui.KeyboardHelper;
 import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
+import com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.detailListEditNew.CalendarDetailListEditNewActivity;
 
 import java.util.concurrent.Executors;
 
@@ -48,7 +51,7 @@ public class CalendarDayDetailActivity extends BaseActivity {
     private final Drawable THUMB_RED = BaseApplication.getInstance().getResources().getDrawable(R.drawable.shape_seekbar_red);
     private final Drawable THUMB_LIGHT_RED = BaseApplication.getInstance().getResources().getDrawable(R.drawable.shape_seekbar_lightred);
     private final Drawable PROGRESS_DARKGRAY = BaseApplication.getInstance().getResources().getDrawable(R.drawable.bg_seekbar_drakgray);
-    private final Drawable PROGRESS_RED = BaseApplication.getInstance().getResources().getDrawable(R.drawable.bg_seekbar_red);
+//    private final Drawable PROGRESS_RED = BaseApplication.getInstance().getResources().getDrawable(R.drawable.bg_seekbar_red);
     private final Drawable PROGRESS_LIGHTRED = BaseApplication.getInstance().getResources().getDrawable(R.drawable.bg_seekbar_lightred);
 
     private static Intent intent(Context context) {  return new Intent(context, CalendarDayDetailActivity.class);  }
@@ -156,8 +159,20 @@ public class CalendarDayDetailActivity extends BaseActivity {
         });
     }
 
-    public void moveToDetailListEditActivity(String viewType){
-        startActivityForResult(CalendarDetailListEditActivity.intent(this, viewType, dayModel), 0);
+    public void moveToDetailListEditActivity(EditType editType){
+
+        Intent intent = null;
+        switch (editType){
+            case friends:
+            case drinks:
+                intent = CalendarDetailListEditNewActivity.intent(this, editType, dayModel);
+                break;
+            case foods:
+                intent = CalendarDetailListEditActivity.intent(this, editType, dayModel);
+                break;
+        }
+
+        startActivityForResult(intent, 0);
     }
 
     public void moveToExpenseDialog(){

@@ -21,7 +21,6 @@ public class SettingCalendarDesignActivity extends BaseActivity {
 
     private ActivitySettingCalendarDesignBinding mBinding;
     private Design calendarDesign;
-    public static String RESULT_KEY = "design";
 
     public static Intent intent(Context context) {  return new Intent(context, SettingCalendarDesignActivity.class);  }
 

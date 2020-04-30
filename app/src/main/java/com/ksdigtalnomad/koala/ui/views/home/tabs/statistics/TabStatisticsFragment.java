@@ -12,7 +12,6 @@ import com.ksdigtalnomad.koala.data.models.calendar.Food;
 import com.ksdigtalnomad.koala.data.models.calendar.Friend;
 import com.ksdigtalnomad.koala.databinding.FragmentTabStatisticsBinding;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;

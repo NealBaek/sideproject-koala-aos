@@ -1,5 +1,6 @@
-package com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.detailListEdit;
+package com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.detailListEditNew;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ksdigtalnomad.koala.R;
@@ -14,19 +16,20 @@ import com.ksdigtalnomad.koala.data.models.calendar.BaseData;
 import com.ksdigtalnomad.koala.data.models.calendar.Drink;
 import com.ksdigtalnomad.koala.data.models.calendar.Food;
 import com.ksdigtalnomad.koala.data.models.calendar.Friend;
+import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
 import com.ksdigtalnomad.koala.ui.base.BaseRecyclerViewAdapter;
 import com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.EditType;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class CalendarDetailListAdapter extends BaseRecyclerViewAdapter<CalendarDetailListAdapter.ViewHolder> {
+public class CalendarDetailListNewAdapter extends BaseRecyclerViewAdapter<CalendarDetailListNewAdapter.ViewHolder> {
     private Context context;
     private ArrayList<BaseData> originalList;
     private ArrayList<BaseData> searchList = new ArrayList<>();
     private EditType editType;
 
-    CalendarDetailListAdapter(Context context, ArrayList<BaseData> list, EditType editType) {
+    CalendarDetailListNewAdapter(Context context, ArrayList<BaseData> list, EditType editType) {
         this.context = context;
         this.originalList = list;
         this.editType = editType;
@@ -61,7 +64,7 @@ public class CalendarDetailListAdapter extends BaseRecyclerViewAdapter<CalendarD
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(
-                R.layout.cell_calendar_detail_edit, parent, false);
+                R.layout.cell_calendar_detail_edit_new, parent, false);
         return new ViewHolder(view);
     }
 
@@ -78,22 +81,6 @@ public class CalendarDetailListAdapter extends BaseRecyclerViewAdapter<CalendarD
             int originalDataCnt = originalList.size();
 
             BaseData searchBaseData = holder.baseData;
-
-//            TODO: 별탈 없으면 삭제
-//            if(editType == EditType.friends){
-//                Friend searchItem = (Friend) searchBaseData;
-//
-//                for(int i = 0; i < originalDataCnt; ++i){
-//
-//                    Friend item = (Friend) originalList.get(i);
-//                    if(searchItem.getName().equals(item.getName())){
-//                        item.setSelected(searchItem.isSelected());
-//                        originalList.set(i, item);
-//                        break;
-//                    }
-//                }
-//
-//            }
 
             if(editType == EditType.friends){
                 Friend searchItem = (Friend) searchBaseData;
@@ -133,12 +120,15 @@ public class CalendarDetailListAdapter extends BaseRecyclerViewAdapter<CalendarD
 
             }
 
-
-
-
             holder.itemView.post(()->{
                 itemClickListener.onItemClick(holder.getAdapterPosition()); // change save btn enable
+                notifyItemChanged(holder.getAdapterPosition());
             });
+        });
+
+        holder.amountLayout.setOnClickListener((v)->{
+            ToastHelper.writeBottomShortToast("헤헤");
+            // TODO: 주량 팝업 추가
         });
 
         holder.itemView.setOnLongClickListener(v -> {
@@ -155,6 +145,7 @@ public class CalendarDetailListAdapter extends BaseRecyclerViewAdapter<CalendarD
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         ImageView checkBtn;
+        RelativeLayout amountLayout;
         public BaseData baseData;
         EditType editType;
 
@@ -163,6 +154,7 @@ public class CalendarDetailListAdapter extends BaseRecyclerViewAdapter<CalendarD
 
             title = itemView.findViewById(R.id.title);
             checkBtn = itemView.findViewById(R.id.checkBtn);
+            amountLayout = itemView.findViewById(R.id.layout_amount);
         }
 
         public void onItemClick(){
@@ -183,6 +175,7 @@ public class CalendarDetailListAdapter extends BaseRecyclerViewAdapter<CalendarD
                     Drink drink = (Drink) baseData;
                     drink.setSelected(!drink.isSelected());
                     setSelected(drink.isSelected());
+                    changeVisibility(drink.isSelected());
 
                     break;
             }
@@ -214,10 +207,26 @@ public class CalendarDetailListAdapter extends BaseRecyclerViewAdapter<CalendarD
                     Drink drink = (Drink) baseData;
                     title.setText(drink.getName());
                     checkBtn.setVisibility(drink.isSelected() ? View.VISIBLE : View.INVISIBLE);
+                    changeVisibility(drink.isSelected());
 
                     break;
             }
 
+        }
+
+        private void changeVisibility(final boolean isSelected) {
+            ValueAnimator va = isSelected ? ValueAnimator.ofInt(0, amountLayout.getHeight()) : ValueAnimator.ofInt(amountLayout.getHeight(), 0);
+
+            va.setDuration(300);
+            va.addUpdateListener(
+                (ValueAnimator animation)->{
+                    amountLayout.requestLayout();
+                    amountLayout.setVisibility(isSelected ? View.VISIBLE : View.GONE);
+                }
+
+            );
+
+            va.start();
         }
     }
 

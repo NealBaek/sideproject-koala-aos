@@ -18,4 +18,6 @@
     <color name="colorRedAlpha">#25FF6363</color>
     <color name="colorLightRed">#FF8A8A</color>
 
+    <color name="colorLightWhite">#f3f3f3</color>
+
 </resources>

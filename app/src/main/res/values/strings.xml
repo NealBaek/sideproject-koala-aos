@@ -74,6 +74,9 @@
     <string name="acitivity_calendar_detail_list_edit_info_add_2">[+]</string>
     <string name="acitivity_calendar_detail_list_edit_info_add_3">&#160;on the top right and add.</string>
 
+    <!-- acitivity_calendar_detail_list_edit_new   -->
+    <string name="acitivity_calendar_detail_list_edit_new_info_amount">(선택입력) 여기를 눌러 마신 양을 기록</string>
+
     <!-- activity_splash -->
     <string name="activity_splash_sub_title">Control alcohol.\nWe can do it.</string>
 

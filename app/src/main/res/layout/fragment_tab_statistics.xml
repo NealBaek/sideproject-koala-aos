@@ -53,37 +53,43 @@
                     android:onClick="@{()->fragment.onBtnNextMonthClick()}"/>
             </RelativeLayout>
 
-            <!-- Body -->
-            <android.support.v4.widget.NestedScrollView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@color/colorPureWhite">
-                <LinearLayout
+                android:layout_height="match_parent">
+
+                <!-- Body -->
+                <android.support.v4.widget.NestedScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/textChartRv"
+                    android:background="@color/colorPureWhite">
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/horizontalBarChartRv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/textChartRv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
 
-                </LinearLayout>
-            </android.support.v4.widget.NestedScrollView>
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/horizontalBarChartRv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+                </android.support.v4.widget.NestedScrollView>
+
+
+                <ImageView
+                    android:id="@+id/view_blur_blinder"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/img_statistics_bg_blur"
+                    android:scaleType="fitXY"/>
+            </RelativeLayout>
 
         </LinearLayout>
-
-        <FrameLayout
-            android:id="@+id/view_blur_blinder"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorHalfTransparentWhite"/>
 
     </RelativeLayout>
 

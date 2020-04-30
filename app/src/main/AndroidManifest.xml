@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.views.dialogs.LoginDialog"></activity>
+        <activity android:name=".ui.views.home.tabs.calendar.detail.detailListEditNew.CalendarDetailListEditNewActivity"></activity>
+        <activity android:name=".ui.views.dialogs.LoginDialog" />
         <activity android:name=".ui.views.user.AccountActivity" />
         <activity android:name=".ui.views.user.TermsDetailActivity" />
         <activity android:name=".ui.views.user.JoinActivity" />

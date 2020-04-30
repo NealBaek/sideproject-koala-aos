@@ -12,7 +12,7 @@
             type="com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel"/>
         <import type="com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils"/>
         <import type="com.ksdigtalnomad.koala.helpers.data.ParseHelper"/>
-        <import type="com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity"/>
+        <import type="com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.EditType"/>
         <!--<import type=""/>-->
     </data>
     <RelativeLayout
@@ -147,7 +147,7 @@
                                 android:textSize="16dp"
                                 android:textColor="@color/colorDarkGray"
                                 android:gravity="right"
-                                android:onClick="@{()->activity.moveToDetailListEditActivity(CalendarDetailListEditActivity.TYPE_FRIENDS)}"/>
+                                android:onClick="@{()->activity.moveToDetailListEditActivity(EditType.friends)}"/>
                         </LinearLayout>
                         <include
                             android:layout_width="match_parent"
@@ -188,7 +188,7 @@
                                 android:textSize="16dp"
                                 android:textColor="@color/colorDarkGray"
                                 android:gravity="right"
-                                android:onClick="@{()->activity.moveToDetailListEditActivity(CalendarDetailListEditActivity.TYPE_DRINKS)}"/>
+                                android:onClick="@{()->activity.moveToDetailListEditActivity(EditType.drinks)}"/>
                         </LinearLayout>
                         <include
                             android:layout_width="match_parent"
@@ -228,7 +228,7 @@
                                 android:textSize="16dp"
                                 android:textColor="@color/colorDarkGray"
                                 android:gravity="right"
-                                android:onClick="@{()->activity.moveToDetailListEditActivity(CalendarDetailListEditActivity.TYPE_FOODS)}"/>
+                                android:onClick="@{()->activity.moveToDetailListEditActivity(EditType.foods)}"/>
                         </LinearLayout>
                         <include
                             android:layout_width="match_parent"

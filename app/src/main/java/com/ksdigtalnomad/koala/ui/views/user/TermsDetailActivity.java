@@ -60,9 +60,16 @@ public class TermsDetailActivity extends BaseActivity {
 
         mBinding.headerText.setText(termsType == TermsType.privacy ? titlePrivacy : titleService);
 
+//        String url = termsType == TermsType.privacy ?
+//                "https://drive.google.com/file/d/1498IqnsOZpwwRRgwhXrovDj0qnBZ0HM_/view"
+//                : "https://drive.google.com/file/d/1498IqnsOZpwwRRgwhXrovDj0qnBZ0HM_/view";
+
         String url = termsType == TermsType.privacy ?
-                "https://drive.google.com/file/d/1498IqnsOZpwwRRgwhXrovDj0qnBZ0HM_/view"
-                : "https://drive.google.com/file/d/1498IqnsOZpwwRRgwhXrovDj0qnBZ0HM_/view";
+                "https://drive.google.com/file/d/17hI6uO2F4R-wNqBfvXmSazwcO3iLhs85/view"
+                : "https://drive.google.com/file/d/1M_p8lZt3hgDoe-rpj2RMkwzNri6IO1h5/view";
+
+
+
 
         ProgressHelper.showProgress(mBinding.bodyLayout, false);
 

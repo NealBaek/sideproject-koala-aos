@@ -1,4 +1,4 @@
-package com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.detailListEdit;
+package com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.detailListEditNew;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,21 +17,22 @@ import com.ksdigtalnomad.koala.data.models.calendar.BaseData;
 import com.ksdigtalnomad.koala.data.models.calendar.Drink;
 import com.ksdigtalnomad.koala.data.models.calendar.Food;
 import com.ksdigtalnomad.koala.data.models.calendar.Friend;
-import com.ksdigtalnomad.koala.databinding.ActivityCalendarDetailListEditBinding;
+import com.ksdigtalnomad.koala.databinding.ActivityCalendarDetailListEditNewBinding;
+import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
+import com.ksdigtalnomad.koala.helpers.ui.KeyboardHelper;
+import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
 import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.base.BaseRecyclerViewAdapter;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.views.dialogs.AddDialog;
 import com.ksdigtalnomad.koala.ui.views.dialogs.UpdateDialog;
-import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
-import com.ksdigtalnomad.koala.helpers.ui.KeyboardHelper;
-import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
 import com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.EditType;
+import com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity;
 
 import java.util.ArrayList;
 
-public class CalendarDetailListEditActivity extends BaseActivity {
+public class CalendarDetailListEditNewActivity extends BaseActivity {
 
     private EditType editType = EditType.foods;
     private static final String KEY_EDIT_TYPE = "KEY_EDIT_TYPE";
@@ -39,8 +40,8 @@ public class CalendarDetailListEditActivity extends BaseActivity {
 
     private DayModel dayModel;
 
-    private ActivityCalendarDetailListEditBinding mBinding;
-    private CalendarDetailListAdapter adapter;
+    private ActivityCalendarDetailListEditNewBinding mBinding;
+    private CalendarDetailListNewAdapter adapter;
 
     private ArrayList dataList = new ArrayList<>();
 
@@ -48,7 +49,7 @@ public class CalendarDetailListEditActivity extends BaseActivity {
     private final int COLOR_OFF = BaseApplication.getInstance().getResources().getColor(R.color.colorLightGray);
 
     public static Intent intent(Context context, EditType type, DayModel dayModel) {
-        Intent intent = new Intent(context, CalendarDetailListEditActivity.class);
+        Intent intent = new Intent(context, CalendarDetailListEditNewActivity.class);
         intent.putExtra(KEY_EDIT_TYPE, type);
         intent.putExtra(KEY_DAY_MODEL, new Gson().toJson(dayModel));
         return intent;
@@ -63,7 +64,7 @@ public class CalendarDetailListEditActivity extends BaseActivity {
 //        this.viewType = getIntent().getStringExtra(KEY_EDIT_TYPE);
         this.dayModel = new Gson().fromJson(getIntent().getStringExtra(KEY_DAY_MODEL), DayModel.class);
 
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_calendar_detail_list_edit);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_calendar_detail_list_edit_new);
         mBinding.setActivity(this);
 
         setEditType(editType);
@@ -82,7 +83,7 @@ public class CalendarDetailListEditActivity extends BaseActivity {
             }
         });
 
-        adapter = new CalendarDetailListAdapter(this, dataList, editType);
+        adapter = new CalendarDetailListNewAdapter(this, dataList, editType);
         adapter.setItemClickListener(new BaseRecyclerViewAdapter.ItemClickListener(){
             @Override
             public void onItemClick(int position) {
@@ -156,7 +157,7 @@ public class CalendarDetailListEditActivity extends BaseActivity {
                             }
                         }
 
-                        CalendarDetailListEditActivity.this.runOnUiThread(()->{
+                        CalendarDetailListEditNewActivity.this.runOnUiThread(()->{
                             mBinding.dataRv.getAdapter().notifyDataSetChanged();
                             setDataListVisible();
                         });
@@ -299,7 +300,7 @@ public class CalendarDetailListEditActivity extends BaseActivity {
     public void onBackPressed() {
         if(mBinding.searchEt.hasFocus()){
             mBinding.searchEt.clearFocus();
-            KeyboardHelper.hide(CalendarDetailListEditActivity.this);
+            KeyboardHelper.hide(CalendarDetailListEditNewActivity.this);
         }else{
             super.onBackPressed();
         }
@@ -325,27 +326,27 @@ public class CalendarDetailListEditActivity extends BaseActivity {
             Runnable runnable = ()->{
                 if(isDuplicate(newName, editType, dataList)) return;
 
-                 if(editType == EditType.friends){
-                     Friend item = Friend.builder().build();
-                     item.setName(newName);
-                     dataList.add(0, item);
-                     adapter.getSearchList().add(0, item);
-                     FBEventLogHelper.onFriendsAddDone();
-                 }else if(editType == EditType.foods){
+                if(editType == EditType.friends){
+                    Friend item = Friend.builder().build();
+                    item.setName(newName);
+                    dataList.add(0, item);
+                    adapter.getSearchList().add(0, item);
+                    FBEventLogHelper.onFriendsAddDone();
+                }else if(editType == EditType.foods){
                     Food item = Food.builder().build();
                     item.setName(newName);
                     dataList.add(0, item);
                     adapter.getSearchList().add(0, item);
-                     FBEventLogHelper.onFoodAddDone();
-                 }else if(editType == EditType.drinks){
-                     Drink item = Drink.builder().build();
-                     item.setName(newName);
-                     dataList.add(0, item);
-                     adapter.getSearchList().add(0, item);
-                     FBEventLogHelper.onDrinkAddDone();
-                 }
+                    FBEventLogHelper.onFoodAddDone();
+                }else if(editType == EditType.drinks){
+                    Drink item = Drink.builder().build();
+                    item.setName(newName);
+                    dataList.add(0, item);
+                    adapter.getSearchList().add(0, item);
+                    FBEventLogHelper.onDrinkAddDone();
+                }
 
-                CalendarDetailListEditActivity.this.runOnUiThread(()->{
+                CalendarDetailListEditNewActivity.this.runOnUiThread(()->{
                     mBinding.dataRv.getAdapter().notifyDataSetChanged();
                     setDataListVisible();
                 });
