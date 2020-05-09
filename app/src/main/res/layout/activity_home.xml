@@ -50,18 +50,18 @@
                 android:layout_height="50dp"
                 android:gravity="center"
                 android:background="@color/colorPureBlack">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/banner_sookdak"
-                    android:onClick="@{()->activity.onSookdakBannerClick()}"/>
-<!--                <com.google.android.gms.ads.AdView-->
-<!--                    xmlns:ads="http://schemas.android.com/apk/res-auto"-->
-<!--                    android:id="@+id/adView"-->
+<!--                <ImageView-->
 <!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    ads:adSize="BANNER"-->
-<!--                    ads:adUnitId="@string/admob_id_banner_home"/>-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:src="@drawable/banner_sookdak"-->
+<!--                    android:onClick="@{()->activity.onSookdakBannerClick()}"/>-->
+                <com.google.android.gms.ads.AdView
+                    xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/adView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    ads:adSize="BANNER"
+                    ads:adUnitId="@string/admob_id_banner_home"/>
             </LinearLayout>
 
 

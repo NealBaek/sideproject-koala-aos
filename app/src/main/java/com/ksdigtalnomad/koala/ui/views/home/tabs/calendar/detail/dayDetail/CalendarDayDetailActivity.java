@@ -25,6 +25,8 @@ import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarConstUtils;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
+import com.ksdigtalnomad.koala.ui.views.dialogs.ClearDialog;
+import com.ksdigtalnomad.koala.ui.views.dialogs.DeleteDialog;
 import com.ksdigtalnomad.koala.ui.views.dialogs.ExpenseDialog;
 import com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity;
 import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
@@ -32,6 +34,7 @@ import com.ksdigtalnomad.koala.helpers.ui.KeyboardHelper;
 import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
 
+import java.util.ArrayList;
 import java.util.concurrent.Executors;
 
 public class CalendarDayDetailActivity extends BaseActivity {
@@ -129,6 +132,13 @@ public class CalendarDayDetailActivity extends BaseActivity {
         }
     }
 
+    private void setDayDetailList(DayModel dayModel){
+        mBinding.friendList.setText(CalendarConstUtils.getLongStrFromFriendList(dayModel.friendList));
+        mBinding.foodList.setText(CalendarConstUtils.getLongStrFromFoodList(dayModel.foodList));
+        mBinding.drinkList.setText(CalendarConstUtils.getLongStrFromDrinkList(dayModel.drinkList));
+    }
+
+    // 얼마나 마셨나요?
     public void onDrunkLevelChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
         setSeekbar(progresValue);
     }
@@ -156,10 +166,12 @@ public class CalendarDayDetailActivity extends BaseActivity {
         });
     }
 
+    // 누구와, 어떤 술을 어떤 안주에
     public void moveToDetailListEditActivity(String viewType){
         startActivityForResult(CalendarDetailListEditActivity.intent(this, viewType, dayModel), 0);
     }
 
+    // 지출액
     public void moveToExpenseDialog(){
         ExpenseDialog dialog = ExpenseDialog.newInstance(dayModel.expense);
         dialog.setDialogListener((newValue)->{
@@ -177,20 +189,46 @@ public class CalendarDayDetailActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == 1){
             dayModel = new Gson().fromJson(data.getStringExtra(KEY_DAY_MODEL), DayModel.class);
-            setDayModel(dayModel);
+            setDayDetailList(dayModel);
         }
     }
-    private void setDayModel(DayModel dayModel){
-        mBinding.friendList.setText(CalendarConstUtils.getLongStrFromFriendList(dayModel.friendList));
-        mBinding.foodList.setText(CalendarConstUtils.getLongStrFromFoodList(dayModel.foodList));
-        mBinding.drinkList.setText(CalendarConstUtils.getLongStrFromDrinkList(dayModel.drinkList));
-    }
+
 
     public void onSaveClick(View v){
 
         dayModel.memo = mBinding.memo.getText().toString();
         dayModel.isSaved = true;
 
+        saveDayModel(dayModel);
+    }
+
+    public void onBackClick(View v){
+        finish();
+    }
+    public void onClearDay(View v){
+
+        // TODO: Popup
+        String title = BaseApplication.getInstance().getResources().getString(R.string.btn_clear_long);
+        String subTitle = BaseApplication.getInstance().getResources().getString(R.string.dialog_clear_info);
+
+        ClearDialog dialog = ClearDialog.newInstance(title, subTitle);
+        dialog.setDialogListener(()->{
+            // 데이터 초기화 처리
+            dayModel.drunkLevel = 0;
+            dayModel.friendList = new ArrayList<>();
+            dayModel.drinkList = new ArrayList<>();
+            dayModel.foodList = new ArrayList<>();
+            dayModel.expense = 0.0;
+            dayModel.memo = "";
+            dayModel.isSaved = false;
+
+            saveDayModel(dayModel);
+        });
+        dialog.show(getFragmentManager(), "Clear Dialog");
+    }
+
+
+    private void saveDayModel(DayModel dayModel){
         ProgressHelper.showProgress(mBinding.bodyLayout, false);
         Executors.newSingleThreadExecutor().execute(()->{
             if(CalendarDataController.isNoDataYet()) CalendarDataController.setNoDataYet(false);
@@ -209,10 +247,6 @@ public class CalendarDayDetailActivity extends BaseActivity {
                 finish();
             });
         });
-    }
-
-    public void onBackClick(View v){
-        finish();
     }
 
 }

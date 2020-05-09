@@ -85,6 +85,9 @@
     <!-- dialog_exit -->
     <string name="dialog_exit_info_exit">Do you really want to exit?</string>
 
+    <!-- dialog_delete -->
+    <string name="dialog_clear_info">이 날의 기록을 모두 지우시겠습니까?</string>
+
 
     <!-- dialog_interview_whythisapp -->
     <string name="dialog_interview_whythisapp_info_1">코알라가 갑자기 궁금하대요.</string>
@@ -182,6 +185,8 @@
     <string name="btn_dontbother">알 거 없어!</string>
 
     <string name="btn_see_total">Details ></string>
+
+    <string name="btn_clear_long">Clear</string>
 
 
     <!-- 가이드 -->

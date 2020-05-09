@@ -191,6 +191,8 @@
 
     <string name="btn_see_total">전체 보기 ></string>
 
+    <string name="btn_clear_long">초기화</string>
+
     <!-- 가이드 -->
     <string name="guide_start">시작하기</string>
     <string name="guide_title_1">기록</string>

@@ -10,18 +10,18 @@ import android.widget.TextView;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.ui.base.BaseDialogFragment;
 
-public class DeleteDialog extends BaseDialogFragment {
+public class ClearDialog extends BaseDialogFragment {
     private static final String KEY_TITLE = "KEY_TITLE";
     private static final String KEY_SUBTITLE = "KEY_SUBTITLE";
 
     private CompleteClickListener completeClickListener;
 
-    private static DeleteDialog newInstance() {
-        return new DeleteDialog();
+    private static ClearDialog newInstance() {
+        return new ClearDialog();
     }
 
-    public static DeleteDialog newInstance(String title, String subTitle) {
-        DeleteDialog dialog = newInstance();
+    public static ClearDialog newInstance(String title, String subTitle) {
+        ClearDialog dialog = newInstance();
         Bundle bundle = new Bundle();
         bundle.putString(KEY_TITLE, title);
         bundle.putString(KEY_SUBTITLE, subTitle);
@@ -32,7 +32,7 @@ public class DeleteDialog extends BaseDialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, this, R.layout.dialog_delete);
+        return super.onCreateView(inflater, container, this, R.layout.dialog_clear);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class DeleteDialog extends BaseDialogFragment {
         view.findViewById(R.id.btnCancel).setOnClickListener((v)->{
             dismiss();
         });
-        view.findViewById(R.id.btnDelete).setOnClickListener((v)->{
+        view.findViewById(R.id.btnConfirm).setOnClickListener((v)->{
             // 삭제 처리
             completeClickListener.onClick();
             dismiss();

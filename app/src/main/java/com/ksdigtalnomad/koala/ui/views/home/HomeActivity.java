@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
 import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.data.AlarmDailyController;
 import com.ksdigtalnomad.koala.databinding.ActivityHomeBinding;
@@ -121,7 +122,7 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        mBinding.adView.loadAd(new AdRequest.Builder().build());
+        mBinding.adView.loadAd(new AdRequest.Builder().build());
     }
 
 
@@ -130,13 +131,13 @@ public class HomeActivity extends BaseActivity {
         ExitDialog.newInstance().show(getFragmentManager(), "Exit Dialog");
     }
 
-    public void onSookdakBannerClick(){
-        Log.d("ABC", "onSookdakBannerClick");
-        String url ="http://www.sookdoc.com/product/%EC%88%99%EC%B7%A8%EB%8B%A5%ED%84%B0-%EC%88%99%EB%8B%A5-%EB%AC%B4%EB%A3%8C%EC%B2%B4%ED%97%98%ED%8C%A9-%ED%8F%89%EC%9D%BC-10%EB%AA%85-%EC%84%A0%EC%B0%A9%EC%88%9C-%EB%A7%88%EA%B0%90/143/category/57/display/1/?utm_source=koala&utm_medium=banner&utm_campaign=promotion";
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(intent);
-
-        FBEventLogHelper.onCustomAdsClick(FBEventLogHelper.Partner.sookDak, FBEventLogHelper.Screen.mainBanner);
-
-    }
+//    public void onSookdakBannerClick(){
+//        Log.d("ABC", "onSookdakBannerClick");
+//        String url ="http://www.sookdoc.com/product/%EC%88%99%EC%B7%A8%EB%8B%A5%ED%84%B0-%EC%88%99%EB%8B%A5-%EB%AC%B4%EB%A3%8C%EC%B2%B4%ED%97%98%ED%8C%A9-%ED%8F%89%EC%9D%BC-10%EB%AA%85-%EC%84%A0%EC%B0%A9%EC%88%9C-%EB%A7%88%EA%B0%90/143/category/57/display/1/?utm_source=koala&utm_medium=banner&utm_campaign=promotion";
+//        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+//        startActivity(intent);
+//
+//        FBEventLogHelper.onCustomAdsClick(FBEventLogHelper.Partner.sookDak, FBEventLogHelper.Screen.mainBanner);
+//
+//    }
 }

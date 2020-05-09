@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ksdigtalnomad.koala.R;
+import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.base.BaseDialogFragment;
 import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
 
@@ -75,7 +76,7 @@ public class UpdateDialog extends BaseDialogFragment {
             dismiss();
         });
         view.findViewById(R.id.btnDelete).setOnClickListener((v)->{
-            DeleteDialog dialog = DeleteDialog.newInstance(originalName);
+            DeleteDialog dialog = DeleteDialog.newInstance(BaseApplication.getInstance().getResources().getString(R.string.btn_delete_long), originalName);
             dialog.setDialogListener(()->{
                 // 삭제 처리
                 completeClickListener.onClick(originalPos, "");

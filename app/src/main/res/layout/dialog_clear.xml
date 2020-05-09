@@ -52,7 +52,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="24dp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@color/colorDarkGray"
                     android:gravity="center"/>
@@ -80,11 +80,11 @@
                         android:textColor="@color/colorDarkGray"
                         android:gravity="center"/>
                     <TextView
-                        android:id="@+id/btnDelete"
+                        android:id="@+id/btnConfirm"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginRight="22dp"
-                        android:text="@string/btn_delete_short"
+                        android:text="@string/btn_confirm_short"
                         android:textSize="16dp"
                         android:textStyle="bold"
                         android:textColor="@color/colorMain"
