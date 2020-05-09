@@ -237,6 +237,8 @@ public class DayView extends RelativeLayout {
             }
 
 
+        }else{
+            hideStamp1();
         }
 
         // 3. 오늘이면 Border 추가
