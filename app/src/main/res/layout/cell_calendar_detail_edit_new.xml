@@ -28,7 +28,7 @@
 
     <!--  마신 양  -->
     <RelativeLayout
-        android:id="@+id/layout_amount"
+        android:id="@+id/layout_quantity"
         android:layout_width="match_parent"
         android:layout_height="47dp"
         android:orientation="vertical"

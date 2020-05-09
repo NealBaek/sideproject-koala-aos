@@ -18,6 +18,7 @@ import com.ksdigtalnomad.koala.data.models.calendar.Food;
 import com.ksdigtalnomad.koala.data.models.calendar.Friend;
 import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
 import com.ksdigtalnomad.koala.ui.base.BaseRecyclerViewAdapter;
+import com.ksdigtalnomad.koala.ui.views.dialogs.QuantityDrinkDialog;
 import com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.EditType;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class CalendarDetailListNewAdapter extends BaseRecyclerViewAdapter<Calend
     private ArrayList<BaseData> originalList;
     private ArrayList<BaseData> searchList = new ArrayList<>();
     private EditType editType;
+    private ItemDetailClickListener itemDetailClickListener;
 
     CalendarDetailListNewAdapter(Context context, ArrayList<BaseData> list, EditType editType) {
         this.context = context;
@@ -45,7 +47,6 @@ public class CalendarDetailListNewAdapter extends BaseRecyclerViewAdapter<Calend
                 String name = "";
                 switch (editType){
                     case friends: name = ((Friend)item).getName(); break;
-                    case foods: name = ((Food)item).getName(); break;
                     case drinks: name = ((Drink)item).getName(); break;
                 }
                 if (name.toLowerCase().contains(charText)) searchList.add(item);
@@ -58,6 +59,13 @@ public class CalendarDetailListNewAdapter extends BaseRecyclerViewAdapter<Calend
     }
     public ArrayList<BaseData> getOriginalList(){
         return originalList;
+    }
+
+    public void setItemdetailClickListener(ItemDetailClickListener itemDetailClickListener) {
+        this.itemDetailClickListener = itemDetailClickListener;
+    }
+    public interface ItemDetailClickListener {
+        void onQuantityClick(int position);
     }
 
     @NonNull
@@ -94,18 +102,6 @@ public class CalendarDetailListNewAdapter extends BaseRecyclerViewAdapter<Calend
                     }
                 }
 
-            }else if(editType == EditType.foods){
-                Food searchItem = (Food) searchBaseData;
-
-                for(int i = 0; i < originalDataCnt; ++i){
-
-                    Food item = (Food) originalList.get(i);
-                    if(searchItem.getName().equals(item.getName())){
-                        item.setSelected(searchItem.isSelected());
-                        break;
-                    }
-                }
-
             }else if(editType == EditType.drinks){
                 Drink searchItem = (Drink) searchBaseData;
 
@@ -126,9 +122,8 @@ public class CalendarDetailListNewAdapter extends BaseRecyclerViewAdapter<Calend
             });
         });
 
-        holder.amountLayout.setOnClickListener((v)->{
-            ToastHelper.writeBottomShortToast("헤헤");
-            // TODO: 주량 팝업 추가
+        holder.quantityLayout.setOnClickListener((v)->{
+            itemDetailClickListener.onQuantityClick(holder.getAdapterPosition());
         });
 
         holder.itemView.setOnLongClickListener(v -> {
@@ -136,6 +131,10 @@ public class CalendarDetailListNewAdapter extends BaseRecyclerViewAdapter<Calend
             return true;
         });
     }
+
+
+
+
 
     @Override
     public int getItemCount() {
@@ -145,7 +144,7 @@ public class CalendarDetailListNewAdapter extends BaseRecyclerViewAdapter<Calend
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         ImageView checkBtn;
-        RelativeLayout amountLayout;
+        RelativeLayout quantityLayout;
         public BaseData baseData;
         EditType editType;
 
@@ -154,7 +153,7 @@ public class CalendarDetailListNewAdapter extends BaseRecyclerViewAdapter<Calend
 
             title = itemView.findViewById(R.id.title);
             checkBtn = itemView.findViewById(R.id.checkBtn);
-            amountLayout = itemView.findViewById(R.id.layout_amount);
+            quantityLayout = itemView.findViewById(R.id.layout_quantity);
         }
 
         public void onItemClick(){
@@ -163,12 +162,6 @@ public class CalendarDetailListNewAdapter extends BaseRecyclerViewAdapter<Calend
                     Friend friend = (Friend) baseData;
                     friend.setSelected(!friend.isSelected());
                     setSelected(friend.isSelected());
-
-                    break;
-                case foods:
-                    Food food = (Food) baseData;
-                    food.setSelected(!food.isSelected());
-                    setSelected(food.isSelected());
 
                     break;
                 case drinks:
@@ -195,13 +188,7 @@ public class CalendarDetailListNewAdapter extends BaseRecyclerViewAdapter<Calend
                     Friend friend = (Friend) baseData;
                     title.setText(friend.getName());
                     checkBtn.setVisibility(friend.isSelected() ? View.VISIBLE : View.INVISIBLE);
-
-                    break;
-                case foods:
-                    Food food = (Food) baseData;
-                    title.setText(food.getName());
-                    checkBtn.setVisibility(food.isSelected() ? View.VISIBLE : View.INVISIBLE);
-
+                    changeVisibility(false);
                     break;
                 case drinks:
                     Drink drink = (Drink) baseData;
@@ -215,13 +202,13 @@ public class CalendarDetailListNewAdapter extends BaseRecyclerViewAdapter<Calend
         }
 
         private void changeVisibility(final boolean isSelected) {
-            ValueAnimator va = isSelected ? ValueAnimator.ofInt(0, amountLayout.getHeight()) : ValueAnimator.ofInt(amountLayout.getHeight(), 0);
+            ValueAnimator va = isSelected ? ValueAnimator.ofInt(0, quantityLayout.getHeight()) : ValueAnimator.ofInt(quantityLayout.getHeight(), 0);
 
             va.setDuration(300);
             va.addUpdateListener(
                 (ValueAnimator animation)->{
-                    amountLayout.requestLayout();
-                    amountLayout.setVisibility(isSelected ? View.VISIBLE : View.GONE);
+                    quantityLayout.requestLayout();
+                    quantityLayout.setVisibility(isSelected ? View.VISIBLE : View.GONE);
                 }
 
             );

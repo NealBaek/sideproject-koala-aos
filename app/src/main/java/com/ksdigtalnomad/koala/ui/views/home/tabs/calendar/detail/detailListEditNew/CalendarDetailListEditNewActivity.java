@@ -26,6 +26,7 @@ import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 import com.ksdigtalnomad.koala.ui.base.BaseRecyclerViewAdapter;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.day.DayModel;
 import com.ksdigtalnomad.koala.ui.views.dialogs.AddDialog;
+import com.ksdigtalnomad.koala.ui.views.dialogs.QuantityDrinkDialog;
 import com.ksdigtalnomad.koala.ui.views.dialogs.UpdateDialog;
 import com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.EditType;
 import com.ksdigtalnomad.koala.ui.views.home.tabs.calendar.detail.detailListEdit.CalendarDetailListEditActivity;
@@ -168,6 +169,16 @@ public class CalendarDetailListEditNewActivity extends BaseActivity {
 
                 dialog.show(getFragmentManager(), "Update Dialog");
             }
+        });
+        adapter.setItemdetailClickListener((pos)->{
+            QuantityDrinkDialog dialog = QuantityDrinkDialog.newInstance();
+            dialog.name = ((ArrayList<Drink>)dataList).get(pos).getName();;
+            dialog.setDialogListener((String result, double amount, String unit)->{
+                // @TODO:
+//                ((ArrayList<Drink>)dataList).get(pos).set
+                adapter.notifyItemChanged(pos);
+            });
+            dialog.show(getFragmentManager(), "QuantityDrink Dialog");
         });
 
         mBinding.dataRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

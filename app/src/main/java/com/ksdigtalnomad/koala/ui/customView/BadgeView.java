@@ -56,7 +56,6 @@ public class BadgeView extends ViewPager {
                 (Boolean) PreferenceGenericHelper.getInstance().getValue(key.name(), false)){
             view.setVisibility(View.GONE);
         }else{
-            Log.d("ABC", "" + (Boolean) PreferenceGenericHelper.getInstance().getValue(key.name(), false));
             view.key = key;
             view.setVisibility(View.VISIBLE);
         }
@@ -68,8 +67,6 @@ public class BadgeView extends ViewPager {
 
     public void onClick(){
         if(key == null) return;
-
-        Log.d("ABC", "key: " + key.name());
         PreferenceGenericHelper.getInstance().setValue(key.name(), true);
         setVisibility(View.GONE);
     }
