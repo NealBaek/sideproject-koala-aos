@@ -39,13 +39,13 @@ public class DayView extends RelativeLayout {
     private Paint drunkLvRectPt = null;
     private Paint drunkLvTvPt = null;
     private Paint listTvPtDefaults = null;
-    private Paint blinderRectPt = null;
 
     // Image
     private Drawable imageStamp_1 = getResources().getDrawable(R.drawable.img_stamp_1);
     private int ivStampId = 77777777;
     private int vBlindId = 8888888;
 
+    private int todayBoarderWidth = 5;
 
     // Text attributes
     private final String DRUNK_LV_STR = "MAX";
@@ -173,8 +173,8 @@ public class DayView extends RelativeLayout {
         Paint rectP = new Paint();
 
         rectP.setColor(color);
-        rectP.setStrokeWidth(2);
         rectP.setStyle(Paint.Style.STROKE);
+        rectP.setStrokeWidth(todayBoarderWidth);
 
         return rectP;
     }
@@ -243,7 +243,13 @@ public class DayView extends RelativeLayout {
 
         // 3. 오늘이면 Border 추가
         if(DateHelper.getInstance().isToday(dayModel.getDate())){
-            canvas.drawRect(1, 1, parentWidth - 1, parentHeight - 1, borderRectPt);
+            canvas.drawRect(
+                    todayBoarderWidth,
+                    todayBoarderWidth,
+                    parentWidth - todayBoarderWidth,
+                    parentHeight - todayBoarderWidth,
+                    borderRectPt
+            );
         }
 
 

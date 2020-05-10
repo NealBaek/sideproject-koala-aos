@@ -52,7 +52,7 @@
     <string name="tap_today_drink_state">My recent alcohol life</string>
     <string name="drink_state_nowadays_0">Safe</string>
     <string name="drink_state_nowadays_1">Not bad</string>
-    <string name="drink_state_nowadays_2">Not good</string>
+    <string name="drink_state_nowadays_2">Too much</string>
     <string name="drink_state_nowadays_3">Dangerous</string>
     <string name="drink_state_nowadays_4">Never drink</string>
     <string name="tap_today_drink_times">The number of drunken days for last 7 days : %s</string>
