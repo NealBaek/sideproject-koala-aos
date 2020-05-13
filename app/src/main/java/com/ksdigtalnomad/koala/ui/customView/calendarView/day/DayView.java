@@ -45,7 +45,7 @@ public class DayView extends RelativeLayout {
     private int ivStampId = 77777777;
     private int vBlindId = 8888888;
 
-    private int todayBoarderWidth = 5;
+    private int todayBoarderWidth = 2;
 
     // Text attributes
     private final String DRUNK_LV_STR = "MAX";
@@ -174,7 +174,7 @@ public class DayView extends RelativeLayout {
 
         rectP.setColor(color);
         rectP.setStyle(Paint.Style.STROKE);
-        rectP.setStrokeWidth(todayBoarderWidth);
+        rectP.setStrokeWidth(todayBoarderWidth + 3);
 
         return rectP;
     }
