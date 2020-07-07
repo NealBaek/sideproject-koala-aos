@@ -8,12 +8,12 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.ksdigtalnomad.koala.BuildConfig;
 
-public class FBRemoteControlHelper {
+public class FBRemoteConfigHelper {
 
-    private FBRemoteControlHelper(){}
-    private static FBRemoteControlHelper instance = null;
-    public static FBRemoteControlHelper getInstance(){
-        if (instance == null){  instance = new FBRemoteControlHelper(); }
+    private FBRemoteConfigHelper(){}
+    private static FBRemoteConfigHelper instance = null;
+    public static FBRemoteConfigHelper getInstance(){
+        if (instance == null){  instance = new FBRemoteConfigHelper(); }
         return instance;
     }
 

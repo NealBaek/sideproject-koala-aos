@@ -1,6 +1,7 @@
 package com.ksdigtalnomad.koala.data.net;
 
 import com.ksdigtalnomad.koala.BuildConfig;
+import com.ksdigtalnomad.koala.ui.base.BaseApplication;
 
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
@@ -30,7 +31,8 @@ public class RetrofitServiceGenericFactory {
                 .build();
 
         return new Retrofit.Builder()
-                .baseUrl(BuildConfig.SERVER_URL + BuildConfig.SERVER_PORT + BuildConfig.API_PREFIX)
+//                .baseUrl(BuildConfig.SERVER_URL + BuildConfig.SERVER_PORT + BuildConfig.API_PREFIX)
+                .baseUrl(BaseApplication.getInstance().baseUrl)
                 .client(client)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 //import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.ksdigtalnomad.koala.BuildConfig;
 import com.ksdigtalnomad.koala.R;
@@ -62,7 +61,7 @@ public class PreferenceHelper {
         getEditPreference().putInt(KEY_ALARM_DAILY_HOUR, alarmDailyHour).apply();
     }
     public static int getAlarmDailyHour() {
-        AlarmDaily alarmDaily = new Gson().fromJson(FBRemoteControlHelper.getInstance().getAlarmDaily(), AlarmDaily.class);
+        AlarmDaily alarmDaily = new Gson().fromJson(FBRemoteConfigHelper.getInstance().getAlarmDaily(), AlarmDaily.class);
         if(alarmDaily == null){
             return 12; // defaultHour
         }
@@ -75,7 +74,7 @@ public class PreferenceHelper {
         getEditPreference().putInt(KEY_ALARM_DAILY_MINUTE, alarmDailyMinute).apply();
     }
     public static int getAlarmDailyMinute() {
-        AlarmDaily alarmDaily = new Gson().fromJson(FBRemoteControlHelper.getInstance().getAlarmDaily(), AlarmDaily.class);
+        AlarmDaily alarmDaily = new Gson().fromJson(FBRemoteConfigHelper.getInstance().getAlarmDaily(), AlarmDaily.class);
         if(alarmDaily == null){
             return 0; // defaultMinute
         }

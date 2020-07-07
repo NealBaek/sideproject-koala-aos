@@ -17,7 +17,6 @@ import com.ksdigtalnomad.koala.databinding.FragmentTabSettingsBinding;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,11 +28,10 @@ import com.ksdigtalnomad.koala.ui.views.dialogs.CustomTimePickerDialog;
 import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
 import com.ksdigtalnomad.koala.helpers.data.LanguageHelper;
 import com.ksdigtalnomad.koala.helpers.util.PlayStoreHelper;
-import com.ksdigtalnomad.koala.helpers.data.FBRemoteControlHelper;
+import com.ksdigtalnomad.koala.helpers.data.FBRemoteConfigHelper;
 import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 import com.ksdigtalnomad.koala.helpers.util.ShareHelper;
 import com.ksdigtalnomad.koala.helpers.ui.ToastHelper;
-import com.ksdigtalnomad.koala.ui.views.dialogs.LoginDialog;
 import com.ksdigtalnomad.koala.ui.views.user.AccountActivity;
 import com.ksdigtalnomad.koala.ui.views.user.LoginActivity;
 
@@ -129,7 +127,7 @@ public class TabSettingsFragment extends BaseFragment {
 
     }
     public void onKakaoOpenChatRoomClick(){
-        String chatRoomUrl = FBRemoteControlHelper.getInstance().getKakaoOpenChatRoomUrl();
+        String chatRoomUrl = FBRemoteConfigHelper.getInstance().getKakaoOpenChatRoomUrl();
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(chatRoomUrl)));
 
         FBEventLogHelper.onKakaoOpenChatRoom();
@@ -164,7 +162,7 @@ public class TabSettingsFragment extends BaseFragment {
         FBEventLogHelper.onPlayStoreComplement();
     }
     public void onShareClick(){
-        ArrayList<ShareMessage> shareMessageList = new Gson().fromJson(FBRemoteControlHelper.getInstance().getShareMessage(), new TypeToken<ArrayList<ShareMessage>>(){}.getType());
+        ArrayList<ShareMessage> shareMessageList = new Gson().fromJson(FBRemoteConfigHelper.getInstance().getShareMessage(), new TypeToken<ArrayList<ShareMessage>>(){}.getType());
 
         ShareMessage shareMessage = ShareMessage.builder().build();
 

@@ -12,7 +12,7 @@ import com.ksdigtalnomad.koala.R;
 import com.ksdigtalnomad.koala.data.models.User;
 import com.ksdigtalnomad.koala.databinding.ActivityAccountBinding;
 import com.ksdigtalnomad.koala.helpers.data.FBEventLogHelper;
-import com.ksdigtalnomad.koala.helpers.data.FBRemoteControlHelper;
+import com.ksdigtalnomad.koala.helpers.data.FBRemoteConfigHelper;
 import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 import com.ksdigtalnomad.koala.ui.base.BaseActivity;
 
@@ -57,7 +57,7 @@ public class AccountActivity extends BaseActivity {
         startActivity(TermsDetailActivity.intent(this, type));
     }
     public void onKakaoOpenChatRoomClick(){
-        String chatRoomUrl = FBRemoteControlHelper.getInstance().getKakaoOpenChatRoomUrl();
+        String chatRoomUrl = FBRemoteConfigHelper.getInstance().getKakaoOpenChatRoomUrl();
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(chatRoomUrl)));
 
         FBEventLogHelper.onKakaoOpenChatRoom();

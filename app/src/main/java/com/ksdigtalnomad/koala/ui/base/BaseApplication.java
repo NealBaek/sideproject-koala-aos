@@ -11,7 +11,7 @@ import android.util.Log;
 
 import com.google.android.gms.ads.MobileAds;
 import com.ksdigtalnomad.koala.R;
-import com.ksdigtalnomad.koala.helpers.data.FBRemoteControlHelper;
+import com.ksdigtalnomad.koala.helpers.data.FBRemoteConfigHelper;
 import com.ksdigtalnomad.koala.helpers.ui.TypeKitHelper;
 import com.tsengvn.typekit.Typekit;
 
@@ -20,6 +20,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class BaseApplication extends MultiDexApplication {
     private static BaseApplication instance;
+    public String baseUrl = "";
 
     public static BaseApplication getInstance() { return instance; }
 
@@ -36,7 +37,7 @@ public class BaseApplication extends MultiDexApplication {
 
         printKeyHash();
 
-        FBRemoteControlHelper.getInstance().activateFetch(null, null);
+        FBRemoteConfigHelper.getInstance().activateFetch(null, null);
 
     }
 

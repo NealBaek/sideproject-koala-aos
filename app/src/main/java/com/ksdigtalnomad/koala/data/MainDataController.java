@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ksdigtalnomad.koala.R;
+import com.ksdigtalnomad.koala.data.models.calendar.CalendarDataCategory;
+import com.ksdigtalnomad.koala.data.models.calendar.CalendarDataUnit;
 import com.ksdigtalnomad.koala.data.models.calendar.Drink;
 import com.ksdigtalnomad.koala.data.models.calendar.Food;
 import com.ksdigtalnomad.koala.data.models.calendar.Friend;
@@ -19,6 +21,8 @@ public class MainDataController {
     private static final String KEY_FRIEND_LIST = "KEY_FRIEND_LIST";
     private static final String KEY_DRINK_LIST = "KEY_DRINK_LIST";
     private static final String KEY_FOOD_LIST = "KEY_FOOD_LIST";
+    private static final String KEY_UNIT_DRINK = "KEY_UNIT_DRINK";
+    private static final String KEY_CATEGORY_DRINK = "KEY_CATEGORY_DRINK";
 
 
     private MainDataController(){}
@@ -245,8 +249,37 @@ public class MainDataController {
 //    }
 
 
+    public static ArrayList<CalendarDataCategory> getCategoryDrinkList(){
+        return dumpCategoryDrinkList();
+    }
+    public static void setCategoryDrinkList(ArrayList<CalendarDataCategory> list){
+        MainDataController.storeCategoryDrinkList(list);
+    }
+    public static ArrayList<CalendarDataUnit> getUnitDrinkList(){
+        return dumpUnitDrinkList();
+    }
+    public static void setUnitDrinkList(ArrayList<CalendarDataUnit> list){
+        MainDataController.storeUnitDrinkList(list);
+    }
+
 
     // Dump | Store
+    private static void storeCategoryDrinkList(ArrayList<CalendarDataCategory> list){
+        getEditPreference().putString(KEY_CATEGORY_DRINK, new Gson().toJson(list)).apply();
+    }
+    private static ArrayList<CalendarDataCategory> dumpCategoryDrinkList(){
+        ArrayList<CalendarDataCategory> dump = new Gson().fromJson(getReadPreference().getString(KEY_CATEGORY_DRINK, null), new TypeToken<ArrayList<CalendarDataCategory>>(){}.getType());
+        if(dump == null) dump = new ArrayList<>();
+        return dump;
+    }
+    private static void storeUnitDrinkList(ArrayList<CalendarDataUnit> list){
+        getEditPreference().putString(KEY_UNIT_DRINK, new Gson().toJson(list)).apply();
+    }
+    private static ArrayList<CalendarDataUnit> dumpUnitDrinkList(){
+        ArrayList<CalendarDataUnit> dump = new Gson().fromJson(getReadPreference().getString(KEY_UNIT_DRINK, null), new TypeToken<ArrayList<CalendarDataUnit>>(){}.getType());
+        if(dump == null) dump = new ArrayList<>();
+        return dump;
+    }
     private static void storeFriendList(ArrayList<Friend> list){
         getEditPreference().putString(KEY_FRIEND_LIST, new Gson().toJson(list)).apply();
     }

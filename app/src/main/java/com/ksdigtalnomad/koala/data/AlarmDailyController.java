@@ -5,7 +5,7 @@ import com.ksdigtalnomad.koala.data.models.alarmDaily.AlarmDaily;
 import com.ksdigtalnomad.koala.data.models.alarmDaily.AlarmDailyBody;
 import com.ksdigtalnomad.koala.service.alarm.AlarmDailyReceiver;
 import com.ksdigtalnomad.koala.ui.customView.calendarView.CalendarDataController;
-import com.ksdigtalnomad.koala.helpers.data.FBRemoteControlHelper;
+import com.ksdigtalnomad.koala.helpers.data.FBRemoteConfigHelper;
 import com.ksdigtalnomad.koala.helpers.data.LanguageHelper;
 import com.ksdigtalnomad.koala.helpers.data.PreferenceHelper;
 
@@ -19,7 +19,7 @@ public class AlarmDailyController {
 
     public static AlarmDailyBody getAlarmDailyData(){
         // 알림 내용 받아오기
-        AlarmDaily alarmDaily = new Gson().fromJson(FBRemoteControlHelper.getInstance().getAlarmDaily(), AlarmDaily.class);
+        AlarmDaily alarmDaily = new Gson().fromJson(FBRemoteConfigHelper.getInstance().getAlarmDaily(), AlarmDaily.class);
         AlarmDailyBody alarmDailyBody = AlarmDailyBody.builder().build();
         ArrayList<AlarmDailyBody> bodyList =  alarmDaily.getBodyList();
         if(bodyList == null || bodyList.size() <= 0) return alarmDailyBody;

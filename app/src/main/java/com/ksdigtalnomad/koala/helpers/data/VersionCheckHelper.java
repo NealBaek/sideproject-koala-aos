@@ -6,10 +6,13 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.util.Log;
+
+import com.ksdigtalnomad.koala.data.models.AppVersion;
 
 public class VersionCheckHelper {
 
-    public static void getUpdateState(String version, Activity activity, CompleteListener listener) {
+    public static void getUpdateState(AppVersion appVersion, Activity activity, CompleteListener listener) {
         PackageInfo info = null;
         try {
             info = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
@@ -23,15 +26,16 @@ public class VersionCheckHelper {
             int bMinorNum = Integer.parseInt(buildVersions[1]);
             int bPatchNum = Integer.parseInt(buildVersions[2]);
 
-            String[] targetVersion = version.split("\\.");
-            int tMajorNum = Integer.parseInt(targetVersion[0]);
-            int tMinorNum = Integer.parseInt(targetVersion[1]);
-            int tPatchNum = Integer.parseInt(targetVersion[2]);
+            int tMajorNum = appVersion.getMajor();
+            int tMinorNum = appVersion.getMinor();
+            int tPatchNum = appVersion.getPatch();
+
+            Log.d("ABC", "빌드 버전: " + bMajorNum + "." + bMinorNum + "." + bPatchNum);
 
             if (bMajorNum < tMajorNum){ showMustUpdate(activity); return; }
             else if (bMajorNum > tMajorNum){ listener.onComplete(); return; }
-            else if (bMinorNum < tMinorNum){ showMustUpdate(activity); return; }
-            else if (bMinorNum > tMajorNum){ listener.onComplete(); return; }
+            else if (bMinorNum < tMinorNum){ showNeedUpdate(activity, listener); return; }
+            else if (bMinorNum > tMinorNum){ listener.onComplete(); return; }
             else if (bPatchNum < tPatchNum){ showNeedUpdate(activity, listener); return; }
         }
 
