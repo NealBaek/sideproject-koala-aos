@@ -153,29 +153,60 @@
                     android:layout_height="1dp"
                     layout="@layout/view_line_ltgray"/>
 
-                <!-- 개발자에게 문의 -->
+                <!-- 코알라 단톡방 -->
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="62dp"
                     android:gravity="center_vertical"
                     android:padding="20dp"
-                    android:onClick="@{()->fragment.onKakaoOpenChatRoomClick()}">
+                    android:onClick="@{()->fragment.onKakaoChatClick()}">
 
                     <TextView
-                        android:id="@+id/tv_info_kakao"
+                        android:id="@+id/tv_info_kakao_chat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentBottom="true"
-                        android:text="@string/fragment_tab_settings_info_kakao"
+                        android:text="@string/fragment_tab_settings_info_kakao_chat"
                         android:textColor="@color/colorDarkGray"/>
 
                     <ImageView
                         android:layout_width="53dp"
                         android:layout_height="25dp"
                         android:layout_marginLeft="12dp"
-                        android:layout_toRightOf="@id/tv_info_kakao"
+                        android:layout_toRightOf="@id/tv_info_kakao_chat"
+                        android:src="@drawable/ic_kakao"/>
+
+                </RelativeLayout>
+                <include
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    layout="@layout/view_line_ltgray"/>
+
+                <!-- 개발자에게 문의 -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="62dp"
+                    android:gravity="center_vertical"
+                    android:padding="20dp"
+                    android:onClick="@{()->fragment.onKakaoCsClick()}">
+
+                    <TextView
+                        android:id="@+id/tv_info_kakao_cs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:text="@string/fragment_tab_settings_info_kakao_cs"
+                        android:textColor="@color/colorDarkGray"/>
+
+                    <ImageView
+                        android:layout_width="53dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_toRightOf="@id/tv_info_kakao_cs"
                         android:src="@drawable/ic_kakao"/>
 
                 </RelativeLayout>

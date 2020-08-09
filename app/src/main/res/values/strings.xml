@@ -106,7 +106,8 @@
     <string name="fragment_tab_settings_info_team_4">This is the first step.</string>
     <string name="fragment_tab_settings_info_team_5">- Koala team for your challenge</string>
     <string name="fragment_tab_settings_info_calendar_design">Calendar Design</string>
-    <string name="fragment_tab_settings_info_kakao">1:1 Chat with Koala team</string>
+    <string name="fragment_tab_settings_info_kakao_cs">1:1 Chat with Koala team</string>
+    <string name="fragment_tab_settings_info_kakao_chat">Open chat with Koala users</string>
     <string name="fragment_tab_settings_info_play_store">Give reviews for Koala</string>
     <string name="fragment_tab_settings_info_share">Share Koala</string>
     <string name="fragment_tab_settings_info_version">Version</string>

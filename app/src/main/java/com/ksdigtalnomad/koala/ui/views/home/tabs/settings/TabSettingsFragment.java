@@ -106,12 +106,15 @@ public class TabSettingsFragment extends BaseFragment {
         // 2. 회원이면 계정 설정 창으로
 
     }
-    public void onKakaoOpenChatRoomClick(){
-        String chatRoomUrl = FBRemoteControlHelper.getInstance().getKakaoOpenChatRoomUrl();
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(chatRoomUrl)));
+    public void onKakaoCsClick(){
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(FBRemoteControlHelper.getInstance().getUrlKakaoCS())));
 
         FBEventLogHelper.onKakaoOpenChatRoom();
     }
+    public void onKakaoChatClick(){
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(FBRemoteControlHelper.getInstance().getUrlKakaoChat())));
+    }
+
     public void onPushAgreeClick(){
         mBinding.alarmDailySwitch.setChecked(!mBinding.alarmDailySwitch.isChecked());
     }

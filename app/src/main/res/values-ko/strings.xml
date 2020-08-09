@@ -103,7 +103,8 @@
     <string name="fragment_tab_settings_info_team_4">절주와 금주의 시작입니다.</string>
     <string name="fragment_tab_settings_info_team_5">- 건강을 생각하는 애주가 코알라 팀</string>
     <string name="fragment_tab_settings_info_calendar_design">달력 디자인</string>
-    <string name="fragment_tab_settings_info_kakao">개발자에게 실시간 문의하기</string>
+    <string name="fragment_tab_settings_info_kakao_cs">개발자에게 실시간 문의하기</string>
+    <string name="fragment_tab_settings_info_kakao_chat">코알라 오픈 채팅</string>
     <string name="fragment_tab_settings_info_play_store">앱 칭찬하기</string>
     <string name="fragment_tab_settings_info_share">앱 공유하기</string>
     <string name="fragment_tab_settings_info_version">버전 정보</string>
