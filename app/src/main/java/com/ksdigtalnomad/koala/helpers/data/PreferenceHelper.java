@@ -25,9 +25,13 @@ public class PreferenceHelper {
     private static final String KEY_ALARM_DAILY_ENABLE = "ALARM_DAILY_ENABLE";
     private static final String KEY_ADID = "ADID";
 
-
-
     private static final String KEY_INTERVIEW_WHYTHISAPP_FIRST = "INTERVIEW_WHYTHISAPP_FIRST";
+
+
+
+    // 마이그레이션 카운트
+    private static final String KEY_MG_1 = "MG_1"; // 윤년계산 잘 못됨 (21.02.21 업데이트)
+
 
 
     public static void clear() {
@@ -181,4 +185,16 @@ public class PreferenceHelper {
     public static boolean isInterviewWhythisappFirst() {
         return getReadPreference().getBoolean(KEY_INTERVIEW_WHYTHISAPP_FIRST, true);
     }
+
+
+    // 마이그레이션 카운트
+    public static void setMg1Done(boolean flag) {
+        getEditPreference().putBoolean(KEY_MG_1, flag).apply();
+    }
+    public static boolean isMg1Done() {
+        return getReadPreference().getBoolean(KEY_MG_1, false);
+    }
+
+
+
 }

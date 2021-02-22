@@ -74,7 +74,7 @@ public class CalendarDataController {
 
 
         // 끝나는 날짜 구하기
-        int endYear = thisYear + 1;
+        int endYear = thisYear + 2;
         int endMonth = thisMonth;
 
         ArrayList<DayModel> dayModelList = new ArrayList<>();
@@ -95,6 +95,7 @@ public class CalendarDataController {
             if(startYear % 400 == 0){ isLeapYear = true; }       // 1. 연도가 400의 배수이면 윤년
             else if(startYear % 100 == 0){ isLeapYear = false; } // 2. 연도가 100의 배수이면 윤년이 아님.
             else if(startYear % 4 == 0){ isLeapYear = true; }    // 3. 연도가 4의 배수이면 윤년.
+            else { isLeapYear = false; }
 
             // 월 계산
             for(int j=0; j < toCalMonthCnt; ++j){
@@ -315,14 +316,89 @@ public class CalendarDataController {
     private static void storeCalendarModel(CalendarModel model){ getEditPreference().putString(KEY_CALENDAR_MODEL, new Gson().toJson(model)).apply(); }
     private static CalendarModel dumpCalendarModel(){
         CalendarModel dumpModel = new Gson().fromJson(getReadPreference().getString(KEY_CALENDAR_MODEL, null), CalendarModel.class);
+
+        /** 달력 생성 주의 - start */
         // Calendar 데이터 생성시 에러가 발생할 수 있다. 에러 발생 시 return null. 3번까지 Null 체크를 해서 생성한다.
         if(dumpModel == null) dumpModel = createCalendarModel();
         if(dumpModel == null) dumpModel = createCalendarModel();
         if(dumpModel == null) dumpModel = createCalendarModel();
+        /** 달력 생성 주의 - end */
 
         return dumpModel;
     }
 
+
+    // 마이그레이션
+    public static void migrate1(){
+        // 유년 계산 오류로 데이터 마이그레이션
+
+        CalendarModel oldCalendarModel = dumpCalendarModel();
+        ArrayList<MonthModel> oldMonthList = oldCalendarModel.monthList;
+        int monthListCnt = oldMonthList.size();
+
+        for (int i = 0; i < monthListCnt; i++) {
+            MonthModel oldMonth = oldMonthList.get(i);
+            Log.d("ABC", "year: " + oldMonth.year + ", month: " + oldMonth.month + ", index: " + oldMonth.index);
+            if(oldMonth.year == 2021 && oldMonth.month == 2){
+
+                Log.d("ABC", "oldMonthListCnt_1: " + oldMonthList.size());
+
+                ArrayList<DayModel> oldDayList = oldMonth.dayList;
+
+                int oldDayListCount = oldDayList.size();
+                for (int j = 0; j < oldDayListCount; j++) {
+                    DayModel oldDay = oldDayList.get(j);
+
+                    Log.d("ABC", "isOutMonth: " + oldDay.isOutMonth);
+
+                    if (oldDay.isOutMonth) continue;
+
+                    Log.d("ABC", "oldDay.day: " + oldDay.day + " == " + (CalendarConstUtils.NUM_DAYS_IN_MONTH[1] + 1));
+
+                    if (oldDay.day == (CalendarConstUtils.NUM_DAYS_IN_MONTH[1] + 1)){
+
+                        Log.d("ABC", "start");
+
+                        DayModel lastOldDay = oldDayList.get(oldDayListCount - 1).clone();
+                        lastOldDay.day += 1;
+                        lastOldDay.daySeq = (lastOldDay.daySeq + 1) % 7;
+                        lastOldDay.dayOfTheWeek = CalendarConstUtils.DAYS_OF_THE_WEEK[lastOldDay.daySeq];
+                        lastOldDay.dayIdx += 1;
+
+                        // 29일 삭제
+                        oldDayList.remove(j);
+
+                        // 마지막 일 추가
+                        oldDayList.add(lastOldDay);
+
+                        // Month 수정
+                        oldMonth.dayList = oldDayList;
+                        oldMonth.numberOfDaysInTheMonth = CalendarConstUtils.NUM_DAYS_IN_MONTH[1]; // 28
+
+                        oldMonthList.set(i, oldMonth); // 21.02 윤년 처리 제거
+
+                        oldMonthList = new ArrayList(oldMonthList.subList(0, i + 1));
+
+                        Log.d("ABC", "i: " + i);
+                        Log.d("ABC", "oldMonthListCnt_2: " + oldMonthList.size());
+
+
+                        ArrayList<MonthModel> newMonthList = createCalendarModel().monthList;
+                        oldMonthList.addAll(newMonthList.subList(i + 1, newMonthList.size() - 1));
+                        oldCalendarModel.monthList = oldMonthList;
+
+                        Log.d("ABC", "oldMonthListCnt_3: " + oldMonthList.size());
+
+                        Log.d("ABc", "migration done");
+
+                        storeCalendarModel(oldCalendarModel);
+
+                        return;
+                    }
+                }
+            }
+        }
+    }
 
 
     public static void setNoDataYet(boolean flag){ getEditPreference().putBoolean(KEY_NO_DATA_YET, flag).apply(); }

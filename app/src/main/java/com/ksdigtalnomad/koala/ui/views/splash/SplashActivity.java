@@ -68,7 +68,13 @@ public class SplashActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-        // 1. Version 정보 가져오기
+        // 1. 마이그레이션 체크 // 21.02.23
+        if(!PreferenceHelper.isMg1Done() && !PreferenceHelper.isFirstOpen()){
+            PreferenceHelper.setMg1Done(true);
+            CalendarDataController.migrate1();
+        }
+
+        // 2. Version 정보 가져오기
         getVersion();
     }
 
