@@ -3,6 +3,7 @@ package com.ksdigtalnomad.koala.ui.views.home.tabs.today;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,6 +95,8 @@ public class TabTodayFragment extends BaseFragment {
         int toDayIdx = 0;
         ArrayList<DayModel> totalDayList = CalendarDataController.getTotalDayList();
 
+        Log.d("ABX", "Test start");
+
         // 1. 오늘 모델 값 구하기
         int dayListCnt =  totalDayList.size();
         for(int i = 0; i < dayListCnt; ++i){
@@ -101,6 +104,9 @@ public class TabTodayFragment extends BaseFragment {
             if (DateHelper.getInstance().isToday(day.getDate())){
                 fromDayIdx = (i - 7 <= 0 ? 0 : i - 7);
                 toDayIdx = i;
+
+                Log.d("ABC", "date: " + day.getDate());
+                Log.d("ABC", "fromDayIdx: " + fromDayIdx + ", toDayIdx: " + toDayIdx + ", size: " + dayListCnt);
                 break;
             }
         }
@@ -109,7 +115,10 @@ public class TabTodayFragment extends BaseFragment {
         // 2. 최근 7일
         List<DayModel> recent7Days = totalDayList.subList(fromDayIdx, toDayIdx);
 
+        Log.d("ABC", "TEST");
+
         if((recent7Days.size() <= 0)){
+            Log.d("ABC", "1");
             showEmptyLayout(true);
             return;
         }
@@ -134,6 +143,7 @@ public class TabTodayFragment extends BaseFragment {
                     avgDrinkLevel += item.drunkLevel * 25; // 0 ~ 4
                     drinkCnt += item.drunkLevel > 0 ? 1 : 0;
                 }else{
+                    Log.d("ABC", "2");
                     showEmptyLayout(true);
                     return;
                 }

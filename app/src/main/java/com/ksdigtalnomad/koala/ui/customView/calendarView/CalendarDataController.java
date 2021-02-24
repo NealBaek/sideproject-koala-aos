@@ -338,10 +338,8 @@ public class CalendarDataController {
 
         for (int i = 0; i < monthListCnt; i++) {
             MonthModel oldMonth = oldMonthList.get(i);
-            Log.d("ABC", "year: " + oldMonth.year + ", month: " + oldMonth.month + ", index: " + oldMonth.index);
-            if(oldMonth.year == 2021 && oldMonth.month == 2){
 
-                Log.d("ABC", "oldMonthListCnt_1: " + oldMonthList.size());
+            if(oldMonth.year == 2021 && oldMonth.month == 2){
 
                 ArrayList<DayModel> oldDayList = oldMonth.dayList;
 
@@ -349,15 +347,9 @@ public class CalendarDataController {
                 for (int j = 0; j < oldDayListCount; j++) {
                     DayModel oldDay = oldDayList.get(j);
 
-                    Log.d("ABC", "isOutMonth: " + oldDay.isOutMonth);
-
                     if (oldDay.isOutMonth) continue;
 
-                    Log.d("ABC", "oldDay.day: " + oldDay.day + " == " + (CalendarConstUtils.NUM_DAYS_IN_MONTH[1] + 1));
-
                     if (oldDay.day == (CalendarConstUtils.NUM_DAYS_IN_MONTH[1] + 1)){
-
-                        Log.d("ABC", "start");
 
                         DayModel lastOldDay = oldDayList.get(oldDayListCount - 1).clone();
                         lastOldDay.day += 1;
@@ -379,19 +371,25 @@ public class CalendarDataController {
 
                         oldMonthList = new ArrayList(oldMonthList.subList(0, i + 1));
 
-                        Log.d("ABC", "i: " + i);
-                        Log.d("ABC", "oldMonthListCnt_2: " + oldMonthList.size());
-
-
                         ArrayList<MonthModel> newMonthList = createCalendarModel().monthList;
                         oldMonthList.addAll(newMonthList.subList(i + 1, newMonthList.size() - 1));
                         oldCalendarModel.monthList = oldMonthList;
 
-                        Log.d("ABC", "oldMonthListCnt_3: " + oldMonthList.size());
-
-                        Log.d("ABc", "migration done");
-
+                        // 달력 데이터 생성
                         storeCalendarModel(oldCalendarModel);
+
+
+                        ArrayList<DayModel> totalDayList = new ArrayList<>();
+
+                        for (MonthModel item1: oldCalendarModel.monthList) {
+                            for (DayModel item2: item1.dayList){
+                                if (item2.isOutMonth) continue;
+                                totalDayList.add(item2);
+                            }
+                        }
+
+                        // 토달 데이 데이터 생성
+                        createTotalDayList(totalDayList);
 
                         return;
                     }
